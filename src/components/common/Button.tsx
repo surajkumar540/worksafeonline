@@ -1,3 +1,4 @@
+import { bigShoulders } from "@/app/layout";
 import React from "react";
 
 interface ButtonProps {
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={isLoading}
       className={`relative flex items-center justify-center text-nowrap px-4 py-2 border transition-all duration-200 ease-linears border-primary/20 text-primary hover:bg-primary hover:text-white rounded-md ${classes} ${
         isLoading ? "opacity-50 cursor-not-allowed" : ""
-      }`}
+      } ${bigShoulders.className}`}
     >
       {isLoading ? (
         <svg

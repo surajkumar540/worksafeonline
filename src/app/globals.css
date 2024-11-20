@@ -5,3 +5,16 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.marquee {
+  animation: marquee 30s linear infinite; /* Adjust speed with 10s */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* Start outside right */
+  }
+  100% {
+    transform: translateX(-100%); /* End outside left */
+  }
+}

@@ -1,4 +1,4 @@
-import { Country } from "@/types/api";
+import { Country, LinkProps } from "@/types/api";
 
 export const countries: Country[] = [
   { name: "Afghanistan", code: "+93", iso: "AF" },
@@ -195,4 +195,33 @@ export const countries: Country[] = [
   { name: "Yemen", code: "+967", iso: "YE" },
   { name: "Zambia", code: "+260", iso: "ZM" },
   { name: "Zimbabwe", code: "+263", iso: "ZW" },
+];
+
+export const links: LinkProps[] = [
+  {
+    id: 1,
+    href: "/",
+    label: "HOME",
+  },
+  {
+    id: 2,
+    href: "/shop",
+    label: "SHOP",
+    icon: true,
+  },
+  {
+    id: 3,
+    href: "/blogs",
+    label: "BLOGS",
+  },
+  {
+    id: 4,
+    href: "/about-us",
+    label: "ABOUT",
+  },
+  {
+    id: 5,
+    href: "/contact",
+    label: "CONTACT",
+  },
 ];

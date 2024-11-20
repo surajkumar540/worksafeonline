@@ -9,8 +9,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#FFC700",
+      },
+      boxShadow: {
+        corner:
+          "rgba(60, 64, 67, 0.3) 0px 0px 0px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+      },
+      dropShadow: {
+        "4xl": "0 35px 35px rgba(0, 0, 0, 0.25)",
+      },
+      maxWidth: {
+        "8xl": "124rem", // 1984 px
+        "9xl": "2560px", // for screens between 2K and 4K
+        "10xl": "3840px", // for 4K screens
+      },
+      screens: {
+        "3xl": "1920px", // for screens like 1080p monitors
+        "4xl": "2560px", // for screens between 2K and 4K
+        "5xl": "3840px", // for 4K screens
       },
     },
   },
