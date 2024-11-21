@@ -7,7 +7,9 @@ import { fetchHomePageData } from "@/api/generalApi";
 import ReasonsToShop from "@/components/home/ReasonToShop";
 import CategoryCard from "@/components/common/CategoryCard";
 import ListingByCategory from "@/components/home/ListingByCategory";
-
+import { bigShoulders } from "./layout";
+import { FaArrowRightLong } from "react-icons/fa6";
+import Categories from "@/components/home/Categories";
 export default async function Home() {
   const {
     brands,
@@ -42,55 +44,81 @@ export default async function Home() {
           bannerImage="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bg-3.jpg"
         />
       )}
-      <div className="grid grid-cols-2 gap-5 max-w-9xl mx-auto px-5 py-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-9xl mx-auto px-5 py-10">
         <div className="relative">
           <Image
             src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-1.jpg"
             alt="Image"
             width={100}
             height={100}
-            className="object-cover w-full h-[75vh] rounded-lg"
+            className="object-cover w-full aspect-square md:h-[75vh] rounded-lg"
             priority
             unoptimized
           />
-          <div className="absolute inset-0">
-            <div className="relative flex items-center">
-              <div className="absolute z-40 left-0 top-0 h-full flex flex-col justify-center items-center transform rotate-[-90deg] origin-bottom-left text-gray-700 font-bold text-sm tracking-wide">
+          <div
+            className={`absolute inset-0 flex flex-col justify-between p-5 md:p-10 ${bigShoulders.className}`}
+          >
+            <div className="text-left pl-12 md:pl-14 relative">
+              <div className="absolute tracking-widest md:text-lg top-10 md:top-12 -rotate-90 text-pink-600 font-bold -left-7">
                 SALE NOW ON
               </div>
-              <div className="mx-auto text-center">
-                <p className="text-[96px] font-bold text-lime-500 leading-none">
-                  15% <span className="text-gray-700">OFF</span>
-                </p>
-                <p className="mt-4 text-xl font-bold text-gray-900 tracking-widest">
-                  ALL SELECTED BRANDS
-                </p>
-              </div>
+              <p className="text-7xl md:text-8xl text-stroke font-extrabold text-lime-500 leading-none">
+                15% OFF
+              </p>
+              <p className="text-2xl font-extrabold text-gray-700">
+                ALL SELECTED BRANDS
+              </p>
             </div>
+            <span className="relative font-sans uppercase text-sm font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
+              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                SHOP NOW
+              </span>
+              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                SHOP NOW
+              </span>
+              <FaArrowRightLong className="ml-2" />
+            </span>
           </div>
         </div>
-        <Image
-          src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-2.jpg"
-          alt="Image"
-          width={100}
-          height={100}
-          className="object-cover w-full h-[75vh] rounded-lg"
-          priority
-          unoptimized
-        />
+        <div className="relative">
+          <Image
+            src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-2.jpg"
+            alt="Image"
+            width={100}
+            height={100}
+            className="object-cover w-full aspect-square md:h-[75vh] rounded-lg"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black rounded-lg to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"></div>
+          <div
+            className={`absolute inset-0 flex flex-col justify-between p-5 md:p-10 ${bigShoulders.className}`}
+          >
+            <div className="text-left uppercase pl-14 relative">
+              <div className="absolute tracking-widest text-lg top-12 -rotate-90 text-[#a9bc41] font-bold -left-7">
+                special offer
+              </div>
+              <p className="text-4xl font-extrabold text-white leading-none">
+                high visibility <br /> workwear
+              </p>
+              <p className="text-2xl mt-5 font-extrabold text-white">
+                start from <span className="text-[#a9bc41]">$299 </span>
+              </p>
+            </div>
+            <span className="relative font-sans uppercase text-sm font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
+              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                SHOP NOW
+              </span>
+              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                SHOP NOW
+              </span>
+              <FaArrowRightLong className="ml-2" />
+            </span>
+          </div>
+        </div>
       </div>
       <ReasonsToShop />
-      <div className="max-w-9xl mx-auto px-10 py-20 grid grid-cols-4 gap-5">
-        {categories &&
-          categories.length > 0 &&
-          categories.slice(0, 4).map((category: unknown, index: number) => {
-            return (
-              <React.Fragment key={index}>
-                <CategoryCard category={category} />
-              </React.Fragment>
-            );
-          })}
-      </div>
+      <Categories categories={categories} />
       <WhoWeAre brands={brands} />
     </div>
   );

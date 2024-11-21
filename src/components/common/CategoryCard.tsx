@@ -11,7 +11,7 @@ const CategoryCard = ({ category }: { category: any }) => {
         height={400}
         alt={category?.menu_name}
         src={category?.thumbail_Image}
-        className="w-full h-96 object-cover transition-all duration-500 ease-linear group-hover:scale-105"
+        className="w-full h-[424px] md:h-96 object-cover transition-all duration-500 ease-linear group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent transition-all duration-500 ease-linear opacity-50 group-hover:opacity-40"></div>
       <div className="absolute bottom-0 left-0 right-0 bg-transparent backdrop-blur-md w-full p-4 rounded-b-lg text-white">

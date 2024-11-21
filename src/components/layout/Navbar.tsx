@@ -1,32 +1,23 @@
-"use client";
+import React from "react";
 import Link from "next/link";
-import { links } from "@/data/country";
-import React, { useEffect, useState } from "react";
-import { LinkProps, NavbarProps } from "@/types/api";
 import ItemHover from "./ItemHover";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { CiDiscount1 } from "react-icons/ci";
-
-import { FaRegHeart } from "react-icons/fa6";
-import { TiShoppingCart } from "react-icons/ti";
-import { FaRegUser } from "react-icons/fa";
-
-import { IoMdSearch } from "react-icons/io";
+import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
+import { FaRegUser } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
+import { FaRegHeart } from "react-icons/fa6";
+import { CiDiscount1 } from "react-icons/ci";
+import { BiMenuAltLeft } from "react-icons/bi";
+import { TiShoppingCart } from "react-icons/ti";
+import { LinkProps, NavbarProps } from "@/types/api";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
-const Navbar: React.FC<NavbarProps> = ({ data }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await Get("api/categories");
-      setCategories(data.categories);
-    };
-    if (categories.length === 0) fetchData();
-  }, [categories.length]);
+const Navbar: React.FC<NavbarProps> = async ({ data }) => {
+  const resp = await Get("api/categories");
+  const categories = resp.categories;
   return (
     <header className="bg-[#1C1C1C] fixed top-0 z-50 w-full text-white shadow-md">
-      <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-6 py-2">
+      <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-2 md:px-4 lg:px-6 py-2">
         {/* Logo */}
         <div className="w-[45%] flex justify-between items-center">
           <Link
@@ -35,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
           >
             AXETOR <br /> WORKWEAR
           </Link>
-          <div className="space-x-5 flex items-center">
+          <div className="space-x-5 lg:flex hidden items-center">
             {links.map((link: LinkProps) => {
               return (
                 <span key={link.id} className="relative group w-fit">
@@ -45,9 +36,9 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
             })}
           </div>
         </div>
-        <div className="w-[55%] flex gap-5 justify-between items-center">
+        <div className="w-[55%] flex gap-5 justify-end lg:justify-between items-center">
           {/* Search */}
-          <div className="relative hidden w-full md:block">
+          <div className="relative hidden w-full lg:block">
             <input
               type="text"
               placeholder="What are you looking for?"
@@ -59,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
           </div>
 
           {/* Right Side */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 lg:space-x-4">
             <div className="border-r border-white/30 flex gap-2 pr-3">
               <Link
                 href="#"
@@ -76,13 +67,13 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
             </div>
             <Link
               href="/account"
-              className="hover:text-yellow-500 transition-all duration-100 ease-linear"
+              className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
             >
               <FaRegUser size={20} />
             </Link>
             <Link
               href="/wishlist"
-              className="hover:text-yellow-500 transition-all duration-100 ease-linear"
+              className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
             >
               <FaRegHeart size={20} />
             </Link>
@@ -92,27 +83,33 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
             >
               <TiShoppingCart size={23} />
             </Link>
+            <Link
+              href="/cart"
+              className="hover:text-yellow-500 lg:hidden transition-all duration-100 ease-linear"
+            >
+              <BiMenuAltLeft size={23} />
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Second Navbar */}
       <nav className="bg-white text-black">
-        <div className="flex max-w-9xl mx-auto items-center justify-between px-6 py-3">
-          <div className="space-x-5 flex items-center">
+        <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
+          <div className="flex flex-wrap gap-3 lg:gap-5 items-center">
             {categories.slice(0, 10).map((link: any) => {
               return (
                 <Link
                   href={"/"}
                   key={link.menu_id}
-                  className="text-sm whitespace-nowrap hover:text-primary capitalize"
+                  className="text-base lg:text-sm whitespace-nowrap hover:text-primary capitalize"
                 >
-                  {link?.menu_name}
+                  - {link?.menu_name}
                 </Link>
               );
             })}
           </div>
-          <div className="flex justify-center items-center gap-2">
+          <div className="hidden lg:flex justify-center items-center gap-2">
             <CiDiscount1 size={28} className="text-red-500" />
             <span className="font-semibold text-red-500">SPECIAL OFFER</span>
           </div>

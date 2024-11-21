@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="h-screen pt-28">
+    <div className="lg:h-screen pt-44 md:pt-36 lg:pt-28">
       {" "}
       <Swiper
         spaceBetween={30}
@@ -39,7 +39,7 @@ const Banner = () => {
               overflow: "hidden",
             }}
             alt="Slides"
-            className="object-cover h-screen w-full"
+            className="object-cover md:object-contain h-[50vh] md:h-auto lg:h-screen w-full"
             src="/assets/banner1.jpg"
           />
         </SwiperSlide>
@@ -54,7 +54,7 @@ const Banner = () => {
               overflow: "hidden",
             }}
             alt="Slides"
-            className="object-cover h-screen w-full"
+            className="object-cover md:object-contain h-[50vh] md:h-auto lg:h-screen w-full"
             src="/assets/banner2.jpg"
           />
         </SwiperSlide>
@@ -69,7 +69,7 @@ const Banner = () => {
               overflow: "hidden",
             }}
             alt="Slides"
-            className="object-cover h-screen w-full"
+            className="object-cover md:object-contain h-[50vh] md:h-auto lg:h-screen w-full"
             src="/assets/banner3.jpg"
           />
         </SwiperSlide>

@@ -18,3 +18,10 @@ body {
     transform: translateX(-100%); /* End outside left */
   }
 }
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px #a9bc41; /* Stroke width and color */
+    color: transparent; /* To ensure only the stroke is visible */
+  }
+}

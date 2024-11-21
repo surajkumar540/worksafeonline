@@ -24,10 +24,10 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
           unoptimized
         />
         <div className="absolute inset-0 bg-black transition-all duration-500 ease-linear opacity-80 group-hover:opacity-40"></div>
-        <div className="absolute inset-0 z-50 max-w-9xl mx-auto flex justify-between gap-10 items-center px-10">
-          <div className="w-1/3 leading-none">
+        <div className="absolute inset-0 z-50 max-w-9xl mx-auto flex flex-col lg:flex-row justify-start md:justify-center lg:justify-between gap-10 items-center px-4 md:px-6 lg:px-10">
+          <div className="w-full lg:w-1/3 pt-20 lg:pt-0 leading-none">
             <p
-              className={`uppercase text-[112px] text-white font-black ${bigShoulders.className}`}
+              className={`uppercase text-4xl md:text-8xl lg:text-[112px] text-white font-black ${bigShoulders.className}`}
             >
               who <br />
               <span className="text-primary">we are</span>
@@ -42,8 +42,8 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
               <FaArrowRightLong className="ml-2" />
             </span>
           </div>
-          <div className="w-2/3">
-            <div className="border-b-2 border-b-white pb-10 mb-5 flex justify-start gap-20">
+          <div className="w-full lg:w-2/3">
+            <div className="border-b-2 border-b-white pb-10 mb-5 flex flex-col md:flex-row justify-start gap-5 md:gap-10 lg:gap-20">
               <Image
                 src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/02/certification.svg"
                 alt="Image"
@@ -53,7 +53,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
                 priority
                 unoptimized
               />
-              <p className="text-xl flex flex-col gap-5 text-white">
+              <p className="md:text-xl flex flex-col gap-5 text-white">
                 <span>
                   Founded in 1983, Axetor are still today&apos;s leader in
                   industrial clothing in Australia and they offer a range of
@@ -71,13 +71,13 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
               >
                 Popular Brands
               </p>
-              <div className="grid grid-cols-5 mt-5 mb-10">
+              <div className="grid grid-cols-3 md:grid-cols-5 mt-5 mb-10">
                 {brands &&
                   brands.length > 0 &&
                   brands.slice(1, 6).map((brand: any, index: number) => {
                     return (
                       <span
-                        className="flex justify-center text-lg font-semibold items-center border py-7"
+                        className="flex justify-center text-center text-sm md:text-lg font-semibold items-center border py-4 md:py-7"
                         key={index}
                       >
                         {brand?.Brand_Name}
@@ -90,7 +90,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
         </div>
       </div>
       <Marquee />
-      <div className="max-w-9xl mx-auto grid grid-cols-4">
+      <div className="max-w-9xl mx-auto grid grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => {
           const Icon = feature.icon;
           return (
@@ -98,10 +98,12 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
               key={index}
               className="flex py-16 flex-col border items-center"
             >
-              <div className="mb-4 text-4xl">
+              <div className="mb-4 text-3xl md:text-4xl">
                 <Icon />
               </div>
-              <p className="text-center text-lg font-medium">{feature.title}</p>
+              <p className="text-center md:text-lg font-medium">
+                {feature.title}
+              </p>
             </div>
           );
         })}

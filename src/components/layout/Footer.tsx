@@ -47,39 +47,40 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
           unoptimized
           src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/ft1-img.jpg"
           alt="Guide Background"
-          className="w-full h-24 object-cover"
+          className="w-full h-36 md:h-24 object-cover"
         />
         {/* Overlay */}
-        <div className="absolute max-w-9xl mx-auto inset-0 bg-black bg-opacity-20 flex items-center gap-5 px-8">
+        <div className="absolute max-w-9xl mx-auto inset-0 bg-black bg-opacity-20 flex flex-col md:flex-row py-5 md:py-0 items-center gap-2 md:gap-5 px-4 md:px-6 lg:px-10">
           <h2
-            className={`text-white text-3xl font-black ${bigShoulders.className}`}
+            className={`text-white text-2xl text-center md:text-left lg:text-3xl font-black ${bigShoulders.className}`}
           >
             LET US GUIDE YOU IN YOUR CHOICE OF WORKWEAR
           </h2>
-          <span className="relative flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-64 pr-4 overflow-hidden group">
-            <span className="absolute text-sm font-semibold whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+          <span className="relative flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-44 md:pl-64 pr-4 overflow-hidden group">
+            <span className="absolute text-xs md:text-sm font-semibold whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
               CHECK OUT OUR GUIDES
             </span>
-            <span className="absolute text-sm font-semibold whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+            <span className="absolute text-xs md:text-sm font-semibold whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
               CHECK OUT OUR GUIDES
             </span>
             <FaArrowRightLong className="ml-2" />
           </span>
         </div>
       </div>
-      <footer className="bg-[#1C1C1C] text-white pt-20 pb-10">
+      <footer className="bg-[#1C1C1C] text-white pt-20">
         {/* Top Section */}
-        <div className="max-w-9xl mx-auto px-4 grid gap-10 md:grid-cols-3 lg:grid-cols-6">
+        <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {/* Customer Links */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Customer</h4>
+            <h4
+              className={`${bigShoulders.className} font-bold text-2xl uppercase mb-4`}
+            >
+              Customer
+            </h4>
             <ul className="space-y-2">
               {customerLinks.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
+                  <a href="#" className="text-white/50 tracking-wide">
                     {link}
                   </a>
                 </li>
@@ -89,14 +90,15 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
 
           {/* About Links */}
           <div>
-            <h4 className="font-bold text-lg mb-4">About Us</h4>
+            <h4
+              className={`${bigShoulders.className} font-bold text-2xl uppercase mb-4`}
+            >
+              About Us
+            </h4>
             <ul className="space-y-2">
               {aboutLinks.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
+                  <a href="#" className="text-white/50 tracking-wide">
                     {link}
                   </a>
                 </li>
@@ -106,14 +108,15 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+            <h4
+              className={`${bigShoulders.className} font-bold text-2xl uppercase mb-4`}
+            >
+              Quick Links
+            </h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
+                  <a href="#" className="text-white/50 tracking-wide">
                     {link}
                   </a>
                 </li>
@@ -123,63 +126,67 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
 
           {/* Contact Information */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Contact</h4>
-            <p>contact@example.com</p>
-            <p>2972 Westheimer Rd. Santa Ana,</p>
-            <p>Illinois 85486</p>
+            <h4
+              className={`${bigShoulders.className} font-bold text-2xl uppercase mb-4`}
+            >
+              Contact
+            </h4>
+            <div className="text-white/50 space-y-2 tracking-wide">
+              <p>contact@example.com</p>
+              <p>2972 Westheimer Rd. Santa Ana,</p>
+              <p>Illinois 85486</p>
+            </div>
           </div>
 
           {/* Mailing List */}
-          <div className="col-span-2">
-            <h4 className="font-bold text-lg mb-4">
+          <div className="col-span-2 lg:px-8">
+            <h4
+              className={`${bigShoulders.className} font-bold text-center md:text-left text-3xl uppercase mb-4`}
+            >
               Subscribe to Our Mailing List
             </h4>
-            <p className="text-gray-300 mb-4">
+            <p className="text-white/50 tracking-wide mb-4">
               Our latest and greatest in your inbox, sign up now.
             </p>
             <div className="flex items-center">
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-grow py-2 px-4 rounded-l-md focus:outline-none text-black"
+                className="flex-grow py-3 px-4 rounded-l-full focus:outline-none text-black"
               />
-              <button className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-r-md">
+              <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-3 rounded-r-full">
                 Subscribe
               </button>
             </div>
           </div>
         </div>
-
-        {/* Divider */}
-        <div className="border-t border-gray-700 my-16"></div>
-
-        {/* Bottom Section */}
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-          {/* Social Media */}
+        <div className="border-t border-white/20 mt-10 md:mt-20"></div>
+        <div
+          className={`max-w-7xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold ${bigShoulders.className}`}
+        >
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
-            <p>Connect with us:</p>
-            <div className="flex space-x-3">
-              {socialIcons.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  className="hover:text-white transition-colors"
-                >
-                  <i className={`fab fa-${social.icon}`}></i>
-                </a>
-              ))}
-            </div>
+            <p className="uppercase">Connect with us:</p>
+            <div className="flex space-x-3"></div>
           </div>
-
-          {/* Copyright */}
-          <div>
-            <p>Copyright © 2024 Axetor. All rights reserved</p>
-          </div>
-
-          {/* Customer Service */}
           <div>
             <p>Customer Service: (084) 123-456 88</p>
           </div>
+        </div>
+        <div className="bg-white text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
+          <p className="text-gray-500">
+            Copyright © {new Date().getFullYear()} Axetor. All rights reserved
+          </p>
+          <Image
+            src={
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
+            }
+            alt="Payment"
+            width={100}
+            height={100}
+            priority
+            unoptimized
+            className="object-contain w-72"
+          />
         </div>
       </footer>
     </>
