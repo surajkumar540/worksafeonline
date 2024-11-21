@@ -28,6 +28,20 @@ export default {
         "4xl": "2560px", // for screens between 2K and 4K
         "5xl": "3840px", // for 4K screens
       },
+      animation: {
+        "fade-up": "fadeUp 1s ease-in-out",
+        "fade-down": "fadeDown 1s ease-in-out",
+      },
+      keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(50px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeDown: {
+          "0%": { opacity: "0", transform: "translateY(-25px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
     },
   },
   plugins: [],

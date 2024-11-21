@@ -2,8 +2,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc"; // To handle UTC time
 import { useState, useEffect } from "react";
 import timezone from "dayjs/plugin/timezone"; // For time zone conversion
-import { Fetch } from "../utils/apiUtils";
-
+import { Fetch } from "@/utils/axios";
 // Extend dayjs with plugins
 dayjs.extend(utc);
 dayjs.extend(timezone);

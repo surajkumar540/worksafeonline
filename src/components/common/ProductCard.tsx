@@ -7,8 +7,8 @@ const ProductCard = ({ product }: { product: any }) => {
   return (
     <div>
       <Image
-        width={300}
-        height={300}
+        width={400}
+        height={400}
         alt={product?.Description}
         src={product?.ListingImage}
         className="h-64 object-contain p-2 border mb-4 rounded-lg"

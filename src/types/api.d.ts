@@ -1,7 +1,7 @@
 export interface Country {
-  name: String;
-  code: String;
-  iso: String;
+  name: string;
+  code: string;
+  iso: string;
 }
 
 export interface LinkProps {
@@ -12,8 +12,8 @@ export interface LinkProps {
 }
 
 export interface NavbarProps {
-  data?: String;
+  data?: string;
 }
 export interface FooterProps {
-  data?: String;
+  data?: string;
 }

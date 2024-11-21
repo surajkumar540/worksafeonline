@@ -1,3 +1,8 @@
+import { BsCreditCard } from "react-icons/bs";
+import { SlSocialDropbox } from "react-icons/sl";
+import { BsTelephoneOutbound } from "react-icons/bs";
+import { RiMoneyPoundCircleLine } from "react-icons/ri";
+
 import { Country, LinkProps } from "@/types/api";
 
 export const countries: Country[] = [
@@ -224,4 +229,11 @@ export const links: LinkProps[] = [
     href: "/contact",
     label: "CONTACT",
   },
+];
+
+export const features = [
+  { icon: SlSocialDropbox, title: "Free Shipping & Return" },
+  { icon: BsTelephoneOutbound, title: "Customer Support 24/7" },
+  { icon: BsCreditCard, title: "100% Secure Payment" },
+  { icon: RiMoneyPoundCircleLine, title: "Money Back Guarantee" },
 ];

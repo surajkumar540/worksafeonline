@@ -24,7 +24,6 @@ const Navbar: React.FC<NavbarProps> = ({ data }) => {
     };
     if (categories.length === 0) fetchData();
   }, [categories.length]);
-  console.log(categories);
   return (
     <header className="bg-[#1C1C1C] fixed top-0 z-50 w-full text-white shadow-md">
       <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-6 py-2">

@@ -49,13 +49,14 @@ const request = async <T>(
 
     clearTimeout(timeoutId);
     return response;
-  } catch (error: any) {
+  } catch (error) {
     clearTimeout(timeoutId);
     if (axios.isAxiosError(error) && error.message === "canceled") {
       throw new Error("Request aborted");
     } else {
-      const status = error.response?.status;
-      const message = error.response?.data?.message || error.message;
+      const status = (error as any).response?.status;
+      const message =
+        (error as any).response?.data?.message || (error as Error).message;
       throw new Error(`Error ${status}: ${message}`);
     }
   }
