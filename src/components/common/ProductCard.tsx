@@ -2,17 +2,12 @@ import Image from "next/image";
 import StarRating from "./StarRating";
 import { BsHandbag } from "react-icons/bs";
 import { bigShoulders } from "@/app/layout";
+import ImageComponent from "./ImageComponent";
 
 const ProductCard = ({ product }: { product: any }) => {
   return (
     <div>
-      <Image
-        width={400}
-        height={400}
-        alt={product?.Description}
-        src={product?.ListingImage}
-        className="h-64 object-contain p-2 border mb-4 rounded-lg"
-      />
+      <ImageComponent product={product} />
       <div
         className={`flex flex-col justify-center items-centers ${bigShoulders.className}`}
       >

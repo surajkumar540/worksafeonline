@@ -47,7 +47,7 @@ const ListingByCategory = ({
         <div
           className={`absolute animate-fade-up text-white inset-0 flex text-left flex-col justify-center max-w-9xl pl-5 md:pl-10 ${bigShoulders.className}`}
         >
-          <p className="text-6xl md:text-9xl uppercase w-1/2 mb-5 font-bold">
+          <p className="text-6xl md:text-8xl lg:text-9xl uppercase w-1/2 mb-5 font-bold">
             {bannerTitle}
           </p>
           <p className="text-2xl uppercase">{bannerDesc}</p>

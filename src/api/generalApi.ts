@@ -50,3 +50,11 @@ export const fetchHomePageData = async () => {
     homeListing3,
   };
 };
+
+export const buildQueryUrl = (baseUrl: string, queryData: any) => {
+  const queryParams = new URLSearchParams();
+  Object.entries(queryData).forEach(([key, value]: any) => {
+    if (value) queryParams.append(key, value);
+  });
+  return `${baseUrl}?${queryParams.toString()}`;
+};

@@ -3,14 +3,15 @@ import Link from "next/link";
 import ItemHover from "./ItemHover";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
+import ActivateLink from "./ActivateLink";
 import { FaRegUser } from "react-icons/fa";
+import MobileSidebar from "./MobileSidebar";
 import { IoMdSearch } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
 import { CiDiscount1 } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
 import { LinkProps, NavbarProps } from "@/types/api";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import MobileSidebar from "./MobileSidebar";
 
 const Navbar: React.FC<NavbarProps> = async ({ data }) => {
   const resp = await Get("api/categories");
@@ -95,11 +96,14 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
             {categories.slice(0, 10).map((link: any) => {
               return (
                 <Link
-                  href={"/"}
                   key={link.menu_id}
+                  href={"/shop?category=" + link?.menu_id}
                   className="text-base lg:text-sm whitespace-nowrap hover:text-primary capitalize"
                 >
-                  {link?.menu_name}
+                  <ActivateLink
+                    name={link?.menu_name}
+                    id={link.menu_id.toString()}
+                  />
                 </Link>
               );
             })}
