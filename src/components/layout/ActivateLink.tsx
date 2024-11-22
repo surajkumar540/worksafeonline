@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const ActivateLink = ({ name, id }: { name: string; id: string }) => {
@@ -24,4 +25,18 @@ const ActivateLink = ({ name, id }: { name: string; id: string }) => {
   );
 };
 
-export default ActivateLink;
+const ActivateLinkWithSuspense = ({
+  name,
+  id,
+}: {
+  name: string;
+  id: string;
+}) => {
+  return (
+    <Suspense fallback={<span>Loading...</span>}>
+      <ActivateLink name={name} id={id} />
+    </Suspense>
+  );
+};
+
+export default ActivateLinkWithSuspense;
