@@ -7,10 +7,10 @@ import { FaRegUser } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
 import { CiDiscount1 } from "react-icons/ci";
-import { BiMenuAltLeft } from "react-icons/bi";
 import { TiShoppingCart } from "react-icons/ti";
 import { LinkProps, NavbarProps } from "@/types/api";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import MobileSidebar from "./MobileSidebar";
 
 const Navbar: React.FC<NavbarProps> = async ({ data }) => {
   const resp = await Get("api/categories");
@@ -83,12 +83,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
             >
               <TiShoppingCart size={23} />
             </Link>
-            <Link
-              href="/cart"
-              className="hover:text-yellow-500 lg:hidden transition-all duration-100 ease-linear"
-            >
-              <BiMenuAltLeft size={23} />
-            </Link>
+            <MobileSidebar categories={categories} />
           </div>
         </div>
       </div>
@@ -104,7 +99,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
                   key={link.menu_id}
                   className="text-base lg:text-sm whitespace-nowrap hover:text-primary capitalize"
                 >
-                  - {link?.menu_name}
+                  {link?.menu_name}
                 </Link>
               );
             })}

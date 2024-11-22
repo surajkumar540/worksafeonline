@@ -24,7 +24,7 @@ const ItemHover = ({ link }: { link: LinkProps }) => {
       <Link
         onClick={() => setShow(false)}
         onMouseEnter={() => handleGroupHover(link.href)}
-        className={`font-semibold 2xl:text-xl flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear ${
+        className={`font-semibold 2xl:text-xl text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear ${
           isActive(link.href) && "text-primary"
         }`}
         href={link?.href}
@@ -33,7 +33,7 @@ const ItemHover = ({ link }: { link: LinkProps }) => {
         {link?.label} {link.icon && <RiArrowDropDownLine size={20} />}
       </Link>
       <span
-        className={`absolute inset-x-0 bottom-0 h-[1.5px] bg-primary transform origin-left transition-transform ${
+        className={`hidden lg:block absolute inset-x-0 bottom-0 h-[1.5px] bg-primary transform origin-left transition-transform ${
           showLink === link.href && "group-hover:scale-x-100"
         } ${isActive(link.href) ? "scale-x-100" : "scale-x-0"}`}
       ></span>

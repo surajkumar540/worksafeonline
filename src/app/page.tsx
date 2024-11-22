@@ -1,15 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import { bigShoulders } from "./layout";
 import Banner from "@/components/home/Banner";
 import Upcoming from "@/components/home/Upcoming";
 import WhoWeAre from "@/components/home/WhoWeAre";
-import { fetchHomePageData } from "@/api/generalApi";
-import ReasonsToShop from "@/components/home/ReasonToShop";
-import CategoryCard from "@/components/common/CategoryCard";
-import ListingByCategory from "@/components/home/ListingByCategory";
-import { bigShoulders } from "./layout";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { fetchHomePageData } from "@/api/generalApi";
 import Categories from "@/components/home/Categories";
+import ReasonsToShop from "@/components/home/ReasonToShop";
+import ListingByCategory from "@/components/home/ListingByCategory";
+
 export default async function Home() {
   const {
     brands,
@@ -26,22 +26,28 @@ export default async function Home() {
       {homeListing1?.product && homeListing1?.product.length > 0 && (
         <ListingByCategory
           sectionText={homeListing1.offerName}
+          bannerTitle={homeListing1?.banner_title}
+          bannerImage={homeListing1?.banner_image}
           products={homeListing1?.product.slice(0, 4)}
-          bannerImage="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bg-1.jpg"
+          bannerDesc={homeListing1?.banner_description}
         />
       )}
       {homeListing2?.product && homeListing2?.product.length > 0 && (
         <ListingByCategory
           sectionText={homeListing2.offerName}
+          bannerTitle={homeListing2?.banner_title}
+          bannerImage={homeListing2?.banner_image}
           products={homeListing2?.product.slice(0, 4)}
-          bannerImage="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bg-2.jpg"
+          bannerDesc={homeListing2?.banner_description}
         />
       )}
       {homeListing3?.product && homeListing3?.product.length > 0 && (
         <ListingByCategory
           sectionText={homeListing3.offerName}
+          bannerTitle={homeListing3?.banner_title}
+          bannerImage={homeListing3?.banner_image}
           products={homeListing3?.product.slice(0, 4)}
-          bannerImage="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bg-3.jpg"
+          bannerDesc={homeListing3?.banner_description}
         />
       )}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-9xl mx-auto px-5 py-10">

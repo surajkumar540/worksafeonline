@@ -6,10 +6,14 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const ListingByCategory = ({
   products,
+  bannerDesc,
   sectionText,
+  bannerTitle,
   bannerImage,
 }: {
   products: any;
+  bannerDesc: string;
+  bannerTitle: string;
   sectionText: string;
   bannerImage: string;
 }) => {
@@ -44,11 +48,9 @@ const ListingByCategory = ({
           className={`absolute animate-fade-up text-white inset-0 flex text-left flex-col justify-center max-w-9xl pl-5 md:pl-10 ${bigShoulders.className}`}
         >
           <p className="text-6xl md:text-9xl uppercase w-1/2 mb-5 font-bold">
-            {text2}
+            {bannerTitle}
           </p>
-          <p className="text-2xl uppercase">
-            {text1} {text2}
-          </p>
+          <p className="text-2xl uppercase">{bannerDesc}</p>
           <span className="relative font-sans uppercase font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-36 pr-4 overflow-hidden group">
             <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
               Discover Now
