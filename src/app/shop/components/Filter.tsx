@@ -63,11 +63,10 @@ const Filter = ({
 
       {/* Filter Options with scrollable animation and blurred edges */}
       <div
-        className={`overflow-y-auto hide-scrollbar transition-all duration-300 ease-in-out mt-4 space-y-3`}
-        style={{
-          maxHeight: isOpen ? "33vh" : "0px",
-          transitionProperty: "max-height",
-        }}
+        className={`overflow-y-auto hide-scrollbar transition-all duration-300 ease-in-out mt-4 space-y-3 ${
+          isOpen ? "md:max-h-96 lg:max-h-[33vh]" : "0px"
+        }`}
+        style={{ transitionProperty: "max-height" }}
       >
         {options.map((option: any, index: number) => {
           return (
@@ -81,7 +80,13 @@ const Filter = ({
               >
                 <input
                   type="checkbox"
-                  checked={subcategoryInput == option?.menu_id}
+                  checked={
+                    subcategoryInput &&
+                    option?.menu_id &&
+                    subcategoryInput == option?.menu_id
+                      ? true
+                      : false
+                  }
                   onChange={(e) => {
                     setSubcategory(e.target.checked ? option?.menu_id : null);
                   }}

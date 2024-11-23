@@ -21,7 +21,7 @@ const ImageComponent = ({ product }: { product: any }) => {
       src={imgSrc}
       onError={handleError}
       alt={product?.Description}
-      className="h-64 object-contain p-2 border mb-4 rounded-lg"
+      className="h-48 md:h-64 object-contain p-2 border mb-4 rounded-lg"
     />
   );
 };

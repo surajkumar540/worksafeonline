@@ -95,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
       {/* Second Navbar */}
       <nav className="bg-white text-black">
         <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
-          <div className="flex flex-wrap gap-3 lg:gap-5 items-center">
+          <div className="flex lg:flex-wrap gap-3 lg:gap-5 items-center overflow-x-auto lg:overflow-x-visible">
             {categories.map((link: any) => {
               return (
                 <Link

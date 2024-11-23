@@ -28,8 +28,8 @@ export default async function Page(ctx: any) {
   const currentPage = response?.CurrentPage ?? [];
   const categories = categoryResponse?.subcategories ?? [];
   return (
-    <div className="grid grid-cols-4 gap-20 max-w-9xl mx-auto p-10">
-      <div className="col-span-1 space-y-6">
+    <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10">
+      <div className="col-span-1 hidden md:block space-y-6">
         {categories && categories.length > 0 && (
           <Filter
             countKey="Count"
@@ -81,7 +81,7 @@ export default async function Page(ctx: any) {
           />
         )}
       </div>
-      <div className="col-span-3 grid grid-cols-4 gap-5">
+      <div className="col-span-2 lg:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-5">
         {products && products.length > 0 ? (
           products.map((product: any) => {
             return (
