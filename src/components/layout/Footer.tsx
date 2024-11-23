@@ -175,7 +175,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
         <div className="border-t border-white/20 mt-10 md:mt-20"></div>
 
         <div
-          className={`max-w-7xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold ${bigShoulders.className}`}
+          className={`max-w-9xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold ${bigShoulders.className}`}
         >
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <p className="uppercase">Connect with us:</p>
