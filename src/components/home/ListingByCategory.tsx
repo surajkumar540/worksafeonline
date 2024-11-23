@@ -42,7 +42,7 @@ const ListingByCategory = ({
             clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
             overflow: "hidden",
           }}
-          className="absolute inset-0 bg-gradient-to-t from-black to-transparent transition-all duration-500 ease-linear opacity-50 group-hover:opacity-40"
+          className="absolute inset-0 bg-gradient-to-r from-black to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"
         ></div>
         <div
           className={`absolute animate-fade-up text-white inset-0 flex text-left flex-col justify-center max-w-9xl pl-5 md:pl-10 ${bigShoulders.className}`}

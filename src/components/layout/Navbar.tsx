@@ -15,9 +15,12 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Navbar: React.FC<NavbarProps> = async ({ data }) => {
   const resp = await Get("api/categories");
-  const categories = resp.categories;
+  const offerResponse = await Get("api/SpecialOffers");
+  let categories = resp.categories;
+  const offerExist = offerResponse.status;
+  categories = !offerExist ? categories : categories.slice(0, 10);
   return (
-    <header className="bg-[#1C1C1C] fixed top-0 z-50 w-full text-white shadow-md">
+    <header className="bg-[#1C1C1C] sticky top-0 z-50 w-full text-white shadow-md">
       <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-2 md:px-4 lg:px-6 py-2">
         {/* Logo */}
         <div className="w-[45%] flex justify-between items-center">
@@ -93,7 +96,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
       <nav className="bg-white text-black">
         <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
           <div className="flex flex-wrap gap-3 lg:gap-5 items-center">
-            {categories.slice(0, 10).map((link: any) => {
+            {categories.map((link: any) => {
               return (
                 <Link
                   key={link.menu_id}
@@ -108,10 +111,12 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
               );
             })}
           </div>
-          <div className="hidden lg:flex justify-center items-center gap-2">
-            <CiDiscount1 size={28} className="text-red-500" />
-            <span className="font-semibold text-red-500">SPECIAL OFFER</span>
-          </div>
+          {offerExist && (
+            <div className="hidden lg:flex justify-center items-center gap-2">
+              <CiDiscount1 size={28} className="text-red-500" />
+              <span className="font-semibold text-red-500">SPECIAL OFFER</span>
+            </div>
+          )}
         </div>
       </nav>
     </header>

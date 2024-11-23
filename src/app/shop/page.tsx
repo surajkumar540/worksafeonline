@@ -11,7 +11,9 @@ export default async function Page(ctx: any) {
     category = categoryExists?.category;
     subcategory = categoryExists?.subcategory;
     const id = category && subcategory ? subcategory : category;
-    response = await Get("api/Products?category_id=" + id);
+    response = await Get(
+      "api/ProductsByPage?category_id=" + id + "&page=1&pagesize=12"
+    );
     categoryResponse = await Get("api/SubCategories?category_id=" + category);
   } else
     response = await Get("api/ProductsByPage?category_id=0&page=1&pagesize=20");
@@ -26,7 +28,7 @@ export default async function Page(ctx: any) {
   const currentPage = response?.CurrentPage ?? [];
   const categories = categoryResponse?.subcategories ?? [];
   return (
-    <div className="grid grid-cols-4 gap-20 max-w-9xl mx-auto p-10 pt-52 md:pt-44 lg:pt-36">
+    <div className="grid grid-cols-4 gap-20 max-w-9xl mx-auto p-10">
       <div className="col-span-1 space-y-6">
         {categories && categories.length > 0 && (
           <Filter

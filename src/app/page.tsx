@@ -18,11 +18,12 @@ export default async function Home() {
     homeListing1,
     homeListing2,
     homeListing3,
+    banners,
   } = await fetchHomePageData();
   return (
     <div>
-      <Banner />
-      <Upcoming products={products} />
+      <Banner banners={banners} />
+      <Upcoming products={products} slidesPerViewDesktop={5} />
       {homeListing1?.product && homeListing1?.product.length > 0 && (
         <ListingByCategory
           sectionText={homeListing1.offerName}

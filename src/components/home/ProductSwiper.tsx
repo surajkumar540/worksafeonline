@@ -8,7 +8,13 @@ import { Autoplay } from "swiper/modules";
 
 import ProductCard from "../common/ProductCard";
 
-const ProductSwiper = ({ products }: { products: any }) => {
+const ProductSwiper = ({
+  products,
+  slidesPerViewDesktop,
+}: {
+  products: any;
+  slidesPerViewDesktop?: number;
+}) => {
   return (
     <div>
       <Swiper
@@ -40,8 +46,8 @@ const ProductSwiper = ({ products }: { products: any }) => {
             spaceBetween: 30,
           },
           1200: {
-            slidesPerView: 4,
-            spaceBetween: 40,
+            slidesPerView: slidesPerViewDesktop ?? 4,
+            spaceBetween: slidesPerViewDesktop ? 25 : 40,
           },
         }}
         className="mySwiper"

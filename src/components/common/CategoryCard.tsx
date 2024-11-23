@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { bigShoulders } from "@/app/layout";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const CategoryCard = ({ category }: { category: any }) => {
   return (
@@ -18,9 +19,15 @@ const CategoryCard = ({ category }: { category: any }) => {
         <h3
           className={`text-2xl font-black mb-3 uppercase ${bigShoulders.className}`}
         >
-          {category.menu_name}
+          <Link passHref href={"/shop?category=" + category?.menu_id}>
+            {category.menu_name}
+          </Link>
         </h3>
-        <span className="relative flex space-x-2 w-fit items-center border transition-all duration-300 ease-in-out rounded-full cursor-pointer bg-primary group-hover:bg-white group-hover:text-black group-hover:border-none border-primary py-2 pl-24 pr-2 overflow-hidden group">
+        <Link
+          passHref
+          href={"/shop?category=" + category?.menu_id}
+          className="relative flex space-x-2 w-fit items-center border transition-all duration-300 ease-in-out rounded-full cursor-pointer bg-primary group-hover:bg-white group-hover:text-black group-hover:border-none border-primary py-2 pl-24 pr-2 overflow-hidden group"
+        >
           <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
             View More
           </span>
@@ -28,7 +35,7 @@ const CategoryCard = ({ category }: { category: any }) => {
             View More
           </span>
           <FaArrowRightLong className="ml-2" />
-        </span>
+        </Link>
       </div>
     </div>
   );

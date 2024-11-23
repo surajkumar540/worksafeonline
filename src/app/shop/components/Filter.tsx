@@ -23,9 +23,11 @@ const Filter = ({
   category,
   subcategory,
 }: FilterProps) => {
-  console.log(subcategory);
   const navigate = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [subcategoryInput, setSubcategory] = useState<string | null>(
+    subcategory ? subcategory.toString() : null
+  );
 
   const handleUrl = (data: any) => {
     if (data.menu_id) {
@@ -79,10 +81,11 @@ const Filter = ({
               >
                 <input
                   type="checkbox"
-                  checked={
-                    subcategory && subcategory == option?.menu_id ? true : false
-                  }
-                  className="w-4 h-4 border-gray-300 rounded focus:ring-primary"
+                  checked={subcategoryInput == option?.menu_id}
+                  onChange={(e) => {
+                    setSubcategory(e.target.checked ? option?.menu_id : null);
+                  }}
+                  className="w-4 h-4 border-gray-300 rounded !text-primary focus:ring-primary"
                 />
                 <span
                   className={`${

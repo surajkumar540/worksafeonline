@@ -17,10 +17,11 @@ export const fetchHomePageData = async () => {
   const apiCalls = [
     Get("api/Brands"), // Fetch brands
     Get("api/Categories"), // Fetch categories
-    Get("api/Products?category_id=1"), // Fetch products
+    Get("api/ProductsByPage?category_id=1&page=1&pagesize=10"), // Fetch products
     Get("api/HomeProductListing1?App=Worksafe"), // Fetch home listing 1
     Get("api/HomeProductListing2?App=Worksafe"), // Fetch home listing 2
     Get("api/HomeProductListing3?App=Worksafe"), // Fetch home listing 3
+    Get("api/BannerOffersWeb?App=Worksafe"), // Fetch Home Page Banner
   ];
 
   // Use Promise.allSettled to handle individual promise results
@@ -32,6 +33,7 @@ export const fetchHomePageData = async () => {
     homeListing1,
     homeListing2,
     homeListing3,
+    bannerResponse,
   ] = results.map((result) =>
     result.status === "fulfilled" ? result.value : {}
   );
@@ -39,8 +41,9 @@ export const fetchHomePageData = async () => {
     productsResponse.product?.filter(
       (product: { Status: number }) => product?.Status === 1
     ) || [];
-  const categories = categoriesResponse.categories || [];
   const brands = brandsResponse.brand || [];
+  const banners = bannerResponse.special_offers || [];
+  const categories = categoriesResponse.categories || [];
   return {
     products,
     categories,
@@ -48,6 +51,7 @@ export const fetchHomePageData = async () => {
     homeListing1,
     homeListing2,
     homeListing3,
+    banners,
   };
 };
 
