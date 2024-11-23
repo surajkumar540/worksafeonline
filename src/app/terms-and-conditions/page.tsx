@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="pt-[10vh] md:pt-[15vh]">
-      <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-20 bg-white">
+    <div>
+      <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-20 lg:pt-10 bg-white">
         <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
         <p className="text-gray-600 mb-8">Last updated: October 04, 2024</p>
 

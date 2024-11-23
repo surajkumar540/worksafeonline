@@ -1,32 +1,33 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { FooterProps } from "@/types/api";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { bigShoulders } from "@/app/layout";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Footer: React.FC<FooterProps> = ({ data }) => {
   const customerLinks = [
-    "Help Center",
-    "My Account",
-    "Track My Order",
-    "Return Policy",
-    "Gift Cards",
+    { label: "Help Center", href: "/faqs" },
+    { label: "My Account", href: "/my-account" },
+    { label: "Track My Order", href: "/order-tracking" },
+    { label: "Return Policy", href: "/refund-policy" },
+    { label: "Gift Cards", href: "/my-account" },
   ];
 
   const aboutLinks = [
-    "Company Info",
-    "Press Releases",
-    "Careers",
-    "Reviews",
-    "Investor Relations",
+    { label: "Company Info", href: "/about-us" },
+    { label: "Press Releases", href: "/about-us" },
+    { label: "Careers", href: "/about-us" },
+    { label: "Reviews", href: "/about-us" },
+    { label: "Investor Relations", href: "/about-us" },
   ];
 
   const quickLinks = [
-    "Search",
-    "Become a Reseller",
-    "About Us",
-    "Contact Us",
-    "Terms of Service",
+    { label: "Search", href: "/search" },
+    { label: "Become a Reseller", href: "/about-us" },
+    { label: "About Us", href: "/about-us" },
+    { label: "Contact Us", href: "/contact" },
+    { label: "Terms of Service", href: "/terms-and-conditions" },
   ];
 
   const socialIcons = [
@@ -67,6 +68,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
           </span>
         </div>
       </div>
+
       <footer className="bg-[#1C1C1C] text-white pt-20">
         {/* Top Section */}
         <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
@@ -80,9 +82,12 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <ul className="space-y-2">
               {customerLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-white/50 tracking-wide">
-                    {link}
-                  </a>
+                  <Link
+                    href={link.href}
+                    className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -98,9 +103,12 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <ul className="space-y-2">
               {aboutLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-white/50 tracking-wide">
-                    {link}
-                  </a>
+                  <Link
+                    href={link.href}
+                    className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -116,9 +124,12 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-white/50 tracking-wide">
-                    {link}
-                  </a>
+                  <Link
+                    href={link.href}
+                    className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -145,7 +156,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             >
               Subscribe to Our Mailing List
             </h4>
-            <p className="text-white/50 tracking-wide mb-4">
+            <p className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear mb-4">
               Our latest and greatest in your inbox, sign up now.
             </p>
             <div className="flex items-center">
@@ -160,7 +171,9 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             </div>
           </div>
         </div>
+
         <div className="border-t border-white/20 mt-10 md:mt-20"></div>
+
         <div
           className={`max-w-7xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold ${bigShoulders.className}`}
         >
@@ -172,14 +185,13 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <p>Customer Service: (084) 123-456 88</p>
           </div>
         </div>
+
         <div className="bg-white text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
           <p className="text-gray-500">
             Copyright © {new Date().getFullYear()} Axetor. All rights reserved
           </p>
           <Image
-            src={
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
-            }
+            src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
             alt="Payment"
             width={100}
             height={100}
