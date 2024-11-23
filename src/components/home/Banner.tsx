@@ -38,7 +38,20 @@ const Banner = ({ banners }: { banners: any }) => {
                   unoptimized
                   alt={banner?.OfferName}
                   src={banner?.DesktopOfferImage}
-                  className="object-contain md:object-contain h-[50vh] md:h-auto w-full"
+                  className="object-contain h-[50vh] md:h-auto w-full hidden sm:block"
+                  style={{
+                    clipPath: "polygon(0 0, 100% 0, 100% 95%, 0 100%)",
+                    overflow: "hidden",
+                  }}
+                />
+                <Image
+                  priority
+                  width={100}
+                  height={100}
+                  unoptimized
+                  alt={banner?.OfferName}
+                  src={banner?.OfferImage}
+                  className="object-cover h-[50vh] md:h-auto w-full block sm:hidden"
                   style={{
                     clipPath: "polygon(0 0, 100% 0, 100% 95%, 0 100%)",
                     overflow: "hidden",
