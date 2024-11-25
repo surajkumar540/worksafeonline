@@ -1,8 +1,8 @@
 import Header from "./components/Header";
+import { features } from "@/data/country";
 import Map from "./components/MapComponent";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
-import { features } from "@/data/country";
 
 export default function Page() {
   return (
