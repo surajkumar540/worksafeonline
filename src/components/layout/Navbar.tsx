@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
@@ -75,12 +76,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
             >
               <FaRegUser size={20} />
             </Link>
-            <Link
-              href="/wishlist"
-              className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
-            >
-              <FaRegHeart size={20} />
-            </Link>
+            <Wishlist />
             <Link
               href="/cart"
               className="hover:text-yellow-500 transition-all duration-100 ease-linear"

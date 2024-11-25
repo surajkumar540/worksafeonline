@@ -1,4 +1,3 @@
-import Image from "next/image";
 import StarRating from "./StarRating";
 import { BsHandbag } from "react-icons/bs";
 import { bigShoulders } from "@/app/layout";
