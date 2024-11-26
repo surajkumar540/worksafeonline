@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    disableStaticImages: true, // Disable image optimization for testing
     remotePatterns: [
       {
         protocol: "https",
