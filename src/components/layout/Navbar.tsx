@@ -60,13 +60,13 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
                 href="#"
                 className="flex items-center text-white/50 font-semibold"
               >
-                ENG <RiArrowDropDownLine size={25} />
+                ENG
               </Link>
               <Link
                 href="#"
                 className="flex items-center text-white/50 font-semibold"
               >
-                $USD <RiArrowDropDownLine size={25} />
+                $USD
               </Link>
             </div>
             <Link
