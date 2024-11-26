@@ -5,6 +5,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import CartListModal from "../modals/CartModal";
 import React, { useState, useEffect } from "react";
 import eventEmitter from "@/hooks/useEventEmitter";
+import { includes } from "@/utils/polyfills";
 
 type Product = {
   ID: number;
@@ -27,7 +28,11 @@ const CartModal = () => {
   }, []);
 
   useEffect(() => {
-    if (!openCartModal && cart.length > 0 && pathname !== "/cart")
+    if (
+      !openCartModal &&
+      cart.length > 0 &&
+      !includes(["/cart", "/checkout"], pathname)
+    )
       setOpenCartModal(true);
   }, [cart.length, pathname]);
 
@@ -53,7 +58,7 @@ const CartModal = () => {
   };
 
   const openCart = () => {
-    if (pathname !== "/cart") setOpenCartModal(true);
+    if (!includes(["/cart", "/checkout"], pathname)) setOpenCartModal(true);
   };
 
   return (
