@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { TiShoppingCart } from "react-icons/ti";
 import CartListModal from "../modals/CartModal";
 import React, { useState, useEffect } from "react";
@@ -13,6 +14,7 @@ type Product = {
 };
 
 const CartModal = () => {
+  const pathname = usePathname();
   const [cart, setCart] = useState<Product[]>([]);
   const [openCartModal, setOpenCartModal] = useState<boolean>(false);
 
@@ -25,8 +27,9 @@ const CartModal = () => {
   }, []);
 
   useEffect(() => {
-    if (!openCartModal) setOpenCartModal(true);
-  }, [cart.length]);
+    if (!openCartModal && cart.length > 0 && pathname !== "/cart")
+      setOpenCartModal(true);
+  }, [cart.length, pathname]);
 
   useEffect(() => {
     const cartListener = (product: Product) => {
@@ -49,9 +52,13 @@ const CartModal = () => {
     setOpenCartModal(!openCartModal);
   };
 
+  const openCart = () => {
+    if (pathname !== "/cart") setOpenCartModal(true);
+  };
+
   return (
     <span className="hover:text-yellow-500 cursor-pointer relative hidden lg:block transition-all duration-100 ease-linear">
-      <TiShoppingCart onClick={() => setOpenCartModal(true)} size={23} />
+      <TiShoppingCart onClick={openCart} size={23} />
       <CartListModal
         cart={cart}
         setCart={setCart}
@@ -59,7 +66,7 @@ const CartModal = () => {
         handleToggle={handleToggle}
       />
       <span
-        onClick={() => setOpenCartModal(true)}
+        onClick={openCart}
         className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
       >
         {cart.length > 0 && cart.length < 9

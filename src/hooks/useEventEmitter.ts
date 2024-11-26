@@ -18,7 +18,7 @@ export const handleAddToWishlist = (product: any) => {
     }
     const updatedWishlist = [
       ...wishlist,
-      { ...product, createdAt: new Date() },
+      { ...product, createdAt: new Date(), quantity: 1 },
     ];
     toast.success("Added to wishlist!");
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
@@ -42,7 +42,10 @@ export const handleAddToCart = (product: any) => {
       toast.warn("Already in cart!");
       return false;
     }
-    const updatedCart = [...cart, { ...product, createdAt: new Date() }];
+    const updatedCart = [
+      ...cart,
+      { ...product, createdAt: new Date(), quantity: 1 },
+    ];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     return true;
   } catch (error) {
