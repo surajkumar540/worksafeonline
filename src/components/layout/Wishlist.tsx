@@ -15,10 +15,14 @@ const Wishlist = () => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
 
   useEffect(() => {
-    const storedWishlist = localStorage.getItem("wishlist");
-    if (storedWishlist) {
-      const parsedWishlist = JSON.parse(storedWishlist);
-      if (Array.isArray(parsedWishlist)) setWishlist(parsedWishlist);
+    if (typeof window !== "undefined") {
+      const storedWishlist = localStorage.getItem("wishlist");
+      if (storedWishlist) {
+        const parsedWishlist = JSON.parse(storedWishlist);
+        if (Array.isArray(parsedWishlist)) {
+          setWishlist(parsedWishlist);
+        }
+      }
     }
   }, []);
 
@@ -26,18 +30,22 @@ const Wishlist = () => {
     const wishlistListener = (product: Product) => {
       setWishlist((prev) => [...prev, product]);
     };
+
     const removeFromwishlistListener = (id: string) => {
       setWishlist((prev) => prev.filter((item) => item.ID !== parseInt(id)));
     };
 
-    eventEmitter.on("addToWishlist", wishlistListener);
-    eventEmitter.on("removeFromWishlist", removeFromwishlistListener);
-
+    if (typeof window !== "undefined" && eventEmitter) {
+      eventEmitter.on("addToWishlist", wishlistListener);
+      eventEmitter.on("removeFromWishlist", removeFromwishlistListener);
+    }
     return () => {
-      eventEmitter.off("addToWishlist", wishlistListener);
-      eventEmitter.off("removeFromWishlist", removeFromwishlistListener);
+      if (typeof window !== "undefined" && eventEmitter) {
+        eventEmitter.off("addToWishlist", wishlistListener);
+        eventEmitter.off("removeFromWishlist", removeFromwishlistListener);
+      }
     };
-  }, [wishlist]);
+  }, []);
 
   return (
     <>

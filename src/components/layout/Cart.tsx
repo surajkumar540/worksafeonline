@@ -3,9 +3,8 @@
 import { usePathname } from "next/navigation";
 import { TiShoppingCart } from "react-icons/ti";
 import CartListModal from "../modals/CartModal";
-import React, { useState, useEffect } from "react";
 import eventEmitter from "@/hooks/useEventEmitter";
-import { includes } from "@/utils/polyfills";
+import React, { useState, useEffect, useCallback } from "react";
 
 type Product = {
   ID: number;
@@ -20,10 +19,16 @@ const CartModal = () => {
   const [openCartModal, setOpenCartModal] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      const parsedCart = JSON.parse(storedCart);
-      if (Array.isArray(parsedCart)) setCart(parsedCart);
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        try {
+          const parsedCart = JSON.parse(storedCart);
+          if (Array.isArray(parsedCart)) setCart(parsedCart);
+        } catch (error) {
+          console.error("Error parsing cart from localStorage", error);
+        }
+      }
     }
   }, []);
 
@@ -31,10 +36,11 @@ const CartModal = () => {
     if (
       !openCartModal &&
       cart.length > 0 &&
-      !includes(["/cart", "/checkout"], pathname)
-    )
+      !["/cart", "/checkout"].includes(pathname)
+    ) {
       setOpenCartModal(true);
-  }, [cart.length, pathname]);
+    }
+  }, [cart.length, pathname, openCartModal]);
 
   useEffect(() => {
     const cartListener = (product: Product) => {
@@ -43,22 +49,27 @@ const CartModal = () => {
     const removeFromCartListener = (id: string) => {
       setCart((prev) => prev.filter((item) => item.ID !== parseInt(id)));
     };
-
-    eventEmitter.on("addToCart", cartListener);
-    eventEmitter.on("removeFromCart", removeFromCartListener);
+    if (eventEmitter) {
+      eventEmitter.on("addToCart", cartListener);
+      eventEmitter.on("removeFromCart", removeFromCartListener);
+    }
 
     return () => {
-      eventEmitter.off("addToCart", cartListener);
-      eventEmitter.off("removeFromCart", removeFromCartListener);
+      if (eventEmitter) {
+        eventEmitter.off("addToCart", cartListener);
+        eventEmitter.off("removeFromCart", removeFromCartListener);
+      }
     };
-  }, [cart]);
+  }, []);
+
+  const openCart = useCallback(() => {
+    if (!["/cart", "/checkout"].includes(pathname)) {
+      setOpenCartModal(true);
+    }
+  }, [pathname]);
 
   const handleToggle = () => {
-    setOpenCartModal(!openCartModal);
-  };
-
-  const openCart = () => {
-    if (!includes(["/cart", "/checkout"], pathname)) setOpenCartModal(true);
+    setOpenCartModal((prev) => !prev);
   };
 
   return (
@@ -74,11 +85,7 @@ const CartModal = () => {
         onClick={openCart}
         className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
       >
-        {cart.length > 0 && cart.length < 9
-          ? "0" + cart.length
-          : cart.length >= 10
-          ? cart.length
-          : 0}
+        {cart.length > 0 && cart.length < 9 ? `0${cart.length}` : cart.length}
       </span>
     </span>
   );

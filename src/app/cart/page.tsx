@@ -13,26 +13,28 @@ import Features from "@/components/common/Features";
 import RecommendedProducts from "@/components/common/RecommendedProducts";
 
 export default function Page() {
-  let cart: any = localStorage.getItem("cart");
-  if (cart) cart = JSON.parse(cart);
-  const [cartUpdated, setCart] = useState(cart ?? []);
+  const [cartUpdated, setCartUpdated] = useState<any>([]);
 
   useEffect(() => {
-    let cart: any = localStorage.getItem("cart") || "[]";
-    if (cart) cart = JSON.parse(cart);
-    setCart(cart);
+    if (typeof window !== "undefined") {
+      let storedCart: any = localStorage.getItem("cart");
+      if (storedCart) {
+        storedCart = JSON.parse(storedCart);
+      } else storedCart = [];
+      setCartUpdated(storedCart);
+    }
   }, []);
 
   const handleRemove = (id: string) => {
-    cart = cart.filter((item: any) => item?.ID !== id);
-    setCart(cart);
-    eventEmitter.emit("removeFromCart", id);
+    let cart = cartUpdated.filter((item: any) => item?.ID !== id);
+    setCartUpdated(cart);
+    if (eventEmitter) eventEmitter.emit("removeFromCart", id);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   const handleUpdateQuantity = (id: string, quantity: number) => {
     if (quantity === 11) return toast.warn("You can add up to 10 items!");
-    setCart((prev: any) =>
+    setCartUpdated((prev: any) =>
       prev.map((item: any) => (item.ID === id ? { ...item, quantity } : item))
     );
   };

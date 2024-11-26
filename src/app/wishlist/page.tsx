@@ -9,25 +9,29 @@ import WishlistCard from "./components/WishlistCard";
 import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 
 export default function Page() {
-  let wishlist: any = localStorage.getItem("wishlist");
-  if (wishlist) wishlist = JSON.parse(wishlist);
-  const [wishlistUpdated, setWishlistUpdated] = useState(wishlist ?? []);
+  const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
 
   useEffect(() => {
-    let wishlist: any = localStorage.getItem("wishlist") || "[]";
-    if (wishlist) wishlist = JSON.parse(wishlist);
-    setWishlistUpdated(wishlist);
+    if (typeof window !== "undefined") {
+      let storedWishlist: any = localStorage.getItem("wishlist");
+      if (storedWishlist) {
+        storedWishlist = JSON.parse(storedWishlist);
+      } else storedWishlist = [];
+      setWishlistUpdated(storedWishlist);
+    }
   }, []);
 
   const handleRemove = (id: string) => {
-    wishlist = wishlist.filter((item: any) => item?.ID !== id);
-    setWishlistUpdated(wishlist);
-    eventEmitter.emit("removeFromWishlist", id);
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    let updatedWishlist = wishlistUpdated.filter(
+      (item: any) => item?.ID !== id
+    );
+    setWishlistUpdated(updatedWishlist);
+    if (eventEmitter) eventEmitter.emit("removeFromWishlist", id);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
   const onAddToCart = (data: any) => {
     if (handleAddToCart(data)) {
-      eventEmitter.emit("addToCart", data);
+      if (eventEmitter) eventEmitter.emit("addToCart", data);
       handleRemove(data?.ID);
     }
   };

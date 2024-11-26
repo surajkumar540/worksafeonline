@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { bigShoulders } from "../layout";
+import { useEffect, useState } from "react";
 import Features from "@/components/common/Features";
 import CheckoutForm from "./components/CheckoutForm";
 import OrderSummary from "./components/OrderSummary";
 
 export default function Page() {
-  let cart: any = localStorage.getItem("cart");
-  if (cart) cart = JSON.parse(cart);
-  const [cartUpdated, setCart] = useState(cart ?? []);
+  const [cart, setCart] = useState<any>([]);
 
   useEffect(() => {
-    let cart: any = localStorage.getItem("cart") || "[]";
-    if (cart) cart = JSON.parse(cart);
-    setCart(cart);
+    if (typeof window !== "undefined") {
+      let cartData: any = localStorage.getItem("cart");
+      if (cartData) cartData = JSON.parse(cartData);
+      setCart(cartData ?? []);
+    }
   }, []);
 
   return (

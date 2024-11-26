@@ -21,7 +21,7 @@ const CartListModal = ({
   const handleRemove = (id: string) => {
     cart = cart.filter((item: any) => item?.ID !== id);
     setCart(cart);
-    eventEmitter.emit("removeFromCart", id);
+    if (eventEmitter) eventEmitter.emit("removeFromCart", id);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
   return (

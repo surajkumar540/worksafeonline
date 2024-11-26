@@ -5,7 +5,8 @@ import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 
 const AddtoCartButton = ({ product }: { product: any }) => {
   const handleCart = (data: any) => {
-    if (handleAddToCart(data)) eventEmitter.emit("addToCart", data);
+    if (handleAddToCart(data) && eventEmitter)
+      eventEmitter.emit("addToCart", data);
   };
   return (
     <span onClick={() => handleCart(product)} className="relative group z-40">

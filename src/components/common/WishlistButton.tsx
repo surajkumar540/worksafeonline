@@ -16,7 +16,8 @@ const WishlistButton = ({
   setImgSrc: any;
 }) => {
   const handleWishlist = (data: any) => {
-    if (handleAddToWishlist(data)) eventEmitter.emit("addToWishlist", data);
+    if (handleAddToWishlist(data) && eventEmitter)
+      eventEmitter.emit("addToWishlist", data);
   };
   return (
     <>

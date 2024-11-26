@@ -1,7 +1,11 @@
-import { toast } from "react-toastify";
-import { EventEmitter } from "node:events";
+"use client";
 
-const eventEmitter = new EventEmitter({ captureRejections: true });
+import { EventEmitter } from "events";
+import { toast } from "react-toastify";
+
+let eventEmitter: EventEmitter | undefined;
+
+if (typeof window !== "undefined") eventEmitter = new EventEmitter();
 
 export const handleAddToWishlist = (product: any) => {
   try {
@@ -22,6 +26,7 @@ export const handleAddToWishlist = (product: any) => {
     ];
     toast.success("Added to wishlist!");
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    eventEmitter?.emit("addToWishlist", product);
     return true;
   } catch (error) {
     console.error("Error accessing or updating wishlist:", error);
@@ -47,6 +52,7 @@ export const handleAddToCart = (product: any) => {
       { ...product, createdAt: new Date(), quantity: 1 },
     ];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    eventEmitter?.emit("addToCart", product);
     return true;
   } catch (error) {
     console.error("Error accessing or updating cart:", error);
