@@ -16,7 +16,10 @@ export const handleAddToWishlist = (product: any) => {
       toast.warn("Already in wishlist!");
       return false;
     }
-    const updatedWishlist = [...wishlist, product];
+    const updatedWishlist = [
+      ...wishlist,
+      { ...product, createdAt: new Date() },
+    ];
     toast.success("Added to wishlist!");
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     return true;

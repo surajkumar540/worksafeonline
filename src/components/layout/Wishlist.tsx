@@ -26,11 +26,16 @@ const Wishlist = () => {
     const wishlistListener = (product: Product) => {
       setWishlist((prev) => [...prev, product]);
     };
+    const removeFromwishlistListener = (id: string) => {
+      setWishlist((prev) => prev.filter((item) => item.ID !== parseInt(id)));
+    };
 
     eventEmitter.on("addToWishlist", wishlistListener);
+    eventEmitter.on("removeFromWishlist", removeFromwishlistListener);
 
     return () => {
       eventEmitter.off("addToWishlist", wishlistListener);
+      eventEmitter.off("removeFromWishlist", removeFromwishlistListener);
     };
   }, [wishlist]);
 
@@ -46,7 +51,7 @@ const Wishlist = () => {
             ? "0" + wishlist.length
             : wishlist.length >= 10
             ? wishlist.length
-            : "00"}
+            : 0}
         </span>
       </Link>
     </>
