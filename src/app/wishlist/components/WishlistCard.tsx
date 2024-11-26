@@ -12,8 +12,8 @@ type Product = {
 
 type WishlistCardProps = {
   product: Product;
+  onAddToCart: any;
   handleRemove: any;
-  onAddToCart: (product: Product) => void;
 };
 
 const WishlistCard: React.FC<WishlistCardProps> = ({
@@ -29,7 +29,7 @@ const WishlistCard: React.FC<WishlistCardProps> = ({
           onClick={() => handleRemove(product?.ID)}
           className="flex justify-center hover:bg-gray-200 items-center my-auto h-full p-3 md:p-4 transition-all duration-200 ease-linear"
         >
-          <RxCross1 />{" "}
+          <RxCross1 />
         </span>
         <div className="flex items-start border-l border-gray-300 gap-4 p-3 md:p-4">
           <Image

@@ -29,4 +29,26 @@ export const handleAddToWishlist = (product: any) => {
   }
 };
 
+export const handleAddToCart = (product: any) => {
+  try {
+    const storedCart = localStorage.getItem("cart");
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    if (!Array.isArray(cart))
+      throw new Error("Invalid cart format in localStorage");
+
+    const isAlreadyInCart = cart.some((item) => item.ID === product.ID);
+
+    if (isAlreadyInCart) {
+      toast.warn("Already in cart!");
+      return false;
+    }
+    const updatedCart = [...cart, { ...product, createdAt: new Date() }];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    return true;
+  } catch (error) {
+    console.error("Error accessing or updating cart:", error);
+    return false;
+  }
+};
+
 export default eventEmitter;

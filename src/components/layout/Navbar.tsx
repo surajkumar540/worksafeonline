@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import CartModal from "./Cart";
 import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
 import { links } from "@/data/country";
@@ -8,9 +9,7 @@ import ActivateLink from "./ActivateLink";
 import { FaRegUser } from "react-icons/fa";
 import MobileSidebar from "./MobileSidebar";
 import { IoMdSearch } from "react-icons/io";
-import { FaRegHeart } from "react-icons/fa6";
 import { CiDiscount1 } from "react-icons/ci";
-import { TiShoppingCart } from "react-icons/ti";
 import { LinkProps, NavbarProps } from "@/types/api";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
@@ -77,12 +76,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
               <FaRegUser size={20} />
             </Link>
             <Wishlist />
-            <Link
-              href="/cart"
-              className="hover:text-yellow-500 transition-all duration-100 ease-linear"
-            >
-              <TiShoppingCart size={23} />
-            </Link>
+            <CartModal />
             <MobileSidebar categories={categories} />
           </div>
         </div>

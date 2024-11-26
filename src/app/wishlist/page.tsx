@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { bigShoulders } from "../layout";
-import eventEmitter from "@/hooks/useEventEmitter";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
+import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 
 export default function Page() {
   let wishlist: any = localStorage.getItem("wishlist") || "[]";
@@ -19,6 +19,12 @@ export default function Page() {
     setWishlistUpdated(wishlist);
     eventEmitter.emit("removeFromWishlist", id);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  };
+  const onAddToCart = (data: any) => {
+    if (handleAddToCart(data)) {
+      eventEmitter.emit("addToCart", data);
+      handleRemove(data?.ID);
+    }
   };
   return (
     <>
@@ -52,7 +58,7 @@ export default function Page() {
                 <React.Fragment key={list?.ID}>
                   <WishlistCard
                     product={list}
-                    onAddToCart={() => {}}
+                    onAddToCart={onAddToCart}
                     handleRemove={handleRemove}
                   />
                 </React.Fragment>
