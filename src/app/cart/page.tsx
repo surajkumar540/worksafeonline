@@ -44,7 +44,7 @@ export default function Page() {
             className={`uppercase text-3xl md:text-5xl lg:text-7xl flex items-center font-black ${bigShoulders.className}`}
           >
             Cart{" "}
-            <span className="text-lg md:text-2xl lg:text-4xl">
+            <span className="text-xl md:text-2xl lg:text-4xl">
               {" "}
               ({cartUpdated.length})
             </span>

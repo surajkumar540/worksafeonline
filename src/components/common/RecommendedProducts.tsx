@@ -4,10 +4,12 @@ import ProductCard from "./ProductCard";
 const RecommendedProducts = ({ products }: { products: any }) => {
   return (
     <div className="py-10">
-      <p className={`${bigShoulders.className} pb-10 text-3xl font-black`}>
+      <p
+        className={`${bigShoulders.className} pb-10 text-2xl md:text-3xl font-black`}
+      >
         You may be interested in…
       </p>
-      <div className="grid grid-cols-5 gap-5 ">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 ">
         {products.map((product: any) => {
           return <ProductCard product={product} />;
         })}
