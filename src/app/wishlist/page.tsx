@@ -1,18 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
 import { bigShoulders } from "../layout";
+import React, { useEffect, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
 import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 
 export default function Page() {
-  let wishlist: any = localStorage.getItem("wishlist") || "[]";
+  let wishlist: any = localStorage.getItem("wishlist");
   if (wishlist) wishlist = JSON.parse(wishlist);
+  const [wishlistUpdated, setWishlistUpdated] = useState(wishlist ?? []);
 
-  const [wishlistUpdated, setWishlistUpdated] = useState(wishlist);
+  useEffect(() => {
+    let wishlist: any = localStorage.getItem("wishlist") || "[]";
+    if (wishlist) wishlist = JSON.parse(wishlist);
+    setWishlistUpdated(wishlist);
+  }, []);
 
   const handleRemove = (id: string) => {
     wishlist = wishlist.filter((item: any) => item?.ID !== id);
