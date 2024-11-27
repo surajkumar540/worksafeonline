@@ -3,6 +3,7 @@ import { Get } from "@/api/generalApi";
 import FilterSection from "./components/FilterSection";
 
 export default async function Page(ctx: any) {
+  let isLoading = true;
   const categoryExists = await ctx.searchParams;
   let category, subcategory, response, categoryResponse;
 
@@ -26,6 +27,7 @@ export default async function Page(ctx: any) {
   const pageCount = response?.PageCount ?? [];
   const currentPage = response?.CurrentPage ?? [];
   const categories = categoryResponse?.subcategories ?? [];
+  isLoading = false;
   return (
     <FilterSection
       sizes={sizes}
@@ -34,6 +36,7 @@ export default async function Page(ctx: any) {
       products={products}
       fittings={fittings}
       category={category}
+      isLoading={isLoading}
       categories={categories}
       subcategory={subcategory}
     />

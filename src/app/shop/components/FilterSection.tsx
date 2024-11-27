@@ -1,8 +1,8 @@
 "use client";
 
 import Filter from "./Filter";
-import { useState } from "react";
 import { Post } from "@/utils/axios";
+import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
 import { BASE_URL, getPaginateData } from "@/api/generalApi";
 
@@ -14,6 +14,7 @@ interface Filter {
   products: [];
   categories: [];
   category: number;
+  isLoading: boolean;
   subcategory: number;
 }
 
@@ -24,19 +25,30 @@ const FilterSection = ({
   products,
   fittings,
   category,
+  isLoading,
   categories,
   subcategory,
 }: Filter) => {
   const [filters, setFilters] = useState<any>({});
+  const [loader, setLoader] = useState<boolean>(isLoading);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const handleProducts = async (filters: any) => {
+    setLoader(true);
     const updatedData = getPaginateData({ ...filters, category_id: category });
     const response: any = await Post(
       BASE_URL + "api/FilterSortProductsByPageN",
       updatedData
     );
     if (response?.status) setFilteredProducts(response?.product ?? []);
+    setLoader(false);
   };
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      setFilteredProducts(products);
+    }
+  }, [products]);
+
   return (
     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10">
       <div className="col-span-1 hidden md:block space-y-6">
@@ -106,7 +118,11 @@ const FilterSection = ({
           />
         )}
       </div>
-      <ProductSection products={filteredProducts} />
+      <ProductSection
+        isLoading={loader}
+        category={category}
+        products={filteredProducts}
+      />
     </div>
   );
 };
