@@ -21,11 +21,11 @@ export default function Page() {
     <>
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
         <h1
-          className={`uppercase text-3xl md:text-5xl lg:text-6xl flex items-center font-black ${bigShoulders.className}`}
+          className={`uppercase text-4xl md:text-5xl lg:text-6xl flex items-center font-black ${bigShoulders.className}`}
         >
           checkout
         </h1>
-        <div className="flex gap-10 mt-10">
+        <div className="flex flex-col lg:flex-row lg:gap-20 mt-5 md:mt-10">
           <div className="w-full lg:w-3/5">
             <CheckoutForm />
           </div>

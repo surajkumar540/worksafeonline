@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { bigShoulders } from "@/app/layout";
 
 interface TextProps {
   field: {
@@ -19,7 +20,7 @@ const Text: FC<TextProps> = ({ field, handleInputChange, className }) => {
     <div className="relative">
       <label
         htmlFor={field.name}
-        className="block font-medium text-gray-700 mb-2"
+        className={`block text-gray-700 text-xl font-extrabold mb-2 ${bigShoulders.className}`}
       >
         {field.label}
         {field.required && <span className="text-red-500">*</span>}
@@ -33,7 +34,7 @@ const Text: FC<TextProps> = ({ field, handleInputChange, className }) => {
         disabled={field.isDisabled}
         placeholder={field.placeholder}
         onChange={handleInputChange}
-        className={`border border-gray-300 rounded-full p-3 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className}`}
+        className={`border border-gray-300 text-lg rounded-full p-3 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className}`}
       />
     </div>
   );

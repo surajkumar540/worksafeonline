@@ -33,29 +33,23 @@ const CartModal = () => {
   }, []);
 
   useEffect(() => {
-    if (
-      !openCartModal &&
-      cart.length > 0 &&
-      !["/cart", "/checkout"].includes(pathname)
-    ) {
-      setOpenCartModal(true);
-    }
-  }, [cart.length, pathname, openCartModal]);
-
-  useEffect(() => {
     const cartListener = (product: Product) => {
-      setCart((prev) => [...prev, product]);
+      setCart((prev) => [
+        ...prev.filter((item) => item.ID !== product.ID),
+        product,
+      ]);
+      setOpenCartModal(true);
     };
     const removeFromCartListener = (id: string) => {
       setCart((prev) => prev.filter((item) => item.ID !== parseInt(id)));
     };
-    if (eventEmitter) {
+    if (typeof window !== "undefined" && eventEmitter) {
       eventEmitter.on("addToCart", cartListener);
       eventEmitter.on("removeFromCart", removeFromCartListener);
     }
 
     return () => {
-      if (eventEmitter) {
+      if (typeof window !== "undefined" && eventEmitter) {
         eventEmitter.off("addToCart", cartListener);
         eventEmitter.off("removeFromCart", removeFromCartListener);
       }

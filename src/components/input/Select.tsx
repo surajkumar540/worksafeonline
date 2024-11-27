@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { bigShoulders } from "@/app/layout";
 
 interface Option {
   value: string | number;
@@ -26,7 +27,7 @@ const Select: FC<SelectProps> = ({ field, handleInputChange, className }) => {
     <div className="relative">
       <label
         htmlFor={field.name}
-        className="block font-medium text-gray-700 mb-2"
+        className={`block text-gray-700 text-xl font-extrabold mb-2 ${bigShoulders.className}`}
       >
         {field.label}
         {field.required && <span className="text-red-500">*</span>}
@@ -39,9 +40,8 @@ const Select: FC<SelectProps> = ({ field, handleInputChange, className }) => {
         disabled={field.isDisabled}
         multiple={field.isMultiple}
         onChange={handleInputChange}
-        className={`border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className} ${
-          field?.isMultiple && "h-36"
-        }`}
+        className={`border border-gray-300 rounded-full p-4 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className} ${field?.isMultiple && "h-36"
+          }`}
       >
         {field.placeholder && field.options && field.options.length > 0 && (
           <option value="" disabled>

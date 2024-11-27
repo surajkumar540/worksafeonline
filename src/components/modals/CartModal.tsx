@@ -20,6 +20,7 @@ const CartListModal = ({
 }) => {
   const handleRemove = (id: string) => {
     cart = cart.filter((item: any) => item?.ID !== id);
+    if (cart.length === 0) handleToggle();
     setCart(cart);
     if (eventEmitter) eventEmitter.emit("removeFromCart", id);
     localStorage.setItem("cart", JSON.stringify(cart));

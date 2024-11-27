@@ -28,7 +28,10 @@ const Wishlist = () => {
 
   useEffect(() => {
     const wishlistListener = (product: Product) => {
-      setWishlist((prev) => [...prev, product]);
+      setWishlist((prev) => [
+        ...prev.filter((item) => item.ID !== product.ID),
+        product,
+      ]);
     };
 
     const removeFromwishlistListener = (id: string) => {

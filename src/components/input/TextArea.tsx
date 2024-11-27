@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { bigShoulders } from "@/app/layout";
 
 interface TextAreaProps {
   field: {
@@ -24,7 +25,7 @@ const TextArea: FC<TextAreaProps> = ({
     <div className="relative">
       <label
         htmlFor={field.name}
-        className="block font-medium text-gray-700 mb-2"
+        className={`block text-gray-700 text-xl font-extrabold mb-2 ${bigShoulders.className}`}
       >
         {field.label}
         {field.required && <span className="text-red-500">*</span>}
@@ -38,7 +39,7 @@ const TextArea: FC<TextAreaProps> = ({
         placeholder={field.placeholder}
         onChange={handleInputChange}
         rows={field.rows ?? 4} // Default rows set to 4 if not specified
-        className={`border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
+        className={`border border-gray-300 rounded-xl p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
       />
     </div>
   );
