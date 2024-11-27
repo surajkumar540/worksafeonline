@@ -5,16 +5,15 @@ import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
-import ActivateLink from "./ActivateLink";
 import { FaRegUser } from "react-icons/fa";
 import MobileSidebar from "./MobileSidebar";
 import { IoMdSearch } from "react-icons/io";
 import { CiDiscount1 } from "react-icons/ci";
 import { LinkProps, NavbarProps } from "@/types/api";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import Categories from "./Categories";
 
 const Navbar: React.FC<NavbarProps> = async ({ data }) => {
-  const resp = await Get("api/categories");
+  const resp = await Get("api/GetFullMenu?App=Worksafe");
   const offerResponse = await Get("api/SpecialOffers");
   let categories = resp.categories;
   const offerExist = offerResponse.status;
@@ -55,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-2 lg:space-x-4">
-            <div className="border-r border-white/30 flex gap-2 pr-3">
+            {/* <div className="border-r border-white/30 flex gap-2 pr-3">
               <Link
                 href="#"
                 className="flex items-center text-white/50 font-semibold"
@@ -68,9 +67,9 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
               >
                 $USD
               </Link>
-            </div>
+            </div> */}
             <Link
-              href="/account"
+              href="/my-account"
               className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
             >
               <FaRegUser size={20} />
@@ -85,22 +84,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
       {/* Second Navbar */}
       <nav className="bg-white text-black">
         <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
-          <div className="flex lg:flex-wrap gap-3 lg:gap-5 items-center overflow-x-auto lg:overflow-x-visible">
-            {categories.map((link: any) => {
-              return (
-                <Link
-                  key={link.menu_id}
-                  href={"/shop?category=" + link?.menu_id}
-                  className="text-base lg:text-sm whitespace-nowrap hover:text-primary capitalize"
-                >
-                  <ActivateLink
-                    name={link?.menu_name}
-                    id={link.menu_id.toString()}
-                  />
-                </Link>
-              );
-            })}
-          </div>
+          <Categories categories={categories} />
           {offerExist && (
             <div className="hidden lg:flex justify-center items-center gap-2">
               <CiDiscount1 size={28} className="text-red-500" />

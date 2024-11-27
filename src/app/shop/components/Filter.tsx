@@ -5,12 +5,16 @@ import { FaAngleUp } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { bigShoulders } from "@/app/layout";
 import { buildQueryUrl } from "@/api/generalApi";
+import { includes } from "@/utils/polyfills";
 
 interface FilterProps {
+  filters: any;
+  setFilters: any;
   heading: string;
   labelKey: string;
   countKey: string;
   category: number;
+  handleProducts: any;
   subcategory: number;
   options: Array<Record<string, any>>;
 }
@@ -21,7 +25,10 @@ const Filter = ({
   labelKey,
   countKey,
   category,
+  filters,
+  setFilters,
   subcategory,
+  handleProducts,
 }: FilterProps) => {
   const navigate = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -29,23 +36,35 @@ const Filter = ({
     subcategory ? subcategory.toString() : null
   );
 
-  const handleUrl = (data: any) => {
+  const handleUrl = async (data: any) => {
     if (data.menu_id) {
       const queryParams = {
         category,
         subcategory: data.menu_id,
       };
       const url = buildQueryUrl("/shop", queryParams);
-      if (url) return navigate.push(url);
+      if (url) window.location.href = url;
+      else window.location.reload();
     }
+    let updated;
+    setFilters((prev: any) => {
+      const existingValues = prev[labelKey] || [];
+      const updatedValues = Array.from(
+        new Set([...existingValues, data[labelKey]])
+      );
+      updated = { ...prev, [labelKey]: updatedValues };
+      return updated;
+    });
+    await handleProducts(updated);
   };
 
   return (
     <div className="w-full">
-      {/* Toggle Button */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between items-center cursor-pointer pb-2 border-b"
+        className={`flex justify-between items-center cursor-pointer ${
+          isOpen && "pb-2 border-b"
+        }`}
       >
         <h2
           className={`text-lg font-black uppercase ${bigShoulders.className}`}
@@ -63,29 +82,24 @@ const Filter = ({
 
       {/* Filter Options with scrollable animation and blurred edges */}
       <div
-        className={`overflow-y-auto hide-scrollbar transition-all duration-300 ease-in-out mt-4 space-y-3 ${
-          isOpen ? "md:max-h-96 lg:max-h-[33vh]" : "0px"
+        className={`overflow-y-auto hide-scrollbar transition-["height"] duration-300 ease-in-out mt-4 space-y-3 ${
+          isOpen ? "md:max-h-96 lg:max-h-[33vh]" : "max-h-0"
         }`}
-        style={{ transitionProperty: "max-height" }}
       >
         {options.map((option: any, index: number) => {
           return (
             <div
               key={index}
-              className="flex justify-between items-center text-gray-800"
+              onClick={() => handleUrl(option)}
+              className="flex justify-between cursor-pointer items-center text-gray-800"
             >
-              <span
-                className="flex items-center gap-2"
-                onClick={() => handleUrl(option)}
-              >
+              <span className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={
-                    subcategoryInput &&
-                    option?.menu_id &&
-                    subcategoryInput == option?.menu_id
-                      ? true
-                      : false
+                    filters?.[labelKey]?.length > 0 &&
+                    option?.[labelKey] &&
+                    filters[labelKey].includes(option[labelKey])
                   }
                   onChange={(e) => {
                     setSubcategory(e.target.checked ? option?.menu_id : null);
@@ -93,11 +107,12 @@ const Filter = ({
                   className="w-4 h-4 border-gray-300 rounded !text-primary focus:ring-primary"
                 />
                 <span
-                  className={`${
-                    subcategory &&
-                    subcategory == option?.menu_id &&
+                  className={`text-sm cursor-pointer ${
+                    option?.[labelKey] &&
+                    filters?.[labelKey]?.length > 0 &&
+                    filters[labelKey].includes(option[labelKey]) &&
                     "text-primary"
-                  } text-sm cursor-pointer`}
+                  }`}
                 >
                   {option[labelKey]}
                 </span>
