@@ -43,7 +43,8 @@ const Filter = ({
         subcategory: data.menu_id,
       };
       const url = buildQueryUrl("/shop", queryParams);
-      if (url) return navigate.push(url);
+      if (url) window.location.href = url;
+      else window.location.reload();
     }
     let updated;
     setFilters((prev: any) => {
