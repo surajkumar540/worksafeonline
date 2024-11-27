@@ -27,6 +27,7 @@ export default async function Page(ctx: any) {
   const pageCount = response?.PageCount ?? [];
   const currentPage = response?.CurrentPage ?? [];
   const categories = categoryResponse?.subcategories ?? [];
+
   return (
     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10">
       <div className="col-span-1 hidden md:block space-y-6">
