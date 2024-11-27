@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
+export const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
 
 export const Get = async (url: string) => {
   try {
@@ -61,4 +61,37 @@ export const buildQueryUrl = (baseUrl: string, queryData: any) => {
     if (value) queryParams.append(key, value);
   });
   return `${baseUrl}?${queryParams.toString()}`;
+};
+
+export const getPaginateData = (filter: any) => {
+  const {
+    page = 1,
+    Size = [],
+    Brand = [],
+    limit = 12,
+    price = "",
+    Colour = [],
+    Fitting = [],
+    category_id = 0,
+    new_arrival = true,
+    price_low_high = true,
+    price_high_low = false,
+  } = filter;
+
+  const createCommaSeparatedString = (array: any[]) =>
+    Array.isArray(array) ? array.join(", ") : "";
+
+  return {
+    page,
+    category_id,
+    pagesize: limit,
+    price: price.toString(),
+    new_arrival: new_arrival.toString(),
+    sizes: createCommaSeparatedString(Size),
+    price_low_high: price_low_high.toString(),
+    price_high_low: price_high_low.toString(),
+    brands: createCommaSeparatedString(Brand),
+    colours: createCommaSeparatedString(Colour),
+    fittings: createCommaSeparatedString(Fitting),
+  };
 };

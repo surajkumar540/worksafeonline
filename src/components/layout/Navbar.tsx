@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-2 lg:space-x-4">
-            <div className="border-r border-white/30 flex gap-2 pr-3">
+            {/* <div className="border-r border-white/30 flex gap-2 pr-3">
               <Link
                 href="#"
                 className="flex items-center text-white/50 font-semibold"
@@ -68,9 +68,9 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
               >
                 $USD
               </Link>
-            </div>
+            </div> */}
             <Link
-              href="/account"
+              href="/my-account"
               className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
             >
               <FaRegUser size={20} />
