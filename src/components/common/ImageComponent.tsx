@@ -1,9 +1,11 @@
 "use client";
+
+import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import WishlistButton from "./WishlistButton";
 
-const ImageComponent = ({ product }: { product: any }) => {
+const ImageComponent = ({ product, slug }: { product: any; slug: string }) => {
   const [imgSrc, setImgSrc] = useState(product?.ListingImage);
   const handleError = () => {
     const fallbackImageUrl =
@@ -16,15 +18,17 @@ const ImageComponent = ({ product }: { product: any }) => {
 
   return (
     <div className="relative group">
-      <Image
-        width={400}
-        key={imgSrc}
-        height={400}
-        src={imgSrc}
-        onError={handleError}
-        alt={product?.Description}
-        className="h-48 md:h-64 object-contain transition-all duration-200 ease-linear p-2 border mb-4 rounded-lg"
-      />
+      <Link href={slug}>
+        <Image
+          width={400}
+          key={imgSrc}
+          height={400}
+          src={imgSrc}
+          onError={handleError}
+          alt={product?.Description}
+          className="h-48 md:h-64 object-contain transition-all duration-200 ease-linear p-2 border mb-4 rounded-lg"
+        />
+      </Link>
       <WishlistButton product={product} imgSrc={imgSrc} setImgSrc={setImgSrc} />
     </div>
   );
