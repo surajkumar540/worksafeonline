@@ -31,6 +31,7 @@ export default {
       animation: {
         "fade-up": "fadeUp 1s ease-in-out",
         "fade-down": "fadeDown 1s ease-in-out",
+        wave: "wave 1.5s linear infinite",
         "fade-in": "fade-in 0.5s ease-out forwards",
       },
       keyframes: {
@@ -45,6 +46,10 @@ export default {
         "fade-in": {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        wave: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
     },
