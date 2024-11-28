@@ -7,11 +7,17 @@ import Link from "next/link";
 
 const ProductCard = ({ product }: { product: any }) => {
 
-  console.log(product.Description,product.Description,"product.Description")
+  function generateSlug(title: string): string {
+    return title.trim().toLowerCase().replace(/\s+/g, "-"); // Replace spaces with hyphens
+  }
+
+
+  // Slug of product
+  const slug = generateSlug(product.Description); // Output: 'smart-phone
+
   return (
-    <Link
-    href={`/product/category/${product.Description.replace(/\s+/g, '-')}`}
-  >
+   // TODO: category is static
+   <Link href={`product/jacket/${slug}`}>
     <div>
       <ImageComponent product={product} />
       <div
