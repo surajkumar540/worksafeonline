@@ -1,33 +1,32 @@
 import React from "react";
 import Button from "../common/Button";
+import { Get } from "@/api/generalApi";
 import ProductSwiper from "./ProductSwiper";
+import UpcomingClient from "./UpconingClient";
 
-const Upcoming = ({
+const Upcoming = async ({
   products,
   slidesPerViewDesktop,
 }: {
   products: any;
   slidesPerViewDesktop: number;
 }) => {
+  let newArrivals = [],
+    bestSellers = [];
+  const [newArrivalsResponse, bestSellersResponse] = await Promise.allSettled([
+    Get(`api/NewArrivals?app=Worksafe`),
+    Get(`api/BestSellers?app=Worksafe`),
+  ]);
+  if (newArrivalsResponse.status === "fulfilled")
+    newArrivals = newArrivalsResponse?.value?.product;
+  if (bestSellersResponse.status === "fulfilled")
+    bestSellers = bestSellersResponse?.value?.product;
   return (
     <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 pt-4 md:pt-6 pb-20">
-      <div className="flex py-10 space-x-4 items-center">
-        <Button
-          text="NEW ARRIVALS"
-          classes="!rounded-full bg-black w-full md:w-fit text-3xl py-3 font-semibold border-2 tracking-tight !px-10 hover:bg-black border-black text-white"
-        />
-        <Button
-          text="BEST SELLERS"
-          classes="!rounded-full text-3xl py-3 hidden md:block font-semibold border-2 tracking-tight !px-10"
-        />
-      </div>
-      <ProductSwiper
-        products={products}
+      <UpcomingClient
+        newArrivals={newArrivals}
+        bestSellers={bestSellers}
         slidesPerViewDesktop={slidesPerViewDesktop}
-      />
-      <Button
-        text="BEST SELLERS"
-        classes="!rounded-full text-3xl py-3 !mt-5 w-full md:w-fit md:hidden font-semibold border-2 tracking-tight !px-10"
       />
     </div>
   );

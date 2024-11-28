@@ -34,10 +34,15 @@ export default function Page() {
 
   const handleUpdateQuantity = (id: string, quantity: number) => {
     if (quantity === 11) return toast.warn("You can add up to 10 items!");
-    setCartUpdated((prev: any) =>
-      prev.map((item: any) => (item.ID === id ? { ...item, quantity } : item))
-    );
+    setCartUpdated((prev: any) => {
+      const updatedCart = prev.map((item: any) =>
+        item.ID === id ? { ...item, quantity } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
+
   return (
     <>
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">

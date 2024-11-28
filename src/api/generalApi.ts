@@ -1,3 +1,4 @@
+import { includes } from "@/utils/polyfills";
 import axios from "axios";
 
 export const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
@@ -72,9 +73,9 @@ export const getPaginateData = (filter: any) => {
     price = "",
     Colour = [],
     Fitting = [],
-    category_id = 0,
+    category_id = [],
     new_arrival = true,
-    price_low_high = true,
+    price_low_high = false,
     price_high_low = false,
   } = filter;
 
@@ -83,7 +84,6 @@ export const getPaginateData = (filter: any) => {
 
   return {
     page,
-    category_id,
     pagesize: limit,
     price: price.toString(),
     new_arrival: new_arrival.toString(),
@@ -93,5 +93,12 @@ export const getPaginateData = (filter: any) => {
     brands: createCommaSeparatedString(Brand),
     colours: createCommaSeparatedString(Colour),
     fittings: createCommaSeparatedString(Fitting),
+    category_id: createCommaSeparatedString(category_id),
   };
+};
+
+export const getCategoryId = (data: any, names: string[]): number[] => {
+  return data
+    .filter((item: any) => includes(names, item?.menu_name))
+    .map((item: any) => item?.menu_id);
 };

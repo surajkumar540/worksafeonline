@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { FaAngleUp } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import { bigShoulders } from "@/app/layout";
-import { buildQueryUrl } from "@/api/generalApi";
 import { includes } from "@/utils/polyfills";
 
 interface FilterProps {
@@ -24,38 +23,33 @@ const Filter = ({
   options,
   labelKey,
   countKey,
-  category,
   filters,
   setFilters,
   subcategory,
   handleProducts,
 }: FilterProps) => {
-  const navigate = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [subcategoryInput, setSubcategory] = useState<string | null>(
     subcategory ? subcategory.toString() : null
   );
 
   const handleUrl = async (data: any) => {
-    if (data.menu_id) {
-      const queryParams = {
-        category,
-        subcategory: data.menu_id,
-      };
-      const url = buildQueryUrl("/shop", queryParams);
-      if (url) window.location.href = url;
-      else window.location.reload();
-    }
-    let updated;
-    setFilters((prev: any) => {
-      const existingValues = prev[labelKey] || [];
-      const updatedValues = Array.from(
-        new Set([...existingValues, data[labelKey]])
+    try {
+      const updatedValues =
+        filters[labelKey] && includes(filters[labelKey], data[labelKey])
+          ? filters[labelKey].filter((value: any) => value !== data[labelKey]) // Remove if exists
+          : [...(filters[labelKey] || []), data[labelKey]]; // Add if not exists
+
+      const updated = { ...filters, [labelKey]: updatedValues };
+      setFilters(updated);
+
+      await handleProducts(updated);
+    } catch (error) {
+      console.error("Error updating filters or handling products:", error);
+      toast.error(
+        "Something went wrong while updating filters. Please try again."
       );
-      updated = { ...prev, [labelKey]: updatedValues };
-      return updated;
-    });
-    await handleProducts(updated);
+    }
   };
 
   return (
@@ -97,9 +91,11 @@ const Filter = ({
                 <input
                   type="checkbox"
                   checked={
-                    filters?.[labelKey]?.length > 0 &&
-                    option?.[labelKey] &&
-                    filters[labelKey].includes(option[labelKey])
+                    (filters?.[labelKey]?.length > 0 &&
+                      option?.[labelKey] &&
+                      filters[labelKey].includes(option[labelKey])) ||
+                    (option?.menu_id &&
+                      subcategoryInput === option?.menu_id.toString())
                   }
                   onChange={(e) => {
                     setSubcategory(e.target.checked ? option?.menu_id : null);
@@ -108,9 +104,11 @@ const Filter = ({
                 />
                 <span
                   className={`text-sm cursor-pointer ${
-                    option?.[labelKey] &&
-                    filters?.[labelKey]?.length > 0 &&
-                    filters[labelKey].includes(option[labelKey]) &&
+                    ((option?.[labelKey] &&
+                      filters?.[labelKey]?.length > 0 &&
+                      filters[labelKey].includes(option[labelKey])) ||
+                      (option?.menu_id &&
+                        subcategoryInput === option?.menu_id.toString())) &&
                     "text-primary"
                   }`}
                 >
