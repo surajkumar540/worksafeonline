@@ -2,127 +2,188 @@
 
 import Filter from "./Filter";
 import { Post } from "@/utils/axios";
+import CustomFilter from "./CustomFilter";
 import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
-import { BASE_URL, getPaginateData } from "@/api/generalApi";
+import Pagination from "@/components/common/Pagination";
+import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
 
 interface Filter {
-  sizes: [];
-  colors: [];
-  brands: [];
-  fittings: [];
-  products: [];
-  categories: [];
+  response: any;
   category: number;
-  isLoading: boolean;
   subcategory: number;
+  categoryResponse: any;
 }
 
 const FilterSection = ({
-  sizes,
-  colors,
-  brands,
-  products,
-  fittings,
   category,
-  isLoading,
-  categories,
+  response,
   subcategory,
+  categoryResponse,
 }: Filter) => {
-  const [filters, setFilters] = useState<any>({});
-  const [loader, setLoader] = useState<boolean>(isLoading);
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const handleProducts = async (filters: any) => {
-    setLoader(true);
-    const updatedData = getPaginateData({ ...filters, category_id: category });
-    const response: any = await Post(
-      BASE_URL + "api/FilterSortProductsByPageN",
-      updatedData
-    );
-    if (response?.status) setFilteredProducts(response?.product ?? []);
-    setLoader(false);
-  };
+  const [state, setState] = useState({
+    sizes: [],
+    brands: [],
+    prices: [],
+    colors: [],
+    products: [],
+    fittings: [],
+    pageCount: 1,
+    categories: [],
+    currentPage: 12,
+  });
+  const [filters, setFilters] = useState<any>(
+    subcategory ? { category_id: [subcategory] } : {}
+  );
+  const [loader, setLoader] = useState<boolean>(false);
+  const [filteredProducts, setFilteredProducts] = useState(state.products);
 
-  useEffect(() => {
-    if (products && products.length > 0) {
-      setFilteredProducts(products);
+  const handleProducts = async (filters: any) => {
+    try {
+      const allFiltersEmpty = Object.keys(filters).every(
+        (key) => Array.isArray(filters[key]) && filters[key].length === 0
+      );
+      if (allFiltersEmpty) return false;
+
+      setLoader(true);
+      const updatedData = getPaginateData({
+        ...filters,
+        category_id:
+          state?.categories &&
+          state?.categories.length > 0 &&
+          filters["menu_name"]
+            ? getCategoryId(state.categories, filters["menu_name"])
+            : [category],
+      });
+
+      const url = BASE_URL + "api/FilterSortProductsByPageN";
+      const response: any = await Post(url, updatedData, 10000, true);
+
+      if (response?.status) {
+        setFilteredProducts(response?.product ?? []);
+        setState({
+          sizes: response?.Sizes ?? [],
+          brands: response?.Brands ?? [],
+          prices: response?.Prices ?? [],
+          colors: response?.Colours ?? [],
+          products: response?.product ?? [],
+          fittings: response?.Fittings ?? [],
+          pageCount: response?.PageCount ?? 0,
+          currentPage: response?.CurrentPage ?? 0,
+          categories: categoryResponse?.subcategories ?? [],
+        });
+      } else throw new Error(response?.message || "Failed to fetch products.");
+    } catch (error: any) {
+      console.error("Error fetching filtered products:", error);
+    } finally {
+      setLoader(false);
     }
-  }, [products]);
+  };
+  useEffect(() => {
+    if (response?.product && response?.product.length > 0) {
+      setFilteredProducts(response?.product);
+      setState({
+        sizes: response?.Sizes ?? [],
+        brands: response?.Brands ?? [],
+        prices: response?.Prices ?? [],
+        colors: response?.Colours ?? [],
+        products: response?.product ?? [],
+        fittings: response?.Fittings ?? [],
+        pageCount: response?.PageCount ?? 0,
+        currentPage: response?.CurrentPage ?? 0,
+        categories: categoryResponse?.subcategories ?? [],
+      });
+    }
+  }, [category, response, subcategory]);
 
   return (
     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10">
       <div className="col-span-1 hidden md:block space-y-6">
-        {categories && categories.length > 0 && (
+        {state.categories && state.categories.length > 0 && (
           <Filter
             countKey="Count"
             filters={filters}
             category={category}
             labelKey="menu_name"
-            options={categories}
             setFilters={setFilters}
             subcategory={subcategory}
+            options={state.categories}
             heading="Product categories"
             handleProducts={handleProducts}
           />
         )}
-        {colors && colors.length > 0 && (
+        {state.colors && state.colors.length > 0 && (
           <Filter
             heading="Color"
             countKey="Count"
-            options={colors}
             filters={filters}
             labelKey="Colour"
             category={category}
+            options={state.colors}
             setFilters={setFilters}
             subcategory={subcategory}
             handleProducts={handleProducts}
           />
         )}
-        {fittings && fittings.length > 0 && (
+        {state.fittings && state.fittings.length > 0 && (
           <Filter
             countKey="Count"
             heading="Fittings"
             filters={filters}
             category={category}
-            options={fittings}
             labelKey="Fitting"
             setFilters={setFilters}
+            options={state.fittings}
             subcategory={subcategory}
             handleProducts={handleProducts}
           />
         )}
-        {sizes && sizes.length > 0 && (
+        {state.sizes && state.sizes.length > 0 && (
           <Filter
             heading="Sizes"
-            options={sizes}
             labelKey="Size"
             countKey="Count"
             filters={filters}
             category={category}
+            options={state.sizes}
             setFilters={setFilters}
             subcategory={subcategory}
             handleProducts={handleProducts}
           />
         )}
-        {brands && brands.length > 0 && (
+        {state.brands && state.brands.length > 0 && (
           <Filter
             heading="brands"
             countKey="Count"
-            options={brands}
             labelKey="Brand"
             filters={filters}
             category={category}
+            options={state.brands}
             setFilters={setFilters}
             subcategory={subcategory}
             handleProducts={handleProducts}
           />
         )}
       </div>
-      <ProductSection
-        isLoading={loader}
-        category={category}
-        products={filteredProducts}
-      />
+      <div className="col-span-2 lg:col-span-3">
+        <CustomFilter
+          filters={filters}
+          pageCount={state.pageCount}
+          currentPage={state.currentPage}
+          handleProducts={handleProducts}
+        />
+        <ProductSection
+          isLoading={loader}
+          category={category}
+          products={filteredProducts}
+        />
+        <Pagination
+          filters={filters}
+          totalPages={state.pageCount}
+          onPageChange={handleProducts}
+          currentPage={state.currentPage}
+        />
+      </div>
     </div>
   );
 };

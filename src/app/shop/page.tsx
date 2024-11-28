@@ -1,44 +1,43 @@
 import React from "react";
 import { Get } from "@/api/generalApi";
 import FilterSection from "./components/FilterSection";
+import Header from "./components/Header";
 
 export default async function Page(ctx: any) {
-  let isLoading = true;
-  const categoryExists = await ctx.searchParams;
-  let category, subcategory, response, categoryResponse;
+  const { category, subcategory } = (await ctx.searchParams) || {};
+  let response = null,
+    categoryResponse = null,
+    subcategoryName = null;
 
-  if (categoryExists && categoryExists.category) {
-    category = categoryExists?.category;
-    subcategory = categoryExists?.subcategory;
-    const id = category && subcategory ? subcategory : category;
-    response = await Get(
-      "api/ProductsByPage?category_id=" + id + "&page=1&pagesize=12"
-    );
-    categoryResponse = await Get("api/SubCategories?category_id=" + category);
-  } else
+  if (category) {
+    const id = subcategory || category;
+    const [productsResult, categoriesResult] = await Promise.allSettled([
+      Get(`api/ProductsByPage?category_id=${id}&page=1&pagesize=12`),
+      Get(`api/SubCategories?category_id=${category}`),
+    ]);
+
+    if (productsResult.status === "fulfilled") response = productsResult.value;
+    if (categoriesResult.status === "fulfilled")
+      categoryResponse = categoriesResult.value;
+
+    if (subcategory && categoryResponse?.subcategories?.length > 0) {
+      const subcategoryMatch = categoryResponse.subcategories.find(
+        (item: any) => item.menu_id == subcategory
+      );
+      if (subcategoryMatch) subcategoryName = subcategoryMatch.menu_name;
+    }
+  } else {
     response = await Get("api/ProductsByPage?category_id=0&page=1&pagesize=20");
-
-  const sizes = response?.Sizes ?? [];
-  const brands = response?.Brands ?? [];
-  const prices = response?.Prices ?? [];
-  const colors = response?.Colours ?? [];
-  const products = response?.product ?? [];
-  const fittings = response?.Fittings ?? [];
-  const pageCount = response?.PageCount ?? [];
-  const currentPage = response?.CurrentPage ?? [];
-  const categories = categoryResponse?.subcategories ?? [];
-  isLoading = false;
+  }
   return (
-    <FilterSection
-      sizes={sizes}
-      colors={colors}
-      brands={brands}
-      products={products}
-      fittings={fittings}
-      category={category}
-      isLoading={isLoading}
-      categories={categories}
-      subcategory={subcategory}
-    />
+    <>
+      <Header title="Shop" />
+      <FilterSection
+        category={category}
+        response={response}
+        subcategory={subcategoryName}
+        categoryResponse={categoryResponse}
+      />
+    </>
   );
 }

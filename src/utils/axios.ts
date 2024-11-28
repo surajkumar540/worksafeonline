@@ -131,7 +131,7 @@ export const Post = async <T>(
   timeout?: number,
   dismissToast: boolean = false
 ): Promise<T> => {
-  const toastId = toast.loading("Submitting data...");
+  const toastId = toast.loading("Please wait...");
 
   try {
     const response = await request<T>({
