@@ -69,7 +69,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
         </div>
       </div>
 
-      <footer className="bg-[#1C1C1C] text-white pt-20">
+      <footer className="bg-[#1C1C1C] text-white pt-20 mb-20 lg:mb-0">
         {/* Top Section */}
         <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {/* Customer Links */}

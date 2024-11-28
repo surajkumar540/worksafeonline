@@ -11,6 +11,7 @@ import { IoMdSearch } from "react-icons/io";
 import { CiDiscount1 } from "react-icons/ci";
 import { LinkProps, NavbarProps } from "@/types/api";
 import Categories from "./Categories";
+import BottomTabs from "./BottomTabs";
 
 const Navbar: React.FC<NavbarProps> = async ({ data }) => {
   const resp = await Get("api/GetFullMenu?App=Worksafe");
@@ -19,42 +20,43 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
   const offerExist = offerResponse.status;
   categories = !offerExist ? categories : categories.slice(0, 10);
   return (
-    <header className="bg-[#1C1C1C] sticky top-0 z-50 w-full text-white shadow-md">
-      <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-2 md:px-4 lg:px-6 py-2">
-        {/* Logo */}
-        <div className="w-[45%] flex justify-between items-center">
-          <Link
-            href="/"
-            className="bg-yellow-500 text-black text-center px-2 font-bold"
-          >
-            AXETOR <br /> WORKWEAR
-          </Link>
-          <div className="space-x-5 lg:flex hidden items-center">
-            {links.map((link: LinkProps) => {
-              return (
-                <span key={link.id} className="relative group w-fit">
-                  <ItemHover link={link} />
-                </span>
-              );
-            })}
+    <>
+      <header className="bg-[#1C1C1C] sticky top-0 z-50 w-full text-white shadow-md">
+        <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-2 md:px-4 lg:px-6 py-2">
+          {/* Logo */}
+          <div className="w-[45%] flex justify-between items-center">
+            <Link
+              href="/"
+              className="bg-yellow-500 text-black text-center px-2 font-bold"
+            >
+              AXETOR <br /> WORKWEAR
+            </Link>
+            <div className="space-x-5 lg:flex hidden items-center">
+              {links.map((link: LinkProps) => {
+                return (
+                  <span key={link.id} className="relative group w-fit">
+                    <ItemHover link={link} />
+                  </span>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="w-[55%] flex gap-5 justify-end lg:justify-between items-center">
-          {/* Search */}
-          <div className="relative hidden w-full lg:block">
-            <input
-              type="text"
-              placeholder="What are you looking for?"
-              className="w-full px-4 py-3 text-gray-500 rounded-full outline-none"
-            />
-            <button className="absolute z-20 top-0 right-0 px-4 py-3 rounded-full">
-              <IoMdSearch size={25} className="text-black" />
-            </button>
-          </div>
+          <div className="w-[55%] flex gap-5 justify-end lg:justify-between items-center">
+            {/* Search */}
+            <div className="relative hidden w-full lg:block">
+              <input
+                type="text"
+                placeholder="What are you looking for?"
+                className="w-full px-4 py-3 text-gray-500 rounded-full outline-none"
+              />
+              <button className="absolute z-20 top-0 right-0 px-4 py-3 rounded-full">
+                <IoMdSearch size={25} className="text-black" />
+              </button>
+            </div>
 
-          {/* Right Side */}
-          <div className="flex items-center space-x-2 lg:space-x-4">
-            {/* <div className="border-r border-white/30 flex gap-2 pr-3">
+            {/* Right Side */}
+            <div className="flex items-center space-x-2 lg:space-x-4">
+              {/* <div className="border-r border-white/30 flex gap-2 pr-3">
               <Link
                 href="#"
                 className="flex items-center text-white/50 font-semibold"
@@ -68,32 +70,36 @@ const Navbar: React.FC<NavbarProps> = async ({ data }) => {
                 $USD
               </Link>
             </div> */}
-            <Link
-              href="/my-account"
-              className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
-            >
-              <FaRegUser size={20} />
-            </Link>
-            <Wishlist />
-            <CartModal />
-            <MobileSidebar categories={categories} />
+              <Link
+                href="/my-account"
+                className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
+              >
+                <FaRegUser size={20} />
+              </Link>
+              <Wishlist />
+              <CartModal />
+              <MobileSidebar categories={categories} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Second Navbar */}
-      <nav className="bg-white text-black">
-        <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
-          <Categories categories={categories} />
-          {offerExist && (
-            <div className="hidden lg:flex justify-center items-center gap-2">
-              <CiDiscount1 size={28} className="text-red-500" />
-              <span className="font-semibold text-red-500">SPECIAL OFFER</span>
-            </div>
-          )}
-        </div>
-      </nav>
-    </header>
+        {/* Second Navbar */}
+        <nav className="bg-white text-black">
+          <div className="flex flex-wrap max-w-9xl mx-auto items-center justify-between px-4 md:px-6 py-3">
+            <Categories categories={categories} />
+            {offerExist && (
+              <div className="hidden lg:flex justify-center items-center gap-2">
+                <CiDiscount1 size={28} className="text-red-500" />
+                <span className="font-semibold text-red-500">
+                  SPECIAL OFFER
+                </span>
+              </div>
+            )}
+          </div>
+        </nav>
+      </header>
+      <BottomTabs />
+    </>
   );
 };
 

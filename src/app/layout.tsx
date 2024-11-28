@@ -43,7 +43,7 @@ export default function RootLayout({
         />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}
       >
         <Navbar />
         <div className="min-h-screen w-full mx-auto">{children}</div>

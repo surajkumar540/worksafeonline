@@ -67,7 +67,7 @@ const CartModal = () => {
   };
 
   return (
-    <span className="hover:text-yellow-500 cursor-pointer relative hidden lg:block transition-all duration-100 ease-linear">
+    <span className="hover:text-yellow-500 cursor-pointer relative transition-all duration-100 ease-linear">
       <TiShoppingCart onClick={openCart} size={23} />
       <CartListModal
         cart={cart}
@@ -77,7 +77,7 @@ const CartModal = () => {
       />
       <span
         onClick={openCart}
-        className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
+        className="absolute -top-3 -right-3 w-5 md:w-6 h-5 md:h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
       >
         {cart.length > 0 && cart.length < 9 ? `0${cart.length}` : cart.length}
       </span>
