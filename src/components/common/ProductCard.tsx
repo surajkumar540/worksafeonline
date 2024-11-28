@@ -3,9 +3,21 @@ import StarRating from "./StarRating";
 import { bigShoulders } from "@/app/layout";
 import ImageComponent from "./ImageComponent";
 import AddtoCartButton from "./AddtoCartButton";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: any }) => {
+
+  function generateSlug(title: string): string {
+    return title.trim().toLowerCase().replace(/\s+/g, "-"); // Replace spaces with hyphens
+  }
+
+
+  // Slug of product
+  const slug = generateSlug(product.Description); // Output: 'smart-phone
+
   return (
+   // TODO: category is static
+   <Link href={`product/jacket/${slug}`}>
     <div>
       <ImageComponent product={product} />
       <div
@@ -28,6 +40,7 @@ const ProductCard = ({ product }: { product: any }) => {
         </button>
       </div>
     </div>
+    </Link>
   );
 };
 

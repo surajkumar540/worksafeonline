@@ -63,3 +63,19 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.colorCircle {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.colorCircle:hover {
+  border: 3px solid white;
+  outline: 1px solid black;
+}
+
+.colorCircle:hover:focus {
+  outline: 2px solid black;
+}
