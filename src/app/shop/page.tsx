@@ -1,10 +1,11 @@
 import React from "react";
 import { Get } from "@/api/generalApi";
-import FilterSection from "./components/FilterSection";
 import Header from "./components/Header";
+import FilterSection from "./components/FilterSection";
 
 export default async function Page(ctx: any) {
-  const { category, subcategory } = (await ctx.searchParams) || {};
+  const { category = null, subcategory = null } =
+    (await ctx.searchParams) || {};
   let response = null,
     categoryResponse = null,
     subcategoryName = null;

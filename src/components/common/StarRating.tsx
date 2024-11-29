@@ -3,9 +3,10 @@ import { IoStarHalfSharp } from "react-icons/io5";
 
 type RatingProps = {
   rating: number;
+  showText?: boolean;
 };
 
-const StarRating: React.FC<RatingProps> = ({ rating }) => {
+const StarRating: React.FC<RatingProps> = ({ rating, showText }) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 >= 0.5 && rating % 1 < 1;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
@@ -21,7 +22,9 @@ const StarRating: React.FC<RatingProps> = ({ rating }) => {
           <IoStarSharp size={15} key={`empty-${i}`} className="text-gray-300" />
         ))}
       </div>
-      <span className="text-sm">({rating})</span>
+      <span className="text-sm">
+        ({rating} {showText && "reviews"})
+      </span>
     </div>
   );
 };

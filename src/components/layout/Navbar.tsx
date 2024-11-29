@@ -32,7 +32,6 @@ const Navbar: React.FC<NavbarProps> = async () => {
     offerExist = offerResponse?.value?.status;
 
   categories = !offerExist ? categories : categories.slice(0, 10);
-  console.log(logoData);
   return (
     <>
       <header className="bg-[#1C1C1C] sticky top-0 z-50 w-full text-white shadow-md">

@@ -5,10 +5,7 @@ import ImageComponent from "./ImageComponent";
 import AddtoCartButton from "./AddtoCartButton";
 
 const ProductCard = ({ product }: { product: any }) => {
-  function generateSlug(title: string): string {
-    return title.trim().toLowerCase().replace(/\s+/g, "-");
-  }
-  const slug = `/product/jacket/${generateSlug(product.Description)}`;
+  const slug = `/product/${product?.MenuId}/${product?.Style}`;
   return (
     <div>
       <ImageComponent slug={slug} product={product} />

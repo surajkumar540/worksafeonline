@@ -49,7 +49,7 @@ export const handleAddToCart = (product: any) => {
     }
     const updatedCart = [
       ...cart,
-      { ...product, createdAt: new Date(), quantity: 1 },
+      { ...product, createdAt: new Date(), quantity: product?.quantity ?? 1 },
     ];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     eventEmitter?.emit("addToCart", product);
