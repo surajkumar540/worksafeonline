@@ -22,13 +22,18 @@ const CustomFilter = ({
   const endItem = Math.min(currentPage * limit, pageCount * limit);
   const [sortingType, setSortingType] = useState<string>("new_arrival");
 
-  const handleFilter = async (data: string) => {
-    if (limit) {
-      const update = { ...filters, [data]: true, limit: limit };
-      setFilters(update);
-      await handleProducts(update);
-    }
-    setSortingType(data);
+  const handleFilter = async (filterKey: string) => {
+    if (!limit) return;
+    const updatedFilters = {
+      limit,
+      ...filters,
+      new_arrival: filterKey === "new_arrival",
+      price_low_high: filterKey === "price_low_high",
+      price_high_low: filterKey === "price_high_low",
+    };
+    setFilters(updatedFilters);
+    await handleProducts(updatedFilters);
+    setSortingType(filterKey);
   };
 
   const handlePageFilter = async (data: any) => {

@@ -159,13 +159,13 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <p className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear mb-4">
               Our latest and greatest in your inbox, sign up now.
             </p>
-            <div className="flex items-center">
+            <div className="flex items-center w-fit">
               <input
                 type="email"
-                placeholder="Enter your email address"
-                className="flex-grow py-3 px-4 rounded-l-full focus:outline-none text-black"
+                placeholder="Email address"
+                className="rounded-l-full w-fit focus:outline-none p-3 text-black"
               />
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-3 rounded-r-full">
+              <button className="bg-yellow-400 font-semibold hover:bg-yellow-500 text-black p-3 rounded-r-full">
                 Subscribe
               </button>
             </div>

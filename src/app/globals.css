@@ -79,3 +79,48 @@ body {
 .colorCircle:hover:focus {
   outline: 2px solid black;
 }
+
+.range-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: #e0e0e0; /* Light background color for the range */
+  border-radius: 5px;
+  width: 100%;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: white; /* Transparent background for the box */
+  border: 4px solid black; /* Black border to create the box effect */
+  border-radius: 4px; /* Optional: add rounded corners for a softer box */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Ensures the border is included in the thumb size */
+}
+
+.range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: white; /* Transparent background for the box */
+  border: 4px solid black; /* Black border to create the box effect */
+  border-radius: 4px; /* Optional: add rounded corners for a softer box */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Ensures the border is included in the thumb size */
+}
+
+.range-input::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  background: white; /* Transparent background for the box */
+  border: 4px solid black; /* Black border to create the box effect */
+  border-radius: 4px; /* Optional: add rounded corners for a softer box */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Ensures the border is included in the thumb size */
+}

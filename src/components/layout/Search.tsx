@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { IoMdSearch } from "react-icons/io";
 import { bigShoulders } from "@/app/layout";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const Search = () => {
   const searchRef = useRef<HTMLDivElement | null>(null);
@@ -95,7 +96,6 @@ const Search = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
   return (
     <div ref={searchRef} className="relative hidden w-full lg:block">
       <input
@@ -116,16 +116,18 @@ const Search = () => {
                 key={index}
                 className="border-b cursor-pointer flex justify-between items-center py-2 text-gray-700"
               >
-                <span className="hover:text-primary flex items-center gap-2">
-                  {/* <Image
+                <Link href={`/product/${product?.MenuId}/${product?.Style}`}>
+                  <span className="hover:text-primary flex items-center gap-2">
+                    {/* <Image
                     src={product?.ListingImage}
                     alt={product?.Description}
                     width={32}
                     height={32}
                     className="object-contain rounded-full"
-                  /> */}
-                  {product.Description ?? "Unnamed Product"}{" "}
-                </span>
+                    /> */}
+                    {product.Description ?? "Unnamed Product"}{" "}
+                  </span>
+                </Link>
                 <span>{product?.EndPrice}$</span>
               </li>
             ))}

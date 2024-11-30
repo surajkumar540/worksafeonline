@@ -15,7 +15,6 @@ const Banner = ({ banners }: { banners: any }) => {
       <Swiper
         spaceBetween={30}
         effect={"fade"}
-        navigation={true}
         pagination={{
           clickable: true,
         }}

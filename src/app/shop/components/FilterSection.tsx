@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
 import Pagination from "@/components/common/Pagination";
 import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
+import PriceFilter from "./PriceFilter";
 
 interface Filter {
   response: any;
@@ -95,7 +96,6 @@ const FilterSection = ({
       });
     }
   }, [category, response, subcategory]);
-
   return (
     <div
       id="filterSection"
@@ -104,7 +104,7 @@ const FilterSection = ({
       <div className="col-span-1 hidden md:block space-y-6">
         {state.categories && state.categories.length > 0 && (
           <Filter
-            countKey="Count"
+            countKey="Cnt"
             filters={filters}
             category={category}
             labelKey="menu_name"
@@ -115,10 +115,23 @@ const FilterSection = ({
             handleProducts={handleProducts}
           />
         )}
+        {state.prices && state.prices.length > 0 && (
+          <PriceFilter
+            // countKey="Cnt"
+            filters={filters}
+            // category={category}
+            // labelKey="menu_name"
+            setFilters={setFilters}
+            // subcategory={subcategory}
+            options={state.prices}
+            heading="Filter By Price"
+            handleProducts={handleProducts}
+          />
+        )}
         {state.colors && state.colors.length > 0 && (
           <Filter
             heading="Color"
-            countKey="Count"
+            countKey="Cnt"
             filters={filters}
             labelKey="Colour"
             category={category}
@@ -130,7 +143,7 @@ const FilterSection = ({
         )}
         {state.fittings && state.fittings.length > 0 && (
           <Filter
-            countKey="Count"
+            countKey="Cnt"
             heading="Fittings"
             filters={filters}
             category={category}
@@ -145,7 +158,7 @@ const FilterSection = ({
           <Filter
             heading="Sizes"
             labelKey="Size"
-            countKey="Count"
+            countKey="Cnt"
             filters={filters}
             category={category}
             options={state.sizes}
@@ -157,7 +170,7 @@ const FilterSection = ({
         {state.brands && state.brands.length > 0 && (
           <Filter
             heading="brands"
-            countKey="Count"
+            countKey="Cnt"
             labelKey="Brand"
             filters={filters}
             category={category}
