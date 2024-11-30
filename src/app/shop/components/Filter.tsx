@@ -43,6 +43,17 @@ const Filter = ({
       const updated = { ...filters, [labelKey]: updatedValues };
       setFilters(updated);
 
+      const element = document.getElementById("filterSection");
+      if (element) {
+        const offset = -100;
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop + offset;
+
+        if ("scrollBehavior" in document.documentElement.style)
+          window.scrollTo({ top: targetPosition, behavior: "smooth" });
+        else window.scrollTo(0, targetPosition);
+      }
       await handleProducts(updated);
     } catch (error) {
       console.error("Error updating filters or handling products:", error);
@@ -90,13 +101,13 @@ const Filter = ({
               <span className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={
+                  checked={Boolean(
                     (filters?.[labelKey]?.length > 0 &&
                       option?.[labelKey] &&
-                      filters[labelKey].includes(option[labelKey])) ||
-                    (option?.menu_id &&
-                      subcategoryInput === option?.menu_id.toString())
-                  }
+                      includes(filters[labelKey], option[labelKey])) ||
+                      (option?.menu_id &&
+                        subcategoryInput === option?.menu_id.toString())
+                  )}
                   onChange={(e) => {
                     setSubcategory(e.target.checked ? option?.menu_id : null);
                   }}

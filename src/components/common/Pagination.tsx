@@ -16,7 +16,17 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      const element = document.getElementById("filterSection");
+      if (element) {
+        const offset = -100;
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop + offset;
+
+        if ("scrollBehavior" in document.documentElement.style)
+          window.scrollTo({ top: targetPosition, behavior: "smooth" });
+        else window.scrollTo(0, targetPosition);
+      }
       onPageChange({ ...filters, page: page });
     }
   };

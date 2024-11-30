@@ -31,9 +31,9 @@ const ImageComponent = ({ product, slug }: { product: any; slug: string }) => {
         <div className="relative">
           {/* Image with loading overlay */}
           <Image
-            width={400}
+            width={564}
             key={imgSrc}
-            height={400}
+            height={564}
             src={imgSrc}
             onLoad={handleLoad}
             onError={handleError}

@@ -15,6 +15,12 @@ const ProductSwiper = ({
   products: any;
   slidesPerViewDesktop?: number;
 }) => {
+  if (!products || !Array.isArray(products) || products.length === 0)
+    return (
+      <div className="text-center text-gray-500">
+        <p>No products available at the moment.</p>
+      </div>
+    );
   return (
     <div>
       <Swiper
@@ -49,18 +55,22 @@ const ProductSwiper = ({
             slidesPerView: slidesPerViewDesktop ?? 4,
             spaceBetween: slidesPerViewDesktop ? 25 : 40,
           },
+          1680: {
+            slidesPerView: products.length >= 5 ? 5 : 4,
+            spaceBetween: 25,
+          },
+          1920: {
+            slidesPerView: products.length >= 6 ? 6 : 4,
+            spaceBetween: 25,
+          },
         }}
         className="mySwiper"
       >
-        {products &&
-          products.length > 0 &&
-          products.map((product: any, index: number) => {
-            return (
-              <SwiperSlide key={index}>
-                <ProductCard product={product} />
-              </SwiperSlide>
-            );
-          })}
+        {products.map((product: any, index: number) => (
+          <SwiperSlide key={index}>
+            <ProductCard product={product} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

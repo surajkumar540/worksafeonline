@@ -35,13 +35,13 @@ const Navbar: React.FC<NavbarProps> = async () => {
   return (
     <>
       <header className="bg-[#1C1C1C] sticky top-0 z-50 w-full text-white shadow-md">
-        <div className="max-w-9xl mx-auto flex gap-5 items-center justify-between px-2 md:px-4 lg:px-6 py-2">
+        <div className="max-w-9xl mx-auto flex items-center justify-between px-2 md:px-4 lg:px-6 py-2">
           {/* Logo */}
-          <div className="w-[45%] flex justify-between items-center">
+          <div className="w-1/2 flex justify-between items-center">
             <Link href="/">
               <Image width={125} unoptimized height={100} src={logoData} alt="Logo" />
             </Link>
-            <div className="space-x-5 lg:flex hidden items-center">
+            <div className="gap-5 lg:flex hidden items-center mx-auto">
               {links.map((link: LinkProps) => {
                 return (
                   <span key={link.id} className="relative group w-fit">
@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = async () => {
               })}
             </div>
           </div>
-          <div className="w-[55%] flex gap-5 justify-end lg:justify-between items-center">
+          <div className="w-1/2 flex gap-5 justify-end lg:justify-between items-center">
             <Search />
             <div className="flex items-center space-x-2 lg:space-x-4">
               <Link

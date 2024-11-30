@@ -103,7 +103,7 @@ const Search = () => {
         value={searchText}
         placeholder={placeholder}
         onChange={handleInputChange}
-        className="w-full px-4 py-3 text-gray-500 rounded-full outline-none"
+        className="w-full px-4 text-lg py-3 text-gray-500 rounded-full outline-none"
       />
       <button className="absolute z-20 top-0 right-0 px-4 py-3 rounded-full">
         <IoMdSearch size={25} className="text-black" />

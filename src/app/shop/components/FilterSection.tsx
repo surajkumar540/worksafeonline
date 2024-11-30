@@ -97,7 +97,10 @@ const FilterSection = ({
   }, [category, response, subcategory]);
 
   return (
-    <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10">
+    <div
+      id="filterSection"
+      className="grid md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-20 max-w-9xl mx-auto p-4 lg:p-10"
+    >
       <div className="col-span-1 hidden md:block space-y-6">
         {state.categories && state.categories.length > 0 && (
           <Filter
@@ -168,6 +171,7 @@ const FilterSection = ({
       <div className="col-span-2 lg:col-span-3">
         <CustomFilter
           filters={filters}
+          setFilters={setFilters}
           pageCount={state.pageCount}
           currentPage={state.currentPage}
           handleProducts={handleProducts}
