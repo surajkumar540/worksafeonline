@@ -5,6 +5,9 @@ import { CiHeart } from "react-icons/ci";
 import { RxEnterFullScreen } from "react-icons/rx";
 import { PiArrowsClockwiseLight } from "react-icons/pi";
 import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
+import QuickViewModal from "../modals/QuickViewModal";
+import { useState } from "react";
+import { Get } from "@/api/generalApi";
 
 const WishlistButton = ({
   imgSrc,
@@ -15,12 +18,37 @@ const WishlistButton = ({
   imgSrc: string;
   setImgSrc: any;
 }) => {
+  const [data, setData] = useState<{}>();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const handleWishlist = (data: any) => {
     if (handleAddToWishlist(data) && eventEmitter)
       eventEmitter.emit("addToWishlist", data);
   };
+
+  const handleQuickView = async ({
+    category,
+    productId,
+  }: {
+    productId: string;
+    category: string | number;
+  }) => {
+    const productResponse = await Get(
+      `api/ProductDetails12?product_id=${productId}&category_id=${category}`
+    );
+    setIsVisible(true);
+    setData(productResponse);
+  };
+
+  const handleToggle = () => {
+    setIsVisible((prev) => !prev);
+  };
   return (
     <>
+      <QuickViewModal
+        data={data}
+        isVisible={isVisible}
+        onclose={handleToggle}
+      />
       <span
         onClick={() => handleWishlist(product)}
         className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-1 right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
@@ -34,7 +62,12 @@ const WishlistButton = ({
         <PiArrowsClockwiseLight title="Compare" size={23} />
       </span>
       <span
-        onClick={() => handleWishlist(product)}
+        onClick={() =>
+          handleQuickView({
+            category: product?.MenuId,
+            productId: product?.Style,
+          })
+        }
         className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-[76px] right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
       >
         <RxEnterFullScreen title="Quick View" size={24} />

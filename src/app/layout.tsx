@@ -46,6 +46,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}
       >
         <Navbar />
+        <div id="modal-root"></div>
         <div className="min-h-screen w-full mx-auto">{children}</div>
         <Footer />
         <ToastContainer
