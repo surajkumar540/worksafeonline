@@ -1,12 +1,13 @@
 import Guarantee from "./Guarantee";
 import ShippingInfo from "./ShippingInfo";
+import ProductSizes from "./ProductSizes";
 import ProductColors from "./ProductColor";
 import ProductDetails from "./ProductDetail";
+import ProductFitting from "./ProductFitting";
 import ProductActions from "./ProductActions";
 import ProductMetaInfo from "./ProductMetaInfo";
 import QuantitySelector from "./QuantitySelector";
-import ProductSizes from "./ProductSizes";
-import ProductFitting from "./ProductFitting";
+import Logo from "@/components/customisation/Logo";
 
 const ProductContent = ({ product }: { product: any }) => {
   const filterProductFittings = product?.ProductFittings.filter(
@@ -25,6 +26,7 @@ const ProductContent = ({ product }: { product: any }) => {
         <ProductFitting productFittings={filterProductFittings} />
       )}
       <QuantitySelector product={product} />
+      <Logo product={product} />
       <ProductActions />
       <Guarantee />
       <ShippingInfo />

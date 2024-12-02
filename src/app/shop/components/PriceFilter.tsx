@@ -89,7 +89,7 @@ const PriceFilter = ({
             >
               Price:{" "}
               <span className="text-black">
-                {min}$ - {value.toFixed(2)}${" "}
+                £{min} - £{value.toFixed(2)}
               </span>
             </span>
             <button

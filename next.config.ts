@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "customiseitnow.co.uk",
+      },
+      {
+        protocol: "https",
+        hostname: "www.clothes2order.com",
+      },
+      {
+        protocol: "https",
         hostname: "www.worksafeonline.co.uk",
       },
       {
