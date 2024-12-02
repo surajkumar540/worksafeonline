@@ -16,7 +16,6 @@ const QuickViewProductSwiper = ({
 }: {
   productListingImages: any;
 }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [imageLoaded, setImageLoaded] = useState<boolean[]>([]);
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
@@ -43,10 +42,6 @@ const QuickViewProductSwiper = ({
   const handleSwiperInstance = useCallback((swiper: SwiperClass) => {
     setSwiperInstance(swiper);
   }, []);
-
-  const handleSlideChange = (swiper: SwiperClass) => {
-    setActiveIndex(swiper.activeIndex);
-  };
 
   const handleMouseEnter = () => {
     if (swiperInstance) {
@@ -80,7 +75,6 @@ const QuickViewProductSwiper = ({
           clickable: true,
         }}
         onSwiper={handleSwiperInstance}
-        onSlideChange={handleSlideChange}
         modules={[EffectFade, Autoplay]}
         autoplay={{
           delay: 2500,
@@ -94,19 +88,16 @@ const QuickViewProductSwiper = ({
             return (
               <SwiperSlide key={index}>
                 <div
-                  className="relative group cursor-zoom-in overflow-hidden w-full h-[50vh] lg:h-screen rounded-md"
+                  className="relative group cursor-zoom-in overflow-hidden w-full h-auto lg:h-[75vh] rounded-md"
                   onMouseMove={handleMouseMove}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                  {/* Skeleton Loader */}
                   {!imageLoaded[index] && (
                     <div className="absolute inset-0 bg-gray-200 overflow-hidden rounded-lg">
                       <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-wave"></div>
                     </div>
                   )}
-
-                  {/* Image */}
                   <Image
                     priority
                     width={100}

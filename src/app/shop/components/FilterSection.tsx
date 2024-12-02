@@ -2,12 +2,12 @@
 
 import Filter from "./Filter";
 import { Post } from "@/utils/axios";
+import PriceFilter from "./PriceFilter";
 import CustomFilter from "./CustomFilter";
 import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
 import Pagination from "@/components/common/Pagination";
 import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
-import PriceFilter from "./PriceFilter";
 
 interface Filter {
   response: any;
@@ -62,20 +62,15 @@ const FilterSection = ({
 
       if (response?.status) {
         setFilteredProducts(response?.product ?? []);
-        setState({
-          sizes: response?.Sizes ?? [],
-          brands: response?.Brands ?? [],
-          prices: response?.Prices ?? [],
-          colors: response?.Colours ?? [],
+        setState((prev: any) => ({
+          ...prev,
           products: response?.product ?? [],
-          fittings: response?.Fittings ?? [],
           pageCount: response?.PageCount ?? 0,
           currentPage: response?.CurrentPage ?? 0,
-          categories: categoryResponse?.subcategories ?? [],
-        });
+        }));
       } else throw new Error(response?.message || "Failed to fetch products.");
     } catch (error: any) {
-      console.error("Error fetching filtered products:", error);
+      console.log("Error fetching filtered products:", error);
     } finally {
       setLoader(false);
     }

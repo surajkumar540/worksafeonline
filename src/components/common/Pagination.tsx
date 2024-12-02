@@ -61,9 +61,9 @@ const Pagination: React.FC<PaginationProps> = ({
     <div
       className={`flex flex-col items-center border-t mt-10 border-t-black/20 py-3 justify-center space-y-1 ${bigShoulders.className}`}
     >
-      <div className="flex justify-between w-full items-center">
+      <div className="flex justify-center lg:justify-between w-full items-center">
         <button
-          className={`px-3 py-1 font-black rounded-md border border-black transition-all duration-150 ease-linear ${
+          className={`px-3 py-1 hidden lg:block font-black rounded-md border border-black transition-all duration-150 ease-linear ${
             currentPage === 1
               ? "opacity-80 bg-white cursor-not-allowed"
               : "hover:bg-black bg-white hover:text-white"
@@ -73,7 +73,7 @@ const Pagination: React.FC<PaginationProps> = ({
         >
           Previous
         </button>
-        <div className="space-x-2">
+        <div className="space-x-1 md:space-x-2">
           {visiblePages.map((page, idx) => {
             if (page === -1) {
               return (
@@ -98,7 +98,7 @@ const Pagination: React.FC<PaginationProps> = ({
           })}
         </div>
         <button
-          className={`px-3 py-1 font-black rounded-md border border-black transition-all duration-150 ease-linear ${
+          className={`px-3 py-1 hidden lg:block font-black rounded-md border border-black transition-all duration-150 ease-linear ${
             currentPage === totalPages
               ? "opacity-80 bg-white cursor-not-allowed"
               : "hover:bg-black bg-white hover:text-white"

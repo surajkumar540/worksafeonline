@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = async () => {
           {/* Logo */}
           <div className="w-1/2 flex justify-between items-center">
             <Link href="/">
-              <Image width={125} unoptimized height={100} src={logoData} alt="Logo" />
+              <Image width={125} unoptimized height={60} src={logoData} alt="Logo" />
             </Link>
             <div className="gap-5 lg:flex hidden items-center mx-auto">
               {links.map((link: LinkProps) => {

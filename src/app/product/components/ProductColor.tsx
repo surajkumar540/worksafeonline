@@ -8,7 +8,7 @@ const ProductColors = ({ productColors }: { productColors: [] }) => {
   return (
     <div>
       <p className="mt-4 font-semibold">Color</p>
-      <div className="mt-2 flex gap-2 items-center">
+      <div className="mt-2 flex flex-wrap gap-2 items-center">
         {productColors.map((color: any) => {
           const [primaryColor, secondaryColor] =
             (color.Html_Code && color.Html_Code?.split("/")) ||
