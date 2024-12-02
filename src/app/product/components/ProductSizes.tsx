@@ -4,7 +4,7 @@ const ProductSizes = ({ sizes }: { sizes: any }) => {
   return (
     <>
       <p className="mt-4 mb-2 font-semibold">Sizes</p>
-      <div className={`flex flex-wrap space-x-2 ${bigShoulders.className}`}>
+      <div className={`flex flex-wrap gap-2 ${bigShoulders.className}`}>
         {sizes.map((size: any) => {
           return (
             <span

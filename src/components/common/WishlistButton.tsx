@@ -43,7 +43,10 @@ const WishlistButton = ({
       if (productResponse?.ProductID) {
         toast.dismiss(toastId);
         setIsVisible(true);
-        setData(productResponse);
+        setData({
+          ...productResponse,
+          slug: `/product/${category}/${productId}`,
+        });
         toast.dismiss(toastId);
       } else {
         toast.dismiss(toastId);

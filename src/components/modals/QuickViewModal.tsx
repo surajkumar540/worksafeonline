@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Modal from "../common/Modal";
+import { bigShoulders } from "@/app/layout";
 import { productData } from "@/data/productData";
 import QuickViewProductSwiper from "./QuickViewProductSwiper";
 import ProductSizes from "@/app/product/components/ProductSizes";
@@ -44,7 +46,13 @@ const QuickViewModal = ({
             <ProductFitting productFittings={filterProductFittings} />
           )}
           <QuantitySelector product={product} />
-          <div className="bg-gray-300 h-[1px]" />
+          <Link
+            href={product?.slug}
+            className={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary rounded-full text-2xl font-bold uppercase bg-black text-white hover:text-black ${bigShoulders.className}`}
+          >
+            View Product
+          </Link>
+          <div className="bg-gray-300 mt-5 h-[1px]" />
           <ProductMetaInfo />
           <div className="bg-gray-300 h-[1px] mt-5" />
         </div>
