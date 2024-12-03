@@ -213,11 +213,11 @@ export const links: LinkProps[] = [
     href: "/shop",
     label: "SHOP",
   },
-  {
-    id: 3,
-    href: "/blogs",
-    label: "BLOGS",
-  },
+  // {
+  //   id: 3,
+  //   href: "/blogs",
+  //   label: "BLOGS",
+  // },
   {
     id: 4,
     href: "/about-us",

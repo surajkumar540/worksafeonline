@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = async () => {
             <Link href="/">
               <Image width={125} unoptimized height={60} src={logoData} alt="Logo" />
             </Link>
-            <div className="gap-5 lg:flex hidden items-center mx-auto">
+            <div className="gap-7 lg:flex hidden items-center mx-auto">
               {links.map((link: LinkProps) => {
                 return (
                   <span key={link.id} className="relative group w-fit">
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = async () => {
           </div>
           <div className="w-1/2 flex gap-5 justify-end lg:justify-between items-center">
             <Search />
-            <div className="flex items-center space-x-2 lg:space-x-4">
+            <div className="flex items-center mx-auto space-x-2 lg:space-x-4">
               <Link
                 href="/my-account"
                 className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"

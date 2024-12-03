@@ -26,15 +26,17 @@ const CustomisationDetails = ({
   if (filterProduct.length > 0) filterProduct = filterProduct[0];
   return (
     <div className="flex justify-start gap-10 mb-10">
-      <Image
-        priority
-        unoptimized
-        width={100}
-        height={100}
-        alt="ProductImage"
-        src={filterProduct?.ProductImage}
-        className="w-1/4 object-contain"
-      />
+      <div className="w-1/4">
+        <Image
+          priority
+          unoptimized
+          width={400}
+          height={400}
+          alt="ProductImage"
+          src={filterProduct?.ProductImage}
+          className="w-full object-contain"
+        />
+      </div>
       <div className="flex w-3/4 flex-col text-left justify-start">
         <h1
           className={`text-xl md:text-3xl py-2 font-black uppercase ${bigShoulders.className}`}
