@@ -8,7 +8,7 @@ import { CiHeart } from "react-icons/ci";
 import { RxEnterFullScreen } from "react-icons/rx";
 import QuickViewModal from "../modals/QuickViewModal";
 import { PiArrowsClockwiseLight } from "react-icons/pi";
-import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
+import { handleAddToWishlist } from "@/hooks/useEventEmitter";
 
 const WishlistButton = ({
   imgSrc,
@@ -22,10 +22,6 @@ const WishlistButton = ({
   const [data, setData] = useState<{}>();
   const [disable, setDIisabled] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const handleWishlist = (data: any) => {
-    if (handleAddToWishlist(data) && eventEmitter)
-      eventEmitter.emit("addToWishlist", data);
-  };
 
   const handleQuickView = async ({
     category,
@@ -76,7 +72,7 @@ const WishlistButton = ({
         onclose={handleToggle}
       />
       <span
-        onClick={() => handleWishlist(product)}
+        onClick={() => handleAddToWishlist(product)}
         className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-1 right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
       >
         <CiHeart title="Add to wishlist" size={25} />

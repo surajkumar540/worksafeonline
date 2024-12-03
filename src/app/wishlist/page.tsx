@@ -30,10 +30,7 @@ export default function Page() {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
   const onAddToCart = (data: any) => {
-    if (handleAddToCart(data)) {
-      if (eventEmitter) eventEmitter.emit("addToCart", data);
-      handleRemove(data?.ID);
-    }
+    if (handleAddToCart(data)) handleRemove(data?.ID);
   };
   return (
     <>

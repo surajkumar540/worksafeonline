@@ -1,3 +1,5 @@
+import { includes } from "@/utils/polyfills";
+
 export interface Country {
   name: string;
   code: string;
@@ -11,12 +13,6 @@ export interface LinkProps {
   icon?: boolean;
 }
 
-export interface NavbarProps {
-  data?: string;
-}
-export interface FooterProps {
-  data?: string;
-}
 export interface Product {
   rating: number;
   Detail: string;
@@ -45,4 +41,21 @@ export interface Product {
     returnPeriod: number;
     freeDelivery: { threshold: number; label: string };
   };
+}
+
+export interface Cart {
+  Size: object;
+  Color: object;
+  Fitting: object;
+  createdAt: Date;
+  Quantity: number;
+  EndPrice: number;
+  ID: string | number;
+  Description: string;
+  CategoryData: object;
+  ListingImage: string;
+  DiscountedPrice?: number;
+  CalculatedPrice?: number;
+  FinalPrice: string | number;
+  CustomisationDetails?: object;
 }

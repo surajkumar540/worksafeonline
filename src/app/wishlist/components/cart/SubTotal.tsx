@@ -3,13 +3,14 @@ import { bigShoulders } from "@/app/layout";
 interface CartItem {
   ID: string;
   EndPrice: number;
+  Quantity: number;
 }
 
 const SubTotal = ({ cart }: { cart: CartItem[] }) => {
   const totalAmount =
     cart?.reduce((acc, item) => {
       if (typeof item?.EndPrice === "number") {
-        return acc + item.EndPrice;
+        return acc + item.EndPrice * item.Quantity;
       } else {
         console.error(`Invalid EndPrice for item ID: ${item?.ID}`);
         return acc;

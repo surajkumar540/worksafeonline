@@ -86,7 +86,7 @@ const Search = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+      if (searchRef.current && e.target !== searchRef.current) {
         setOpenModal(false);
         setSearchText("");
       }

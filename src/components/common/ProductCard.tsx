@@ -18,12 +18,13 @@ const ProductCard = ({ product }: { product: any }) => {
         </h3>
         <button className="flex mt-2 justify-between items-center">
           <span className="space-x-1 flex items-center">
-            <span className="text-2xl">{product?.EndPrice}$</span>
-            {product?.StartPrice !== product?.EndPrice && (
-              <span className="text-xl text-gray-400 line-through">
-                {product?.StartPrice}$
-              </span>
-            )}
+            <span className="text-2xl">£{product?.EndPrice}</span>
+            {product?.StartPrice &&
+              product?.StartPrice !== product?.EndPrice && (
+                <span className="text-xl text-gray-400 line-through">
+                  £{product?.StartPrice}
+                </span>
+              )}
           </span>
           <AddtoCartButton product={product} />
         </button>

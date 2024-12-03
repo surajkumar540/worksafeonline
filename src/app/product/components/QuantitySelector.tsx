@@ -9,6 +9,11 @@ import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 
 const QuantitySelector = ({ product }: { product: Product }) => {
+  const [selectedFields, setSelectedFields] = useState({
+    size: {},
+    color: {},
+    fitting: {},
+  });
   const [countItem, setCountItem] = useState(1);
 
   useEffect(() => {
@@ -39,13 +44,25 @@ const QuantitySelector = ({ product }: { product: Product }) => {
         </p>
       )}
       {product?.ProductSizes.length > 0 && (
-        <ProductSizes sizes={product?.ProductSizes} />
+        <ProductSizes
+          sizes={product?.ProductSizes}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+        />
       )}
       {product?.ProductColour.length > 0 && (
-        <ProductColors productColors={product?.ProductColour} />
+        <ProductColors
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+          productColors={product?.ProductColour}
+        />
       )}
       {filterProductFittings.length > 0 && (
-        <ProductFitting productFittings={filterProductFittings} />
+        <ProductFitting
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+          productFittings={filterProductFittings}
+        />
       )}
       <div className="flex text-center py-5 gap-3">
         <div className="w-[150px] text-xl flex gap-5 rounded-full justify-center items-center bg-[#F5F5F5] font-bold">
@@ -63,7 +80,11 @@ const QuantitySelector = ({ product }: { product: Product }) => {
             +
           </button>
         </div>
-        <AddToCartButton quantity={countItem} product={product} />
+        <AddToCartButton
+          product={product}
+          quantity={countItem}
+          selectedFields={selectedFields}
+        />
       </div>
     </>
   );
