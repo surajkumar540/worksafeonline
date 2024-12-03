@@ -59,7 +59,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   }
 
   return (
-    <div className="grid grid-cols-5 gap-5 w-full lg:w-[55%] h-full lg:h-screen lg:sticky lg:top-32">
+    <div className="grid grid-cols-5 gap-5 w-full lg:w-[55%] h-full lg:h-screen lg:sticky lg:top-36">
       <div className="hidden lg:block col-span-1 gap-2">
         <Swiper
           spaceBetween={15}

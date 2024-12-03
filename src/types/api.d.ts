@@ -31,6 +31,7 @@ export interface Product {
   ProductColour: any[];
   ProductImage: string;
   availability: string;
+  ProductFittings: any[];
   ProductFeatures: any[];
   addToWatchlist: string;
   productCategory: string;

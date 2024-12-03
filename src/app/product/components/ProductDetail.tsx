@@ -42,22 +42,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <span className="rounded-full">{product.availability}</span>
         </div>
       </div>
-
       <div className="bg-gray-300 h-[1px] mt-5" />
-
       <p className="mt-4 text-gray-500 font-thin">{product.Detail}</p>
-      {product.ProductActualPrice && product.ProductSellingPrice && (
-        <p className={`mt-4 text-4xl space-x-2 ${bigShoulders.className}`}>
-          <span>{product.ProductSellingPrice}$</span>
-          <span className="text-3xl text-gray-500 line-through">
-            {product.ProductActualPrice}$
-          </span>
-        </p>
-      )}
-      {/* <p className={`mt-4 text-4xl ${bigShoulders.className}`}>
-          {product.price.minPrice.toString()}$ -{" "}
-          {product.price.maxPrice.toString()}$
-        </p> */}
     </div>
   );
 };

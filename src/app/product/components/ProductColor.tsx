@@ -4,7 +4,7 @@ const extractColorFromDescription = (description: string) => {
   return description.split("/").map((color) => color.trim());
 };
 
-const ProductColors = ({ productColors }: { productColors: [] }) => {
+const ProductColors = ({ productColors }: { productColors: any[] }) => {
   return (
     <div>
       <p className="mt-4 font-semibold">Color</p>
