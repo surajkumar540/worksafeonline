@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Search from "./Search";
+import Image from "next/image";
 import CartModal from "./Cart";
 import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
@@ -8,13 +9,12 @@ import Categories from "./Categories";
 import BottomTabs from "./BottomTabs";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
+import { LinkProps } from "@/types/api";
 import { FaRegUser } from "react-icons/fa";
 import MobileSidebar from "./MobileSidebar";
 import { CiDiscount1 } from "react-icons/ci";
-import { LinkProps, NavbarProps } from "@/types/api";
-import Image from "next/image";
 
-const Navbar: React.FC<NavbarProps> = async () => {
+const Navbar = async () => {
   const [resp, logoResponse, offerResponse] = await Promise.allSettled([
     Get("api/GetFullMenu?App=Worksafe"),
     Get("api/WebLogo?App=Worksafe"),
@@ -39,7 +39,14 @@ const Navbar: React.FC<NavbarProps> = async () => {
           {/* Logo */}
           <div className="w-1/2 flex justify-between items-center">
             <Link href="/">
-              <Image width={125} unoptimized height={60} src={logoData} alt="Logo" />
+              <Image
+                width={100}
+                unoptimized
+                height={60}
+                alt="Logo"
+                src={logoData}
+                className="w-32"
+              />
             </Link>
             <div className="gap-7 lg:flex hidden items-center mx-auto">
               {links.map((link: LinkProps) => {
@@ -53,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = async () => {
           </div>
           <div className="w-1/2 flex gap-5 justify-end lg:justify-between items-center">
             <Search />
-            <div className="flex items-center mx-auto space-x-2 lg:space-x-4">
+            <div className="flex items-center lg:mx-auto space-x-2 lg:space-x-4">
               <Link
                 href="/my-account"
                 className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"

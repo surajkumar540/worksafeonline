@@ -3,10 +3,7 @@ import Modal from "../common/Modal";
 import { bigShoulders } from "@/app/layout";
 import { productData } from "@/data/productData";
 import QuickViewProductSwiper from "./QuickViewProductSwiper";
-import ProductSizes from "@/app/product/components/ProductSizes";
-import ProductColors from "@/app/product/components/ProductColor";
 import ProductDetails from "@/app/product/components/ProductDetail";
-import ProductFitting from "@/app/product/components/ProductFitting";
 import ProductMetaInfo from "@/app/product/components/ProductMetaInfo";
 import QuantitySelector from "@/app/product/components/QuantitySelector";
 
@@ -24,9 +21,6 @@ const QuickViewModal = ({
   const productListImages = data.ProductImageList.map(
     (image: any) => image?.ProductImage
   );
-  const filterProductFittings = data?.ProductFittings.filter(
-    (fittings: any) => fittings.Fitting.trim() !== "NA"
-  );
   const product = { ...data, ...productData };
   return (
     <Modal onClose={onclose} isVisible={isVisible}>
@@ -36,15 +30,6 @@ const QuickViewModal = ({
         </div>
         <div className="w-full lg:w-1/2">
           <ProductDetails product={product} />
-          {product?.ProductSizes.length > 0 && (
-            <ProductSizes sizes={product?.ProductSizes} />
-          )}
-          {product?.ProductColour.length > 0 && (
-            <ProductColors productColors={product?.ProductColour} />
-          )}
-          {filterProductFittings.length > 0 && (
-            <ProductFitting productFittings={filterProductFittings} />
-          )}
           <QuantitySelector product={product} />
           <Link
             href={product?.slug}

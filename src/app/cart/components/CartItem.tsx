@@ -37,7 +37,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 </p>
                 <div className="flex justify-between items-center">
                   <p className="text-lg">
-                    {(item.EndPrice * item.quantity).toFixed(2)}$
+                    £{(item.EndPrice * item.Quantity).toFixed(2)}
                   </p>
                   <div className="flex items-center">
                     <button
@@ -45,17 +45,17 @@ const CartItem: React.FC<CartItemProps> = ({
                       onClick={() =>
                         handleUpdateQuantity(
                           item.ID,
-                          Math.max(1, item.quantity - 1)
+                          Math.max(1, item.Quantity - 1)
                         )
                       }
                     >
                       -
                     </button>
-                    <span className="px-4">{item.quantity}</span>
+                    <span className="px-4">{item.Quantity}</span>
                     <button
                       className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                       onClick={() =>
-                        handleUpdateQuantity(item.ID, item.quantity + 1)
+                        handleUpdateQuantity(item.ID, item.Quantity + 1)
                       }
                     >
                       +
@@ -99,31 +99,31 @@ const CartItem: React.FC<CartItemProps> = ({
                 />
               </div>
               <p className="col-span-2 line-clamp-3">{item.Description}</p>
-              <p className="text-lg">{item.EndPrice}$</p>
+              <p className="text-lg">£{item.EndPrice}</p>
               <div className="flex items-center">
                 <button
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                   onClick={() =>
                     handleUpdateQuantity(
                       item.ID,
-                      Math.max(1, item.quantity - 1)
+                      Math.max(1, item.Quantity - 1)
                     )
                   }
                 >
                   -
                 </button>
-                <span className="px-4">{item.quantity}</span>
+                <span className="px-4">{item.Quantity}</span>
                 <button
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                   onClick={() =>
-                    handleUpdateQuantity(item.ID, item.quantity + 1)
+                    handleUpdateQuantity(item.ID, item.Quantity + 1)
                   }
                 >
                   +
                 </button>
               </div>
               <p className="text-lg">
-                {(item.EndPrice * item.quantity).toFixed(2)}$
+                £{(item.EndPrice * item.Quantity).toFixed(2)}
               </p>
             </div>
           );

@@ -1,11 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FooterProps } from "@/types/api";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-const Footer: React.FC<FooterProps> = ({ data }) => {
+const Footer = () => {
   const customerLinks = [
     { label: "Help Center", href: "/faqs" },
     { label: "My Account", href: "/my-account" },

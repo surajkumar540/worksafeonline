@@ -1,5 +1,6 @@
 "use client";
 
+import { Cart } from "@/types/api";
 import { EventEmitter } from "events";
 import { toast } from "react-toastify";
 
@@ -14,19 +15,38 @@ export const handleAddToWishlist = (product: any) => {
     if (!Array.isArray(wishlist))
       throw new Error("Invalid wishlist format in localStorage");
 
-    const isAlreadyInWishlist = wishlist.some((item) => item.ID === product.ID);
+    const isAlreadyInWishlist = wishlist.some(
+      (item) => item.ID === (product.Style ?? product.ID)
+    );
 
     if (isAlreadyInWishlist) {
       toast.warn("Already in wishlist!");
       return false;
     }
-    const updatedWishlist = [
-      ...wishlist,
-      { ...product, createdAt: new Date(), quantity: 1 },
-    ];
+
+    const productData: Cart = {
+      createdAt: new Date(),
+      Size: product?.Size ?? "",
+      Color: product?.Color ?? "",
+      EndPrice: product?.EndPrice,
+      ID: product.Style ?? product.ID,
+      Fitting: product?.Fitting ?? "",
+      Quantity: product?.quantity ?? 1,
+      Description: product?.Description,
+      ListingImage: product?.ListingImage,
+      DiscountedPrice: product?.DiscountedPrice ?? 0,
+      CustomisationDetails: product?.CustomisationDetails ?? {},
+      FinalPrice: (product?.quantity ?? 1 * product?.EndPrice).toFixed(2),
+      CategoryData: product?.MenuId ? { categoryId: product?.MenuId } : {},
+    };
+
     toast.success("Added to wishlist!");
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    eventEmitter?.emit("addToWishlist", product);
+
+    localStorage.setItem(
+      "wishlist",
+      JSON.stringify([...wishlist, productData])
+    );
+    eventEmitter?.emit("addToWishlist", productData);
     return true;
   } catch (error) {
     console.error("Error accessing or updating wishlist:", error);
@@ -41,18 +61,31 @@ export const handleAddToCart = (product: any) => {
     if (!Array.isArray(cart))
       throw new Error("Invalid cart format in localStorage");
 
-    const isAlreadyInCart = cart.some((item) => item.ID === product.ID);
+    const isAlreadyInCart = cart.some(
+      (item) => item.ID === (product.Style ?? product.ID)
+    );
 
     if (isAlreadyInCart) {
       toast.warn("Already in cart!");
       return false;
     }
-    const updatedCart = [
-      ...cart,
-      { ...product, createdAt: new Date(), quantity: product?.quantity ?? 1 },
-    ];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    eventEmitter?.emit("addToCart", product);
+    const productData: Cart = {
+      createdAt: new Date(),
+      Size: product?.Size ?? {},
+      Color: product?.Color ?? {},
+      EndPrice: product?.EndPrice,
+      ID: product.Style ?? product.ID,
+      Fitting: product?.Fitting ?? {},
+      Quantity: product?.quantity ?? 1,
+      Description: product?.Description,
+      ListingImage: product?.ListingImage,
+      DiscountedPrice: product?.DiscountedPrice ?? 0,
+      CustomisationDetails: product?.CustomisationDetails ?? {},
+      FinalPrice: (product?.quantity ?? 1 * product?.EndPrice).toFixed(2),
+      CategoryData: product?.MenuId ? { categoryId: product?.MenuId } : {},
+    };
+    localStorage.setItem("cart", JSON.stringify([...cart, productData]));
+    eventEmitter?.emit("addToCart", productData);
     return true;
   } catch (error) {
     console.error("Error accessing or updating cart:", error);

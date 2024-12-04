@@ -2,26 +2,30 @@
 
 import { Product } from "@/types/api";
 import { bigShoulders } from "@/app/layout";
-import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
+import { handleAddToCart } from "@/hooks/useEventEmitter";
 
 const AddToCartButton = ({
   product,
   quantity,
+  selectedFields,
 }: {
   product: Product;
   quantity: number;
+  selectedFields: any;
 }) => {
-  const handleCart = (data: any) => {
+  const handleCart = (product: any) => {
     const updatedData = {
-      ...data,
       quantity: quantity,
-      ID: product?.ProductID,
+      MenuId: product.MenuId,
+      Style: product?.ProductID,
+      Size: selectedFields?.size,
+      Color: selectedFields?.color,
+      Fitting: selectedFields?.fitting,
       Description: product?.ProductName,
       ListingImage: product?.ProductImage,
       EndPrice: product?.ProductSellingPrice,
     };
-    if (handleAddToCart(updatedData) && eventEmitter)
-      eventEmitter.emit("addToCart", updatedData);
+    handleAddToCart(updatedData);
   };
   return (
     <button

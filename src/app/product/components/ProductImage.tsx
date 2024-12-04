@@ -62,7 +62,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
     <div className="grid grid-cols-5 gap-5 w-full lg:w-[55%] h-full lg:h-screen lg:sticky lg:top-36">
       <div className="hidden lg:block col-span-1 gap-2">
         <Swiper
-          spaceBetween={15}
+          spaceBetween={20}
           modules={[Thumbs]}
           direction="vertical"
           onSwiper={setThumbsSwiper}
@@ -71,7 +71,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           slidesPerView={Math.min(4, images.length)}
         >
           {images.map((src, index) => (
-            <SwiperSlide key={src}>
+            <SwiperSlide key={src} className="!h-fit">
               <div
                 className={`w-full rounded-md shadow-sm cursor-pointer ${
                   activeIndex === index
@@ -85,7 +85,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
                   alt={`Thumbnail ${index + 1}`}
                   width={100}
                   height={100}
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full py-2 object-contain rounded-md"
                 />
               </div>
             </SwiperSlide>

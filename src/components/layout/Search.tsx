@@ -73,7 +73,11 @@ const Search = () => {
   }, [searchText]);
 
   const callApi = async (query: string) => {
-    const response = await Get("api/SearchProducts?search=" + query);
+    const response = await Get(
+      "api/SearchProductsByPageWCategories?search=" +
+        query +
+        "&page=1&pagesize=20"
+    );
     if (response.status) {
       setOpenModal(true);
       setProducts(response.product);
@@ -86,7 +90,7 @@ const Search = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+      if (searchRef.current && e.target !== searchRef.current) {
         setOpenModal(false);
         setSearchText("");
       }

@@ -57,6 +57,15 @@ const CartModal = () => {
   }, []);
 
   const openCart = useCallback(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      try {
+        const parsedCart = JSON.parse(storedCart);
+        if (Array.isArray(parsedCart)) setCart(parsedCart);
+      } catch (error) {
+        console.error("Error parsing cart from localStorage", error);
+      }
+    }
     if (!["/cart", "/checkout"].includes(pathname)) {
       setOpenCartModal(true);
     }

@@ -4,7 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 
 type Product = {
   ID: string;
-  quantity: number;
+  Quantity: number;
   EndPrice: string;
   Description: string;
   ListingImage: string;
@@ -34,7 +34,7 @@ const CartItem: React.FC<WishlistCardProps> = ({ product, handleRemove }) => {
       <div>
         <h2 className="text-gray-700 text-sm">{product.Description}</h2>
         <p className="text-primary font-semibold">
-          <span className="text-black font-normal">{product?.quantity} x</span>{" "}
+          <span className="text-black font-normal">{product?.Quantity} x</span>{" "}
           {product.EndPrice}$
         </p>
       </div>

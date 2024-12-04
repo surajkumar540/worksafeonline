@@ -7,8 +7,14 @@ import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
+import Logo from "@/components/customisation/Logo";
 
 const QuantitySelector = ({ product }: { product: Product }) => {
+  const [selectedFields, setSelectedFields] = useState({
+    size: {},
+    color: {},
+    fitting: {},
+  });
   const [countItem, setCountItem] = useState(1);
 
   useEffect(() => {
@@ -17,7 +23,15 @@ const QuantitySelector = ({ product }: { product: Product }) => {
       const filtered = localStorageCart.filter(
         (prod: any) => prod.ID === product?.ProductID
       );
-      if (filtered.length > 0) setCountItem(filtered[0].quantity);
+      if (filtered.length > 0) {
+        const product = filtered[0];
+        setSelectedFields({
+          size: product?.Size ?? {},
+          color: product?.Color ?? {},
+          fitting: product?.Fitting ?? {},
+        });
+        setCountItem(product.Quantity);
+      }
     }
   }, [product]);
 
@@ -39,13 +53,25 @@ const QuantitySelector = ({ product }: { product: Product }) => {
         </p>
       )}
       {product?.ProductSizes.length > 0 && (
-        <ProductSizes sizes={product?.ProductSizes} />
+        <ProductSizes
+          sizes={product?.ProductSizes}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+        />
       )}
       {product?.ProductColour.length > 0 && (
-        <ProductColors productColors={product?.ProductColour} />
+        <ProductColors
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+          productColors={product?.ProductColour}
+        />
       )}
       {filterProductFittings.length > 0 && (
-        <ProductFitting productFittings={filterProductFittings} />
+        <ProductFitting
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+          productFittings={filterProductFittings}
+        />
       )}
       <div className="flex text-center py-5 gap-3">
         <div className="w-[150px] text-xl flex gap-5 rounded-full justify-center items-center bg-[#F5F5F5] font-bold">
@@ -63,8 +89,19 @@ const QuantitySelector = ({ product }: { product: Product }) => {
             +
           </button>
         </div>
-        <AddToCartButton quantity={countItem} product={product} />
+        <AddToCartButton
+          product={product}
+          quantity={countItem}
+          selectedFields={selectedFields}
+        />
       </div>
+      <Logo
+        product={{
+          ...(product || {}),
+          ...(selectedFields || {}),
+          quantity: countItem || 0,
+        }}
+      />
     </>
   );
 };

@@ -36,15 +36,15 @@ export const fetchHomePageData = async () => {
     homeListing3,
     bannerResponse,
   ] = results.map((result) =>
-    result.status === "fulfilled" ? result.value : {}
+    result?.status === "fulfilled" ? result?.value : {}
   );
   const products =
-    productsResponse.product?.filter(
+    productsResponse?.product?.filter(
       (product: { Status: number }) => product?.Status === 1
     ) || [];
-  const brands = brandsResponse.brand || [];
-  const banners = bannerResponse.special_offers || [];
-  const categories = categoriesResponse.categories || [];
+  const brands = brandsResponse?.brand || [];
+  const banners = bannerResponse?.special_offers || [];
+  const categories = categoriesResponse?.categories || [];
   return {
     products,
     categories,

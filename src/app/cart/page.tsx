@@ -32,11 +32,11 @@ export default function Page() {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
-  const handleUpdateQuantity = (id: string, quantity: number) => {
-    if (quantity === 11) return toast.warn("You can add up to 10 items!");
+  const handleUpdateQuantity = (id: string, Quantity: number) => {
+    if (Quantity === 11) return toast.warn("You can add up to 10 items!");
     setCartUpdated((prev: any) => {
       const updatedCart = prev.map((item: any) =>
-        item.ID === id ? { ...item, quantity } : item
+        item.ID === id ? { ...item, Quantity } : item
       );
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
@@ -83,9 +83,9 @@ export default function Page() {
                 <CartSummary cart={cartUpdated} />
               </div>
             </div>
-            {cartUpdated && cartUpdated.length > 0 && (
+            {/* {cartUpdated && cartUpdated.length > 0 && (
               <RecommendedProducts products={cartUpdated} />
-            )}
+            )} */}
           </>
         ) : (
           <Image
