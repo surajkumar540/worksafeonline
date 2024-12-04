@@ -52,7 +52,9 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ details }) => {
         return (
           <div key={index} className="flex flex-col">
             <div className="flex flex-col lg:flex-row justify-center items-center md:justify-start md:items-start text-4xl gap-5">
-              <Icon />
+              <div>
+                <Icon />
+              </div>
               <div className="text-center md:text-left">
                 <h3
                   className={`font-black uppercase text-2xl md:text-xl lg:text-3xl ${bigShoulders.className}`}

@@ -1,10 +1,10 @@
 import { bigShoulders } from "@/app/layout";
 import ProductSwiper from "./TeamSwiper";
-import { FaArrowRightLong } from "react-icons/fa6";
+import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 const OurTeam = () => {
     return (
-        <section className="sm:py-16">
+        <section className="max-w-9xl mx-auto  py-8 px-4 lg:py-10">
             <div className="max-w-screen-xl mx-auto lg:px-6">
                 <div className={`relative ${bigShoulders.className}`}>
                     <h1 className="text-6xl md:text-9xl font-bold text-center tracking-wider bg-gradient-to-b mb-10 from-gray-300 via-gray-200 uppercase to-white bg-clip-text text-transparent">
@@ -21,15 +21,14 @@ const OurTeam = () => {
             <ProductSwiper />
 
             <div className="sm:mt-20 w-full flex justify-center items-center">
-                <span className="relative font-sans uppercase font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-36 pr-4 overflow-hidden group">
-                    <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                        Contact Us
-                    </span>
-                    <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                        Contact Us
-                    </span>
-                    <FaArrowRightLong className="ml-2" />
-                </span>
+                <AnimatedActionButton
+                    text="contact us"
+                    href="https://example.com"
+                    // onClick={() => console.log("Button clicked")}
+                    classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"
+                    isLoading={false}
+                    type="submit"
+                />
             </div>
         </section>
     );

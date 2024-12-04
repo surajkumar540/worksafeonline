@@ -1,5 +1,4 @@
 import { bigShoulders } from "@/app/layout";
-import Image from "next/image";
 import React, { ReactNode } from "react";
 import { CiMedal } from "react-icons/ci";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -21,8 +20,8 @@ type FeatureHighlightProps = {
 
 const TradeSafetyBanner = () => {
   return (
-    <div className="max-w-9xl mx-auto  py-8 px-4 md:px-6 lg:px-10 lg:py-10">
-      <section>
+    <div className="max-w-9xl mx-auto  py-8 px-4 md:px-6 lg:px-10 lg:py-20">
+      <section className="container mx-auto mt-20 py-10 px-4 sm:px-4 md:px-10">
         {/* Heading Section */}
         <div className="w-full md:w-[85%]">
           <p
@@ -47,7 +46,7 @@ const TradeSafetyBanner = () => {
             <ContentCard
               title="Business Idea"
               description="We sell workwear, work gloves, and work shoes for professionals with high demands on function, quality, safety, and design. We sell our products through our online shop or direct agreements with our customer management."
-              imgUrl="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/ab-img1.jpg"
+              imgUrl="https://www.soosi.co.in/cdn/shop/products/WhatsAppImage2021-10-31at11.58.18_1200x1200.jpg?v=1635674699"
             />
             <Divider />
 
@@ -55,7 +54,7 @@ const TradeSafetyBanner = () => {
             <ContentCard
               title="Our Vision"
               description="We aim to be a global leader in supplying workwear, work gloves, work shoes, and profile clothes for professionals. Our products are designed to facilitate the work of professionals in various occupations."
-              imgUrl="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/ab-img2.jpg"
+              imgUrl="https://www.soosi.co.in/cdn/shop/products/WhatsAppImage2021-10-31at11.58.18_1200x1200.jpg?v=1635674699"
             />
             <Divider />
           </div>
@@ -100,15 +99,11 @@ const TradeSafetyBanner = () => {
 // Reusable Components
 const ContentCard: React.FC<ContentCardProps> = ({ title, description, imgUrl }) => (
   <div className="flex flex-col w-full h-full">
-    {/* lg:aspect-[1/1] */}
-    <div className=" w-full rounded-md overflow-hidden">
-      <Image
+    <div className="lg:aspect-[1/1] w-full rounded-md overflow-hidden">
+      <img
         src={imgUrl}
         alt={title}
-        width={100}
-        height={100}
         className="object-cover w-full h-auto transition-transform duration-300 ease-in-out bg-slate-600 transform hover:scale-110"
-        unoptimized
       />
     </div>
     <div>
