@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
-import statsbg from "../../../../public/assets/others/statsbg.jpg"
 const BusinessStats: React.FC = () => {
     return (
         <div
@@ -16,7 +15,7 @@ const BusinessStats: React.FC = () => {
                 priority
                 alt="Contact-Us Banner"
                 className="object-cover"
-                src={statsbg}
+                src={"https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/ab-bg.jpg"}
             />
             {/* Overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
