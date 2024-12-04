@@ -17,7 +17,7 @@ const BlogsSwiper = ({
             description: "Exploring trends in the design world.",
             date: "January 25, 2024",
             imageUrl:
-                "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/blog_14-820x620.jpg",
         },
         {
             id: 2,
@@ -25,7 +25,7 @@ const BlogsSwiper = ({
             description: "How to grow as a software developer.",
             date: "Nov 20, 2024",
             imageUrl:
-                "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/blog_13-820x620.jpg",
         },
         {
             id: 3,
@@ -33,7 +33,7 @@ const BlogsSwiper = ({
             description: "What makes a great manager.",
             date: "Nov 18, 2024",
             imageUrl:
-                "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/blog_12-820x620.jpg",
         },
         {
             id: 4,
@@ -61,11 +61,11 @@ const BlogsSwiper = ({
         );
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto px-6">
             <Swiper
                 spaceBetween={30}
                 slidesPerView={3} // Adjust slides per view
-                loop={false} // Disable infinite loop
+                loop={true} // Disable infinite loop
                 pagination={{
                     clickable: true, // Enable pagination dots
                 }}
