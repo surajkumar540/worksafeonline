@@ -4,13 +4,22 @@ import { useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
 
+
+export const BASE_URL = "https://johntrn.worksafeonline.co.uk";
+
+
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
+    company_name: "", // Optional field
+    find: "", // Optional field: e.g. "existingWorksafeAPI" or blank
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,9 +28,51 @@ const ContactForm: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+    setIsSubmitting(true);
+    setSubmissionStatus(null); // Reset the status before submission
+
+    const { name, email, phone, message, company_name, find } = formData;
+
+    // Data to be sent in the POST request
+    const postData = {
+      name,
+      email,
+      phone,
+      company_name: company_name || "", // Optional field, pass empty string if not provided
+      find: find || "", // Optional field, pass empty string if not provided
+      your_message: message,
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/api/Contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (response.ok) {
+        setSubmissionStatus("Your message has been sent successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+          company_name: "",
+          find: "",
+        }); // Reset the form after successful submission
+      } else {
+        setSubmissionStatus("There was an issue sending your message. Please try again.");
+      }
+    } catch (error) {
+      console.log(error)
+      setSubmissionStatus("Error submitting form. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,13 +129,37 @@ const ContactForm: React.FC = () => {
           rows={5}
           required
         ></textarea>
+        <input
+          type="text"
+          name="company_name"
+          placeholder="Company Name"
+          value={formData.company_name}
+          onChange={handleChange}
+          className="w-full p-4 outline-none border rounded-full focus:ring-2 transition-all duration-200 ease-linear text-black placeholder:black focus:ring-primary"
+        />
+        <input
+          type="text"
+          name="find"
+          placeholder="How did you find us?"
+          value={formData.find}
+          onChange={handleChange}
+          className="w-full p-4 outline-none border rounded-full focus:ring-2 transition-all duration-200 ease-linear text-black placeholder:black focus:ring-primary"
+        />
         <button
           type="submit"
+          disabled={isSubmitting}
           className="bg-primary text-black px-8 inline-flex gap-3 text-xs font-semibold mx-auto items-center py-4 rounded-full hover:bg-black hover:text-white transition"
         >
-          SEND MESSAGE <FaArrowRightLong />
+          {isSubmitting ? "Sending..." : "SEND MESSAGE"} <FaArrowRightLong />
         </button>
       </form>
+
+      {/* Show submission status message */}
+      {submissionStatus && (
+        <div className="mt-5 text-center text-lg font-semibold text-gray-700">
+          {submissionStatus}
+        </div>
+      )}
     </div>
   );
 };

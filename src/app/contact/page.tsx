@@ -4,11 +4,20 @@ import Map from "./components/MapComponent";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
 
-export default function Page() {
+export const BASE_URL = "https://johntrn.worksafeonline.co.uk";
+
+
+
+export default async function Page() {
+
+  // Fetch the contact details from the API
+  const response = await fetch(`${BASE_URL}/api/ContactDetail1?app=Worksafe`);
+  const data = await response.json();
+  console.log(data, "data");
   return (
     <>
       <Header title="Contact" subtitle="Contact" />
-      <ContactDetails />
+      <ContactDetails details={data} />
       <Map />
       <ContactForm />
       <div className="max-w-9xl mx-auto grid grid-cols-2 lg:grid-cols-4">
