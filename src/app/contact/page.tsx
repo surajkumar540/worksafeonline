@@ -18,7 +18,7 @@ export default async function Page() {
     <>
       <Header title="Contact" subtitle="Contact" />
       <ContactDetails details={data} />
-      <Map />
+      <Map location={data?.Location} />
       <ContactForm />
       <div className="max-w-9xl mx-auto grid grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => {

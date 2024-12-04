@@ -13,7 +13,6 @@ interface ContactDetailsProps {
     Saturday: string;
     StoreLocation: string;
     HeadQuarter: string;
-    Location: string;
   };
 }
 
@@ -42,12 +41,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ details }) => {
       icon: MdOutlineMarkEmailRead,
       title: "Contact Info",
       description: `Tel: ${details.Telephone}\nEmail: ${details.Email}`,
-    },
-    {
-      icon: MdOutlineLocationOn,
-      title: "Location",
-      description: details.Location || "Default location",
-    },
+    }
   ];
 
 
