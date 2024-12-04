@@ -73,7 +73,11 @@ const Search = () => {
   }, [searchText]);
 
   const callApi = async (query: string) => {
-    const response = await Get("api/SearchProducts?search=" + query);
+    const response = await Get(
+      "api/SearchProductsByPageWCategories?search=" +
+        query +
+        "&page=1&pagesize=20"
+    );
     if (response.status) {
       setOpenModal(true);
       setProducts(response.product);

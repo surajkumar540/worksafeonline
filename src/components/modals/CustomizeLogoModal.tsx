@@ -21,7 +21,13 @@ const CustomizeLogoModal = ({
 }) => {
   if (!data) return null;
 
-  const [customizeData, setCustomizeData] = useState<any>({});
+  const [customizeData, setCustomizeData] = useState<any>({
+    addtext: {},
+    imageText: {},
+    designImage: "",
+    logoPosition: {},
+    printEmbroidery: {},
+  });
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
@@ -92,27 +98,20 @@ const CustomizeLogoModal = ({
         case 3:
           return (
             <UploadDesign
+              product={data}
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
               handleCustomizeNext={handleCustomizeNext}
             />
           );
         case 4:
-          return (
-            <CustomisationDetails
-              product={data}
-              customizeData={customizeData}
-              handleCustomizeNext={handleNext}
-              setCustomizeData={setCustomizeData}
-            />
-          );
+          return <CustomisationDetails data={{ ...data, ...customizeData }} />;
         default:
           return <></>;
       }
     },
     [currentCustomizeStep]
   );
-
   return (
     <Modal
       onClose={onclose}

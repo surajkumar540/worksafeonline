@@ -28,7 +28,7 @@ export default async function Page(ctx: any) {
       if (subcategoryMatch) subcategoryName = subcategoryMatch.menu_name;
     }
   } else {
-    response = await Get("api/ProductsByPageN?category_id=0&page=1&pagesize=20");
+    response = await Get("api/ProductsByPageN?category_id=0&page=1&pagesize=12");
   }
   return (
     <>

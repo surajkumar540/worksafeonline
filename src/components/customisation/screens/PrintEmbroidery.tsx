@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 interface Option {
   id: number;
+  icon: string;
   title: string;
-  maxWidth: string;
   price: string;
   terms: string;
-  icon: JSX.Element;
+  maxWidth: string;
 }
 
 const options: Option[] = [
@@ -18,14 +18,7 @@ const options: Option[] = [
     maxWidth: "30cm",
     price: "£2.99 (One-time setup)",
     terms: "Best for companies graphics and gradients",
-    icon: (
-      <Image
-        alt="Image"
-        width={200}
-        height={75}
-        src="https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png"
-      />
-    ),
+    icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
   },
   {
     id: 2,
@@ -33,14 +26,7 @@ const options: Option[] = [
     maxWidth: "25cm",
     price: "£4.99 (One-time setup)",
     terms: "Best for solid colours and durability.",
-    icon: (
-      <Image
-        alt="Image"
-        width={200}
-        height={75}
-        src="https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png"
-      />
-    ),
+    icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
   },
 ];
 
@@ -54,12 +40,12 @@ const PrintEmbroidery = ({
   handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
-    customizeData?.printEmbroidery ?? null
+    customizeData?.printEmbroidery?.id ?? null
   );
 
-  const handleSelect = (id: number) => {
-    setSelectedOption(id);
-    setCustomizeData((prev: any) => ({ ...prev, printEmbroidery: id }));
+  const handleSelect = (option: any) => {
+    setSelectedOption(option?.id);
+    setCustomizeData((prev: any) => ({ ...prev, printEmbroidery: option }));
     // handleCustomizeNext();
   };
 
@@ -94,11 +80,19 @@ const PrintEmbroidery = ({
                 : "border-gray-200"
             } transition-all duration-300 bg-white`}
             whileTap={{ scale: 0.95 }}
-            onClick={() => handleSelect(option.id)}
+            onClick={() => handleSelect(option)}
             variants={optionVariants}
           >
             <div className="flex flex-col items-center space-y-3">
-              <div className="text-4xl py-3">{option.icon}</div>
+              <div className="text-4xl py-3">
+                <Image
+                  alt="Image"
+                  width={200}
+                  height={75}
+                  src={option.icon}
+                  className="w-auto object-contain"
+                />
+              </div>
               <p className="text-gray-500 flex text-sm text-center relative">
                 Max Width: {option.maxWidth}
                 <span className="ml-1 bg-primary text-black rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">

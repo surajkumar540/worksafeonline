@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Button from "../common/Button";
-import { Product } from "@/types/api";
 import { bigShoulders } from "@/app/layout";
+import { useEffect, useState } from "react";
 import CustomizeLogoModal from "../modals/CustomizeLogoModal";
 
-const Logo = ({ product }: { product: Product }) => {
+const Logo = ({ product }: { product: any }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const handleToggle = () => setIsVisible(!isVisible);
 
@@ -18,10 +17,45 @@ const Logo = ({ product }: { product: Product }) => {
     };
   }, [isVisible]);
 
+  const {
+    size,
+    color,
+    price,
+    Detail,
+    fitting,
+    quantity,
+    ProductID,
+    Composition,
+    ProductName,
+    availability,
+    ProductImage,
+    productBrand,
+    reviewsCount,
+    ProductActualPrice,
+    ProductSellingPrice,
+  } = product;
+
+  const updatedProduct = {
+    size,
+    color,
+    price,
+    Detail,
+    fitting,
+    quantity,
+    ProductID,
+    Composition,
+    ProductName,
+    availability,
+    ProductImage,
+    productBrand,
+    reviewsCount,
+    ProductActualPrice,
+    ProductSellingPrice,
+  };
   return (
     <>
       <CustomizeLogoModal
-        data={product}
+        data={updatedProduct}
         isVisible={isVisible}
         onclose={handleToggle}
       />

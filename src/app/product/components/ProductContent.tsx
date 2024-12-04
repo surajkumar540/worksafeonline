@@ -4,14 +4,12 @@ import ProductDetails from "./ProductDetail";
 import ProductActions from "./ProductActions";
 import ProductMetaInfo from "./ProductMetaInfo";
 import QuantitySelector from "./QuantitySelector";
-import Logo from "@/components/customisation/Logo";
 
 const ProductContent = ({ product }: { product: any }) => {
   return (
     <div className="w-full lg:w-[45%] mt-4 lg:mt-0">
       <ProductDetails product={product} />
       <QuantitySelector product={product} />
-      <Logo product={product} />
       <ProductActions />
       <Guarantee />
       <ShippingInfo />

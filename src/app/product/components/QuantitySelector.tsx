@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
+import Logo from "@/components/customisation/Logo";
 
 const QuantitySelector = ({ product }: { product: Product }) => {
   const [selectedFields, setSelectedFields] = useState({
@@ -22,7 +23,15 @@ const QuantitySelector = ({ product }: { product: Product }) => {
       const filtered = localStorageCart.filter(
         (prod: any) => prod.ID === product?.ProductID
       );
-      if (filtered.length > 0) setCountItem(filtered[0].quantity);
+      if (filtered.length > 0) {
+        const product = filtered[0];
+        setSelectedFields({
+          size: product?.Size ?? {},
+          color: product?.Color ?? {},
+          fitting: product?.Fitting ?? {},
+        });
+        setCountItem(product.Quantity);
+      }
     }
   }, [product]);
 
@@ -86,6 +95,13 @@ const QuantitySelector = ({ product }: { product: Product }) => {
           selectedFields={selectedFields}
         />
       </div>
+      <Logo
+        product={{
+          ...(product || {}),
+          ...(selectedFields || {}),
+          quantity: countItem || 0,
+        }}
+      />
     </>
   );
 };

@@ -6,23 +6,29 @@ import { bigShoulders } from "@/app/layout";
 interface Option {
   id: number;
   icon: string;
+  title?: string;
+  position?: { top: number; bottom: number; left: number; right: number };
 }
 
 const options = [
   {
     id: 1,
+    title: "front-center-left",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/3.jpg",
   },
   {
     id: 2,
+    title: "front-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/4.jpg",
   },
   {
     id: 3,
+    title: "front-center-right",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/5.jpg",
   },
   {
     id: 4,
+    title: "front-top-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/17.jpg",
   },
 ];
@@ -30,18 +36,22 @@ const options = [
 const optionsBack = [
   {
     id: 5,
+    title: "back-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/8.jpg",
   },
   {
     id: 6,
+    title: "back-top-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/9.jpg",
   },
   {
     id: 7,
+    title: "back-bottom-centered",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/12.jpg",
   },
   {
     id: 8,
+    title: "back-top-inbetween-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/65.jpg",
   },
 ];
@@ -49,10 +59,12 @@ const optionsBack = [
 const optionsSide = [
   {
     id: 9,
+    title: "front-right",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/7.jpg",
   },
   {
     id: 10,
+    title: "front-left",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/1.jpg",
   },
 ];
@@ -67,12 +79,12 @@ const LogoPosition = ({
   handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
-    customizeData?.logoPosition ?? null
+    customizeData?.logoPosition?.id ?? null
   );
 
-  const handleSelect = (id: number) => {
-    setSelectedOption(id);
-    setCustomizeData((prev: any) => ({ ...prev, logoPosition: id }));
+  const handleSelect = (option: any) => {
+    setSelectedOption(option?.id);
+    setCustomizeData((prev: any) => ({ ...prev, logoPosition: option }));
     // handleCustomizeNext();
   };
 
@@ -98,7 +110,7 @@ const LogoPosition = ({
           : "border-gray-200"
       } transition-all duration-300 bg-white`}
       whileTap={{ scale: 0.95 }}
-      onClick={() => handleSelect(option.id)}
+      onClick={() => handleSelect(option)}
       variants={optionVariants}
     >
       <div className="flex flex-col items-center space-y-3">
@@ -110,6 +122,7 @@ const LogoPosition = ({
             width={100} // adjust width as necessary
             height={75} // adjust height as necessary
             src={option.icon}
+            className="w-fit object-contain"
           />
         </div>
       </div>
@@ -171,6 +184,7 @@ const LogoPosition = ({
                   alt="Selected Icon"
                   priority
                   unoptimized
+                  className="w-full"
                   width={400} // adjust width as necessary
                   height={250} // adjust height as necessary
                   src={

@@ -1,35 +1,61 @@
-import { useState } from "react";
-
 const colors = [
   { name: "Red", value: "#FF0000" },
-  { name: "Green", value: "#00FF00" },
+  { name: "Green", value: "#008000" },
   { name: "Blue", value: "#0000FF" },
   { name: "Black", value: "#000000" },
   { name: "White", value: "#FFFFFF" },
+  { name: "Yellow", value: "#FFFF00" },
+  { name: "Cyan", value: "#00FFFF" },
+  { name: "Magenta", value: "#FF00FF" },
+  { name: "Gray", value: "#808080" },
+  { name: "Orange", value: "#FFA500" },
+  { name: "Pink", value: "#FFC0CB" },
+  { name: "Purple", value: "#800080" },
+  { name: "Brown", value: "#A52A2A" },
+  { name: "Lime", value: "#00FF00" },
+  { name: "Gold", value: "#FFD700" },
+  { name: "Silver", value: "#C0C0C0" },
+  { name: "Teal", value: "#008080" },
+  { name: "Maroon", value: "#800000" },
+  { name: "Olive", value: "#808000" },
+  { name: "Navy", value: "#000080" },
+];
+const fonts = [
+  "Arial, sans-serif",
+  "Verdana, sans-serif",
+  "Helvetica, sans-serif",
+  "Tahoma, sans-serif",
+  "Trebuchet MS, sans-serif",
+  "Times New Roman, serif",
+  "Georgia, serif",
+  "Courier New, monospace",
+  "Palatino, serif",
+  "Garamond, serif",
+  "Segoe UI, sans-serif",
+  "Roboto, sans-serif",
+  "Open Sans, sans-serif",
+  "Lato, sans-serif",
+  "Montserrat, sans-serif",
 ];
 
-const fonts = ["Arial", "Verdana", "Courier New", "Times New Roman", "Georgia"];
-
 const AddText = ({
-  setText,
+  selectedFields,
+  setSelectedFilters,
 }: {
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  selectedFields: any;
+  setSelectedFilters: any;
 }) => {
-  const [selectedColor, setSelectedColor] = useState<string>("#000000");
-  const [selectedFont, setSelectedFont] = useState<string>("Arial");
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "textline1") setText(value);
-    else setText((prevText: string) => `${prevText}\n${e.target.value}`);
+    setSelectedFilters({ ...selectedFields, [name]: value });
   };
 
   const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedColor(e.target.value);
+    setSelectedFilters({ ...selectedFields, color: e.target.value });
   };
 
   const handleFontChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFont(e.target.value);
+    setSelectedFilters({ ...selectedFields, font: e.target.value });
   };
 
   return (
@@ -40,8 +66,8 @@ const AddText = ({
       </p>
       <select
         id="color"
-        value={selectedColor}
         onChange={handleColorChange}
+        value={selectedFields?.color}
         className="border p-3 rounded-lg outline-none"
       >
         <option value="">Select Color</option>
@@ -55,8 +81,8 @@ const AddText = ({
       {/* Font Selector */}
       <select
         id="font"
-        value={selectedFont}
         onChange={handleFontChange}
+        value={selectedFields?.font}
         className="border p-3 rounded-lg outline-none"
       >
         <option value="">Select Font</option>
@@ -70,27 +96,27 @@ const AddText = ({
       {/* Text Inputs */}
       <input
         type="text"
-        name="textline1"
+        maxLength={50}
+        name="textLine1"
+        onChange={handleInputChange}
         placeholder="Enter Line 1 Text here"
         className="border p-3 rounded-lg outline-none"
-        style={{ color: selectedColor, fontFamily: selectedFont }}
-        onChange={handleInputChange}
       />
       <input
         type="text"
-        name="textline2"
+        maxLength={50}
+        name="textLine2"
+        onChange={handleInputChange}
         placeholder="Enter Line 2 Text here (optional)"
         className="border p-3 rounded-lg outline-none"
-        style={{ color: selectedColor, fontFamily: selectedFont }}
-        onChange={handleInputChange}
       />
       <input
         type="text"
-        name="textline3"
+        maxLength={50}
+        name="textLine3"
+        onChange={handleInputChange}
         placeholder="Enter Line 3 Text here (optional)"
         className="border p-3 rounded-lg outline-none"
-        style={{ color: selectedColor, fontFamily: selectedFont }}
-        onChange={handleInputChange}
       />
     </div>
   );

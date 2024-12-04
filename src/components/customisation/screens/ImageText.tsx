@@ -42,12 +42,12 @@ const ImageText = ({
   handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
-    customizeData?.imageText ?? null
+    customizeData?.imageText?.id ?? null
   );
 
-  const handleSelect = (id: number) => {
-    setSelectedOption(id);
-    setCustomizeData((prev: any) => ({ ...prev, imageText: id }));
+  const handleSelect = (option: any) => {
+    setSelectedOption(option.id);
+    setCustomizeData((prev: any) => ({ ...prev, imageText: option }));
     // handleCustomizeNext();
   };
 
@@ -83,7 +83,7 @@ const ImageText = ({
                 : "border-gray-100"
             } transition-all duration-200 ease-linear bg-white`}
             whileTap={{ scale: 0.95 }}
-            onClick={() => handleSelect(option.id)}
+            onClick={() => handleSelect(option)}
             variants={optionVariants}
           >
             <div className="flex flex-col items-center space-y-3">
