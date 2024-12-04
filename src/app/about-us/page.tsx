@@ -6,7 +6,7 @@ import Blogs from "./components/Blogs";
 import BusinessStats from "./components/BusinessStats";
 import Header from "./components/Header";
 
-const ListingByCategory = async () => {
+const AboutUS = async () => {
   return (
     <>
       <Header title="About Us" />
@@ -20,4 +20,4 @@ const ListingByCategory = async () => {
   );
 };
 
-export default ListingByCategory;
+export default AboutUS;

@@ -1,5 +1,4 @@
 import { bigShoulders } from "@/app/layout";
-import { div } from "framer-motion/client";
 import React from "react";
 
 const Marquee: React.FC = () => {

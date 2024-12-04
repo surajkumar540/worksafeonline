@@ -9,6 +9,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <div
+      id="header"
       style={{
         clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
         overflow: "hidden",
