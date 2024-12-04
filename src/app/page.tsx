@@ -11,18 +11,18 @@ import ReasonsToShop from "@/components/home/ReasonToShop";
 import ListingByCategory from "@/components/home/ListingByCategory";
 
 export default async function Home() {
-  // const {
-  //   brands,
-  //   products,
-  //   categories,
-  //   homeListing1,
-  //   homeListing2,
-  //   homeListing3,
-  //   banners,
-  // } = await fetchHomePageData();
+  const {
+    brands,
+    products,
+    categories,
+    homeListing1,
+    homeListing2,
+    homeListing3,
+    banners,
+  } = await fetchHomePageData();
   return (
     <div>
-      {/* <Banner banners={banners} />
+      <Banner banners={banners} />
       <Upcoming products={products} slidesPerViewDesktop={5} />
       {homeListing1?.product && homeListing1?.product.length > 0 && (
         <ListingByCategory
@@ -126,7 +126,7 @@ export default async function Home() {
       </div>
       <ReasonsToShop />
       <Categories categories={categories} />
-      <WhoWeAre brands={brands} /> */}
+      <WhoWeAre brands={brands} />
     </div>
   );
 }
