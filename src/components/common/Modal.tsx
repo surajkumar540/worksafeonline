@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom";
-import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
+import { RxCross1 } from "react-icons/rx";
 
 interface ModalProps {
   width?: string;
   isVisible: boolean;
   onClose: () => void;
+  removePadding?: boolean;
   showCloseButton?: boolean;
   children: React.ReactNode;
 }
@@ -13,6 +14,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
+  removePadding,
   isVisible,
   width = "w-[95vw] md:w-4/5",
   showCloseButton = true,
@@ -21,7 +23,6 @@ const Modal: React.FC<ModalProps> = ({
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center overflow-hidden justify-center z-50">
-      {/* Animated Backdrop */}
       <motion.div
         className="fixed inset-0 bg-white backdrop-blur-lg bg-opacity-10"
         initial={{ opacity: 0 }}
@@ -29,8 +30,6 @@ const Modal: React.FC<ModalProps> = ({
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       ></motion.div>
-
-      {/* Modal Content */}
       <motion.div
         className={`bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg z-10 rounded-xl relative ${width}`}
         initial={{ scale: 0 }}
@@ -39,16 +38,18 @@ const Modal: React.FC<ModalProps> = ({
         transition={{ duration: 0.3 }}
       >
         <div className="bg-white overflow-scroll no-scrollbar max-h-[90vh] rounded-xl">
-          <p className="w-full flex justify-end items-center p-4 pb-0">
-            {showCloseButton && (
+          {showCloseButton && (
+            <p className="w-full flex justify-end items-center p-4 pb-0">
               <RxCross1
                 size={24}
                 className="cursor-pointer text-black"
                 onClick={onClose}
               />
-            )}
-          </p>
-          <div className="p-4">{children}</div>
+            </p>
+          )}
+          <div className={`${removePadding ? removePadding : "p-4"}`}>
+            {children}
+          </div>
         </div>
       </motion.div>
     </div>,
