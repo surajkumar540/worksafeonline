@@ -3,6 +3,7 @@ import Link from "next/link";
 import Search from "./Search";
 import Image from "next/image";
 import CartModal from "./Cart";
+import Account from "./Account";
 import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
 import Categories from "./Categories";
@@ -10,7 +11,6 @@ import BottomTabs from "./BottomTabs";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
 import { LinkProps } from "@/types/api";
-import { FaRegUser } from "react-icons/fa";
 import MobileSidebar from "./MobileSidebar";
 import { CiDiscount1 } from "react-icons/ci";
 
@@ -61,12 +61,7 @@ const Navbar = async () => {
           <div className="w-1/2 flex gap-5 justify-end lg:justify-between items-center">
             <Search />
             <div className="flex items-center lg:mx-auto space-x-2 lg:space-x-4">
-              <Link
-                href="/my-account"
-                className="hover:text-yellow-500 hidden lg:block transition-all duration-100 ease-linear"
-              >
-                <FaRegUser size={20} />
-              </Link>
+              <Account />
               <Wishlist />
               <CartModal />
               <MobileSidebar categories={categories} />
