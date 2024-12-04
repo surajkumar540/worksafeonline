@@ -1,14 +1,13 @@
 import Image from "next/image";
+import Link from "next/link"; // Import Link for routing in Next.js
 import { bigShoulders } from "@/app/layout";
 
 interface HeaderProps {
   title: string;
-  subtitle?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
-    
     <div
       style={{
         clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
@@ -24,8 +23,13 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
         src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      <div className="absolute inset-0 flex flex-col justify-between items-start p-4 md:p-6 lg:p-10 z-10 text-center max-w-9xl mx-auto ">
-        <h1 className="text-sm font-semibold uppercase">Homepage / About us</h1>
+      <div className="absolute inset-0 flex flex-col justify-between items-start p-4 md:p-6 lg:p-10 z-10 text-center max-w-9xl mx-auto">
+        <h1 className="text-sm font-semibold uppercase">
+          <Link href="/" className="hover:text-primary hover:underline">
+            Homepage
+          </Link>{" "}
+          / About Us
+        </h1>
         <h1
           className={`text-7xl ${bigShoulders.className} uppercase font-extrabold`}
         >
