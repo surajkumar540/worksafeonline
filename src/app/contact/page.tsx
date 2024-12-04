@@ -1,19 +1,12 @@
+import { Get } from "@/api/generalApi";
 import Header from "./components/Header";
 import { features } from "@/data/country";
 import Map from "./components/MapComponent";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
 
-export const BASE_URL = "https://johntrn.worksafeonline.co.uk";
-
-
-
 export default async function Page() {
-
-  // Fetch the contact details from the API
-  const response = await fetch(`${BASE_URL}/api/ContactDetail1?app=Worksafe`);
-  const data = await response.json();
-  console.log(data, "data");
+  const data = await Get("api/ContactDetail1?app=Worksafe");
   return (
     <>
       <Header title="Contact" subtitle="Contact" />
