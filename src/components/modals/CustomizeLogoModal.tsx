@@ -4,6 +4,8 @@ import { bigShoulders } from "@/app/layout";
 import { useCallback, useState } from "react";
 import Stepper from "../customisation/Stepper";
 import ImageText from "../customisation/screens/ImageText";
+import Selection from "../customisation/screens/Selection";
+import SavedLogos from "../customisation/screens/SavedLogos";
 import LogoPosition from "../customisation/screens/LogoPosition";
 import UploadDesign from "../customisation/screens/UploadDesign";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
@@ -32,8 +34,9 @@ const CustomizeLogoModal = ({
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
   const steps = [
-    { label: "Choose product" },
-    { label: "Assign or create customizations" },
+    { label: "Select a Product" },
+    { label: "Choose Logo or Design" },
+    { label: "Customize or Assign Options" },
   ];
 
   const customize = [
@@ -50,10 +53,17 @@ const CustomizeLogoModal = ({
     }
   };
 
+  const handleFinal = () => {};
+
   const handleCustomizePrevious = () => {
+    if (currentCustomizeStep === 0) return handlePrevious();
     if (currentCustomizeStep > 0) {
       setCurrentCustomizeStep(currentCustomizeStep - 1);
     }
+  };
+
+  const handleSetFilterScreen = (step: number) => {
+    setCurrentStep(step);
   };
 
   const handleNext = () => {
@@ -129,7 +139,19 @@ const CustomizeLogoModal = ({
             className="cursor-pointer hover:scale-110 hover:text-primary absolute top-1 right-5 text-black"
           />
         </div>
+        {currentStep === 3 && (
+          <SavedLogos
+            handleFinal={handleFinal}
+            handleSetFilterScreen={handleSetFilterScreen}
+          />
+        )}
         {currentStep === 1 && (
+          <Selection
+            handleNext={handleNext}
+            handleSetFilterScreen={handleSetFilterScreen}
+          />
+        )}
+        {currentStep === 2 && (
           <>
             <div className="bg-gray-300 h-[1px]" />
             <p

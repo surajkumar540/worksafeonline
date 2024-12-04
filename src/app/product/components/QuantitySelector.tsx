@@ -9,7 +9,13 @@ import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 import Logo from "@/components/customisation/Logo";
 
-const QuantitySelector = ({ product }: { product: Product }) => {
+const QuantitySelector = ({
+  product,
+  showLogoCustomisation = true,
+}: {
+  product: Product;
+  showLogoCustomisation?: boolean;
+}) => {
   const [selectedFields, setSelectedFields] = useState({
     size: {},
     color: {},
@@ -95,13 +101,15 @@ const QuantitySelector = ({ product }: { product: Product }) => {
           selectedFields={selectedFields}
         />
       </div>
-      <Logo
-        product={{
-          ...(product || {}),
-          ...(selectedFields || {}),
-          quantity: countItem || 0,
-        }}
-      />
+      {showLogoCustomisation && (
+        <Logo
+          product={{
+            ...(product || {}),
+            ...(selectedFields || {}),
+            quantity: countItem || 0,
+          }}
+        />
+      )}
     </>
   );
 };
