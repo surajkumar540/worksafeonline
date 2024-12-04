@@ -3,6 +3,7 @@ import { Get } from "@/api/generalApi";
 import Header from "./components/Header";
 import FilterSection from "./components/FilterSection";
 
+
 export default async function Page(ctx: any) {
   const { category = null, subcategory = null } =
     (await ctx.searchParams) || {};
