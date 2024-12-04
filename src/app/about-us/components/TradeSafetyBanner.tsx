@@ -21,8 +21,8 @@ type FeatureHighlightProps = {
 
 const TradeSafetyBanner = () => {
   return (
-    <div className="max-w-9xl mx-auto  py-8 px-4 md:px-6 lg:px-10 lg:py-20">
-      <section className="">
+    <div className="max-w-9xl mx-auto  py-8 px-4 md:px-6 lg:px-10 lg:py-10">
+      <section>
         {/* Heading Section */}
         <div className="w-full md:w-[85%]">
           <p

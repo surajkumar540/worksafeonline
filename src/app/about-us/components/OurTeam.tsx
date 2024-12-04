@@ -4,7 +4,7 @@ import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 const OurTeam = () => {
     return (
-        <section className="max-w-9xl mx-auto  py-8 px-4 lg:py-20">
+        <section className="max-w-9xl mx-auto  py-8 px-4 lg:py-10">
             <div className="max-w-screen-xl mx-auto lg:px-6">
                 <div className={`relative ${bigShoulders.className}`}>
                     <h1 className="text-6xl md:text-9xl font-bold text-center tracking-wider bg-gradient-to-b mb-10 from-gray-300 via-gray-200 uppercase to-white bg-clip-text text-transparent">
