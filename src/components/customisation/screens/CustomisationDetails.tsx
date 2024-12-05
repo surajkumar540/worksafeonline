@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import StarRating from "@/components/common/StarRating";
 
 const CustomisationDetails = ({ data }: { data: any }) => {
   const product = data;
-  const navigate = useRouter();
+  // const navigate = useRouter();
 
   const handleSaveCustomization = () => {
     const customizationDetails = {

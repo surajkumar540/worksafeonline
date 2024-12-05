@@ -31,12 +31,12 @@ const Footer = () => {
     { label: "Terms of Service", href: "/terms-and-conditions" },
   ];
 
-  const socialIcons = [
-    { icon: "facebook", url: "#" },
-    { icon: "x", url: "#" },
-    { icon: "instagram", url: "#" },
-    { icon: "youtube", url: "#" },
-  ];
+  // const socialIcons = [
+  //   { icon: "facebook", url: "#" },
+  //   { icon: "x", url: "#" },
+  //   { icon: "instagram", url: "#" },
+  //   { icon: "youtube", url: "#" },
+  // ];
 
   return (
     <>

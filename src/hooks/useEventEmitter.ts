@@ -8,7 +8,23 @@ let eventEmitter: EventEmitter | undefined;
 
 if (typeof window !== "undefined") eventEmitter = new EventEmitter();
 
-export const handleAddToWishlist = (product: any) => {
+export interface Product {
+  ID?: any;
+  Size: object;
+  Color: object;
+  Style?: string;
+  MenuId?: string;
+  Fitting: object;
+  EndPrice: number;
+  quantity?: number;
+  Description: string;
+  ListingImage: string;
+  DiscountedPrice?: number;
+  StartPrice?: number | string;
+  CustomisationDetails?: Record<string, unknown>;
+}
+
+export const handleAddToWishlist = (product: Product) => {
   try {
     const storedWishlist = localStorage.getItem("wishlist");
     const wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
@@ -29,7 +45,7 @@ export const handleAddToWishlist = (product: any) => {
       Size: product?.Size ?? "",
       Color: product?.Color ?? "",
       EndPrice: product?.EndPrice,
-      ID: product.Style ?? product.ID,
+      ID: product.Style ?? product?.ID,
       Fitting: product?.Fitting ?? "",
       Quantity: product?.quantity ?? 1,
       Description: product?.Description,
@@ -54,7 +70,7 @@ export const handleAddToWishlist = (product: any) => {
   }
 };
 
-export const handleAddToCart = (product: any) => {
+export const handleAddToCart = (product: Product) => {
   try {
     const storedCart = localStorage.getItem("cart");
     const cart = storedCart ? JSON.parse(storedCart) : [];

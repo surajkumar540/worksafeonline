@@ -45,6 +45,7 @@ const useCountryTime = (): CountryTime => {
         );
         setCountryDetails(response);
       } catch (error) {
+        console.log("Error fetching country details", error);
         setError("Failed to fetch country details.");
       }
     };

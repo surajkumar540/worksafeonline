@@ -25,7 +25,7 @@ export default function Page() {
   }, []);
 
   const handleRemove = (id: string) => {
-    let cart = cartUpdated.filter((item: any) => item?.ID !== id);
+    const cart = cartUpdated.filter((item: any) => item?.ID !== id);
     setCartUpdated(cart);
     if (eventEmitter) eventEmitter.emit("removeFromCart", id);
     localStorage.setItem("cart", JSON.stringify(cart));

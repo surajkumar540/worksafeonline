@@ -17,8 +17,8 @@ interface Product {
  */
 export const addToCart = async (product: Product): Promise<any> => {
   try {
-    const response = await Post(`api/AddToCart1`, product);
-    console.log("Add to cart response:", response);
+    const response = await Post(`api/AddToCart1`, {});
+    console.log("Add to cart response:", response, product);
     return response;
   } catch (error: any) {
     console.error("Error adding product to cart:", error.message);

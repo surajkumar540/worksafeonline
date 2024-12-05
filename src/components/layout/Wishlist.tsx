@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa6";
 import React, { useState, useEffect } from "react";
 import eventEmitter from "@/hooks/useEventEmitter";
+import BottomTabs from "./BottomTabs";
 
 type Product = {
   ID: number;
@@ -51,7 +52,7 @@ const Wishlist = () => {
   }, []);
 
   return (
-    <>
+    <div className="relative">
       <Link
         href="/wishlist"
         className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
@@ -65,7 +66,8 @@ const Wishlist = () => {
             : 0}
         </span>
       </Link>
-    </>
+      <BottomTabs wishlist={wishlist} />
+    </div>
   );
 };
 

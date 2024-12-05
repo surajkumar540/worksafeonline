@@ -30,7 +30,6 @@ export async function generateMetadata() {
 export default async function Home() {
   const {
     brands,
-    products,
     categories,
     homeListing1,
     homeListing2,
@@ -40,7 +39,7 @@ export default async function Home() {
   return (
     <div>
       <Banner banners={banners} />
-      <Upcoming products={products} slidesPerViewDesktop={5} />
+      <Upcoming slidesPerViewDesktop={5} />
       {homeListing1?.product && homeListing1?.product.length > 0 && (
         <ListingByCategory
           sectionText={homeListing1.offerName}

@@ -4,7 +4,6 @@ import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
 
 interface HeaderProps {
   title: string;
-  subtitle?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useRef } from "react";
 // import CircularLoading from "./CircularLoader";
 import { IoCloudUpload } from "react-icons/io5";
@@ -138,9 +139,12 @@ const MultipleImageUpload: React.FC<MultipleImageUploadProps> = ({
       <div className="grid grid-cols-5 gap-5">
         {selectedImages.map((image) => (
           <div key={image.url} className="relative h-36">
-            <img
+            <Image
+              width={100}
+              height={100}
               src={image.url}
               alt="Selected"
+              unoptimized
               className="w-full h-full object-contain rounded-lg border border-primary"
             />
             <button

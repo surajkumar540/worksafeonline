@@ -3,8 +3,9 @@ import StarRating from "./StarRating";
 import { bigShoulders } from "@/app/layout";
 import ImageComponent from "./ImageComponent";
 import AddtoCartButton from "./AddtoCartButton";
+import { Product } from "@/hooks/useEventEmitter";
 
-const ProductCard = ({ product }: { product: any }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   const slug = `/product/${product?.MenuId}/${product?.Style}`;
   return (
     <div>

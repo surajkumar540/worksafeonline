@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { Get } from "@/api/generalApi";
 import { toast } from "react-toastify";
 import { IoMdSearch } from "react-icons/io";
 import { bigShoulders } from "@/app/layout";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 
 const Search = () => {
   const searchRef = useRef<HTMLDivElement | null>(null);
@@ -58,6 +57,7 @@ const Search = () => {
 
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line
   }, [charIndex, isDeleting, typingIndex]);
 
   useEffect(() => {
@@ -70,6 +70,7 @@ const Search = () => {
 
     setDebounceTimeout(timeout);
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line
   }, [searchText]);
 
   const callApi = async (query: string) => {

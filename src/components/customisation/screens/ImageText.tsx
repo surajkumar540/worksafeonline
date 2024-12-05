@@ -35,11 +35,9 @@ const options: Option[] = [
 const ImageText = ({
   customizeData,
   setCustomizeData,
-  handleCustomizeNext,
 }: {
   customizeData: any;
   setCustomizeData: any;
-  handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
     customizeData?.imageText?.id ?? null

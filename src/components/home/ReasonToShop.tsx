@@ -39,27 +39,29 @@ const ReasonsToShop = () => {
           </p>
         </div>
         <div className="grid px-4 lg:px-32 grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="bg-white p-4 md:p-6 lg:p-8 rounded-lg text-center transition-transform duration-200 ease-linear transform hover:scale-105 cursor-pointer"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-6xl">{reason.icon}</span>
-                <span className="text-8xl font-bold text-center tracking-wider bg-gradient-to-b from-gray-300 via-gray-200 to-white bg-clip-text text-transparent">
-                  0{index + 1}
-                </span>
-              </div>
-              <h3
-                className={`text-lg text-left font-black text-gray-800 mb-4 ${bigShoulders.className}`}
+          {reasons &&
+            reasons.length > 0 &&
+            reasons.map((reason, index) => (
+              <div
+                key={index}
+                className="bg-white p-4 md:p-6 lg:p-8 rounded-lg text-center transition-transform duration-200 ease-linear transform hover:scale-105 cursor-pointer"
               >
-                {reason.title}
-              </h3>
-              <p className="text-gray-500 text-left text-sm">
-                {reason.description}
-              </p>
-            </div>
-          ))}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-6xl">{reason.icon}</span>
+                  <span className="text-8xl font-bold text-center tracking-wider bg-gradient-to-b from-gray-300 via-gray-200 to-white bg-clip-text text-transparent">
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3
+                  className={`text-lg text-left font-black text-gray-800 mb-4 ${bigShoulders.className}`}
+                >
+                  {reason.title}
+                </h3>
+                <p className="text-gray-500 text-left text-sm">
+                  {reason.description}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
     </section>

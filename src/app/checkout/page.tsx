@@ -4,8 +4,6 @@ import { bigShoulders } from "../layout";
 import { useEffect, useState } from "react";
 import Features from "@/components/common/Features";
 import CheckoutForm from "./components/CheckoutForm";
-import OrderSummary from "./components/OrderSummary";
-// import PayPalCheckout from "@/components/payment/PayPalCheckout";
 
 export default function Page() {
   const [cart, setCart] = useState<any>([]);

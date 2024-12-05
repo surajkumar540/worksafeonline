@@ -12,12 +12,9 @@ const ItemHover = ({ link }: { link: LinkProps }) => {
   const isActive = (path: string) => pathName === path;
   const [showLink, setLinkShow] = useState<string | null>("");
 
-  const handleShowChildren = () => {
-    setShow(!show);
-    setLinkShow("");
-  };
   const handleGroupHover = (path: string) => {
     setLinkShow(path);
+    console.log(show);
   };
   return (
     <>

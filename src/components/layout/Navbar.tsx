@@ -7,7 +7,6 @@ import Account from "./Account";
 import Wishlist from "./Wishlist";
 import ItemHover from "./ItemHover";
 import Categories from "./Categories";
-import BottomTabs from "./BottomTabs";
 import { links } from "@/data/country";
 import { Get } from "@/api/generalApi";
 import { LinkProps } from "@/types/api";
@@ -82,25 +81,8 @@ const Navbar = async () => {
           </div>
         </nav>
       </header>
-      <BottomTabs />
     </>
   );
 };
 
 export default Navbar;
-{
-  /* <div className="border-r border-white/30 flex gap-2 pr-3">
-              <Link
-                href="#"
-                className="flex items-center text-white/50 font-semibold"
-              >
-                ENG
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center text-white/50 font-semibold"
-              >
-                $USD
-              </Link>
-            </div> */
-}

@@ -44,7 +44,7 @@ const Selection = ({
                 Create Design
               </span>
               <p className="text-sm text-gray-200 mt-2">
-                Design a custom logo with your brand's elements.
+                Design a custom logo with your brand&apos;s elements.
               </p>
             </button>
           </div>

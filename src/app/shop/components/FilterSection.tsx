@@ -90,6 +90,7 @@ const FilterSection = ({
         categories: categoryResponse?.subcategories ?? [],
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, response, subcategory]);
   return (
     <div

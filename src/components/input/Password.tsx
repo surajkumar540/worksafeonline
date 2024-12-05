@@ -15,12 +15,7 @@ interface PasswordProps {
   handleInputChange?: any;
 }
 
-const Password: FC<PasswordProps> = ({
-  field,
-  className,
-  setFormData,
-  handleInputChange,
-}) => {
+const Password: FC<PasswordProps> = ({ field, className, setFormData }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");

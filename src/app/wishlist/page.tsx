@@ -22,7 +22,7 @@ export default function Page() {
   }, []);
 
   const handleRemove = (id: string) => {
-    let updatedWishlist = wishlistUpdated.filter(
+    const updatedWishlist = wishlistUpdated.filter(
       (item: any) => item?.ID !== id
     );
     setWishlistUpdated(updatedWishlist);

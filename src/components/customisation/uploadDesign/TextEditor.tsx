@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AddText from "./AddText";
 import Image from "next/image";
 
@@ -11,8 +10,8 @@ const TextEditor = ({
   selectedFields: any;
   setSelectedFilters: any;
 }) => {
-  const widthInCM = 18;
-  const maxWidthInPX = widthInCM * 37.795275; // 1 cm = 37.795275 px
+  // const widthInCM = 18;
+  // const maxWidthInPX = widthInCM * 37.795275; // 1 cm = 37.795275 px
 
   console.log(selectedFields);
   return (
