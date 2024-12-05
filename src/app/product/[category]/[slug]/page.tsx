@@ -1,4 +1,4 @@
-import { fetchMetaData, Get } from "@/api/generalApi";
+import { Get } from "@/api/generalApi";
 import { redirect } from "next/navigation";
 import { productData } from "@/data/productData";
 import Features from "@/components/common/Features";
@@ -16,23 +16,21 @@ type ProductPageProps = {
 };
 
 
-interface PageData {
-  title?: string;
-  keyword?: string;
-  descriptions?: string;
-  noIndex?: boolean;
-}
+// export async function generateMetadata(slug: string) {
+//   // Replace with the correct endpoint
+//   const pageData = await Get(`product/${slug}`);
 
-export async function generateMetadata(slug: string) {
-  const pageData: PageData = await fetchMetaData(`product/${slug}`);
-  return {
-    title: pageData?.title ?? "WorkSafeOnline | Product Details",
-    keywords: pageData?.keyword ?? "seo, product",
-    description: pageData?.descriptions ?? "Default description for product",
-    alternates: { canonical: `https://www.worksafeonline.co.uk/product/${slug}` },
-    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
-  };
-}
+//   return {
+//     title: pageData?.title ?? "Worksafeonline | Product Details",
+//     keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+//     description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+//     alternates: {
+//       canonical: `https://www.worksafeonline.co.uk/product/${slug}`, // Ensure URL is correct
+//     },
+//     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+//   };
+// }
+
 
 
 export default async function Page(ctx: ProductPageProps) {

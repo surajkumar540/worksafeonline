@@ -1,4 +1,3 @@
-import { http } from "@/utils/axios";
 import { includes } from "@/utils/polyfills";
 import axios from "axios";
 
@@ -103,22 +102,3 @@ export const getCategoryId = (data: any, names: string[]): number[] => {
     .filter((item: any) => includes(names, item?.menu_name))
     .map((item: any) => item?.menu_id);
 };
-
-
-export const fetchMetaData = async (slug: string): Promise<any> => {
-  try {
-    // Dummy API URL for metadata
-    const apiUrl = `/api/public/seo`; 
-    // Sending the slug as part of the POST request body
-    const response = await http.post(apiUrl, { slug }); 
-    return response.data; // Return only the relevant data
-  } catch (error: any) {
-    console.error("Error fetching metadata:", error?.message || error); 
-    // Provide a meaningful fallback response in case of an error
-    return {
-      message: error?.response?.data?.message || "Failed to fetch metadata",
-      status: error?.response?.status || 500,
-    }; 
-  }
-};
-

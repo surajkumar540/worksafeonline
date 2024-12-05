@@ -28,14 +28,11 @@ const TradeSafetyBanner = () => {
           <p
             className={`uppercase text-3xl md:text-4xl lg:text-5xl tracking-tight font-extrabold ${bigShoulders.className}`}
           >
-            We Are The Workwear Specialist Destination for Trade, Safety, and
-            Uniforms
+            Your Premier Workwear and Safety Centre :
           </p>
-          <p className="text-gray-500 text-xl mt-4">
-            Axetor is Australia’s largest network of workwear specialist
-            destinations for Trade, Safety, and Uniforms. We are 90 stores strong,
-            with bold plans for more. A steel-toe footprint stretching across the
-            nation and working hard for our local communities.
+          <p className="text-gray-500 text-sm mt-4">
+            For Quality Workwear, Footwear and Safety Gear look no further than Worksafe. A long established Independent Company, we operate from our large Showroom and Warehouse in Corby Northamptonshire. Our dedicated staff are ready to serve you; Whatever your industry, Worksafe can provide uniforms for all of your staff and also cater for sole traders and private individuals alike. With in-house design, print and embroidery facilities, our technicians are ready to logo and personalise your Workwear requirements. If our store is too far away for you to visit, or you would like to place an ‘out of hours’ order, you can still purchase logo’d workwear online. Using our the latest online design facility, simply choose your garment, then add your logo, select from the gallery of designs, upload your own logo, or place text to create your workwear. This innovative design facility will provide you with endless solutions for all of your Workplace uniform requirements.
+            If your company has a specific requirement, our experienced staff are also available to meet with you onsite to provide advice, guidance and to discuss ongoing contract products, solutions and prices. Whatever your requirements we are pleased to serve you online, by phone, or in our store and hope you enjoy the convenience, quality and experience that Worksafe has to offer.
           </p>
         </div>
 

@@ -5,27 +5,26 @@ import Features from "@/components/common/Features";
 import Blogs from "./components/Blogs";
 import BusinessStats from "./components/BusinessStats";
 import Header from "./components/Header";
-import { fetchMetaData } from "@/api/generalApi";
-interface PageData {
-  title?: string;
-  keyword?: string;
-  descriptions?: string;
-  noIndex?: boolean;
-}
+import { Get } from "@/api/generalApi";
 
 export async function generateMetadata() {
-  const pageData: PageData = await fetchMetaData("/about-us"); // Use the defined interface
+  // Replace with the correct endpoint
+  const pageData = await Get("");
+
   return {
-    title: "WorkSafeOnline | About Us",
-    keywords: "seo",
-    alternates: { canonical: `https://www.worksafeonline.co.uk/about-us` },
+    title: pageData?.title ?? "Worksafeonline | About Us",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/about-us`, // Ensure URL is correct
+    },
     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
   };
 }
 
 
-const AboutUS = async () => {
 
+const AboutUS = async () => {
 
 
   return (
