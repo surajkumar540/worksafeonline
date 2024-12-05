@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
+import AnimatedActionButton from "../common/AnimatedActionButton";
 
 const Footer = () => {
   const customerLinks = [
@@ -56,7 +57,7 @@ const Footer = () => {
           >
             LET US GUIDE YOU IN YOUR CHOICE OF WORKWEAR
           </h2>
-          <span className="relative flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-44 md:pl-64 pr-4 overflow-hidden group">
+          {/* <span className="relative flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-44 md:pl-64 pr-4 overflow-hidden group">
             <span className="absolute text-xs md:text-sm font-semibold whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
               CHECK OUT OUR GUIDES
             </span>
@@ -64,7 +65,15 @@ const Footer = () => {
               CHECK OUT OUR GUIDES
             </span>
             <FaArrowRightLong className="ml-2" />
-          </span>
+          </span> */}
+          <AnimatedActionButton
+            text=" CHECK OUT OUR GUIDES"
+            href="https://example.com"
+            // onClick={() => console.log("Button clicked")}
+            classes="md:text-lg font-extrabold whitespace-nowrap py-6 text-wider w-[280px] hover:bg-primary bg-white text-black hover:text-black"
+            isLoading={false}
+            type="submit"
+          />
         </div>
       </div>
 

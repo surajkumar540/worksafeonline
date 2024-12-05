@@ -3,6 +3,7 @@ import Marquee from "../common/Marquee";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Features from "../common/Features";
+import AnimatedActionButton from "../common/AnimatedActionButton";
 
 const WhoWeAre = ({ brands }: { brands: any }) => {
   return (
@@ -32,7 +33,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
               who <br />
               <span className="text-primary">we are</span>
             </p>
-            <span className="relative flex space-x-2 mt-4 items-center border rounded-full cursor-pointer w-fit hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
+            {/* <span className="relative flex space-x-2 mt-4 items-center border rounded-full cursor-pointer w-fit hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
               <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
                 Our Story
               </span>
@@ -40,7 +41,15 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
                 Our Story
               </span>
               <FaArrowRightLong className="ml-2" />
-            </span>
+            </span> */}
+            <AnimatedActionButton
+              text="Our Story"
+              href="https://example.com"
+              // onClick={() => console.log("Button clicked")}
+              classes=" md:text-lg mt-4 font-semibold whitespace-nowrap py-6 w-[160px] hover:bg-primary bg-white text-black hover:text-black"
+              isLoading={false}
+              type="submit"
+            />
           </div>
           <div className="w-full lg:w-2/3">
             <div className="border-b-2 border-b-white pb-10 mb-5 flex flex-col md:flex-row justify-start gap-5 md:gap-10 lg:gap-20">

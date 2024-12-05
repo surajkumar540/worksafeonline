@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 
 export const BASE_URL = "https://johntrn.worksafeonline.co.uk";
@@ -55,7 +56,7 @@ const ContactForm: React.FC = () => {
       });
 
       if (response.ok) {
-        setSubmissionStatus("Your message has been sent successfully!");
+        toast.success("Your message has been sent successfully!");
         setFormData({
           name: "",
           email: "",
@@ -65,11 +66,13 @@ const ContactForm: React.FC = () => {
           find: "",
         }); // Reset the form after successful submission
       } else {
-        setSubmissionStatus("There was an issue sending your message. Please try again.");
+        toast.warn(
+          "There was an issue sending your message. Please try again."
+        );
       }
     } catch (error) {
-      console.log(error)
-      setSubmissionStatus("Error submitting form. Please try again later.");
+      console.log(error);
+      toast.warn("Error submitting form. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -125,7 +128,7 @@ const ContactForm: React.FC = () => {
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
-          className="w-full p-4 outline-none border rounded-xl focus:ring-2 transition-all duration-200 ease-linear text-black placeholder:black focus:ring-primary"
+          className="w-full p-4 outline-none border rounded-xl focus:ring-2 transition-all duration-200 ease-linear text-black placeholder:black focus:ring-primary resize-none"
           rows={5}
           required
         ></textarea>
