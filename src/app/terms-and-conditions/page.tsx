@@ -1,4 +1,20 @@
+import { Get } from "@/api/generalApi";
 import React from "react";
+
+export async function generateMetadata() {
+  // Replace with the correct endpoint
+  const pageData = await Get("");
+
+  return {
+    title: pageData?.title ?? "Worksafeonline | Privacy-Policy",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/privacy-policy`, // Ensure URL is correct
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 const TermsAndConditions: React.FC = () => {
   return (
@@ -74,8 +90,8 @@ const TermsAndConditions: React.FC = () => {
             to us in your order.
           </p>
           <p className="mb-4">
-            2.3 When we use the words "writing" or "written" in these terms,
-            this includes emails.
+          {`  2.3 When we use the words "writing" or "written" in these terms,
+            this includes emails.`}
           </p>
         </section>
 
@@ -105,11 +121,11 @@ const TermsAndConditions: React.FC = () => {
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">4. OUR PRODUCTS</h2>
           <p className="mb-4">
-            4.1 The images of the products on our website are for illustrative
+          {`  4.1 The images of the products on our website are for illustrative
             purposes only. Although we have made every effort to display the
             colours accurately, we cannot guarantee that a device's display of
             the colours accurately reflects the colour of the products. Your
-            product may vary slightly from those images.
+            product may vary slightly from those images.`}
           </p>
           <p className="mb-4">
             4.2 The packaging of the product may also vary from any images shown
@@ -595,9 +611,9 @@ const TermsAndConditions: React.FC = () => {
                 quality.
               </li>
               <li>
-                If your product is a service, you can ask us to repeat or fix
+                {`If your product is a service, you can ask us to repeat or fix
                 the service if it's not carried out with reasonable care and
-                skill or get some money back if we can't fix it.
+                skill or get some money back if we can't fix it.`}
               </li>
             </ol>
           </section>
