@@ -2,7 +2,7 @@ import { toast, Id, TypeOptions } from "react-toastify";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 // Define API base URL
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,
