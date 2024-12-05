@@ -35,7 +35,7 @@ const Wishlist = () => {
     };
 
     const removeFromwishlistListener = (id: string) => {
-      setWishlist((prev) => prev.filter((item) => item.ID !== parseInt(id)));
+      setWishlist((prev) => prev.filter((item: any) => item.ID !== id));
     };
 
     if (typeof window !== "undefined" && eventEmitter) {

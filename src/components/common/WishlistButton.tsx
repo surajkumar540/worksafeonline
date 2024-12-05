@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { Get } from "@/api/generalApi";
 import { toast } from "react-toastify";
+import { FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
+import { useEffect, useState } from "react";
+import { includes } from "@/utils/polyfills";
 import { RxEnterFullScreen } from "react-icons/rx";
 import QuickViewModal from "../modals/QuickViewModal";
 import { PiArrowsClockwiseLight } from "react-icons/pi";
@@ -20,8 +22,20 @@ const WishlistButton = ({
   setImgSrc: any;
 }) => {
   const [data, setData] = useState<{}>();
+  const [isSelected, setIsSelected] = useState(false);
   const [disable, setDIisabled] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedWishlist = localStorage.getItem("wishlist");
+    if (storedWishlist) {
+      const parsedWishlist = JSON.parse(storedWishlist);
+      if (Array.isArray(parsedWishlist)) {
+        const ids = parsedWishlist.map((item: { ID: string }) => item.ID);
+        setIsSelected(includes(ids, product.Style));
+      } else console.warn("Wishlist is not in the correct format.");
+    }
+  }, []);
 
   const handleQuickView = async ({
     category,
@@ -64,6 +78,11 @@ const WishlistButton = ({
   const handleToggle = () => {
     setIsVisible((prev) => !prev);
   };
+
+  const selectProductToWishlist = () => {
+    if (handleAddToWishlist(product)) setIsSelected(true);
+  };
+
   return (
     <>
       <QuickViewModal
@@ -71,11 +90,20 @@ const WishlistButton = ({
         isVisible={isVisible}
         onclose={handleToggle}
       />
-      <span
-        onClick={() => handleAddToWishlist(product)}
-        className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-1 right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
-      >
-        <CiHeart title="Add to wishlist" size={25} />
+      <span className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-1 right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear">
+        {isSelected ? (
+          <FaHeart
+            size={25}
+            className="text-red-500"
+            title="Already added to wishlist"
+          />
+        ) : (
+          <CiHeart
+            size={25}
+            title="Add to wishlist"
+            onClick={selectProductToWishlist}
+          />
+        )}
       </span>
       {/* <span
         onClick={() => handleWishlist(product)}
@@ -95,44 +123,28 @@ const WishlistButton = ({
       >
         <RxEnterFullScreen title="Quick View" size={24} />
       </span>
-      <div className="grid p-1.5 grid-cols-5 gap-1 absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear">
-        <Image
-          width={400}
-          height={400}
-          alt={"Image"}
-          onMouseEnter={() =>
-            setImgSrc(
-              "https://www.worksafeonline.co.uk/StandardImages/IMAGE COMING SOON.jpg"
-            )
-          }
-          onMouseLeave={() => setImgSrc(product?.ListingImage)}
-          className={`w-full h-full object-contain aspect-square transition-all duration-200 ease-linear border rounded ${
-            imgSrc ===
-              "https://www.worksafeonline.co.uk/StandardImages/IMAGE COMING SOON.jpg" &&
-            "border-black"
-          }`}
-          key="https://www.worksafeonline.co.uk/StandardImages/IMAGE COMING SOON.jpg"
-          src="https://www.worksafeonline.co.uk/StandardImages/IMAGE COMING SOON.jpg"
-        />
-        <Image
-          width={400}
-          height={400}
-          alt={"Image"}
-          onMouseEnter={() =>
-            setImgSrc(
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
-            )
-          }
-          onMouseLeave={() => setImgSrc(product?.ListingImage)}
-          className={`w-full h-full object-cover aspect-square transition-all duration-200 ease-linear border rounded ${
-            imgSrc ===
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg" &&
-            "border-black"
-          }`}
-          key="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
-          src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
-        />
-      </div>
+      {product?.MultipleImage && product?.MultipleImage.length > 0 && (
+        <div className="grid p-1.5 grid-cols-5 gap-1 absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear">
+          {product?.MultipleImage.slice(0, 5).map(
+            (productImage: any, index: number) => {
+              return (
+                <Image
+                  width={96}
+                  height={96}
+                  alt={"Image"}
+                  src={productImage?.ThumbnailImage}
+                  key={`${productImage?.Style}-${index}`}
+                  onMouseEnter={() => setImgSrc(productImage?.ProductImage)}
+                  onMouseLeave={() => setImgSrc(productImage?.ProductImage)}
+                  className={`w-full h-full object-contain aspect-square transition-all duration-200 ease-linear border rounded ${
+                    imgSrc === productImage?.ProductImage && "border-black"
+                  }`}
+                />
+              );
+            }
+          )}
+        </div>
+      )}
     </>
   );
 };
