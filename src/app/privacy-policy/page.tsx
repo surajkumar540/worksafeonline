@@ -1,4 +1,22 @@
+import { fetchMetaData } from "@/api/generalApi";
 import Link from "next/link";
+
+interface PageData {
+  title?: string;
+  keyword?: string;
+  descriptions?: string;
+  noIndex?: boolean;
+}
+
+export async function generateMetadata() {
+  const pageData: PageData = await fetchMetaData("/privacy-policy"); // Use the defined interface
+  return {
+    title: "WorkSafeOnline | Privacy Policy",
+    keywords: "seo",
+    alternates: { canonical: `https://www.worksafeonline.co.uk/privacy-policy` },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 export default function Page() {
   return (

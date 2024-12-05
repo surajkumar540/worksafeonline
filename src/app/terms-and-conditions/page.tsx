@@ -1,4 +1,23 @@
+import { fetchMetaData } from "@/api/generalApi";
 import Link from "next/link";
+
+interface PageData {
+  title?: string;
+  keyword?: string;
+  descriptions?: string;
+  noIndex?: boolean;
+}
+
+export async function generateMetadata() {
+  const pageData: PageData = await fetchMetaData("/terms-and-conditions"); // Use the defined interface
+  return {
+    title: "WorkSafeOnline | Terms And Conditions",
+    keywords: "seo",
+    alternates: { canonical: `https://www.worksafeonline.co.uk/terms-and-conditions` },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
+
 
 export default function Page() {
   return (

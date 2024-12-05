@@ -1,4 +1,4 @@
-import { Get } from "@/api/generalApi";
+import { fetchMetaData, Get } from "@/api/generalApi";
 import { redirect } from "next/navigation";
 import { productData } from "@/data/productData";
 import Features from "@/components/common/Features";
@@ -14,6 +14,26 @@ type ProductPageProps = {
     slug: string;
   }>;
 };
+
+
+interface PageData {
+  title?: string;
+  keyword?: string;
+  descriptions?: string;
+  noIndex?: boolean;
+}
+
+export async function generateMetadata(slug: string) {
+  const pageData: PageData = await fetchMetaData(`product/${slug}`);
+  return {
+    title: pageData?.title ?? "WorkSafeOnline | Product Details",
+    keywords: pageData?.keyword ?? "seo, product",
+    description: pageData?.descriptions ?? "Default description for product",
+    alternates: { canonical: `https://www.worksafeonline.co.uk/product/${slug}` },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
+
 
 export default async function Page(ctx: ProductPageProps) {
   const { category, slug } = (await ctx.params) || {};

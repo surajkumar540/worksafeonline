@@ -1,8 +1,24 @@
 import React from "react";
-import { Get } from "@/api/generalApi";
+import { fetchMetaData, Get } from "@/api/generalApi";
 import Header from "./components/Header";
 import FilterSection from "./components/FilterSection";
 
+interface PageData {
+  title?: string;
+  keyword?: string;
+  descriptions?: string;
+  noIndex?: boolean;
+}
+
+export async function generateMetadata() {
+  const pageData: PageData = await fetchMetaData("/shop"); // Use the defined interface
+  return {
+    title: "WorkSafeOnline | Shop",
+    keywords: "seo",
+    alternates: { canonical: `https://www.worksafeonline.co.uk/shop` },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 export default async function Page(ctx: any) {
   const { category = null, subcategory = null } =

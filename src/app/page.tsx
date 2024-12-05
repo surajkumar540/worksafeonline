@@ -5,10 +5,33 @@ import Banner from "@/components/home/Banner";
 import Upcoming from "@/components/home/Upcoming";
 import WhoWeAre from "@/components/home/WhoWeAre";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { fetchHomePageData } from "@/api/generalApi";
+import { fetchHomePageData, fetchMetaData } from "@/api/generalApi";
 import Categories from "@/components/home/Categories";
 import ReasonsToShop from "@/components/home/ReasonToShop";
 import ListingByCategory from "@/components/home/ListingByCategory";
+interface PageData {
+  title?: string;
+  keyword?: string;
+  descriptions?: string;
+  noIndex?: boolean;
+}
+
+export async function generateMetadata() {
+  const pageData: PageData = await fetchMetaData(""); // Pass string instead of an object
+  return {
+    title:  "WorkSafeOnline ",
+    keywords:"seo ",
+    description: "descrption here",
+    alternates: { canonical: `https://www.worksafeonline.co.uk/` },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+
+    // title: pageData?.title ?? "Worksafe | Contact Us",
+    // keywords: pageData?.keyword,
+    // description: pageData?.descriptions,
+    // alternates: { canonical: `https://www.unfazed.in/contact-us` },
+    // robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 export default async function Home() {
   const {

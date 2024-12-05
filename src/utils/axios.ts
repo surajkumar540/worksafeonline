@@ -230,3 +230,14 @@ export const Delete = async <T>(
     throw error;
   }
 };
+
+
+// Create an axios instance for HTTP requests without authorization
+// Create an axios instance for HTTP requests without authorization
+export const http = axios.create({
+  baseURL: "https://johntrn.worksafeonline.co.uk/", // Ensure this environment variable is defined
+  headers: {
+    "Content-Type": "application/json", // Set default content type
+  },
+  timeout: 10000, // Optional: set a timeout for the instance
+});
