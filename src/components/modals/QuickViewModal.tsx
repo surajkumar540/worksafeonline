@@ -17,16 +17,18 @@ const QuickViewModal = ({
   onclose: () => void;
 }) => {
   if (!data) return null;
-
-  const productListImages = data.ProductImageList.map(
-    (image: any) => image?.ProductImage
-  );
+  const productListImages =
+    data?.ProductImageList &&
+    data?.ProductImageList.length > 0 &&
+    data?.ProductImageList.map((image: any) => image?.ProductImage);
   const product = { ...data, ...productData };
   return (
     <Modal onClose={onclose} isVisible={isVisible}>
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="w-full lg:w-1/2">
-          <QuickViewProductSwiper productListingImages={productListImages} />
+          <QuickViewProductSwiper
+            productListingImages={productListImages ?? []}
+          />
         </div>
         <div className="w-full lg:w-1/2">
           <ProductDetails product={product} />

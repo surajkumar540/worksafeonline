@@ -66,11 +66,13 @@ const ProductSwiper = ({
         }}
         className="mySwiper"
       >
-        {products.map((product: any, index: number) => (
-          <SwiperSlide key={index}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        ))}
+        {products &&
+          products.length > 0 &&
+          products.map((product: any, index: number) => (
+            <SwiperSlide key={index}>
+              <ProductCard product={product} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

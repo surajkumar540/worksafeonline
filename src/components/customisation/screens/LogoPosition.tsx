@@ -72,11 +72,9 @@ const optionsSide = [
 const LogoPosition = ({
   customizeData,
   setCustomizeData,
-  handleCustomizeNext,
 }: {
   customizeData: any;
   setCustomizeData: any;
-  handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
     customizeData?.logoPosition?.id ?? null

@@ -1,4 +1,5 @@
 import { bigShoulders } from "@/app/layout";
+import Image from "next/image";
 import React, { ReactNode } from "react";
 import { CiMedal } from "react-icons/ci";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -32,9 +33,9 @@ const TradeSafetyBanner = () => {
           </p>
           <p className="text-gray-500 text-xl mt-4">
             Axetor is Australia’s largest network of workwear specialist
-            destinations for Trade, Safety, and Uniforms. We are 90 stores strong,
-            with bold plans for more. A steel-toe footprint stretching across the
-            nation and working hard for our local communities.
+            destinations for Trade, Safety, and Uniforms. We are 90 stores
+            strong, with bold plans for more. A steel-toe footprint stretching
+            across the nation and working hard for our local communities.
           </p>
         </div>
 
@@ -97,12 +98,19 @@ const TradeSafetyBanner = () => {
 };
 
 // Reusable Components
-const ContentCard: React.FC<ContentCardProps> = ({ title, description, imgUrl }) => (
+const ContentCard: React.FC<ContentCardProps> = ({
+  title,
+  imgUrl,
+  description,
+}) => (
   <div className="flex flex-col w-full h-full">
     <div className="lg:aspect-[1/1] w-full rounded-md overflow-hidden">
-      <img
+      <Image
+        width={100}
+        height={100}
         src={imgUrl}
         alt={title}
+        unoptimized
         className="object-cover w-full h-auto transition-transform duration-300 ease-in-out bg-slate-600 transform hover:scale-110"
       />
     </div>
@@ -127,7 +135,11 @@ const Divider: React.FC = () => (
   <div className="w-[1px] h-[600px] lg:h-full hidden md:block bg-gray-400" />
 );
 
-const FeatureHighlight: React.FC<FeatureHighlightProps> = ({ icon, title, description }) => (
+const FeatureHighlight: React.FC<FeatureHighlightProps> = ({
+  icon,
+  title,
+  description,
+}) => (
   <div className="flex gap-3">
     <div>{icon}</div>
     <div className="flex flex-col">

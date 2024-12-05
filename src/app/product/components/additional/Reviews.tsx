@@ -76,8 +76,8 @@ const Reviews = ({ handleChangeContent }: { handleChangeContent: any }) => {
             </div>
             <p className="font-normal">
               Quality is good though. Lots of pockets for hand tools and
-              storage. Fit reminds me of 90's jeans. Down size for length and
-              waist is true to size.
+              storage. Fit reminds me of 90&apos;s jeans. Down size for length
+              and waist is true to size.
             </p>
           </div>
         </div>

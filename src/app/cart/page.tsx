@@ -10,7 +10,7 @@ import CartSummary from "./components/CartSummary";
 import eventEmitter from "@/hooks/useEventEmitter";
 import ApplyCoupon from "./components/ApplyCoupon";
 import Features from "@/components/common/Features";
-import RecommendedProducts from "@/components/common/RecommendedProducts";
+// import RecommendedProducts from "@/components/common/RecommendedProducts";
 
 export default function Page() {
   const [cartUpdated, setCartUpdated] = useState<any>([]);
@@ -26,7 +26,7 @@ export default function Page() {
   }, []);
 
   const handleRemove = (id: string) => {
-    let cart = cartUpdated.filter((item: any) => item?.ID !== id);
+    const cart = cartUpdated.filter((item: any) => item?.ID !== id);
     setCartUpdated(cart);
     if (eventEmitter) eventEmitter.emit("removeFromCart", id);
     localStorage.setItem("cart", JSON.stringify(cart));

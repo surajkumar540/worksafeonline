@@ -16,6 +16,10 @@ const QuantitySelector = ({
   product: Product;
   showLogoCustomisation?: boolean;
 }) => {
+  const [price, setPrice] = useState({
+    ProductSellingPrice: product.ProductSellingPrice,
+    ProductActualPrice: product.ProductActualPrice,
+  });
   const [selectedFields, setSelectedFields] = useState({
     size: {},
     color: {},
@@ -48,28 +52,55 @@ const QuantitySelector = ({
     (fittings: any) => fittings.Fitting.trim() !== "NA"
   );
 
+  useEffect(() => {
+    const filterProducts = (products: any[], config: any) => {
+      return products.filter((product) => {
+        return (
+          product?.Size_Sequence_No === config?.size?.Size_Sequence_No &&
+          product?.Colour_Sequence_No === config?.color?.Colour_Sequence_No &&
+          product?.Fitting_Sequence_No === config?.fitting?.Fitting_Sequence_No
+        );
+      });
+    };
+    if (
+      product?.ProductPricingByColourSizeFit &&
+      product?.ProductPricingByColourSizeFit.length > 0
+    ) {
+      const filteredProducts = filterProducts(
+        product?.ProductPricingByColourSizeFit,
+        selectedFields
+      );
+      if (filteredProducts.length > 0)
+        setPrice({
+          ProductSellingPrice: filteredProducts[0]?.SPPrice,
+          ProductActualPrice: filteredProducts[0]?.TCPrice,
+        });
+    }
+    // eslint-disable-next-line
+  }, [selectedFields]);
+
   return (
     <>
-      {product.ProductActualPrice && product.ProductSellingPrice && (
+      {price?.ProductActualPrice && price?.ProductSellingPrice && (
         <p className={`mt-4 text-4xl space-x-2 ${bigShoulders.className}`}>
-          <span>{product.ProductSellingPrice}$</span>
+          <span>{price?.ProductSellingPrice}$</span>
           <span className="text-3xl text-gray-500 line-through">
-            {product.ProductActualPrice}$
+            {price?.ProductActualPrice}$
           </span>
         </p>
-      )}
-      {product?.ProductSizes.length > 0 && (
-        <ProductSizes
-          sizes={product?.ProductSizes}
-          selectedFields={selectedFields}
-          setSelectedFields={setSelectedFields}
-        />
       )}
       {product?.ProductColour.length > 0 && (
         <ProductColors
           selectedFields={selectedFields}
           setSelectedFields={setSelectedFields}
           productColors={product?.ProductColour}
+        />
+      )}
+      {product?.ProductSizes.length > 0 && (
+        <ProductSizes
+          sizes={product?.ProductSizes}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
         />
       )}
       {filterProductFittings.length > 0 && (
@@ -96,9 +127,12 @@ const QuantitySelector = ({
           </button>
         </div>
         <AddToCartButton
-          product={product}
           quantity={countItem}
           selectedFields={selectedFields}
+          product={{
+            ...product,
+            ProductSellingPrice: price?.ProductSellingPrice,
+          }}
         />
       </div>
       {showLogoCustomisation && (

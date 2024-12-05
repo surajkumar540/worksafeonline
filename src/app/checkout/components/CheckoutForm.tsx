@@ -55,6 +55,7 @@ const CheckoutForm = ({ cart }: { cart: any }) => {
       setLoading(true);
       console.log(formData);
     } catch (error) {
+      console.log("An error occurred:", error);
     } finally {
       setLoading(false);
     }

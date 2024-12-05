@@ -1,5 +1,3 @@
-import { includes } from "@/utils/polyfills";
-
 export interface Country {
   name: string;
   code: string;
@@ -14,27 +12,30 @@ export interface LinkProps {
 }
 
 export interface Product {
+  ID?: string;
   rating: number;
   Detail: string;
+  Style?: string;
   images: string[];
   warranty: string;
   sizeGuide: string;
   productSKU: string;
   ProductName: string;
-  ProductSizes: any[];
   productBrand: string;
   reviewsCount: number;
-  ProductColour: any[];
   ProductImage: string;
   availability: string;
-  ProductFittings: any[];
-  ProductFeatures: any[];
   addToWatchlist: string;
   productCategory: string;
+  ProductSizes: unknown[];
+  ProductColour: unknown[];
+  ProductFeatures: unknown[];
+  ProductFittings: unknown[];
   ProductID: number | string;
   ProductActualPrice: number;
   ProductSellingPrice: number;
-  recommended_products: any[];
+  recommended_products: unknown[];
+  ProductPricingByColourSizeFit?: unknown[];
   price: { minPrice: number; maxPrice: number };
   colorOptions: { color: string; hex: string }[];
   shippingDetails: {

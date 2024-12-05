@@ -1,7 +1,7 @@
-import axios from "axios";
 import { includes } from "@/utils/polyfills";
+import axios from "axios";
 
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+export const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
 
 export const Get = async (url: string) => {
   try {
@@ -18,7 +18,6 @@ export const fetchHomePageData = async () => {
   const apiCalls = [
     Get("api/Brands"), // Fetch brands
     Get("api/Categories"), // Fetch categories
-    Get("api/ProductsByPage?category_id=1&page=1&pagesize=10"), // Fetch products
     Get("api/HomeProductListing1?App=Worksafe"), // Fetch home listing 1
     Get("api/HomeProductListing2?App=Worksafe"), // Fetch home listing 2
     Get("api/HomeProductListing3?App=Worksafe"), // Fetch home listing 3
@@ -30,7 +29,6 @@ export const fetchHomePageData = async () => {
   const [
     brandsResponse,
     categoriesResponse,
-    productsResponse,
     homeListing1,
     homeListing2,
     homeListing3,
@@ -38,15 +36,10 @@ export const fetchHomePageData = async () => {
   ] = results.map((result) =>
     result?.status === "fulfilled" ? result?.value : {}
   );
-  const products =
-    productsResponse?.product?.filter(
-      (product: { Status: number }) => product?.Status === 1
-    ) || [];
   const brands = brandsResponse?.brand || [];
   const banners = bannerResponse?.special_offers || [];
   const categories = categoriesResponse?.categories || [];
   return {
-    products,
     categories,
     brands,
     homeListing1,

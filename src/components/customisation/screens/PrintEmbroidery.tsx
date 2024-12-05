@@ -33,11 +33,9 @@ const options: Option[] = [
 const PrintEmbroidery = ({
   customizeData,
   setCustomizeData,
-  handleCustomizeNext,
 }: {
   customizeData: any;
   setCustomizeData: any;
-  handleCustomizeNext: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
     customizeData?.printEmbroidery?.id ?? null

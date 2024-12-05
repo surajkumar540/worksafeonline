@@ -1,6 +1,5 @@
-import { bigShoulders } from "@/app/layout";
-import { div } from "framer-motion/client";
 import React from "react";
+import { bigShoulders } from "@/app/layout";
 
 const Marquee: React.FC = () => {
   return (
@@ -11,15 +10,15 @@ const Marquee: React.FC = () => {
             className={`text-4xl uppercase font-semibold tracking-wider flex justify-center items-center ${bigShoulders.className}`}
           >
             Build for work &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; *
-            &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling forever!
-            &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling
-            forever! &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep it
-            scrolling forever! &nbsp; * &nbsp; Add more items here! &nbsp; *
-            &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add more items here!
-            &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add more
-            items here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; * &nbsp;
-            Add more items here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp;
-            * &nbsp; Add more items here!
+            &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling
+            forever! &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep
+            it scrolling forever! &nbsp; * &nbsp; Add more items here! &nbsp; *
+            &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add more items
+            here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add
+            more items here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; *
+            &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling
+            forever! &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep
+            it scrolling forever! &nbsp; * &nbsp; Add more items here!
           </span>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { includes } from "@/utils/polyfills";
 import { RxEnterFullScreen } from "react-icons/rx";
 import QuickViewModal from "../modals/QuickViewModal";
-import { PiArrowsClockwiseLight } from "react-icons/pi";
+// import { PiArrowsClockwiseLight } from "react-icons/pi";
 import { handleAddToWishlist } from "@/hooks/useEventEmitter";
 
 const WishlistButton = ({
@@ -21,7 +21,7 @@ const WishlistButton = ({
   imgSrc: string;
   setImgSrc: any;
 }) => {
-  const [data, setData] = useState<{}>();
+  const [data, setData] = useState({});
   const [isSelected, setIsSelected] = useState(false);
   const [disable, setDIisabled] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const WishlistButton = ({
         setIsSelected(includes(ids, product.Style));
       } else console.warn("Wishlist is not in the correct format.");
     }
-  }, []);
+  }, [product.Style]);
 
   const handleQuickView = async ({
     category,
@@ -67,8 +67,10 @@ const WishlistButton = ({
           autoClose: 3000,
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
       toast.dismiss(toastId);
+      const errMessage = (error as Error).message || "Failed to delete data";
+      console.log("first error", errMessage);
       toast.error("An error occurred while fetching product details!");
     } finally {
       setDIisabled(false);

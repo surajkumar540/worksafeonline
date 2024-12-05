@@ -21,8 +21,6 @@ const CustomizeLogoModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
-  if (!data) return null;
-
   const [customizeData, setCustomizeData] = useState<any>({
     addtext: {},
     imageText: {},
@@ -86,7 +84,6 @@ const CustomizeLogoModal = ({
             <ImageText
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
-              handleCustomizeNext={handleCustomizeNext}
             />
           );
         case 1:
@@ -94,7 +91,6 @@ const CustomizeLogoModal = ({
             <PrintEmbroidery
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
-              handleCustomizeNext={handleCustomizeNext}
             />
           );
         case 2:
@@ -102,7 +98,6 @@ const CustomizeLogoModal = ({
             <LogoPosition
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
-              handleCustomizeNext={handleCustomizeNext}
             />
           );
         case 3:
@@ -120,8 +115,12 @@ const CustomizeLogoModal = ({
           return <></>;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentCustomizeStep]
   );
+
+  if (!data) return null;
+
   return (
     <Modal
       onClose={onclose}

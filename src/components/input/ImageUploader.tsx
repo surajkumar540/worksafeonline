@@ -3,6 +3,7 @@
 import { toast } from "react-toastify";
 import { IoCloudUpload } from "react-icons/io5";
 import React, { FC, useState, useRef } from "react";
+import Image from "next/image";
 
 interface SingleImageUploaderProps {
   field: {
@@ -80,8 +81,11 @@ const SingleImageUploader: FC<SingleImageUploaderProps> = ({
       >
         {selectedImage ? (
           <>
-            <img
+            <Image
+              width={100}
+              height={100}
               alt="Selected"
+              unoptimized
               src={selectedImage}
               className="w-full h-full object-contain rounded-full"
             />

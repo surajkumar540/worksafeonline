@@ -54,9 +54,9 @@ const request = async <T>(
     if (axios.isAxiosError(error) && error.message === "canceled") {
       throw new Error("Request aborted");
     } else {
-      const status = (error as any).response?.status;
+      const status = (error as AxiosResponse)?.status;
       const message =
-        (error as any).response?.data?.message || (error as Error).message;
+        (error as AxiosResponse)?.data?.message || (error as Error).message;
       throw new Error(`Error ${status}: ${message}`);
     }
   }
@@ -91,7 +91,7 @@ const handleToast = (
 // Fetch utility function
 export const Fetch = async <T>(
   url: string,
-  params?: object,
+  params?: Record<string, unknown>,
   timeout?: number,
   dismissToast: boolean = false,
   showToast: boolean = true
@@ -113,13 +113,9 @@ export const Fetch = async <T>(
       dismissToast
     );
     return response.data;
-  } catch (error: any) {
-    handleToast(
-      toastId,
-      "error",
-      error.message || "Failed to fetch data",
-      dismissToast
-    );
+  } catch (error: unknown) {
+    const errMessage = (error as Error).message || "Failed to fetch data";
+    handleToast(toastId, "error", errMessage, dismissToast);
     throw error;
   }
 };
@@ -127,7 +123,7 @@ export const Fetch = async <T>(
 // Post utility function
 export const Post = async <T>(
   url: string,
-  data: object | FormData,
+  data: Record<string, unknown> | FormData,
   timeout?: number,
   dismissToast: boolean = false
 ): Promise<T> => {
@@ -148,13 +144,9 @@ export const Post = async <T>(
       dismissToast
     );
     return response.data;
-  } catch (error: any) {
-    handleToast(
-      toastId,
-      "error",
-      error.message || "Failed to submit data",
-      dismissToast
-    );
+  } catch (error: unknown) {
+    const errMessage = (error as Error).message || "Failed to submit data";
+    handleToast(toastId, "error", errMessage, dismissToast);
     throw error;
   }
 };
@@ -162,7 +154,7 @@ export const Post = async <T>(
 // Put utility function
 export const Put = async <T>(
   url: string,
-  data: object | FormData,
+  data: Record<string, unknown> | FormData,
   timeout?: number,
   dismissToast: boolean = false
 ): Promise<T> => {
@@ -183,13 +175,9 @@ export const Put = async <T>(
       dismissToast
     );
     return response.data;
-  } catch (error: any) {
-    handleToast(
-      toastId,
-      "error",
-      error.message || "Failed to update data",
-      dismissToast
-    );
+  } catch (error: unknown) {
+    const errMessage = (error as Error).message || "Failed to update data";
+    handleToast(toastId, "error", errMessage, dismissToast);
     throw error;
   }
 };
@@ -197,8 +185,8 @@ export const Put = async <T>(
 // Delete utility function
 export const Delete = async <T>(
   url: string,
-  data?: object,
-  params?: object,
+  data?: Record<string, unknown>,
+  params?: Record<string, unknown>,
   timeout?: number,
   dismissToast: boolean = false
 ): Promise<T> => {
@@ -220,13 +208,9 @@ export const Delete = async <T>(
       dismissToast
     );
     return response.data;
-  } catch (error: any) {
-    handleToast(
-      toastId,
-      "error",
-      error.message || "Failed to delete data",
-      dismissToast
-    );
+  } catch (error: unknown) {
+    const errMessage = (error as Error).message || "Failed to delete data";
+    handleToast(toastId, "error", errMessage, dismissToast);
     throw error;
   }
 };

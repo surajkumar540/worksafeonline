@@ -3,10 +3,9 @@ import { bigShoulders } from "@/app/layout";
 
 interface HeaderProps {
   title: string;
-  subtitle?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
+const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <div
       style={{

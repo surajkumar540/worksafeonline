@@ -34,7 +34,9 @@ const OtpVerification = ({
       return () => clearInterval(interval);
     } else {
       setIsResendDisabled(false);
+      setOtpLocal();
     }
+    // eslint-disable-next-line
   }, [timer]);
 
   const handleChange = (

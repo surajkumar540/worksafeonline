@@ -9,7 +9,7 @@ export default async function Page() {
   const data = await Get("api/ContactDetail1?app=Worksafe");
   return (
     <>
-      <Header title="Contact" subtitle="Contact" />
+      <Header title="Contact" />
       <ContactDetails details={data} />
       <Map location={data?.Location} />
       <ContactForm />

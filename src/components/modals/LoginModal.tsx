@@ -158,7 +158,7 @@ const LoginModal = ({
                 Forget password?
               </Link>
               <p className="text-sm mt-2">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link
                   href="/create-account"
                   className="text-primary hover:underline"

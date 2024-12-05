@@ -1,14 +1,10 @@
 import React from "react";
-import Button from "../common/Button";
 import { Get } from "@/api/generalApi";
-import ProductSwiper from "./ProductSwiper";
 import UpcomingClient from "./UpconingClient";
 
 const Upcoming = async ({
-  products,
   slidesPerViewDesktop,
 }: {
-  products: any;
   slidesPerViewDesktop: number;
 }) => {
   let newArrivals = [],
