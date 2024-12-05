@@ -2,7 +2,6 @@ import { Get } from "@/api/generalApi";
 import { redirect } from "next/navigation";
 import { productData } from "@/data/productData";
 import Features from "@/components/common/Features";
-import Breadcrumbs from "../../components/Bradcrumbs";
 import ProductImage from "../../components/ProductImage";
 import ProductContent from "../../components/ProductContent";
 import ProductFeatures from "../../components/ProductFeatures";

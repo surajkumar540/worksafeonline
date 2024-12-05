@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
-import { FaArrowRightLong } from "react-icons/fa6";
 import AnimatedActionButton from "../common/AnimatedActionButton";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 

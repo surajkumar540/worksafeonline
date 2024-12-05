@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link"; // Import Link for routing in Next.js
 import { bigShoulders } from "@/app/layout";
 import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
 

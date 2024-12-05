@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
-import Link from "next/link";
 
 interface HeaderProps {
   title: string;

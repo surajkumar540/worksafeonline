@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Marquee from "../common/Marquee";
 import { bigShoulders } from "@/app/layout";
-import { FaArrowRightLong } from "react-icons/fa6";
 import Features from "../common/Features";
 import AnimatedActionButton from "../common/AnimatedActionButton";
 

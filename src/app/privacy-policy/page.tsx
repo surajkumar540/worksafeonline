@@ -1,5 +1,4 @@
 import { Get } from "@/api/generalApi";
-import Link from "next/link";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
