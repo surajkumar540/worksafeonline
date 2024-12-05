@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
+import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
 
 interface HeaderProps {
   title: string;
@@ -23,7 +24,24 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       />
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="absolute inset-0 flex flex-col justify-between items-start p-4 md:p-6 lg:p-10 z-10 text-center">
-        <h1 className="text-sm font-semibold uppercase">Home Page / Shop</h1>
+
+        {/* <h1 className="text-sm font-semibold uppercase">Home Page / Shop</h1> */}
+
+        {/* <ol className="flex space-x-2">
+          <li>
+            <Link href="/" className="hover:text-yellow-400 ">
+              Home
+            </Link>
+          </li>
+          <li>/</li>
+          <li>
+            Shop
+          </li>
+          <li>/</li>
+        </ol> */}
+        <BreadcrumbsHeader text={"Shop"}/>
+
+
         <h1
           className={`text-7xl ${bigShoulders.className} uppercase font-extrabold`}
         >

@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { bigShoulders } from "../layout";
 import React, { useEffect, useState } from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
 import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
+import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 export default function Page() {
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
@@ -46,15 +46,14 @@ export default function Page() {
             </span>
           </h1>
           {wishlistUpdated.length === 0 && (
-            <span className="relative flex w-fit space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-3 md:py-4 pl-32 pr-4 overflow-hidden group">
-              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                View Products
-              </span>
-              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                View Products
-              </span>
-              <FaArrowRightLong className="ml-2" />
-            </span>
+            <AnimatedActionButton
+              text="View Products"
+              href="https://example.com"
+              // onClick={() => console.log("Button clicked")}
+              classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"
+              isLoading={false}
+              type="submit"
+            />
           )}
         </div>
         <div className="pt-4 md:pt-6 lg:pt-10">

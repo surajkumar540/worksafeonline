@@ -3,6 +3,20 @@ import { Get } from "@/api/generalApi";
 import Header from "./components/Header";
 import FilterSection from "./components/FilterSection";
 
+export async function generateMetadata() {
+  // Replace with the correct endpoint
+  const pageData = await Get("");
+
+  return {
+    title: pageData?.title ?? "Worksafeonline | Shop",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/shop`, // Ensure URL is correct
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 export default async function Page(ctx: any) {
   const { category = null, subcategory = null } =

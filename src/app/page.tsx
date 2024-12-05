@@ -4,11 +4,28 @@ import { bigShoulders } from "./layout";
 import Banner from "@/components/home/Banner";
 import Upcoming from "@/components/home/Upcoming";
 import WhoWeAre from "@/components/home/WhoWeAre";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { fetchHomePageData } from "@/api/generalApi";
+import { fetchHomePageData, Get } from "@/api/generalApi";
 import Categories from "@/components/home/Categories";
 import ReasonsToShop from "@/components/home/ReasonToShop";
 import ListingByCategory from "@/components/home/ListingByCategory";
+import AnimatedActionButton from "@/components/common/AnimatedActionButton";
+
+export async function generateMetadata() {
+  // Replace with the correct endpoint
+  const pageData = await Get("");
+
+  return {
+    title: pageData?.title ?? "Worksafeonline | Home",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/`, // Ensure URL is correct
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
+
+
 
 export default async function Home() {
   const {
@@ -75,15 +92,14 @@ export default async function Home() {
                 ALL SELECTED BRANDS
               </p>
             </div>
-            <span className="relative font-sans uppercase text-sm font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
-              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                SHOP NOW
-              </span>
-              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                SHOP NOW
-              </span>
-              <FaArrowRightLong className="ml-2" />
-            </span>
+            <AnimatedActionButton
+              text="SHOP NOW"
+              href="https://example.com"
+              // onClick={() => console.log("Button clicked")}
+              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
+              isLoading={false}
+              type="submit"
+            />
           </div>
         </div>
         <div className="relative">
@@ -111,15 +127,15 @@ export default async function Home() {
                 start from <span className="text-[#a9bc41]">$299 </span>
               </p>
             </div>
-            <span className="relative font-sans uppercase text-sm font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
-              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                SHOP NOW
-              </span>
-              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                SHOP NOW
-              </span>
-              <FaArrowRightLong className="ml-2" />
-            </span>
+
+            <AnimatedActionButton
+              text="SHOP NOW"
+              href="https://example.com"
+              // onClick={() => console.log("Button clicked")}
+              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
+              isLoading={false}
+              type="submit"
+            />
           </div>
         </div>
       </div>

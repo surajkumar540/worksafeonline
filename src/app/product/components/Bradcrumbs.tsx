@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 
 type BreadcrumbsProps = {
-  category: string;
-  formattedSlug: string;
+  category?: string;
+  formattedSlug?: string;
 };
 
 const Breadcrumbs = ({ category, formattedSlug }: BreadcrumbsProps) => {

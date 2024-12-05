@@ -5,6 +5,21 @@ import Map from "./components/MapComponent";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
 
+export async function generateMetadata() {
+  // Replace with the correct endpoint
+  const pageData = await Get('');
+
+  return {
+    title: pageData?.title ?? "Worksafeonline | Contact Us",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/contact`, // Ensure URL is correct
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
+
 export default async function Page() {
   const data = await Get("api/ContactDetail1?app=Worksafe");
   return (

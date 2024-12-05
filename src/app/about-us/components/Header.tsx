@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link"; // Import Link for routing in Next.js
 import { bigShoulders } from "@/app/layout";
+import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
 
 interface HeaderProps {
   title: string;
@@ -26,10 +26,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="absolute inset-0 flex flex-col justify-between items-start p-4 md:p-6 lg:p-10 z-10 text-center max-w-9xl mx-auto">
         <h1 className="text-sm font-semibold uppercase">
-          <Link href="/" className="hover:text-primary hover:underline">
-            Homepage
-          </Link>{" "}
-          / About Us
+          <BreadcrumbsHeader text={"About Us"} />
         </h1>
         <h1
           className={`text-7xl ${bigShoulders.className} uppercase font-extrabold`}
