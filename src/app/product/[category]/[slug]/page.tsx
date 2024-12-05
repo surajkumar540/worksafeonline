@@ -7,6 +7,7 @@ import ProductImage from "../../components/ProductImage";
 import ProductContent from "../../components/ProductContent";
 import ProductFeatures from "../../components/ProductFeatures";
 import RecommendedProducts from "@/components/common/RecommendedProducts";
+import BreadcrumbsHeader from "../../components/BradcrumbsHeader";
 
 type ProductPageProps = {
   params: Promise<{
@@ -16,20 +17,20 @@ type ProductPageProps = {
 };
 
 
-// export async function generateMetadata(slug: string) {
-//   // Replace with the correct endpoint
-//   const pageData = await Get(`product/${slug}`);
+export async function generateMetadata() {
+  // Replace with the correct endpoint
+  const pageData = await Get("");
 
-//   return {
-//     title: pageData?.title ?? "Worksafeonline | Product Details",
-//     keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
-//     description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
-//     alternates: {
-//       canonical: `https://www.worksafeonline.co.uk/product/${slug}`, // Ensure URL is correct
-//     },
-//     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
-//   };
-// }
+  return {
+    title: pageData?.title ?? "Worksafeonline | Product Details",
+    keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
+    description: pageData?.descriptions ?? "Default description", // Provide default if description is missing
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/product}`, // Ensure URL is correct
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+}
 
 
 
@@ -47,7 +48,8 @@ export default async function Page(ctx: ProductPageProps) {
   return (
     <>
       <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-10">
-        <Breadcrumbs
+        <BreadcrumbsHeader
+          text={"shop"}
           category={category}
           formattedSlug={productResponse?.ProductName}
         />

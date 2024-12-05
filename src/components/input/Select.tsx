@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { bigShoulders } from "@/app/layout";
+import ErrorText from "@/app/checkout/components/Error";
 
 interface Option {
   value: string | number;
@@ -20,9 +21,15 @@ interface SelectProps {
   };
   handleInputChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   className?: string;
+  error?: string | undefined;
 }
 
-const Select: FC<SelectProps> = ({ field, handleInputChange, className }) => {
+const Select: FC<SelectProps> = ({
+  error,
+  field,
+  className,
+  handleInputChange,
+}) => {
   return (
     <div className="relative">
       <label
@@ -40,8 +47,9 @@ const Select: FC<SelectProps> = ({ field, handleInputChange, className }) => {
         disabled={field.isDisabled}
         multiple={field.isMultiple}
         onChange={handleInputChange}
-        className={`border border-gray-300 rounded-full p-4 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className} ${field?.isMultiple && "h-36"
-          }`}
+        className={`border border-gray-300 rounded-full p-4 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className} ${
+          field?.isMultiple && "h-36"
+        }`}
       >
         {field.placeholder && field.options && field.options.length > 0 && (
           <option value="" disabled>
@@ -60,6 +68,7 @@ const Select: FC<SelectProps> = ({ field, handleInputChange, className }) => {
           </option>
         )}
       </select>
+      <ErrorText error={error} />
     </div>
   );
 };

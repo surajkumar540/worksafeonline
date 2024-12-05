@@ -1,7 +1,7 @@
-import { includes } from "@/utils/polyfills";
 import axios from "axios";
+import { includes } from "@/utils/polyfills";
 
-export const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const Get = async (url: string) => {
   try {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import { FaArrowRightLong } from "react-icons/fa6";
 import AnimatedActionButton from "../common/AnimatedActionButton";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   const customerLinks = [
@@ -187,12 +188,29 @@ const Footer = () => {
         >
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <p className="uppercase">Connect with us:</p>
-            <div className="flex space-x-3"></div>
+            <div className="flex space-x-3">
+              <div className="space-x-4 text-center flex justify-center w-full">
+                <Link href="#" className="hover:text-blue-500">
+                  <FaFacebook size={24} />
+                </Link>
+                <Link href="#" className="hover:text-blue-400">
+                  <FaTwitter size={24} />
+                </Link>
+                <Link href="#" className="hover:text-pink-500">
+                  <FaInstagram size={24} />
+                </Link>
+                <Link href="#" className="hover:text-blue-700">
+                  <FaLinkedin size={24} />
+                </Link>
+              </div>
+            </div>
           </div>
           <div>
             <p>Customer Service: (084) 123-456 88</p>
           </div>
         </div>
+
+
 
         <div className="bg-white text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
           <p className="text-gray-500">

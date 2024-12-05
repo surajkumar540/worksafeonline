@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
+import BreadcrumbsHeader from "@/app/product/components/BradcrumbsHeader";
 
 interface HeaderProps {
   title: string;
   subtitle?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
+const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <div
       style={{
@@ -24,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
       />
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="absolute inset-0 flex flex-col justify-between items-start p-4 md:p-6 lg:p-10 z-10 text-center max-w-9xl mx-auto ">
-        <h1 className="text-sm font-semibold uppercase">Home Page / Contact</h1>
+        <BreadcrumbsHeader text={"contact"} />
         <h1
           className={`text-7xl ${bigShoulders.className} uppercase font-extrabold`}
         >

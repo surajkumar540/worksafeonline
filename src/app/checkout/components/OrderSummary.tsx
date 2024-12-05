@@ -1,11 +1,17 @@
 "use client";
 
-import { bigShoulders } from "@/app/layout";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { bigShoulders } from "@/app/layout";
 
-const OrderSummary = ({ cart }: { cart: any }) => {
-  const navigate = useRouter();
+const OrderSummary = ({
+  cart,
+  loading,
+  handleSubmit,
+}: {
+  cart: any;
+  loading: boolean;
+  handleSubmit: any;
+}) => {
   const totalAmount =
     cart?.reduce((acc: any, item: any) => {
       if (typeof item?.EndPrice === "number") {
@@ -15,10 +21,6 @@ const OrderSummary = ({ cart }: { cart: any }) => {
         return acc;
       }
     }, 0) || 0;
-
-  const handleCheckout = () => {
-    console.log("Order Checkout:");
-  };
 
   return (
     <div className={`p-6 rounded-lg border-4 ${bigShoulders.className}`}>
@@ -62,10 +64,11 @@ const OrderSummary = ({ cart }: { cart: any }) => {
         .
       </p>
       <button
-        onClick={handleCheckout}
+        disabled={loading}
+        onClick={handleSubmit}
         className="w-full bg-primary font-sans hover:bg-primary/70 py-4 text-xs font-semibold rounded-full"
       >
-        PLACE ORDER
+        {loading ? "Please wait..." : "PLACE ORDER"}
       </button>
     </div>
   );

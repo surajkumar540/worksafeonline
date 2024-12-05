@@ -41,7 +41,7 @@ const CartModal = () => {
       setOpenCartModal(true);
     };
     const removeFromCartListener = (id: string) => {
-      setCart((prev) => prev.filter((item) => item.ID !== parseInt(id)));
+      setCart((prev) => prev.filter((item: any) => item.ID !== id));
     };
     if (typeof window !== "undefined" && eventEmitter) {
       eventEmitter.on("addToCart", cartListener);

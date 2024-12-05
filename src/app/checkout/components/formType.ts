@@ -2,32 +2,26 @@ import { countries } from "@/data/country";
 import { includes } from "@/utils/polyfills";
 
 export interface FormField {
-  name: string;
-  label: string;
   type:
-  | "text"
-  | "email"
-  | "richTextEditor"
-  | "password"
-  | "file"
-  | "date"
-  | "multipleFiles"
-  | "select"
-  | "checkbox"
-  | "radio"
-  | "number"
-  | "textarea"
-  | "choose"
-  | "stringNumeric";
+    | "text"
+    | "file"
+    | "date"
+    | "email"
+    | "radio"
+    | "select"
+    | "choose"
+    | "number"
+    | "password"
+    | "textarea"
+    | "checkbox"
+    | "stringNumeric";
   min?: number;
   max?: number;
+  name: string;
+  label: string;
   accept?: string;
-  maxFiles?: number;
-  maxSizeMB?: number;
   maxLength?: number;
-  widthFull?: boolean;
   multiple?: boolean;
-  isVideo?: boolean;
   required?: boolean;
   placeholder?: string;
   confirmPlaceholder?: string;
@@ -37,31 +31,45 @@ export interface FormField {
 
 export const formFields: FormField[] = [
   {
+    type: "text",
+    required: true,
     name: "firstName",
     label: "First Name",
-    type: "text",
     placeholder: "Enter your first name",
-    required: true,
+    validation: (value) => {
+      if (!value) return "First name is required";
+      if (value.length > 50) return "First name cannot exceed 50 characters";
+      return null;
+    },
   },
   {
+    type: "text",
+    required: true,
     name: "lastName",
     label: "Last Name",
-    type: "text",
     placeholder: "Enter your last name",
-    required: true,
+    validation: (value) => {
+      if (!value) return "Last name is required";
+      if (value.length > 50) return "Last name cannot exceed 50 characters";
+      return null;
+    },
   },
   {
-    name: "companyName",
     type: "text",
+    name: "companyName",
     label: "Company name (optional)",
     placeholder: "Enter your company name",
-    required: true,
+    validation: (value) => {
+      if (value && value.length > 100)
+        return "Company name cannot exceed 100 characters";
+      return null;
+    },
   },
   {
-    name: "countryCode",
-    label: "Country / Region",
     type: "select",
     required: true,
+    name: "countryCode",
+    label: "Country / Region",
     placeholder: "Select Country",
     options: countries.map((country: any) => ({
       value: country.name,
@@ -69,58 +77,103 @@ export const formFields: FormField[] = [
     })),
   },
   {
+    type: "text",
+    required: true,
     name: "addressLine1",
     label: "Address Line 1",
-    type: "text",
     placeholder: "House number and street name",
-    required: true,
+    validation: (value) => {
+      if (!value) return "Address Line 1 is required";
+      if (value.length > 255)
+        return "Address Line 1 cannot exceed 255 characters";
+      return null;
+    },
   },
   {
+    type: "text",
     name: "addressLine2",
     label: "Address Line 2 (optional)",
-    type: "text",
     placeholder: "Apartment, suite, unit, etc. (optional)",
+    validation: (value) => {
+      if (value && value.length > 255)
+        return "Address Line 2 cannot exceed 255 characters";
+      return null;
+    },
   },
   {
     name: "city",
-    label: "Town / City",
     type: "text",
-    placeholder: "Enter your city",
     required: true,
+    label: "Town / City",
+    placeholder: "Enter your city",
+    validation: (value) => {
+      if (!value) return "City is required";
+      if (value.length > 50) return "City name cannot exceed 50 characters";
+      return null;
+    },
   },
   {
+    type: "text",
     name: "state",
     label: "State",
-    type: "text",
-    placeholder: "Enter your state",
     required: true,
+    placeholder: "Enter your state",
+    validation: (value) => {
+      if (!value) return "State is required";
+      if (value.length > 50) return "State name cannot exceed 50 characters";
+      return null;
+    },
   },
   {
+    type: "text",
+    required: true,
     name: "zipcode",
     label: "Zip Code",
-    type: "text",
     placeholder: "Enter zip code",
-    required: true,
+    validation: (value) => {
+      if (!value) return "Zip code is required";
+      if (value.length < 5 || value.length > 10)
+        return "Zip code must be between 5 and 10 characters";
+      return null;
+    },
   },
   {
-    name: "phomenumber",
-    label: "Phone",
     type: "text",
-    placeholder: "Enter your phone number",
     required: true,
+    label: "Phone",
+    name: "phomenumber",
+    placeholder: "Enter your phone number",
+    validation: (value) => {
+      if (!value) return "Phone number is required";
+      const phoneRegEx = /^[0-9]{10,15}$/;
+      if (!phoneRegEx.test(value))
+        return "Phone number must be between 10 and 15 digits";
+      return null;
+    },
   },
   {
     name: "email",
-    label: "Email address",
     type: "email",
+    required: true,
+    label: "Email address",
     placeholder: "Enter your email",
-    validation: (value) => (includes(value, "@") ? null : "Invalid email"),
+    validation: (value) => {
+      if (!value) return "Email address is required";
+      if (value.length > 320)
+        return "Email address cannot exceed 320 characters";
+      if (!includes(value, "@")) return "Invalid email address";
+      return null;
+    },
   },
   {
+    type: "textarea",
     name: "orderNotes",
     label: "Order notes (optional)",
-    type: "textarea",
     placeholder: "Notes about your order, e.g. special notes for delivery.",
-    required: true,
+    validation: (value) => {
+      if (value && value.length > 500)
+        return "Order notes cannot exceed 500 characters";
+      return null;
+    },
   },
 ];
