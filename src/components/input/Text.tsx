@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { bigShoulders } from "@/app/layout";
+import ErrorText from "@/app/checkout/components/Error";
 
 interface TextProps {
   field: {
@@ -11,11 +12,17 @@ interface TextProps {
     isDisabled?: boolean;
     defaultValue?: string;
   };
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
   className?: string;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Text: FC<TextProps> = ({ field, handleInputChange, className }) => {
+const Text: FC<TextProps> = ({
+  error,
+  field,
+  className,
+  handleInputChange,
+}) => {
   return (
     <div className="relative">
       <label
@@ -36,6 +43,7 @@ const Text: FC<TextProps> = ({ field, handleInputChange, className }) => {
         onChange={handleInputChange}
         className={`border border-gray-300 text-lg rounded-full p-3 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className}`}
       />
+      <ErrorText error={error} />
     </div>
   );
 };

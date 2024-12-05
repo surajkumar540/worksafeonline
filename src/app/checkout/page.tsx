@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Features from "@/components/common/Features";
 import CheckoutForm from "./components/CheckoutForm";
 import OrderSummary from "./components/OrderSummary";
+// import PayPalCheckout from "@/components/payment/PayPalCheckout";
 
 export default function Page() {
   const [cart, setCart] = useState<any>([]);
@@ -25,15 +26,11 @@ export default function Page() {
         >
           checkout
         </h1>
-        <div className="flex flex-col lg:flex-row lg:gap-20 mt-5 md:mt-10">
-          <div className="w-full lg:w-3/5">
-            <CheckoutForm />
-          </div>
-          <div className="w-full lg:w-2/5">
-            <OrderSummary cart={cart} />
-          </div>
-        </div>
+        <CheckoutForm cart={cart} />
       </div>
+      {/* <div className="flex items-center justify-center">
+        <PayPalCheckout />
+      </div> */}
       <Features />
     </>
   );
