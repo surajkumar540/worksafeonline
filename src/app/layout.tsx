@@ -28,6 +28,7 @@ export const bigShoulders = Big_Shoulders_Text({
 import "react-toastify/dist/ReactToastify.css"; // Import toastify styles
 import { ToastContainer } from "react-toastify";
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
+        <Link rel="icon" href="/logo.ico" />
         <Link
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap"
           rel="stylesheet"
