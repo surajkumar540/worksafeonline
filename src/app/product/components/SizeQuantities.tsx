@@ -38,7 +38,7 @@ const SizeQuantities = ({
 
     setQuantities((prev) => {
       const currentQuantity = prev[size.Size] || 0;
-      if (currentQuantity < 10) {
+      if (currentQuantity < size.qty) {
         const newQuantity = currentQuantity + 1;
         const updatedSize = { ...size, quantity: newQuantity };
 
