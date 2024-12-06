@@ -160,7 +160,7 @@ const PrivacyPolicy: React.FC = () => {
         </section>
       </div>
       <div>
-        <p className="mb-4">
+        <div className="mb-4">
           <h2
             className={`text-3xl tracking-wide font-bold text-gray-800  ${bigShoulders.className}`}
           >
@@ -173,7 +173,7 @@ const PrivacyPolicy: React.FC = () => {
           control these third-party websites and are not responsible for their
           privacy statements. When you leave our website, we encourage you to
           read the privacy policy of every website you visit.
-        </p>
+        </div>
 
         <h3
           className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}

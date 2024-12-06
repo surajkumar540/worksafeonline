@@ -24,7 +24,7 @@ const Footer = () => {
 
   const quickLinks = [
     { label: "Search", href: "/search" },
-    { label: "Become a Reseller", href: "/about-us" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "About Us", href: "/about-us" },
     { label: "Contact Us", href: "/contact" },
     { label: "Terms of Service", href: "/terms-and-conditions" },
