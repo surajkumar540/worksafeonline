@@ -87,7 +87,7 @@ export const handleAddToCart = (product: Product) => {
     }
     const productData: Cart = {
       createdAt: new Date(),
-      Size: product?.Size ?? {},
+      Size: product?.Size ?? [],
       Color: product?.Color ?? {},
       EndPrice: product?.EndPrice,
       ID: product.Style ?? product.ID,
