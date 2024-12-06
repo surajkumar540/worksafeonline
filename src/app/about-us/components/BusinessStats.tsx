@@ -4,7 +4,7 @@ import { bigShoulders } from "@/app/layout";
 import { useEffect, useMemo, useState } from "react";
 const BusinessStats: React.FC = () => {
 
-    const [progress, setProgress] = useState([0, 0, 120, 70]); // Array to manage multiple progress values
+    const [progress, setProgress] = useState([0, 0, 110, 65]); // Array to manage multiple progress values
 
     // Memoize the progress values
     const progressValues = useMemo(() => [24, 12, 135, 89], []);
@@ -25,7 +25,7 @@ const BusinessStats: React.FC = () => {
     return (
         <div
             style={{
-                clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
+                clipPath: "polygon(0 5%, 100% 0, 100% 90%, 0 100%)",
                 overflow: "hidden",
             }}
             className="relative  text-white w-full  h-[700px] sm:h-[400px]"

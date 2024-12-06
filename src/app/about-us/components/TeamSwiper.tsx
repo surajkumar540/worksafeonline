@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,7 +13,6 @@ import {
 } from "react-icons/fa6";
 import Image from "next/image";
 
-// Define the product type
 interface Product {
   id: number;
   name: string;
@@ -20,7 +20,6 @@ interface Product {
   imageUrl: string;
 }
 
-// Props type for OurTeamSwiper
 interface OurTeamSwiperProps {
   slidesPerViewDesktop?: number;
 }
@@ -28,44 +27,78 @@ interface OurTeamSwiperProps {
 const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
   slidesPerViewDesktop,
 }) => {
-  // Static array of products
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      designation: "Designer",
-      imageUrl:
-        "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      designation: "Developer",
-      imageUrl:
-        "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      designation: "Manager",
-      imageUrl:
-        "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      designation: "Photographer",
-      imageUrl:
-        "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg",
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  if (!products || products.length === 0)
+  // Simulating an API call
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      // Simulating delay
+      setTimeout(() => {
+        setProducts([
+          {
+            id: 1,
+            name: "Product 1",
+            designation: "Designer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg",
+          },
+          {
+            id: 2,
+            name: "Product 2",
+            designation: "Developer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg",
+          },
+          {
+            id: 3,
+            name: "Product 3",
+            designation: "Manager",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg",
+          },
+          {
+            id: 4,
+            name: "Product 4",
+            designation: "Photographer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg",
+          },
+        ]);
+        setIsLoading(false);
+      }, 0); // Simulated 2-second delay
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {[...Array(4)].map((_, index) => (
+          <div
+            key={index}
+            className="relative border rounded-lg overflow-hidden shadow-lg animate-pulse bg-gray-300"
+          >
+            <div className="w-full h-[300px] bg-gray-400"></div>
+            <div className="p-4 space-y-4">
+              <div className="h-6 bg-gray-500 w-1/2 rounded"></div>
+              <div className="h-4 bg-gray-500 w-2/3 rounded"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (!products || products.length === 0) {
     return (
       <div className="text-center text-gray-500">
         <p>No Teams available at the moment.</p>
       </div>
     );
+  }
 
   return (
     <div>
@@ -121,14 +154,14 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
                 height={100}
                 width={100}
                 unoptimized
-                className="object-cover w-full "
+                className="object-cover w-full"
               />
               <div className="absolute top-4 right-4 bg-opacity-60 text-white px-4 py-2 rounded-md flex flex-col items-end justify-end">
                 <p className="font-bold text-3xl">{product.name}</p>
                 <p>{product.designation}</p>
               </div>
               <div className="absolute bottom-0 w-full h-full">
-                <div className="relative font-sans uppercase font-semibold w-full border-black/10 pt-20 flex justify-center overflow-hidden group  h-full">
+                <div className="relative font-sans uppercase font-semibold w-full border-black/10 pt-20 flex justify-center overflow-hidden group h-full">
                   <span className="absolute whitespace-nowrap w-[80%] bottom-0 transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] bg-white group-hover:opacity-100 opacity-0 translate-y-0 py-3 rounded-full p-3">
                     <div className="space-x-4 text-center flex justify-center w-full">
                       <a href="#" className="hover:text-blue-500">
