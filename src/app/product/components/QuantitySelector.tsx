@@ -1,10 +1,10 @@
 "use client";
 
 import { Product } from "@/types/api";
-import ProductSizes from "./ProductSizes";
 import ProductColors from "./ProductColor";
 import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
+import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 import Logo from "@/components/customisation/Logo";
@@ -21,7 +21,7 @@ const QuantitySelector = ({
     ProductActualPrice: product.ProductActualPrice,
   });
   const [selectedFields, setSelectedFields] = useState({
-    size: {},
+    size: [],
     color: {},
     fitting: {},
   });
@@ -96,8 +96,15 @@ const QuantitySelector = ({
           productColors={product?.ProductColour}
         />
       )}
-      {product?.ProductSizes.length > 0 && (
+      {/* {product?.ProductSizes.length > 0 && (
         <ProductSizes
+          sizes={product?.ProductSizes}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+        />
+      )} */}
+      {product?.ProductSizes.length > 0 && (
+        <SizeQuantities
           sizes={product?.ProductSizes}
           selectedFields={selectedFields}
           setSelectedFields={setSelectedFields}
@@ -111,21 +118,23 @@ const QuantitySelector = ({
         />
       )}
       <div className="flex text-center py-5 gap-3">
-        <div className="w-[150px] text-xl flex gap-5 rounded-full justify-center items-center bg-[#F5F5F5] font-bold">
-          <button
-            className="w-full rounded-l-full h-full px-2 pl-4"
-            onClick={decreaseCount}
-          >
-            -
-          </button>
-          <h3>{countItem}</h3>
-          <button
-            className="w-full rounded-r-full h-full px-2 pr-4"
-            onClick={increaseCount}
-          >
-            +
-          </button>
-        </div>
+        {product?.ProductSizes.length === 1 && (
+          <div className="w-[150px] text-xl flex gap-5 rounded-full justify-center items-center bg-[#F5F5F5] font-bold">
+            <button
+              className="w-full rounded-l-full h-full px-2 pl-4"
+              onClick={decreaseCount}
+            >
+              -
+            </button>
+            <h3>{countItem}</h3>
+            <button
+              className="w-full rounded-r-full h-full px-2 pr-4"
+              onClick={increaseCount}
+            >
+              +
+            </button>
+          </div>
+        )}
         <AddToCartButton
           quantity={countItem}
           selectedFields={selectedFields}
