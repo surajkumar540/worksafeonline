@@ -10,24 +10,19 @@ const Footer = () => {
     { label: "Help Center", href: "/faqs" },
     { label: "My Account", href: "/my-account" },
     { label: "Track My Order", href: "/order-tracking" },
-    { label: "Return Policy", href: "/refund-policy" },
-    { label: "Gift Cards", href: "/my-account" },
   ];
 
   const aboutLinks = [
     { label: "Company Info", href: "/about-us" },
-    { label: "Press Releases", href: "/about-us" },
     { label: "Careers", href: "/about-us" },
     { label: "Reviews", href: "/about-us" },
-    { label: "Investor Relations", href: "/about-us" },
   ];
 
   const quickLinks = [
-    { label: "Search", href: "/search" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "About Us", href: "/about-us" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Terms of Service", href: "/terms-and-conditions" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions" },
   ];
 
   // const socialIcons = [
