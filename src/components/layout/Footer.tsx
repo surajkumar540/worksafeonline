@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import AnimatedActionButton from "../common/AnimatedActionButton";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const customerLinks = [

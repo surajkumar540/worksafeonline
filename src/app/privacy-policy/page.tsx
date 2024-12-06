@@ -1,4 +1,4 @@
- import { Get } from "@/api/generalApi";
+import { Get } from "@/api/generalApi";
 
 import { bigShoulders } from "../layout";
 
@@ -9,7 +9,7 @@ export async function generateMetadata() {
     keywords: pageData?.keyword,
     description: pageData?.descriptions,
     alternates: {
-      canonical:" https://www.worksafeonline.co.uk/privacy-policy",
+      canonical: " https://www.worksafeonline.co.uk/privacy-policy",
     },
     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
     icons: {
@@ -86,9 +86,9 @@ const PrivacyPolicy: React.FC = () => {
             Controller
           </h2>
           <p className="text-gray-700">
-            The Company is the controller and responsible for your personal data
+            {` The Company is the controller and responsible for your personal data
             (collectively referred to as "we", "us" or "our" in this privacy
-            policy).
+            policy).`}
           </p>
           <p className="text-gray-700 pt-5">
             We have appointed a Compliance Manager who is responsible for
@@ -112,30 +112,42 @@ const PrivacyPolicy: React.FC = () => {
               ways:
             </p>
             <br />
-            <strong>Name of Compliance Manger:</strong> Matthew Stevens
+            <strong className="text-lg tracking-wide">
+              Name of Compliance Manger:
+            </strong>{" "}
+            Matthew Stevens
             <br />
-            <strong>Full name of legal entity:</strong> Worksafe Direct (UK)
-            Limited (company number: 07995116)
+            <strong className="text-lg tracking-wide">
+              Full name of legal entity:
+            </strong>{" "}
+            Worksafe Direct (UK) Limited (company number: 07995116)
             <br />
-            <strong>Email address:</strong> Matt@worksafeonline.co.uk
+            <strong className="text-lg tracking-wide">
+              Email address:
+            </strong>{" "}
+            Matt@worksafeonline.co.uk
             <br />
-            <strong>Postal Address:</strong> St James Road, St James Industrial
-            Estate, Corby, Northamptonshire, NN18 8AL
+            <strong className="text-lg tracking-wide">
+              Postal Address:
+            </strong>{" "}
+            St James Road, St James Industrial Estate, Corby, Northamptonshire,
+            NN18 8AL
             <br />
-            <strong>Telephone:</strong> 01536 203888
+            <strong className="text-lg tracking-wide">Telephone:</strong> 01536
+            203888
           </div>
           <p className="text-gray-700 mt-4">
-            You have the right to make a complaint at any time to the
+            {` You have the right to make a complaint at any time to the
             Information Commissioner's Office (ICO), the UK supervisory
             authority for data protection issues (www.ico.org.uk). We would,
             however, appreciate the chance to deal with your concerns before you
-            approach the ICO so please contact us in the first instance.
+            approach the ICO so please contact us in the first instance.`}
           </p>
         </section>
 
         <section className="my-5 border-b border-gray-200 pb-5">
           <h2
-            className={`text-3xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+            className={`text-3xl tracking-wide font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
           >
             Changes to the privacy policy and your duty to inform us of changes{" "}
           </h2>
@@ -149,18 +161,11 @@ const PrivacyPolicy: React.FC = () => {
       </div>
       <div>
         <p className="mb-4">
-          <strong>
-            Changes to the privacy policy and your duty to inform us of changes
-          </strong>
-          <br />
-          We keep our privacy policy under regular review. It is important that
-          the personal data we hold about you is accurate and current. Please
-          keep us informed if your personal data changes during your
-          relationship with us.
-        </p>
-
-        <p className="mb-4">
-          <strong>Third-party links</strong>
+          <h2
+            className={`text-3xl tracking-wide font-bold text-gray-800  ${bigShoulders.className}`}
+          >
+            Third-party links
+          </h2>
           <br />
           This website may include links to third-party websites, plug-ins and
           applications. Clicking on those links or enabling those connections
@@ -188,43 +193,46 @@ const PrivacyPolicy: React.FC = () => {
         </p>
         <ul className="list-inside list-disc mb-4">
           <li>
-            <strong>Identity Data:</strong> first name, maiden name, last name,
-            username or similar identifier, marital status, title, date of
-            birth, and gender.
+            <strong className="text-lg tracking-wide">Identity Data:</strong>{" "}
+            first name, maiden name, last name, username or similar identifier,
+            marital status, title, date of birth, and gender.
           </li>
           <li>
-            <strong>Contact Data:</strong> billing address, delivery address,
-            email address, and telephone numbers.
+            <strong className="text-lg tracking-wide">Contact Data:</strong>{" "}
+            billing address, delivery address, email address, and telephone
+            numbers.
           </li>
           <li>
-            <strong>Financial Data:</strong> bank account and payment card
-            details.
+            <strong className="text-lg tracking-wide">Financial Data:</strong>{" "}
+            bank account and payment card details.
           </li>
           <li>
-            <strong>Transaction Data:</strong> details about payments to and
-            from you and other details of products and services you have
-            purchased from us.
+            <strong className="text-lg tracking-wide">Transaction Data:</strong>{" "}
+            details about payments to and from you and other details of products
+            and services you have purchased from us.
           </li>
           <li>
-            <strong>Technical Data:</strong> internet protocol (IP) address,
-            your login data, browser type and version, time zone setting and
-            location, browser plug-in types and versions, operating system and
-            platform, and other technology on the devices you use to access this
-            website.
+            <strong className="text-lg tracking-wide">Technical Data:</strong>{" "}
+            internet protocol (IP) address, your login data, browser type and
+            version, time zone setting and location, browser plug-in types and
+            versions, operating system and platform, and other technology on the
+            devices you use to access this website.
           </li>
           <li>
-            <strong>Profile Data:</strong> your username and password, purchases
-            or orders made by you, your interests, preferences, feedback, and
-            survey responses.
+            <strong className="text-lg tracking-wide">Profile Data:</strong>{" "}
+            your username and password, purchases or orders made by you, your
+            interests, preferences, feedback, and survey responses.
           </li>
           <li>
-            <strong>Usage Data:</strong> information about how you use our
-            website, products, and services.
+            <strong className="text-lg tracking-wide">Usage Data:</strong>{" "}
+            information about how you use our website, products, and services.
           </li>
           <li>
-            <strong>Marketing and Communications Data:</strong> your preferences
-            in receiving marketing from us and our third parties and your
-            communication preferences.
+            <strong className="text-lg tracking-wide">
+              Marketing and Communications Data:
+            </strong>{" "}
+            your preferences in receiving marketing from us and our third
+            parties and your communication preferences.
           </li>
         </ul>
 
@@ -274,10 +282,12 @@ const PrivacyPolicy: React.FC = () => {
         </p>
         <ul className="list-inside list-disc mb-4">
           <li>
-            <strong>(a) Direct interactions:</strong> You may give us your
-            Identity, Contact and Financial Data by filling in forms or by
-            corresponding with us by post, phone, email or otherwise. This
-            includes personal data you provide when you:
+            <strong className="text-lg tracking-wide">
+              (a) Direct interactions:
+            </strong>{" "}
+            You may give us your Identity, Contact and Financial Data by filling
+            in forms or by corresponding with us by post, phone, email or
+            otherwise. This includes personal data you provide when you:
             <ul className="list-inside list-disc">
               <li>apply for our products or services;</li>
               <li>create an account on our website;</li>
@@ -288,17 +298,21 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
           </li>
           <li>
-            <strong>(b) Automated technologies or interactions:</strong> As you
-            interact with our website, we will automatically collect Technical
-            Data about your equipment, browsing actions and patterns. We collect
-            this personal data by using cookies, server logs and other similar
-            technologies. We may also receive Technical Data about you if you
-            visit other websites employing our cookies.
+            <strong className="text-lg tracking-wide">
+              (b) Automated technologies or interactions:
+            </strong>{" "}
+            As you interact with our website, we will automatically collect
+            Technical Data about your equipment, browsing actions and patterns.
+            We collect this personal data by using cookies, server logs and
+            other similar technologies. We may also receive Technical Data about
+            you if you visit other websites employing our cookies.
           </li>
           <li>
-            <strong>(c) Third parties or publicly available sources:</strong> We
-            will receive personal data about you from various third parties and
-            public sources as set out below:
+            <strong className="text-lg tracking-wide">
+              (c) Third parties or publicly available sources:
+            </strong>{" "}
+            We will receive personal data about you from various third parties
+            and public sources as set out below:
             <ul className="list-inside list-disc">
               <li>
                 Technical Data from analytics providers such as Google based
@@ -621,20 +635,20 @@ const PrivacyPolicy: React.FC = () => {
         <p className="text-gray-600 mb-4">You have the right to:</p>
         <ul className="list-disc pl-5 space-y-4 text-gray-700">
           <li>
-            <span className="font-semibold">Request access</span> to your
+            <span className="font-semibold text-lg tracking-wide">Request access</span> to your
             personal data (commonly known as a{" "}
-            <span className="italic">"data subject access request"</span>). This
-            enables you to receive a copy of the personal data we hold about you
-            and to check that we are lawfully processing it.
+            <span className="italic">{`"data subject access request"`}</span>).
+            This enables you to receive a copy of the personal data we hold
+            about you and to check that we are lawfully processing it.
           </li>
           <li>
-            <span className="font-semibold">Request correction</span> of the
+            <span className="font-semibold text-lg tracking-wide">Request correction</span> of the
             personal data that we hold about you. This enables you to have any
             incomplete or inaccurate data we hold about you corrected, though we
             may need to verify the accuracy of the new data you provide to us.
           </li>
           <li>
-            <span className="font-semibold">Request erasure</span> of your
+            <span className="font-semibold text-lg tracking-wide">Request erasure</span> of your
             personal data. This enables you to ask us to delete or remove
             personal data where there is no good reason for us continuing to
             process it. You also have the right to ask us to delete or remove
@@ -647,7 +661,7 @@ const PrivacyPolicy: React.FC = () => {
             at the time of your request.
           </li>
           <li>
-            <span className="font-semibold">Object to processing</span> of your
+            <span className="font-semibold text-lg tracking-wide">Object to processing</span> of your
             personal data where we are relying on a legitimate interest (or
             those of a third party) and there is something about your particular
             situation which makes you want to object to processing on this
@@ -658,12 +672,12 @@ const PrivacyPolicy: React.FC = () => {
             your information which override your rights and freedoms.
           </li>
           <li>
-            <span className="font-semibold">Request restriction</span> of
+            <span className="font-semibold text-lg tracking-wide">Request restriction</span> of
             processing of your personal data. This enables you to ask us to
             suspend the processing of your personal data in the following
             scenarios:
             <ul className="list-decimal pl-8 space-y-2 mt-2">
-              <li>If you want us to establish the data's accuracy.</li>
+              <li>{`If you want us to establish the data's accuracy.`}</li>
               <li>
                 Where our use of the data is unlawful but you do not want us to
                 erase it.
@@ -680,7 +694,7 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
           </li>
           <li>
-            <span className="font-semibold">Request the transfer</span> of your
+            <span className="font-semibold text-lg tracking-wide">Request the transfer</span> of your
             personal data to you or to a third party. We will provide to you, or
             a third party you have chosen, your personal data in a structured,
             commonly used, machine-readable format. Note that this right only
@@ -689,7 +703,7 @@ const PrivacyPolicy: React.FC = () => {
             contract with you.
           </li>
           <li>
-            <span className="font-semibold">Withdraw consent</span> at any time
+            <span className="font-semibold text-lg tracking-wide">Withdraw consent</span> at any time
             where we are relying on consent to process your personal data.
             However, this will not affect the lawfulness of any processing
             carried out before you withdraw your consent. If you withdraw your

@@ -39,19 +39,21 @@ const TermsAndConditions: React.FC = () => {
             1. THESE TERMS
           </h2>
           <p className="mb-4">
-            1.1 These are the terms and conditions on which we supply products
-            to you, whether these are goods or services.
+            <strong>1.1 </strong> These are the terms and conditions on which we
+            supply products to you, whether these are goods or services.
           </p>
           <p className="mb-4">
-            1.2 Please read these terms carefully before you submit your order
-            to us. These terms tell you who we are, how we will provide products
-            to you, how you or we may change or end the contract, what to do if
+            <strong>1.2 </strong>
+            Please read these terms carefully before you submit your order to
+            us. These terms tell you who we are, how we will provide products to
+            you, how you or we may change or end the contract, what to do if
             there is a problem, and other important information. If you think
             there is a mistake in these terms, please contact us to discuss
             this, by any of the methods listed in clause 2.1.
           </p>
           <p className="mb-4">
-            1.3 In some areas, you will have different rights under these terms
+            <strong>1.3 </strong>
+            In some areas, you will have different rights under these terms
             depending on whether you are a business or consumer customer. You
             are a consumer customer if:
           </p>
@@ -64,16 +66,17 @@ const TermsAndConditions: React.FC = () => {
             </li>
           </ol>
           <p className="mb-4">
-            1.4 If you are a business customer, these terms and conditions apply
-            to the contract between you and us, to the exclusion of any other
-            terms that you seek to impose or incorporate, or which are implied
-            by trade, custom, practice, or course of dealing. These terms also
-            constitute the entire agreement between us in relation to your
-            purchase. You acknowledge that you have not relied on any statement,
-            promise, representation, assurance, or warranty made or given by or
-            on behalf of us, which is not set out in these terms, and that you
-            shall have no claim for innocent or negligent misrepresentation
-            based on any statement in this agreement.
+            <strong>1.4 </strong> If you are a business customer, these terms
+            and conditions apply to the contract between you and us, to the
+            exclusion of any other terms that you seek to impose or incorporate,
+            or which are implied by trade, custom, practice, or course of
+            dealing. These terms also constitute the entire agreement between us
+            in relation to your purchase. You acknowledge that you have not
+            relied on any statement, promise, representation, assurance, or
+            warranty made or given by or on behalf of us, which is not set out
+            in these terms, and that you shall have no claim for innocent or
+            negligent misrepresentation based on any statement in this
+            agreement.
           </p>
         </section>
 
@@ -84,12 +87,12 @@ const TermsAndConditions: React.FC = () => {
             2. INFORMATION ABOUT US AND HOW TO CONTACT US
           </h2>
           <p className="mb-4">
-            2.1 We are Worksafe Direct (UK) Limited (company number: 07995116)
-            trading as Worksafe, whose registered office is at St James Road, St
-            James Industrial Estate, Corby, Northamptonshire, NN18 8AL. You can
-            contact us by telephone on 01536 203 888, in writing at Worksafe
-            Direct (UK) Limited, St James Road, St James Industrial Estate,
-            Corby, Northamptonshire, NN18 8AL, or by email to{" "}
+            <strong>2.1 </strong> We are Worksafe Direct (UK) Limited (company
+            number: 07995116) trading as Worksafe, whose registered office is at
+            St James Road, St James Industrial Estate, Corby, Northamptonshire,
+            NN18 8AL. You can contact us by telephone on 01536 203 888, in
+            writing at Worksafe Direct (UK) Limited, St James Road, St James
+            Industrial Estate, Corby, Northamptonshire, NN18 8AL, or by email to{" "}
             <a
               href="mailto:sales@worksafeonline.co.uk"
               className="text-blue-500 underline"
@@ -99,12 +102,13 @@ const TermsAndConditions: React.FC = () => {
             .
           </p>
           <p className="mb-4">
-            2.2 If we have to contact you, we will do so by telephone or by
-            writing to you at the email address or postal address you provided
-            to us in your order.
+            <strong>2.2 </strong>If we have to contact you, we will do so by
+            telephone or by writing to you at the email address or postal
+            address you provided to us in your order.
           </p>
           <p className="mb-4">
-            {`  2.3 When we use the words "writing" or "written" in these terms,
+            <strong>2.3 </strong>{" "}
+            {` When we use the words "writing" or "written" in these terms,
             this includes emails.`}
           </p>
         </section>
@@ -116,21 +120,24 @@ const TermsAndConditions: React.FC = () => {
             3. OUR CONTRACT WITH YOU
           </h2>
           <p className="mb-4">
-            3.1 Our acceptance of your order will take place when we email you
-            to accept it, at which point a contract will come into existence
-            between you and us. If we are unable to accept your order, we will
-            inform you of this and will not charge you for the product.
+            <strong>3.1 </strong> Our acceptance of your order will take place
+            when we email you to accept it, at which point a contract will come
+            into existence between you and us. If we are unable to accept your
+            order, we will inform you of this and will not charge you for the
+            product.
           </p>
           <p className="mb-4">
-            3.2 We will assign an order number to your order and tell you what
-            it is when we accept your order. It will help us if you quote your
-            order number whenever you contact us about your order.
+            <strong>3.2 </strong> We will assign an order number to your order
+            and tell you what it is when we accept your order. It will help us
+            if you quote your order number whenever you contact us about your
+            order.
           </p>
           <p className="mb-4">
-            3.3 On most occasions, we do not accept orders outside the UK.
-            However, in limited circumstances, we are able to deliver products
-            outside the UK. If you require any products to be delivered outside
-            of the UK, please contact us prior to placing your order.
+            <strong>3.3 </strong> On most occasions, we do not accept orders
+            outside the UK. However, in limited circumstances, we are able to
+            deliver products outside the UK. If you require any products to be
+            delivered outside of the UK, please contact us prior to placing your
+            order.
           </p>
         </section>
 
@@ -141,18 +148,21 @@ const TermsAndConditions: React.FC = () => {
             4. OUR PRODUCTS
           </h2>
           <p className="mb-4">
-            {`  4.1 The images of the products on our website are for illustrative
+            <strong>4.1 </strong>{" "}
+            {`The images of the products on our website are for illustrative
             purposes only. Although we have made every effort to display the
             colours accurately, we cannot guarantee that a device's display of
             the colours accurately reflects the colour of the products. Your
             product may vary slightly from those images.`}
           </p>
           <p className="mb-4">
-            4.2 The packaging of the product may also vary from any images shown
-            on our website, at our warehouse, or in our brochure.
+            <strong>4.2 </strong>
+            The packaging of the product may also vary from any images shown on
+            our website, at our warehouse, or in our brochure.
           </p>
           <p className="mb-4">
-            4.3 If we are making the products to your specification, you are
+            <strong>4.3 </strong>
+            If we are making the products to your specification, you are
             responsible for ensuring that any measurements supplied to us are
             correct and accurate.
           </p>
@@ -197,14 +207,16 @@ const TermsAndConditions: React.FC = () => {
             7. PROVIDING THE PRODUCTS
           </h2>
           <p className="mb-4">
-            7.1 If you have asked to collect the products from our premises, you
-            can collect them from us at any time during our normal working
-            hours, which are Monday to Friday 8:00 am to 5:00 pm and Saturday
-            8:00 am to 12:00 pm, and you must do so within 10 days of us
-            notifying you that the products are ready for collection.
+            <strong>7.1 </strong>
+            If you have asked to collect the products from our premises, you can
+            collect them from us at any time during our normal working hours,
+            which are Monday to Friday 8:00 am to 5:00 pm and Saturday 8:00 am
+            to 12:00 pm, and you must do so within 10 days of us notifying you
+            that the products are ready for collection.
           </p>
           <div className="mb-4">
-            7.2 If you have requested the products to be delivered to you:
+            <strong>7.2 </strong>
+            If you have requested the products to be delivered to you:
             <ol className="list-disc pl-6 mb-4">
               <li>
                 (a) if the products are goods, we will contact you with an
@@ -227,31 +239,34 @@ const TermsAndConditions: React.FC = () => {
             </ol>
           </div>
           <p className="mb-4">
-            7.3 If you are not at home when the product is delivered and the
+            <strong>7.3 </strong>
+            If you are not at home when the product is delivered and the
             products cannot be posted through your letterbox, we will try to
             rearrange delivery, or if possible, you may collect them from our
             store.
           </p>
           <p className="mb-4">
-            7.4 If you do not collect the products from us as required in clause
-            7.1 or if, after a failed delivery to you, you do not rearrange
-            delivery or collection of the product in accordance with clause 7.3,
-            we will contact you for further instructions and may charge you for
-            storage costs and any further delivery costs. If, despite our
-            reasonable efforts, we are unable to contact you or rearrange
-            delivery or collection, we may end the contract and clause 13.2 will
-            apply.
+            <strong>7.4 </strong>
+            If you do not collect the products from us as required in clause 7.1
+            or if, after a failed delivery to you, you do not rearrange delivery
+            or collection of the product in accordance with clause 7.3, we will
+            contact you for further instructions and may charge you for storage
+            costs and any further delivery costs. If, despite our reasonable
+            efforts, we are unable to contact you or rearrange delivery or
+            collection, we may end the contract and clause 13.2 will apply.
           </p>
           <p className="mb-4">
-            7.5 If you have ordered services and you do not allow us access to
-            your property to perform the services as arranged (and you do not
-            have a good reason for this), we may charge you additional costs
-            incurred by us as a result. If, despite our reasonable efforts, we
-            are unable to contact you or rearrange access to your property, we
-            may end the contract and clause 13.2 will apply.
+            <strong>7.5 </strong>
+            If you have ordered services and you do not allow us access to your
+            property to perform the services as arranged (and you do not have a
+            good reason for this), we may charge you additional costs incurred
+            by us as a result. If, despite our reasonable efforts, we are unable
+            to contact you or rearrange access to your property, we may end the
+            contract and clause 13.2 will apply.
           </p>
           <p className="mb-4">
-            7.6 If our supply of the products is delayed by an event outside our
+            <strong>7.6 </strong>
+            If our supply of the products is delayed by an event outside our
             control, then we will contact you as soon as possible to let you
             know, and we will take steps to minimize the effect of the delay.
             Provided we do this, we will not be liable for delays caused by the
@@ -270,7 +285,8 @@ const TermsAndConditions: React.FC = () => {
           </h2>
           <div className="space-y-4">
             <p>
-              <strong>8.1 Delivery of the products shall be completed:</strong>
+              <strong>8.1 </strong>
+              Delivery of the products shall be completed:
             </p>
             <ol className="list-disc pl-6">
               <li>
@@ -326,7 +342,8 @@ const TermsAndConditions: React.FC = () => {
           </h2>
           <div className="space-y-4">
             <p>
-              <strong>9.1 Delivery of the products shall be completed:</strong>
+              <strong>9.1</strong>
+              Delivery of the products shall be completed:
             </p>
             <ol className="list-disc pl-6">
               <li>
@@ -419,8 +436,9 @@ const TermsAndConditions: React.FC = () => {
             12. OUR RIGHTS TO SUSPEND DELIVERY OF THE PRODUCTS
           </h2>
           <p className="text-lg mb-4">
-            12.1 We may need certain information from you so that we can supply
-            the products to you, for example, your address or any embroidery
+            <strong>12.1 </strong>
+            We may need certain information from you so that we can supply the
+            products to you, for example, your address or any embroidery
             requirements. If so, this will have been stated in the description
             of the products on our website. If you do not give us this
             information within a reasonable time of us asking for it, or if you
@@ -433,7 +451,8 @@ const TermsAndConditions: React.FC = () => {
             time of us asking for it.
           </p>
           <div className="text-lg mb-4">
-            12.2 We may have to suspend the supply of a product to:
+            <strong>12.2 </strong>
+            We may have to suspend the supply of a product to:
             <ol className="list-disc pl-8">
               <li>
                 deal with technical problems or make minor technical changes;
@@ -449,8 +468,9 @@ const TermsAndConditions: React.FC = () => {
             </ol>
           </div>
           <p className="text-lg mb-4">
-            12.3 If we suspend the supply of the products, we will contact you
-            in advance to tell you we will be suspending supply of the product,
+            <strong>12.3 </strong>
+            If we suspend the supply of the products, we will contact you in
+            advance to tell you we will be suspending supply of the product,
             unless the problem is urgent or an emergency. You may contact us to
             end the contract for a product if we suspend it, or tell you we are
             going to suspend it in each case for a period of more than ten days
@@ -458,15 +478,16 @@ const TermsAndConditions: React.FC = () => {
             in respect of the period after you end the contract.
           </p>
           <p className="text-lg mb-4">
-            12.4 If you do not pay us for the product when you are supposed to
-            (see clause 11.6, 11.7 and 11.8), we may suspend supply of the
-            products until you have paid us the outstanding amounts. We will
-            contact you to tell you we are suspending supply of the products. We
-            will not suspend the products where you dispute the unpaid invoice
-            (see clause 11.12) providing that you notify us as soon as possible
-            as soon as you become aware of the same. We will not charge you for
-            the products during the period for which they are suspended. As well
-            as suspending the products we can also charge you interest on your
+            <strong>12.4 </strong>
+            If you do not pay us for the product when you are supposed to (see
+            clause 11.6, 11.7 and 11.8), we may suspend supply of the products
+            until you have paid us the outstanding amounts. We will contact you
+            to tell you we are suspending supply of the products. We will not
+            suspend the products where you dispute the unpaid invoice (see
+            clause 11.12) providing that you notify us as soon as possible as
+            soon as you become aware of the same. We will not charge you for the
+            products during the period for which they are suspended. As well as
+            suspending the products we can also charge you interest on your
             overdue payments (see clause 11.11).
           </p>
         </section>
@@ -478,8 +499,9 @@ const TermsAndConditions: React.FC = () => {
             13. OUR RIGHTS TO END THE CONTRACT
           </h2>
           <div className="text-lg mb-4">
-            13.1 We may end the contract for a product at any time by writing to
-            you if:
+            <strong>13.1 </strong>
+            We may end the contract for a product at any time by writing to you
+            if:
             <ol className="list-disc pl-8">
               <li>
                 you do not make any payment to us when it is due and we have not
@@ -512,10 +534,11 @@ const TermsAndConditions: React.FC = () => {
             </ol>
           </div>
           <p className="text-lg mb-4">
-            13.2 If we end the contract in the situations set out in clause 13.1
-            we will refund any money you have paid in advance for products we
-            have not provided but we may deduct reasonable compensation for the
-            net costs we will incur as a result of you breaking the contract.
+            <strong>13.2 </strong>
+            If we end the contract in the situations set out in clause 13.1 we
+            will refund any money you have paid in advance for products we have
+            not provided but we may deduct reasonable compensation for the net
+            costs we will incur as a result of you breaking the contract.
           </p>
         </section>
 
@@ -526,9 +549,10 @@ const TermsAndConditions: React.FC = () => {
             14. YOUR RIGHTS TO END THE CONTRACT
           </h2>
           <p className="text-lg mb-4">
-            14.1 You can always end your contract with us. Your rights when you
-            end the contract will depend on what you have bought, whether there
-            is anything wrong with it, how we are performing, when you decide to
+            <strong>14.1 </strong>
+            You can always end your contract with us. Your rights when you end
+            the contract will depend on what you have bought, whether there is
+            anything wrong with it, how we are performing, when you decide to
             end the contract and whether you are a consumer customer or business
             customer:
           </p>
@@ -713,8 +737,8 @@ const TermsAndConditions: React.FC = () => {
             A BUSINESS CUSTOMER
           </h3>
           <p className="mb-3">
-            20.1 Nothing in these terms shall limit or exclude our liability
-            for:
+            <strong>20.1 </strong>
+            Nothing in these terms shall limit or exclude our liability for:
           </p>
           <ol className="list-disc pl-6 space-y-2">
             <li>
@@ -737,12 +761,16 @@ const TermsAndConditions: React.FC = () => {
             </li>
           </ol>
           <p className="mb-3">
-            20.2 Except to the extent expressly stated in clause 18.1 all terms
+            <strong>20.2 </strong>
+            Except to the extent expressly stated in clause 18.1 all terms
             implied by sections 13 to 15 of the Sale of Goods Act 1979 and
             sections 3 to 5 of the Supply of Goods and Services Act 1982 are
             excluded.
           </p>
-          <p className="mb-3">20.3 Subject to clause 20.1:</p>
+          <p className="mb-3">
+            <strong>20.3 </strong>
+            Subject to clause 20.1:
+          </p>
           <ol className="list-disc pl-6 space-y-2">
             <li>
               (a) we shall not be liable to you, whether in contract, tort
@@ -759,13 +787,13 @@ const TermsAndConditions: React.FC = () => {
             </li>
           </ol>
           <p className="mb-3">
-            20.4 If you purchase any goods from us, which are part of our
-            janitorial range, such goods are not permitted to be resold or made
-            available to consumers and are not permitted to be sold or used by
-            the general public. By purchasing any goods from our janitorial
-            range from us, you acknowledge and agree that you will not resell or
-            make available any such goods to any consumers or the general
-            public.
+            <strong>20.4 </strong>
+            If you purchase any goods from us, which are part of our janitorial
+            range, such goods are not permitted to be resold or made available
+            to consumers and are not permitted to be sold or used by the general
+            public. By purchasing any goods from our janitorial range from us,
+            you acknowledge and agree that you will not resell or make available
+            any such goods to any consumers or the general public.
           </p>
         </div>
 
@@ -777,7 +805,8 @@ const TermsAndConditions: React.FC = () => {
             21. INTELLECTUAL PROPERTY
           </h3>
           <p className="mb-3">
-            21.1 The following definition shall apply to this clause:
+            <strong>21.1 </strong>
+            The following definition shall apply to this clause:
           </p>
           <p className="mb-3">
             <strong>Intellectual Property Rights:</strong> patents, utility
@@ -796,7 +825,8 @@ const TermsAndConditions: React.FC = () => {
             the world.
           </p>
           <p className="mb-3">
-            21.2 If you require us to use any logos, badges, tagline, product or
+            <strong>21.2 </strong>
+            If you require us to use any logos, badges, tagline, product or
             business names or similar related items (Customer’s Branding) which
             are required to be embroidered or embellished onto the goods, then:
           </p>
@@ -826,7 +856,8 @@ const TermsAndConditions: React.FC = () => {
             22. HOW WE MAY USE YOUR PERSONAL INFORMATION
           </h3>
           <p className="mb-3">
-            22.1 We will use the personal information you provide to us:
+            <strong>22.1 </strong>
+            We will use the personal information you provide to us:
           </p>
           <ol className="list-disc pl-6 space-y-2">
             <li>(a) to supply the products to you;</li>
@@ -838,10 +869,11 @@ const TermsAndConditions: React.FC = () => {
             </li>
           </ol>
           <p className="mb-3">
-            22.2 We will only give your personal information to other third
-            parties where the law either requires or allows us to do so. Please
-            refer to our privacy policy, which is available on our website, for
-            further information.
+            <strong>22.2 </strong>
+            We will only give your personal information to other third parties
+            where the law either requires or allows us to do so. Please refer to
+            our privacy policy, which is available on our website, for further
+            information.
           </p>
         </div>
 
