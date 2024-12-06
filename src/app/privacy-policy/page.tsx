@@ -3,8 +3,7 @@
 import { bigShoulders } from "../layout";
 
 export async function generateMetadata() {
-  const pageData: any = {};
-  //  await Get("/privacy-policy");
+  const pageData = await Get("");
   return {
     title: pageData?.title ?? "Worksafe Direct | Privacy Policy",
     keywords: pageData?.keyword,

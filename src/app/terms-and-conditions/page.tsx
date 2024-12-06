@@ -1,5 +1,6 @@
 import { Get } from "@/api/generalApi";
 import React from "react";
+import { bigShoulders } from "../layout";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
@@ -19,13 +20,19 @@ export async function generateMetadata() {
 const TermsAndConditions: React.FC = () => {
   return (
     <div className="bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-md p-8 rounded-lg">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">
+      <div className="bg-white max-w-9xl font-sans mx-auto px-4 md:px-6 lg:px-10 pb-6">
+        <h1
+          className={`pt-6 font-castoro text-5xl font-extrabold ${bigShoulders.className}`}
+        >
           Terms and Conditions
         </h1>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">1. THESE TERMS</h2>
+        <section className="mb-6 mt-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
+            1. THESE TERMS
+          </h2>
           <p className="mb-4">
             1.1 These are the terms and conditions on which we supply products
             to you, whether these are goods or services.
@@ -66,7 +73,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             2. INFORMATION ABOUT US AND HOW TO CONTACT US
           </h2>
           <p className="mb-4">
@@ -90,13 +99,15 @@ const TermsAndConditions: React.FC = () => {
             to us in your order.
           </p>
           <p className="mb-4">
-          {`  2.3 When we use the words "writing" or "written" in these terms,
+            {`  2.3 When we use the words "writing" or "written" in these terms,
             this includes emails.`}
           </p>
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             3. OUR CONTRACT WITH YOU
           </h2>
           <p className="mb-4">
@@ -119,9 +130,13 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">4. OUR PRODUCTS</h2>
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
+            4. OUR PRODUCTS
+          </h2>
           <p className="mb-4">
-          {`  4.1 The images of the products on our website are for illustrative
+            {`  4.1 The images of the products on our website are for illustrative
             purposes only. Although we have made every effort to display the
             colours accurately, we cannot guarantee that a device's display of
             the colours accurately reflects the colour of the products. Your
@@ -139,7 +154,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             5. YOUR RIGHTS TO MAKE CHANGES
           </h2>
           <p className="mb-4">
@@ -155,7 +172,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             6. OUR RIGHTS TO MAKE CHANGES
           </h2>
           <p className="mb-4">
@@ -167,7 +186,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             7. PROVIDING THE PRODUCTS
           </h2>
           <p className="mb-4">
@@ -236,7 +257,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-2xl font-bold mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             8. YOUR LEGAL RIGHTS IF WE DELIVER LATE IF YOU ARE A CONSUMER
             CUSTOMER
           </h2>
@@ -290,7 +313,9 @@ const TermsAndConditions: React.FC = () => {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold mt-6 mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             9. YOUR LEGAL RIGHTS IF WE DELIVER LATE IF YOU ARE A BUSINESS
             CUSTOMER
           </h2>
@@ -326,7 +351,9 @@ const TermsAndConditions: React.FC = () => {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold mt-6 mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             10. OWNERSHIP AND RESPONSIBILITY OF GOODS
           </h2>
           <div className="space-y-4">
@@ -353,7 +380,9 @@ const TermsAndConditions: React.FC = () => {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold mt-6 mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             11. PRICE AND PAYMENT
           </h2>
           <div className="space-y-4">
@@ -379,7 +408,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             12. OUR RIGHTS TO SUSPEND DELIVERY OF THE PRODUCTS
           </h2>
           <p className="text-lg mb-4">
@@ -436,7 +467,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             13. OUR RIGHTS TO END THE CONTRACT
           </h2>
           <div className="text-lg mb-4">
@@ -482,7 +515,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             14. YOUR RIGHTS TO END THE CONTRACT
           </h2>
           <p className="text-lg mb-4">
@@ -508,7 +543,9 @@ const TermsAndConditions: React.FC = () => {
         </section>
 
         <section className="my-8">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-5 ${bigShoulders.className}`}
+          >
             15. HOW TO END THE CONTRACT WITH US
           </h2>
           <div className="mb-4">
@@ -584,7 +621,9 @@ const TermsAndConditions: React.FC = () => {
           </div>
 
           <section id="product-problem" className="my-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2
+              className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+            >
               16. IF THERE IS A PROBLEM WITH THE PRODUCT
             </h2>
             <p>
@@ -594,7 +633,9 @@ const TermsAndConditions: React.FC = () => {
           </section>
 
           <section id="consumer-rights" className="my-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2
+              className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+            >
               17. YOUR RIGHTS IN RESPECT OF DEFECTIVE PRODUCTS IF YOU ARE A
               CONSUMER CUSTOMER
             </h2>
@@ -619,7 +660,9 @@ const TermsAndConditions: React.FC = () => {
           </section>
 
           <section id="business-rights" className="my-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2
+              className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+            >
               18. YOUR RIGHTS IN RESPECT OF DEFECTIVE PRODUCTS IF YOU ARE A
               BUSINESS CUSTOMER
             </h2>
@@ -635,7 +678,9 @@ const TermsAndConditions: React.FC = () => {
           </section>
 
           <section id="consumer-liability" className="my-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2
+              className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+            >
               19. OUR RESPONSIBILITY FOR LOSS OR DAMAGE SUFFERED BY YOU IF YOU
               ARE A CONSUMER CUSTOMER
             </h2>
@@ -656,7 +701,9 @@ const TermsAndConditions: React.FC = () => {
         {/*  */}
         {/* Section 20 */}
         <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-3">
+          <h3
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             20. OUR RESPONSIBILITY FOR LOSS OR DAMAGE SUFFERED BY YOU IF YOU ARE
             A BUSINESS CUSTOMER
           </h3>
@@ -719,7 +766,9 @@ const TermsAndConditions: React.FC = () => {
 
         {/* Section 21 */}
         <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-3">
+          <h3
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             21. INTELLECTUAL PROPERTY
           </h3>
           <p className="mb-3">
@@ -766,7 +815,9 @@ const TermsAndConditions: React.FC = () => {
 
         {/* Section 22 */}
         <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-3">
+          <h3
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             22. HOW WE MAY USE YOUR PERSONAL INFORMATION
           </h3>
           <p className="mb-3">
@@ -791,7 +842,9 @@ const TermsAndConditions: React.FC = () => {
 
         {/* Section 23 */}
         <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-3">
+          <h3
+            className={`text-3xl font-bold text-gray-800 my-5 ${bigShoulders.className}`}
+          >
             23. OTHER IMPORTANT TERMS
           </h3>
           <ol className="list-disc pl-6 space-y-2">
