@@ -1,10 +1,31 @@
+"use client"
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
+import { useEffect, useMemo, useState } from "react";
 const BusinessStats: React.FC = () => {
+
+    const [progress, setProgress] = useState([0, 0, 110, 65]); // Array to manage multiple progress values
+
+    // Memoize the progress values
+    const progressValues = useMemo(() => [24, 12, 135, 89], []);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setProgress((prev) =>
+          prev.map((p, index) =>
+            p < progressValues[index] ? p + 1 : p // Increment progress until target is reached
+          )
+        );
+      }, 50); // Update the value every 50ms
+  
+      return () => clearInterval(interval); // Cleanup on unmount
+    }, [progressValues]); // Dependency on memoized array
+  
+
     return (
         <div
             style={{
-                clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
+                clipPath: "polygon(0 5%, 100% 0, 100% 90%, 0 100%)",
                 overflow: "hidden",
             }}
             className="relative  text-white w-full  h-[700px] sm:h-[400px]"
@@ -26,10 +47,10 @@ const BusinessStats: React.FC = () => {
                     <div className="flex flex-col md:flex-row gap-x-12 items-center md:space-x-12 ">
 
                         {[
-                            { value: "24+", label: "years in business" },
-                            { value: "12+", label: "worldwide stores" },
-                            { value: "135+", label: "trusted experts" },
-                            { value: "89K", label: "satisfied customers" },
+                            { value: `${progress[0]}+`, label: "years in business" },
+                            { value: `${progress[1]}+`, label: "worldwide stores" },
+                            { value: `${progress[2]}+`, label: "trusted experts" },
+                            { value: `${progress[3]}K`, label: "satisfied customers" },
                         ].map((stat, index) => (
                             <div key={index} className={`relative ${bigShoulders.className}`}>
                                 <h1 className="text-8xl md:text-9xl text-center font-extrabold bg-gradient-to-t mb-10 from-gray-900 via-gray-200 uppercase to-white bg-clip-text text-transparent">

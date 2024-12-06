@@ -22,10 +22,13 @@ export async function generateMetadata() {
       canonical: `https://www.worksafeonline.co.uk/`, // Ensure URL is correct
     },
     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+    icons: {
+      icon: "/logo.ico", // Path to your favicon
+      shortcut: "/logo.ico", // Optional: Shortcut icon for browsers
+      apple: "/logo.ico", // Optional: Apple touch icon
+    },
   };
 }
-
-
 
 export default async function Home() {
   const {
