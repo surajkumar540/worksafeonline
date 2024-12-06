@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 
 interface WindowSize {
@@ -7,17 +8,23 @@ interface WindowSize {
 
 const useWindowSize = (): WindowSize => {
   const [size, setSize] = useState<WindowSize>({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
-    const handleResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-    };
+    // Ensure window is available only in the browser
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setSize({ width: window.innerWidth, height: window.innerHeight });
+      };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+      // Initial setting of the window size
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   return size;

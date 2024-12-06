@@ -1,17 +1,12 @@
-"use client";
-
+"use client"
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-} from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa6";
 import Image from "next/image";
+import useWindowSize from "@/hooks/useWindowSize";
 
 interface Product {
   id: number;
@@ -24,63 +19,39 @@ interface OurTeamSwiperProps {
   slidesPerViewDesktop?: number;
 }
 
-const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
-  slidesPerViewDesktop,
-}) => {
+const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({ slidesPerViewDesktop }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
+
+  // Use the window size hook
+  const { width: windowWidth } = useWindowSize();
+
+  // Calculate skeleton count based on window width
+  const skeletonCount = windowWidth < 640 ? 1 : windowWidth < 1020 ? 2 : windowWidth < 1267 ? 3 : 4;
 
   // Simulating an API call
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      // Simulating delay
       setTimeout(() => {
         setProducts([
-          {
-            id: 1,
-            name: "Product 1",
-            designation: "Designer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg",
-          },
-          {
-            id: 2,
-            name: "Product 2",
-            designation: "Developer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg",
-          },
-          {
-            id: 3,
-            name: "Product 3",
-            designation: "Manager",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg",
-          },
-          {
-            id: 4,
-            name: "Product 4",
-            designation: "Photographer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg",
-          },
+          { id: 1, name: "Product 1", designation: "Designer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg" },
+          { id: 2, name: "Product 2", designation: "Developer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg" },
+          { id: 3, name: "Product 3", designation: "Manager", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg" },
+          { id: 4, name: "Product 4", designation: "Photographer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg" },
         ]);
         setIsLoading(false);
-      }, 0); // Simulated 2-second delay
+      }, 500); // Simulated 500ms delay
     };
 
     fetchData();
   }, []);
 
-  if (isLoading) {
+  if (isLoading && windowWidth ) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <div
-            key={index}
-            className="relative border rounded-lg overflow-hidden shadow-lg animate-pulse bg-gray-300"
-          >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {[...Array(skeletonCount)].map((_, index) => (
+          <div key={index} className="relative border rounded-lg overflow-hidden shadow-lg animate-pulse bg-gray-300">
             <div className="w-full h-[300px] bg-gray-400"></div>
             <div className="p-4 space-y-4">
               <div className="h-6 bg-gray-500 w-1/2 rounded"></div>
@@ -104,44 +75,18 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
     <div>
       <Swiper
         spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={{ clickable: true }}
         modules={[Autoplay]}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
         breakpoints={{
-          0: {
-            slidesPerView: 1.25,
-            spaceBetween: 20,
-          },
-          640: {
-            slidesPerView: 1.5,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1260: {
-            slidesPerView: slidesPerViewDesktop ?? 4,
-            spaceBetween: slidesPerViewDesktop ? 25 : 20,
-          },
-          1680: {
-            slidesPerView: products.length >= 5 ? 5 : 4,
-            spaceBetween: 25,
-          },
-          1920: {
-            slidesPerView: products.length >= 6 ? 6 : 4,
-            spaceBetween: 25,
-          },
+          0: { slidesPerView: 1.25, spaceBetween: 20 },
+          640: { slidesPerView: 1.5, spaceBetween: 10 },
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 30 },
+          1260: { slidesPerView: slidesPerViewDesktop ?? 4, spaceBetween: slidesPerViewDesktop ? 25 : 20 },
+          1680: { slidesPerView: products.length >= 5 ? 5 : 4, spaceBetween: 25 },
+          1920: { slidesPerView: products.length >= 6 ? 6 : 4, spaceBetween: 25 },
         }}
         className="mySwiper"
       >
