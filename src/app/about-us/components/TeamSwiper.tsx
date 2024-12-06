@@ -186,16 +186,16 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
                   <span className="absolute whitespace-nowrap w-[80%] bottom-0 transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] bg-white group-hover:opacity-100 opacity-0 translate-y-0 py-3 rounded-full p-3">
                     <div className="space-x-4 text-center flex justify-center w-full">
                       <a href="#" className="hover:text-blue-500">
-                        <FaFacebook size={14} />
+                        <FaFacebook size={18} />
                       </a>
                       <a href="#" className="hover:text-blue-400">
-                        <FaTwitter size={14} />
+                        <FaTwitter size={18} />
                       </a>
                       <a href="#" className="hover:text-pink-500">
-                        <FaInstagram size={14} />
+                        <FaInstagram size={18} />
                       </a>
                       <a href="#" className="hover:text-blue-700">
-                        <FaLinkedin size={14} />
+                        <FaLinkedin size={18} />
                       </a>
                     </div>
                   </span>
