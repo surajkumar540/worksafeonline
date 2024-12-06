@@ -1,4 +1,4 @@
-// import { Get } from "@/api/generalApi";
+ import { Get } from "@/api/generalApi";
 
 import { bigShoulders } from "../layout";
 
@@ -10,7 +10,7 @@ export async function generateMetadata() {
     keywords: pageData?.keyword,
     description: pageData?.descriptions,
     alternates: {
-      canonical: `https://www.worksafeonline.co.uk/privacy-policy`,
+      canonical:" https://www.worksafeonline.co.uk/privacy-policy",
     },
     robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
   };
@@ -18,7 +18,7 @@ export async function generateMetadata() {
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="bg-white max-w-9xl font-sans mx-auto px-4 md:px-6 lg:px-10">
+    <div className="bg-white max-w-9xl font-sans mx-auto px-4 md:px-6 lg:px-10 pb-6">
       <div className="">
         <h1
           className={`pt-6 font-castoro text-5xl font-extrabold ${bigShoulders.className}`}
@@ -166,9 +166,12 @@ const PrivacyPolicy: React.FC = () => {
           read the privacy policy of every website you visit.
         </p>
 
-        <h3 className="text-xl font-semibold mb-3">
+        <h3
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
           1. The data we collect about you
         </h3>
+
         <p className="mb-4">
           Personal data, or personal information, means any information about an
           individual from which that person can be identified. It does not
@@ -256,7 +259,9 @@ const PrivacyPolicy: React.FC = () => {
           time.
         </p>
 
-        <h3 className="text-xl font-semibold mb-3">
+        <h3
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
           2. How is your personal data collected?
         </h3>
         <p className="mb-4">
@@ -458,7 +463,11 @@ const PrivacyPolicy: React.FC = () => {
       </div>
       <section className="space-y-8">
         <div>
-          <h2 className="text-2xl font-semibold">Marketing</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Marketing
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We strive to provide you with choices regarding certain personal
             data uses, particularly around marketing and advertising.
@@ -466,7 +475,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Promotional Offers from Us</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Promotional Offers from Us
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We may use your Identity, Contact, Technical, Usage, and Profile
             Data to form a view on what we think you may want or need, or what
@@ -482,7 +495,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Third-Party Marketing</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Third-Party Marketing
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We will get your express opt-in consent before we share your
             personal data with any third party for marketing purposes.
@@ -490,7 +507,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Opting Out</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Opting Out
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             You can ask us or third parties to stop sending you marketing
             messages at any time by contacting us at any time. Where you opt out
@@ -502,7 +523,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Cookies</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Cookies
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             You can set your browser to refuse all or some browser cookies, or
             to alert you when websites set or access cookies. If you disable or
@@ -512,7 +537,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Change of Purpose</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Change of Purpose
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We will only use your personal data for the purposes for which we
             collected it, unless we reasonably consider that we need to use it
@@ -521,8 +550,10 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">
-            Disclosures of Your Personal Data
+          <h2
+            className={`text-3xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            4. Disclosures of Your Personal Data
           </h2>
           <p className="mt-2 text-lg text-gray-700">
             We may share your personal data with the parties set out below for
@@ -531,7 +562,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">International Transfers</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            International Transfers
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We do not transfer your personal data outside the European Economic
             Area (EEA).
@@ -539,7 +574,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Data Security</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Data Security
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We have put in place appropriate security measures to prevent your
             personal data from being accidentally lost, used, or accessed in an
@@ -548,7 +587,11 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Data Retention</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Data Retention
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             We will only retain your personal data for as long as reasonably
             necessary to fulfill the purposes we collected it for, including for
@@ -557,12 +600,140 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Your Legal Rights</h2>
+          <h2
+            className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+          >
+            Your Legal Rights
+          </h2>
           <p className="mt-2 text-lg text-gray-700">
             Under certain circumstances, you have rights under data protection
             laws in relation to your personal data.
           </p>
         </div>
+
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+          YOUR LEGAL RIGHTS
+        </h1>
+        <p className="text-gray-600 mb-4">You have the right to:</p>
+        <ul className="list-disc pl-5 space-y-4 text-gray-700">
+          <li>
+            <span className="font-semibold">Request access</span> to your
+            personal data (commonly known as a{" "}
+            <span className="italic">"data subject access request"</span>). This
+            enables you to receive a copy of the personal data we hold about you
+            and to check that we are lawfully processing it.
+          </li>
+          <li>
+            <span className="font-semibold">Request correction</span> of the
+            personal data that we hold about you. This enables you to have any
+            incomplete or inaccurate data we hold about you corrected, though we
+            may need to verify the accuracy of the new data you provide to us.
+          </li>
+          <li>
+            <span className="font-semibold">Request erasure</span> of your
+            personal data. This enables you to ask us to delete or remove
+            personal data where there is no good reason for us continuing to
+            process it. You also have the right to ask us to delete or remove
+            your personal data where you have successfully exercised your right
+            to object to processing (see below), where we may have processed
+            your information unlawfully, or where we are required to erase your
+            personal data to comply with local law. Note, however, that we may
+            not always be able to comply with your request of erasure for
+            specific legal reasons which will be notified to you, if applicable,
+            at the time of your request.
+          </li>
+          <li>
+            <span className="font-semibold">Object to processing</span> of your
+            personal data where we are relying on a legitimate interest (or
+            those of a third party) and there is something about your particular
+            situation which makes you want to object to processing on this
+            ground as you feel it impacts your fundamental rights and freedoms.
+            You also have the right to object where we are processing your
+            personal data for direct marketing purposes. In some cases, we may
+            demonstrate that we have compelling legitimate grounds to process
+            your information which override your rights and freedoms.
+          </li>
+          <li>
+            <span className="font-semibold">Request restriction</span> of
+            processing of your personal data. This enables you to ask us to
+            suspend the processing of your personal data in the following
+            scenarios:
+            <ul className="list-decimal pl-8 space-y-2 mt-2">
+              <li>If you want us to establish the data's accuracy.</li>
+              <li>
+                Where our use of the data is unlawful but you do not want us to
+                erase it.
+              </li>
+              <li>
+                Where you need us to hold the data even if we no longer require
+                it as you need it to establish, exercise, or defend legal
+                claims.
+              </li>
+              <li>
+                You have objected to our use of your data but we need to verify
+                whether we have overriding legitimate grounds to use it.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span className="font-semibold">Request the transfer</span> of your
+            personal data to you or to a third party. We will provide to you, or
+            a third party you have chosen, your personal data in a structured,
+            commonly used, machine-readable format. Note that this right only
+            applies to automated information which you initially provided
+            consent for us to use or where we used the information to perform a
+            contract with you.
+          </li>
+          <li>
+            <span className="font-semibold">Withdraw consent</span> at any time
+            where we are relying on consent to process your personal data.
+            However, this will not affect the lawfulness of any processing
+            carried out before you withdraw your consent. If you withdraw your
+            consent, we may not be able to provide certain products or services
+            to you. We will advise you if this is the case at the time you
+            withdraw your consent.
+          </li>
+        </ul>
+
+        <h2
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
+          No Fee Usually Required
+        </h2>
+        <p className="text-gray-700 mb-4">
+          You will not have to pay a fee to access your personal data (or to
+          exercise any of the other rights). However, we may charge a reasonable
+          fee if your request is clearly unfounded, repetitive, or excessive.
+          Alternatively, we could refuse to comply with your request in these
+          circumstances.
+        </p>
+
+        <h2
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
+          What We May Need From You
+        </h2>
+        <p className="text-gray-700 mb-4">
+          We may need to request specific information from you to help us
+          confirm your identity and ensure your right to access your personal
+          data (or to exercise any of your other rights). This is a security
+          measure to ensure that personal data is not disclosed to any person
+          who has no right to receive it. We may also contact you to ask for
+          further information in relation to your request to speed up our
+          response.
+        </p>
+
+        <h2
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
+          Time Limit to Respond
+        </h2>
+        <p className="text-gray-700">
+          We try to respond to all legitimate requests within one month.
+          Occasionally it could take us longer than a month if your request is
+          particularly complex or you have made a number of requests. In this
+          case, we will notify you and keep you updated.
+        </p>
       </section>
     </div>
   );
