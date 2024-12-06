@@ -24,6 +24,7 @@ const SizeQuantities = ({
       {} as { [key: string]: number }
     );
     setQuantities(reducedSize);
+    // eslint-disable-next-line
   }, [selectedFields?.size.length]);
 
   const handleIncrement = (size: any) => {
