@@ -1,14 +1,18 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa6";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa6";
 import Image from "next/image";
-import useWindowSize from "@/hooks/useWindowSize";
 
-interface Product {
+interface Teams {
   id: number;
   name: string;
   designation: string;
@@ -19,26 +23,53 @@ interface OurTeamSwiperProps {
   slidesPerViewDesktop?: number;
 }
 
-const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({ slidesPerViewDesktop }) => {
+// Skeleton loader component
+const SkeletonLoader = () => (
+  <div className="rounded-lg shadow-lg overflow-hidden">
+    <div className="animate-pulse bg-gray-300 w-full h-[400px] rounded-sm"></div>
+  </div>
+);
+
+const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
+  slidesPerViewDesktop,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>([]);
-
-  // Use the window size hook
-  const { width: windowWidth } = useWindowSize();
-
-  // Calculate skeleton count based on window width
-  const skeletonCount = windowWidth < 640 ? 1 : windowWidth < 1020 ? 2 : windowWidth < 1267 ? 3 : 4;
+  const [teamsData, setTeamsData] = useState<Teams[]>([]);
 
   // Simulating an API call
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       setTimeout(() => {
-        setProducts([
-          { id: 1, name: "Product 1", designation: "Designer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg" },
-          { id: 2, name: "Product 2", designation: "Developer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg" },
-          { id: 3, name: "Product 3", designation: "Manager", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg" },
-          { id: 4, name: "Product 4", designation: "Photographer", imageUrl: "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg" },
+        setTeamsData([
+          {
+            id: 1,
+            name: "Product 1",
+            designation: "Designer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg",
+          },
+          {
+            id: 2,
+            name: "Product 2",
+            designation: "Developer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg",
+          },
+          {
+            id: 3,
+            name: "Product 3",
+            designation: "Manager",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg",
+          },
+          {
+            id: 4,
+            name: "Product 4",
+            designation: "Photographer",
+            imageUrl:
+              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg",
+          },
         ]);
         setIsLoading(false);
       }, 500); // Simulated 500ms delay
@@ -47,23 +78,59 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({ slidesPerViewDesktop }) =
     fetchData();
   }, []);
 
-  if (isLoading && windowWidth ) {
+  if (isLoading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {[...Array(skeletonCount)].map((_, index) => (
-          <div key={index} className="relative border rounded-lg overflow-hidden shadow-lg animate-pulse bg-gray-300">
-            <div className="w-full h-[300px] bg-gray-400"></div>
-            <div className="p-4 space-y-4">
-              <div className="h-6 bg-gray-500 w-1/2 rounded"></div>
-              <div className="h-4 bg-gray-500 w-2/3 rounded"></div>
-            </div>
-          </div>
-        ))}
+      <div className="container mx-auto px-6">
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={3}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          className="mySwiper"
+          breakpoints={{
+            0: {
+              slidesPerView: 1.25,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 1.5,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1260: {
+              slidesPerView: slidesPerViewDesktop ?? 4,
+              spaceBetween: slidesPerViewDesktop ? 25 : 20,
+            },
+            1680: {
+              slidesPerView: teamsData.length >= 5 ? 5 : 4,
+              spaceBetween: 25,
+            },
+            1920: {
+              slidesPerView: teamsData.length >= 6 ? 6 : 4,
+              spaceBetween: 25,
+            },
+          }}
+        >
+          {[...Array(5)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <SkeletonLoader key={index} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     );
   }
 
-  if (!products || products.length === 0) {
+  if (!teamsData || teamsData.length === 0) {
     return (
       <div className="text-center text-gray-500">
         <p>No Teams available at the moment.</p>
@@ -84,26 +151,35 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({ slidesPerViewDesktop }) =
           640: { slidesPerView: 1.5, spaceBetween: 10 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 },
-          1260: { slidesPerView: slidesPerViewDesktop ?? 4, spaceBetween: slidesPerViewDesktop ? 25 : 20 },
-          1680: { slidesPerView: products.length >= 5 ? 5 : 4, spaceBetween: 25 },
-          1920: { slidesPerView: products.length >= 6 ? 6 : 4, spaceBetween: 25 },
+          1260: {
+            slidesPerView: slidesPerViewDesktop ?? 4,
+            spaceBetween: slidesPerViewDesktop ? 25 : 20,
+          },
+          1680: {
+            slidesPerView: teamsData.length >= 5 ? 5 : 4,
+            spaceBetween: 25,
+          },
+          1920: {
+            slidesPerView: teamsData.length >= 6 ? 6 : 4,
+            spaceBetween: 25,
+          },
         }}
         className="mySwiper"
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
+        {teamsData.map((team) => (
+          <SwiperSlide key={team.id}>
             <div className="relative border rounded-lg overflow-hidden shadow-lg">
               <Image
-                src={product.imageUrl}
-                alt={product.name}
+                src={team.imageUrl}
+                alt={team.name}
                 height={100}
                 width={100}
                 unoptimized
                 className="object-cover w-full"
               />
               <div className="absolute top-4 right-4 bg-opacity-60 text-white px-4 py-2 rounded-md flex flex-col items-end justify-end">
-                <p className="font-bold text-3xl">{product.name}</p>
-                <p>{product.designation}</p>
+                <p className="font-bold text-3xl">{team.name}</p>
+                <p>{team.designation}</p>
               </div>
               <div className="absolute bottom-0 w-full h-full">
                 <div className="relative font-sans uppercase font-semibold w-full border-black/10 pt-20 flex justify-center overflow-hidden group h-full">
