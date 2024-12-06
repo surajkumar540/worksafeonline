@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import AnimatedActionButton from "../common/AnimatedActionButton";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const customerLinks = [
@@ -187,7 +187,7 @@ const Footer = () => {
         >
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <p className="uppercase">Connect with us:</p>
-            <div className="flex space-x-3">
+            {/* <div className="flex space-x-3">
               <div className="space-x-4 text-center flex justify-center w-full">
                 <Link href="#" className="hover:text-blue-500">
                   <FaFacebook size={24} />
@@ -202,14 +202,64 @@ const Footer = () => {
                   <FaLinkedin size={24} />
                 </Link>
               </div>
+            </div> */}
+            <div className="flex items-center gap-3">
+              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-blue-500  group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
+                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                  <Link href="#" className="hover:text-white">
+                    <FaFacebook size={24} />
+                  </Link>
+                </span>
+                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                  <Link href="#" className="hover:text-white">
+                    <FaFacebook size={24} />
+                  </Link>
+                </span>
+              </span>
+              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#00C3F4] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
+                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                  <Link href="#" className="hover:text-white">
+                    <FaTwitter size={24} />
+                  </Link>
+                </span>
+                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                  <Link href="#" className="hover:text-white">
+                    <FaTwitter size={24} />
+                  </Link>
+                </span>
+              </span>
+
+              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#D80085] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
+                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                  <Link href="#" className="hover:text-white">
+                    <FaInstagram size={24} />
+                  </Link>
+                </span>
+                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                  <Link href="#" className="hover:text-white">
+                    <FaInstagram size={24} />
+                  </Link>
+                </span>
+              </span>
+
+              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#B72D28] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
+                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                  <Link href="#" className="hover:text-white">
+                    <FaYoutube size={24} />
+                  </Link>
+                </span>
+                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                  <Link href="#" className="hover:text-white">
+                    <FaYoutube size={24} />
+                  </Link>
+                </span>
+              </span>
             </div>
           </div>
           <div>
             <p>Customer Service: (084) 123-456 88</p>
           </div>
         </div>
-
-
 
         <div className="bg-white text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
           <p className="text-gray-500">
