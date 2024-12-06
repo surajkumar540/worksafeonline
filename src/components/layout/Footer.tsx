@@ -31,6 +31,33 @@ const Footer = () => {
   //   { icon: "youtube", url: "#" },
   // ];
 
+  const socialLinks = [
+    {
+      platform: "Facebook",
+      icon: <FaFacebook size={20} />,
+      href: "#",
+      hoverColor: "hover:bg-blue-500",
+    },
+    {
+      platform: "Twitter",
+      icon: <FaTwitter size={20} />,
+      href: "#",
+      hoverColor: "hover:bg-[#00C3F4]",
+    },
+    {
+      platform: "Instagram",
+      icon: <FaInstagram size={20} />,
+      href: "#",
+      hoverColor: "hover:bg-[#D80085]",
+    },
+    {
+      platform: "YouTube",
+      icon: <FaYoutube size={20} />,
+      href: "#",
+      hoverColor: "hover:bg-[#B72D28]",
+    },
+  ];
+
   return (
     <>
       {/* Guide Section */}
@@ -161,11 +188,11 @@ const Footer = () => {
             <p className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear mb-4">
               Our latest and greatest in your inbox, sign up now.
             </p>
-            <div className="flex items-center w-fit">
+            <div className="flex items-center sm:w-fit">
               <input
                 type="email"
                 placeholder="Email address"
-                className="rounded-l-full w-fit focus:outline-none p-3 text-black"
+                className="rounded-l-full w-full md:w-fit focus:outline-none p-3 text-black"
               />
               <button className="bg-yellow-400 font-semibold hover:bg-yellow-500 text-black p-3 rounded-r-full">
                 Subscribe
@@ -182,56 +209,23 @@ const Footer = () => {
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <p className="uppercase">Connect with us:</p>
             <div className="flex items-center gap-3">
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#3b3b3b] hover:bg-blue-500  group-hover:text-black group-hover:border-none  py-5 pl-9 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-3 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaFacebook size={20} />
-                  </Link>
+              {socialLinks.map((link, index) => (
+                <span
+                  key={index}
+                  className={`relative flex space-x-2 items-center transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#3b3b3b] ${link.hoverColor} group-hover:text-black group-hover:border-none py-5 pl-9 pr-2 overflow-hidden group`}
+                >
+                  <span className="absolute whitespace-nowrap text-sm left-3 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                    <Link href={link.href} className="hover:text-white">
+                      {link.icon}
+                    </Link>
+                  </span>
+                  <span className="absolute whitespace-nowrap text-sm left-1 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                    <Link href={link.href} className="hover:text-white">
+                      {link.icon}
+                    </Link>
+                  </span>
                 </span>
-                <span className="absolute whitespace-nowrap text-sm left-1 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaFacebook size={20} />
-                  </Link>
-                </span>
-              </span>
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#3b3b3b] hover:bg-[#00C3F4] group-hover:text-black group-hover:border-none  py-5 pl-9 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-3 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaTwitter size={20} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-1 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaTwitter size={20} />
-                  </Link>
-                </span>
-              </span>
-
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#3b3b3b] hover:bg-[#D80085]  group-hover:text-black group-hover:border-none  py-5 pl-9 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-3 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaInstagram size={20} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-1 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaInstagram size={20} />
-                  </Link>
-                </span>
-              </span>
-
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#3b3b3b] hover:bg-[#B72D28]  group-hover:text-black group-hover:border-none  py-5 pl-9 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-3 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaYoutube size={20} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-1 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaYoutube size={20} />
-                  </Link>
-                </span>
-              </span>
+              ))}
             </div>
           </div>
           <div>
