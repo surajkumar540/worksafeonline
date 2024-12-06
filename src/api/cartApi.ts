@@ -87,20 +87,3 @@ export const getCartDetails = async (deviceId: string): Promise<any> => {
     throw new Error("Failed to fetch cart details.");
   }
 };
-
-/**
- * Generates a unique device ID.
- * @async
- * @throws Will throw an error if the API request fails.
- * @returns {Promise<string>} The generated device ID.
- */
-export const generateDeviceId = async (): Promise<string> => {
-  try {
-    const response: string = await Fetch(`api/DeviceID`);
-    console.log("Device ID response:", response);
-    return response;
-  } catch (error: any) {
-    console.error("Error generating device ID:", error.message);
-    throw new Error("Failed to generate device ID.");
-  }
-};

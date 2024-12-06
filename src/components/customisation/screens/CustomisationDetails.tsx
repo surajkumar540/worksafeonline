@@ -30,7 +30,7 @@ const CustomisationDetails = ({ data }: { data: any }) => {
         return cart;
       });
     }
-    console.log(cartData);
+    console.log(customizationDetails);
     // else
     //   cartData.push({
     //     ID: data?.ProductID,

@@ -15,17 +15,21 @@ const SizeQuantities = ({
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
-    const reducedSize: { [key: string]: number } = selectedFields.size.reduce(
-      (acc: any, size: any) => {
-        const { Size, quantity } = size;
-        acc[Size] = quantity;
-        return acc;
-      },
-      {} as { [key: string]: number }
-    );
-    setQuantities(reducedSize);
+    if (
+      selectedFields &&
+      selectedFields?.size &&
+      selectedFields?.size.length > 0
+    ) {
+      const reducedSize: { [key: string]: number } =
+        selectedFields?.size?.reduce((acc: any, size: any) => {
+          const { Size, quantity } = size;
+          acc[Size] = quantity;
+          return acc;
+        }, {} as { [key: string]: number });
+      setQuantities(reducedSize ?? {});
+    }
     // eslint-disable-next-line
-  }, [selectedFields?.size.length]);
+  }, [selectedFields]);
 
   const handleIncrement = (size: any) => {
     setQuantities((prev) => {
@@ -104,10 +108,7 @@ const SizeQuantities = ({
                         ? "bg-primary/70 text-black hover:bg-primary scale-1-5"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDecrement(size);
-                    }}
+                    onClick={() => handleDecrement(size)}
                   >
                     -
                   </button>
@@ -118,10 +119,7 @@ const SizeQuantities = ({
                         ? "bg-primary/70 text-black hover:bg-primary scale-1-5"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleIncrement(size);
-                    }}
+                    onClick={() => handleIncrement(size)}
                   >
                     +
                   </button>

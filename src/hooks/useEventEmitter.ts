@@ -3,6 +3,7 @@
 import { Cart } from "@/types/api";
 import { EventEmitter } from "events";
 import { toast } from "react-toastify";
+import { getDeviceData, storeDeviceData } from "@/api/generateDeviceId";
 
 let eventEmitter: EventEmitter | undefined;
 
@@ -24,8 +25,11 @@ export interface Product {
   CustomisationDetails?: Record<string, unknown>;
 }
 
-export const handleAddToWishlist = (product: Product) => {
+export const handleAddToWishlist = async (product: Product) => {
   try {
+    const deviceData = getDeviceData();
+    if (!deviceData) await storeDeviceData();
+
     const storedWishlist = localStorage.getItem("wishlist");
     const wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
     if (!Array.isArray(wishlist))
@@ -70,8 +74,11 @@ export const handleAddToWishlist = (product: Product) => {
   }
 };
 
-export const handleAddToCart = (product: Product) => {
+export const handleAddToCart = async (product: Product) => {
   try {
+    const deviceData = getDeviceData();
+    if (!deviceData) await storeDeviceData();
+
     const storedCart = localStorage.getItem("cart");
     const cart = storedCart ? JSON.parse(storedCart) : [];
     if (!Array.isArray(cart))
