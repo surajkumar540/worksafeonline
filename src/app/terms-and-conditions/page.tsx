@@ -51,13 +51,13 @@ const TermsAndConditions: React.FC = () => {
             there is a mistake in these terms, please contact us to discuss
             this, by any of the methods listed in clause 2.1.
           </p>
-          <p className="mb-4">
+          <p className="mb-2">
             <strong>1.3 </strong>
             In some areas, you will have different rights under these terms
             depending on whether you are a business or consumer customer. You
             are a consumer customer if:
           </p>
-          <ol className="list-disc pl-6 mb-4">
+          <ol className=" mb-4">
             <li>(a) you are an individual; and</li>
             <li>
               (b) you are buying products from us wholly or mainly for your
@@ -65,7 +65,7 @@ const TermsAndConditions: React.FC = () => {
               craft, or profession).
             </li>
           </ol>
-          <p className="mb-4">
+          <p>
             <strong>1.4 </strong> If you are a business customer, these terms
             and conditions apply to the contract between you and us, to the
             exclusion of any other terms that you seek to impose or incorporate,
@@ -77,6 +77,11 @@ const TermsAndConditions: React.FC = () => {
             in these terms, and that you shall have no claim for innocent or
             negligent misrepresentation based on any statement in this
             agreement.
+          </p>
+
+          <p className="font-bold">
+            Your attention is also particularly drawn to the provisions of
+            clause 20 of these terms.
           </p>
         </section>
 
@@ -99,7 +104,7 @@ const TermsAndConditions: React.FC = () => {
             >
               sales@worksafeonline.co.uk
             </a>
-            .
+            . Our VAT number is 131 3501 67.
           </p>
           <p className="mb-4">
             <strong>2.2 </strong>If we have to contact you, we will do so by
@@ -133,11 +138,16 @@ const TermsAndConditions: React.FC = () => {
             order.
           </p>
           <p className="mb-4">
-            <strong>3.3 </strong> On most occasions, we do not accept orders
+            <strong>3.3 </strong> On most occasions we do not accept orders
             outside the UK. However, in limited circumstances, we are able to
             deliver products outside the UK. If you require any products to be
-            delivered outside of the UK, please contact us prior to placing your
-            order.
+            delivered outside of the UK, then please contact us prior to placing
+            your order and we will advise you as to whether we will be able to
+            deliver the products to you. If you require the products to be
+            delivered to an address in Northern Ireland, then please note that
+            the delivery provisions stated in these terms may vary. Please
+            contact us prior to placing your order and we can advise you
+            further.
           </p>
         </section>
 
@@ -217,7 +227,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="mb-4">
             <strong>7.2 </strong>
             If you have requested the products to be delivered to you:
-            <ol className="list-disc pl-6 mb-4">
+            <ol className=" pl-6 mb-4">
               <li>
                 (a) if the products are goods, we will contact you with an
                 estimated delivery date, which is normally within 30 days from
@@ -288,7 +298,7 @@ const TermsAndConditions: React.FC = () => {
               <strong>8.1 </strong>
               Delivery of the products shall be completed:
             </p>
-            <ol className="list-disc pl-6">
+            <ol className="pl-4">
               <li>
                 (a) on delivery of the products at our premises, if you have
                 arranged to collect the products from our premises;
@@ -308,7 +318,7 @@ const TermsAndConditions: React.FC = () => {
               products then you may treat the contract as at an end straight
               away if any of the following apply:
             </p>
-            <ol className="list-disc pl-6">
+            <ol className="pl-4">
               <li>(a) we have refused to deliver the products;</li>
               <li>
                 (b) delivery within the delivery deadline was essential (taking
@@ -330,7 +340,13 @@ const TermsAndConditions: React.FC = () => {
               <strong>8.4</strong> If you do choose to treat the contract as at
               an end for late delivery under clause 8.2 or clause 8.3, you can
               cancel your order for any of the products or reject products that
-              have been delivered.
+              have been delivered. If you wish, you can reject or cancel the
+              order for some of those products (not all of them), unless
+              splitting them up would significantly reduce their value. After
+              that we will refund any sums you have paid to us for the cancelled
+              products and their delivery. If the products have been delivered
+              to you, you will have to return them to us or allow us to collect
+              them, and we will pay the costs of this.
             </p>
           </div>
 
@@ -342,10 +358,10 @@ const TermsAndConditions: React.FC = () => {
           </h2>
           <div className="space-y-4">
             <p>
-              <strong>9.1</strong>
+              <strong>9.1 </strong>
               Delivery of the products shall be completed:
             </p>
-            <ol className="list-disc pl-6">
+            <ol className="pl-6">
               <li>
                 (a) on delivery of the products at our premises, if you have
                 arranged to collect the products from our premises;
@@ -363,13 +379,13 @@ const TermsAndConditions: React.FC = () => {
             <p>
               <strong>9.2</strong> Any dates quoted for delivery of the products
               are approximate only and the time of delivery is not of the
-              essence.
-            </p>
-            <p>
-              If we fail to deliver the products, our liability shall be limited
-              to the costs and expenses incurred by you in obtaining replacement
-              goods of similar description and quality in the cheapest market
-              available.
+              essence. If we fail to deliver the products, our liability shall
+              be limited to the costs and expenses incurred by you in obtaining
+              replacement goods of similar description and quality in the
+              cheapest market available. We shall not be liable for any delay in
+              delivery that is due to a reason beyond our reasonable control or
+              if you fail to provide us with adequate delivery instructions that
+              are relevant to the supply of the products.
             </p>
           </div>
 
@@ -380,26 +396,126 @@ const TermsAndConditions: React.FC = () => {
           </h2>
           <div className="space-y-4">
             <p>
-              <strong>10.1</strong> The goods will be your responsibility on
+              <strong>10.1 </strong>The goods will be your responsibility on
               completion of delivery of the goods and you own the goods once we
-              have received payment for the goods in full.
+              have received payment for the goods in full (subject to clause
+              10.3 if you are a business customer and clause 10.2 and 10.3
+              applies).
             </p>
             <p>
               <strong>10.2</strong> If you are a business customer, we are able
               to offer some of our customers goods on consignment (whereby we
-              purchase a set amount of goods from our suppliers).
+              purchase a set amount of goods from our suppliers, at your
+              request, store the goods in our warehouse, allow you to take
+              possession of the goods for your use or resale, subject to our
+              consignment terms and conditions, but retain ownership of such
+              goods until they are paid for by the applicable customer
+              (Consignment Goods). In this instance, we will require you to
+              enter into our consignment terms and conditions, which will apply
+              in addition to these terms and conditions.
             </p>
             <p>
-              <strong>10.3</strong> Ownership of the Consignment Goods will not
-              pass to you until:
+              <strong>10.3</strong> For the purpose of clause 10.2, subject to
+              any matters stated in our consignment terms and conditions, which
+              will apply in addition to these terms and conditions, in relation
+              to any such Consignment Goods:
             </p>
-            <ol className="list-disc pl-6">
-              <li>(i) we receive payment in full for the Consignment Goods;</li>
+            <p>
+              (a) ownership of the Consignment Goods will not pass to you until:
+            </p>
+            <ol className="pl-4">
+              <li>
+                (i) we receive payment in full (in cash or cleared funds) for
+                the Consignment Goods and any other goods that we have supplied
+                to you, in which case title to the Consignment Goods shall pass
+                at the time of payment of all such sums; or
+              </li>
               <li>
                 (ii) you resell the Consignment Goods, in which case ownership
-                will pass at the time of resale.
+                of the Consignment Goods shall pass to the you at the time
+                specified in clause 10.3 (b).
               </li>
             </ol>
+
+            <p>
+              (b) Subject to clause 10.3(d), you may resell or use the
+              Consignment Goods in the ordinary course of your business (but not
+              otherwise) before we receive payment for the Consignment Goods.
+              However, if you resell the Consignment Goods before that time:
+            </p>
+            <ol className="pl-4">
+              <li>(i) you do so as principal and not as our agent; and</li>
+              <li>
+                (ii) title to the Consignment Goods shall pass from us to you
+                immediately before the time at which resale by you occurs.
+              </li>
+            </ol>
+
+            <p>
+              (c) Until ownership of the Consignment Goods has passed to you,
+              you shall:
+            </p>
+            <ol className="pl-4">
+              <li>
+                (i) store the Consignment Goods separately from all other goods
+                held by you so that they remain readily identifiable as our
+                property;
+              </li>
+              <li>
+                (ii) not remove, deface or obscure any identifying mark or
+                packaging on or relating to the Consignment Goods;
+              </li>
+
+              <li>
+                (iii) maintain the Consignment Goods in satisfactory condition
+                and keep them insured against all risks for their full price
+                from the date of delivery;
+              </li>
+
+              <li>
+                (iv) be responsible for and will indemnify us in respect of any
+                Consignment Goods which have been damaged by you or a third
+                party whom you have permitted to have control of the Consignment
+                Goods;
+              </li>
+
+              <li>
+                (v) notify us immediately if you become subject to any of the
+                events listed in clause 13.1(e); and
+              </li>
+
+              <li>
+                (vi) give us such information relating to the Consignment Goods
+                as we may require from time to time.
+              </li>
+            </ol>
+
+            <p>
+              (d) If before ownership of the Consignment Goods passes to you,
+              you become subject to any of the events listed in clause 13.1(e)
+              then, without limiting any other right or remedy, we may at any
+              time:
+            </p>
+            <ol className="pl-4">
+              <li>
+                (i) require you to deliver up all of the Consignment Goods in
+                your possession that have not been resold, or irrevocably
+                incorporated into another product; and
+              </li>
+              <li>
+                (ii) if you fail to do so promptly, enter into any of your
+                premises or of any third party where the Consignment Goods are
+                stored in order to recover them.
+              </li>
+            </ol>
+
+            <p>
+              (e) If the Consignment Goods consist of goods which are
+              non-standard goods, and you do not purchase such goods from us, in
+              accordance with our consignment terms and conditions, we will
+              charge you a restocking fee of 25 % of the sale price of the
+              applicable product. time:
+            </p>
           </div>
 
           <h2
@@ -409,8 +525,8 @@ const TermsAndConditions: React.FC = () => {
           </h2>
           <div className="space-y-4">
             <p>
-              <strong>11.1</strong> The price of the product will be the price
-              indicated on the order pages when you place your order.
+              <strong>11.1</strong>
+              {` The price of the product will be the price indicated on the order pages when you place your order. We take all reasonable care to ensure that the price of the product advised to you is correct. However, it is always possible that, despite our best efforts, some of the products we sell may be incorrectly priced. We will normally check prices before accepting your order so that, where the product's correct price at your order date is less than our stated price at your order date, we will charge the lower amount. If the product's correct price at your order date is higher than the price stated to you, we will contact you for your instructions before we accept your order.`}
             </p>
             <p>
               <strong>11.2</strong> We accept the following methods of payment:
@@ -422,9 +538,109 @@ const TermsAndConditions: React.FC = () => {
               our acknowledgment of your order.
             </p>
             <p>
-              <strong>11.4</strong> If the rate of VAT changes between your
+              <strong>11.4</strong> Where the price is stated to exclude VAT,
+              all amounts payable by you are exclusive of amounts in respect of
+              VAT chargeable from time to time. Where any taxable supply for VAT
+              purposes is made by us to you, you shall, on receipt of a valid
+              VAT invoice from us, pay to us, such additional amounts in respect
+              of VAT as are chargeable on the supply of the products at the same
+              time as payment is due for the supply of the products.
+            </p>
+
+            <p>
+              <strong>11.5</strong> If the rate of VAT changes between your
               order date and the date we supply the product, we will adjust the
-              rate of VAT accordingly.
+              rate of VAT that you pay, unless you have already paid for the
+              product in full before the change in the rate of VAT takes effect.
+            </p>
+
+            <p>
+              <strong>11.6</strong> When you must pay for the products depends
+              on whether you are a consumer customer or business customer and
+              what type of account you have with us.
+            </p>
+
+            <p>
+              <strong>11.7</strong> For some of our business customers, we are
+              able to offer a trade account, where we are able to offer more
+              favourable payment terms. Should you wish to apply for a trade
+              account with us, please contact us. We will notify you in writing
+              to confirm whether we are able to offer you a trade account and
+              any applicable payment terms. If you have a trade account with us,
+              then payment for the products will be due within 30 days from the
+              end of the month in which the products were ordered, unless
+              otherwise agreed by us in writing.
+            </p>
+
+            <p>
+              <strong>11.8</strong> If you are a business or consumer customer
+              and you do not have a trade account with us, then the price for
+              the products will be payable on collection or delivery of the
+              goods (as the case may be). However, if you order any
+              customised/bespoke products, or any non-standard items (these are
+              goods which we would not normally stock but have stocked these
+              upon your request) then these products must be paid for by you at
+              the time you place your order.
+            </p>
+
+            <p>
+              <strong>11.9</strong> No payment will be deemed to have been
+              received by us until payment is received in full and clear funds.
+            </p>
+
+            <p>
+              <strong>11.10</strong> If you are a business customer:
+            </p>
+
+            <ol className="pl-4">
+              <li> (a) time for payment is of the essence; and</li>
+              <li>
+                (b) you must pay all amounts due to us under these terms in full
+                without any set-off, counterclaim, deduction or withholding
+                (other than any deduction or withholding of tax as required by
+                law).
+              </li>
+            </ol>
+
+            <p>
+              <strong>11.11</strong>We can charge interest if you pay late, what
+              we can charge you depends if you are a business or consumer
+              customer:
+            </p>
+
+            <ol className="pl-4">
+              <li>
+                (a) If you are a consumer customer and you do not make any
+                payment to us by the due date, we may charge interest to you on
+                the overdue amount at the rate of 4% a year above the base
+                lending rate of Barclays Bank from time to time. This interest
+                shall accrue on a daily basis from the due date until the date
+                of actual payment of the overdue amount, whether before or after
+                judgment. You must pay us interest together with any overdue
+                amount.
+              </li>
+              <li>
+                (b) If you are a business customer and you do not make any
+                payment to us by the due date we may charge interest to you on
+                the overdue amount at the rate of 8% a year above the base
+                lending rate of Barclays Bank from time to time. This interest
+                shall accrue on a daily basis from the due date until the date
+                of actual payment of the overdue amount, whether before or after
+                judgment. You must pay us interest together with any overdue
+                amount. You will indemnify us against all liabilities, costs,
+                expenses, damages and losses, including all interest, penalties,
+                and legal costs (calculated on a full indemnity basis), suffered
+                or incurred by us arising out of or in connection with the
+                enforcement of the contract.
+              </li>
+            </ol>
+
+            <p>
+              <strong>11.12 </strong>If you think an invoice is wrong please
+              contact us promptly to let us know. You will not have to pay any
+              interest until the dispute is resolved. Once the dispute is
+              resolved we will charge you interest on correctly invoiced sums
+              from the original due date.
             </p>
           </div>
         </section>
@@ -453,7 +669,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="text-lg mb-4">
             <strong>12.2 </strong>
             We may have to suspend the supply of a product to:
-            <ol className="list-disc pl-8">
+            <ol className="">
               <li>
                 deal with technical problems or make minor technical changes;
               </li>
@@ -502,34 +718,62 @@ const TermsAndConditions: React.FC = () => {
             <strong>13.1 </strong>
             We may end the contract for a product at any time by writing to you
             if:
-            <ol className="list-disc pl-8">
+            <ol className="pl-4">
               <li>
-                you do not make any payment to us when it is due and we have not
-                received payment within 7 days of us reminding you that payment
-                is due;
+                (a) you do not make any payment to us when it is due and we have
+                not received payment within 7 days of us reminding you that
+                payment is due;
               </li>
               <li>
-                you do not, within a reasonable time of us asking for it,
+                (b) you do not, within a reasonable time of us asking for it,
                 provide us with information that is necessary for us to provide
                 the products, for example a delivery address;
               </li>
               <li>
-                you do not, within a reasonable time, allow us to deliver the
-                products to you or collect them from us; or
+                (c) you do not, within a reasonable time, allow us to deliver
+                the products to you or collect them from us; or
               </li>
               <li>
-                you do not, within a reasonable time, allow us access to your
-                premises to supply the services;
+                (d) you do not, within a reasonable time, allow us access to
+                your premises to supply the services;
               </li>
               <li>
-                if you are a business customer and:
-                <ol className="list-inside pl-8">
+                (e) if you are a business customer and:
+                <ol className="pl-4">
                   <li>
-                    you take any step or action in connection with, entering
+                    (i) you take any step or action in connection with, entering
                     into administration, provisional liquidation or any
-                    composition or arrangement with your creditors...
+                    composition or arrangement with your creditors (other than
+                    in relation to a solvent restructuring), being wound up
+                    (whether voluntarily or by order of the court, unless for
+                    the purpose of a solvent restructuring), having a receiver
+                    appointed to any of your assets or ceasing to carry on
+                    business; or
+                  </li>
+
+                  <li>
+                    (ii) you suspend, or threaten to suspend, or cease or
+                    threaten to cease, to carry on all or a substantial part of
+                    your business; or
+                  </li>
+
+                  <li>
+                    (iii) we reasonably believe that you are about to take any
+                    of the actions, or become subject to any of the events
+                    listed in clause 13.1 (e) (i) to 13.1 (e) (iii).
+                  </li>
+
+                  <li>
+                    (iv) If you are a consumer customer and you stop or suspend
+                    payment of any of your debts, or are unable to, or you admit
+                    your inability to, pay your debts as they fall due.
                   </li>
                 </ol>
+              </li>
+              <li>
+                (f) If you are a consumer customer and you stop or suspend
+                payment of any of your debts, or are unable to, or you admit
+                your inability to, pay your debts as they fall due.
               </li>
             </ol>
           </div>
@@ -539,6 +783,14 @@ const TermsAndConditions: React.FC = () => {
             will refund any money you have paid in advance for products we have
             not provided but we may deduct reasonable compensation for the net
             costs we will incur as a result of you breaking the contract.
+          </p>
+
+          <p className="text-lg mb-4">
+            <strong>13.3 </strong>
+            We may write to you to let you know that we are going to stop
+            providing the product. We will let you know within a reasonable time
+            in advance and will refund any sums you have paid in advance for
+            products which will not be provided.
           </p>
         </section>
 
@@ -556,19 +808,162 @@ const TermsAndConditions: React.FC = () => {
             end the contract and whether you are a consumer customer or business
             customer:
           </p>
-          <ol className="list-disc pl-8 mb-4">
+          <ol className="pl-4  mb-4">
             <li>
-              If what you have bought is faulty or misdescribed you may have a
-              legal right to end the contract (or to get the product repaired or
-              replaced or a service re-performed or to get some or all of your
-              money back), please see clause 17 if you are a consumer and clause
-              18 if you are a business customer;
+              (a) If what you have bought is faulty or misdescribed you may have
+              a legal right to end the contract (or to get the product repaired
+              or replaced or a service re-performed or to get some or all of
+              your money back), please see clause 17 if you are a consumer and
+              clause 18 if you are a business customer;
             </li>
             <li>
-              If you want to end the contract because of something we have done
-              or have told you we are going to do, see clause 14.2;
+              (b) If you want to end the contract because of something we have
+              done or have told you we are going to do, see clause 14.2;
+            </li>
+            <li>
+              (c) If you are a consumer and have just changed your mind about
+              the product, see clause 14.3. You may be able to get a refund if
+              you are within the cooling-off period, but this may be subject to
+              deductions and you will have to pay the costs of return of any
+              goods; or
+            </li>
+
+            <li>
+              (d) In all other cases (if we are not at fault and you are not a
+              consumer exercising your right to change your mind), see clause
+              14.4.
             </li>
           </ol>
+
+          <p className="text-lg mb-4">
+            <strong>14.2 </strong>
+            If you are ending a contract for a reason set out at (a) to (e)
+            below, the contract will end immediately and we will refund you in
+            full for any products which have not been provided and you may also
+            be entitled to compensation. The reasons are:
+          </p>
+          <ol className="pl-4  mb-4">
+            <li>
+              (a) we have told you about an upcoming change to the product or
+              these terms which you do not agree to (see clause 6);
+            </li>
+            <li>
+              (b) we have told you about an error in the price or description of
+              the product you have ordered and you do not wish to proceed;
+            </li>
+            <li>
+              (c) there is a risk that supply of the products may be
+              significantly delayed because of events outside our control;
+            </li>
+
+            <li>
+              (d) we have suspended supply of the products for technical
+              reasons, or notify you we are going to suspend them for technical
+              reasons, in each case for a period of more than 10 days; or
+            </li>
+
+            <li>
+              (e) you have a legal right to end the contract because of
+              something we have done wrong.
+            </li>
+          </ol>
+
+          <p className="text-lg mb-4">
+            <strong>14.3 </strong>
+            If you are a consumer customer:
+          </p>
+          <ol className="pl-4  mb-4">
+            <li>
+              (a) then for most products bought online you have a legal right to
+              change your mind within 14 days and receive a refund. These
+              rights, under the Consumer Contracts Regulations 2013, are
+              explained in more detail in these terms. If you wish to exercise
+              your right to cancel the contract, please notify us in writing.
+              You may wish to use the model cancellation form, which is attached
+              to these terms and conditions.
+            </li>
+            <li>
+              (b) Your right as a consumer to change your mind under the
+              Consumer Contract Regulations 2013 does not apply in respect of:
+            </li>
+
+            <ol className="pl-4  mb-4">
+              <li>
+                (i) services, once these have been completed, even if the
+                cancellation period is still running;
+              </li>
+              <li>
+                (ii) products sealed for health protection or hygiene purposes,
+                once these have been unsealed after you receive them;
+              </li>
+              <li>
+                (iii) any goods which have been customised to your requirements
+                or bespoke goods;
+              </li>
+
+              <li>
+                (iv) sealed audio or sealed video recordings or sealed computer
+                software, once these products are unsealed after you receive
+                them; and
+              </li>
+
+              <li>
+                (v) any products which become mixed inseparably with other items
+                after their delivery.
+              </li>
+            </ol>
+            <li>
+              (c) how long you have to change your mind under the Consumer
+              Contract Regulations 2013 depends on what you have ordered and how
+              it is delivered:
+            </li>
+          </ol>
+
+          <ol className="pl-4  mb-4">
+            <li>
+              (i) If you have bought services, you have 14 days after the day we
+              email you to confirm we accept your order. However, once we have
+              completed the services you cannot change your mind, even if the
+              period is still running. If you cancel after we have started the
+              services, you must pay us for the services provided up until the
+              time you tell us that you have changed your mind; and
+            </li>
+            <li>
+              (ii) If you have bought goods, you have 14 days after the day you
+              (or someone you nominate) receives the goods, unless your goods
+              are split into several deliveries over different days. In this
+              case you have until 14 days after the day you (or someone you
+              nominate) receives the last delivery or your goods. If your goods
+              are for regular delivery over a set period. In this case you have
+              until 14 days after the day you (or someone you nominate) receives
+              the first delivery of the goods.
+            </li>
+          </ol>
+
+          <p className="text-lg mb-4">
+            <strong>14.4 </strong>
+            Ending the contract where we are not at fault and there is no right
+            to change your mind. Even if we are not at fault and you are not a
+            consumer who has a right to change their mind (see clause 14.1), you
+            can still end the contract before it is completed, but you may have
+            to pay us compensation. A contract for goods is completed when the
+            product is delivered. A contract for services is completed when we
+            have finished providing the services and you have paid for them. If
+            you want to end a contract before it is completed where we are not
+            at fault and you are not a consumer who has changed their mind, just
+            contact us to let us know. The contract will end immediately and we
+            will refund any sums paid by you for products not provided but we
+            may deduct from that refund (or, if you have not made an advance
+            payment, charge you) reasonable compensation for the net costs we
+            will incur as a result of you ending the contract. Unfortunately, if
+            you have ordered customised/ bespoke goods, such as goods containing
+            your logo or business name, you are not entitled to return these
+            items unless they are defective. In addition, if you have ordered
+            undergarments or thermal underwear you are not able to return these
+            goods unless they are defective and unworn. Any footwear must be
+            returned to us in the original condition and unworn, unless they are
+            defective.
+          </p>
         </section>
 
         <section className="my-8">
@@ -595,12 +990,12 @@ const TermsAndConditions: React.FC = () => {
             <p>
               <strong>15.3</strong> We will only pay the costs of return:
             </p>
-            <ol className="list-disc pl-6">
-              <li>If the products are faulty or misdescribed;</li>
+            <ol className="pl-4">
+              <li>(a) If the products are faulty or misdescribed; or</li>
               <li>
-                If you are ending the contract due to changes in the product,
-                pricing, description, or delivery delays caused by external
-                events, or because we have done something wrong.
+                (b) If you are ending the contract due to changes in the
+                product, pricing, description, or delivery delays caused by
+                external events, or because we have done something wrong.
               </li>
             </ol>
             <p>In all other cases, you must pay the costs of return.</p>
@@ -619,32 +1014,32 @@ const TermsAndConditions: React.FC = () => {
               <strong>15.6</strong> If you are exercising your right to change
               your mind under clause 14.3:
             </p>
-            <ol className="list-disc pl-6">
+            <ol className="pl-4">
               <li>
-                We may reduce your refund of the price (excluding delivery
+                (a) We may reduce your refund of the price (excluding delivery
                 costs) to reflect any reduction in the value of the goods caused
                 by handling them in a way that would not be permitted in a shop.
               </li>
               <li>
-                The maximum refund for delivery costs will be the costs of
+                (b) The maximum refund for delivery costs will be the costs of
                 delivery by the least expensive method we offer.
               </li>
               <li>
-                If the product is a service, we may deduct an amount for the
+                (c) If the product is a service, we may deduct an amount for the
                 supply of the service for the period it was supplied before you
                 changed your mind.
               </li>
             </ol>
-            <p>We will make any refunds as soon as possible:</p>
-            <ol className="list-disc pl-6">
+            <p>(d) We will make any refunds as soon as possible:</p>
+            <ol className="pl-4">
               <li>
-                If the products are goods and we have not offered to collect
+                (i) If the products are goods and we have not offered to collect
                 them, your refund will be made within 14 days of us receiving
                 the product back or receiving evidence that it has been sent.
               </li>
               <li>
-                In all other cases, your refund will be made within 14 days of
-                your notification of changing your mind.
+                (ii) In all other cases, your refund will be made within 14 days
+                of your notification of changing your mind.
               </li>
             </ol>
           </div>
@@ -669,23 +1064,73 @@ const TermsAndConditions: React.FC = () => {
               CONSUMER CUSTOMER
             </h2>
             <p>
-              <strong>17.1</strong> If you are a consumer, we are under a legal
-              duty to supply products that are in conformity with this contract.
-              Below is a summary of your key legal rights in relation to the
-              products:
+              <strong>17.1</strong> If you are a consumer customer we are under
+              a legal duty to supply products that are in conformity with this
+              contract. See the box below for a summary of your key legal rights
+              in relation to the products. Nothing in these terms will affect
+              your legal rights.
             </p>
-            <ol className="list-disc pl-6">
+            <strong>Summary of your key legal rights</strong>
+            <p>
+              This is a summary of your key legal rights. These are subject to
+              certain exceptions. For detailed information please visit the
+              Citizens Advice website www.adviceguide.org.uk or call 03454 04 05
+              06.
+            </p>
+            <p>
+              (a) If your product is goods,The Consumer Rights Act 2015 says
+              goods must be as described, fit for purpose and of satisfactory
+              quality. During the expected lifespan of your product your legal
+              rights entitle you to the following:
+            </p>
+            <ol className="pl-4">
               <li>
-                If your product is goods, the Consumer Rights Act 2015 says
-                goods must be as described, fit for purpose, and of satisfactory
-                quality.
+                (i) up to 30 days: if your goods are faulty, then you can get an
+                immediate refund.
               </li>
+
               <li>
-                {`If your product is a service, you can ask us to repeat or fix
-                the service if it's not carried out with reasonable care and
-                skill or get some money back if we can't fix it.`}
+                {` (ii) up to six months: if your goods can't be repaired or
+                replaced, then you're entitled to a full refund, in most cases.`}
+              </li>
+
+              <li>
+                (iii) up to six years: if your goods do not last a reasonable
+                length of time you may be entitled to some money back. See also
+                clause 14.3.
               </li>
             </ol>
+
+            <p>
+              (b) If your product is services The Consumer Rights Act 2015 says:
+            </p>
+            <ol className="pl-4">
+              <li>
+                {`  (i) you can ask us to repeat or fix a service if it's not
+                carried out with reasonable care and skill, or get some money
+                back if we can't fix it.`}
+              </li>
+
+              <li>
+                {`(ii)
+if you haven't agreed a price beforehand, what you're asked to pay must be reasonable.
+`}
+              </li>
+
+              <li>
+                (iii)
+                {` if you haven't agreed a time beforehand, it must be carried out within a reasonable time.
+Please note that all of our goods are off the shelf products and we make no representation or give any warranty that the goods are fit for a particular purpose. You should satisfy yourself that any goods you purchase from us are for the purpose you require.`}
+              </li>
+            </ol>
+
+            <p>
+              <strong>17.2</strong> If you wish to exercise your legal rights to
+              reject products, you must either return them in person to where
+              you bought them, post them back to us or (if they are not suitable
+              for posting) allow us to collect them from you. We will pay the
+              costs of postage or collection.
+            </p>
           </section>
 
           <section id="business-rights" className="my-8">
@@ -714,15 +1159,42 @@ const TermsAndConditions: React.FC = () => {
               ARE A CONSUMER CUSTOMER
             </h2>
             <p>
-              <strong>19.1</strong> We are responsible for foreseeable loss and
-              damage caused by us. If we fail to comply with these terms, we are
-              responsible for loss or damage you suffer that is a foreseeable
-              result of our failure to comply with the contract.
+              <strong>19.1</strong> We are responsible to you for foreseeable
+              loss and damage caused by us. If we fail to comply with these
+              terms, we are responsible for loss or damage you suffer that is a
+              foreseeable result of us breaking this contract or as a result of
+              us failing to use reasonable care and skill, but we are not
+              responsible for any loss or damage that is not foreseeable. Loss
+              or damage is foreseeable if either it is obvious that it will
+              happen or if, at the time the contract was made, both we and you
+              knew it might happen, for example, if you discussed it with us
+              during the sales process.
             </p>
             <p>
-              <strong>19.2</strong> We do not exclude or limit our liability to
-              you where it would be unlawful to do so. This includes liability
-              for death, personal injury, fraud, or defective products.
+              <strong>19.2</strong> We do not exclude or limit in any way our
+              liability to you where it would be unlawful to do so. This
+              includes liability for death or personal injury caused by our
+              negligence or the negligence of our employees, agents or
+              subcontractors; for fraud or fraudulent misrepresentation; for
+              breach of your legal rights in relation to the products as
+              summarised at clause 17.1 and for defective products under the
+              Consumer Protection Act 1987.
+            </p>
+
+            <p>
+              <strong>19.3</strong> When we are liable for damage to your
+              property. If we are providing services in your property, we will
+              make good any damage to your property caused by us while doing so.
+              However, we are not responsible for the cost of repairing any
+              pre-existing faults or damage to your property that we discover
+              while providing the services.
+            </p>
+
+            <p>
+              <strong>19.4</strong> If you are a consumer we are only supplying
+              the products for to you for domestic and private use. If you use
+              the products for any commercial, business or re-sale purpose our
+              liability to you will be limited as set out in clause 20.
             </p>
           </section>
         </section>
@@ -740,7 +1212,7 @@ const TermsAndConditions: React.FC = () => {
             <strong>20.1 </strong>
             Nothing in these terms shall limit or exclude our liability for:
           </p>
-          <ol className="list-disc pl-6 space-y-2">
+          <ol className=" space-y-2">
             <li>
               (a) death or personal injury caused by our negligence, or the
               negligence of our employees, agents or subcontractors (as
@@ -760,7 +1232,7 @@ const TermsAndConditions: React.FC = () => {
               exclude or restrict liability.
             </li>
           </ol>
-          <p className="mb-3">
+          <p className="my-3">
             <strong>20.2 </strong>
             Except to the extent expressly stated in clause 18.1 all terms
             implied by sections 13 to 15 of the Sale of Goods Act 1979 and
@@ -771,7 +1243,7 @@ const TermsAndConditions: React.FC = () => {
             <strong>20.3 </strong>
             Subject to clause 20.1:
           </p>
-          <ol className="list-disc pl-6 space-y-2">
+          <ol className=" space-y-2">
             <li>
               (a) we shall not be liable to you, whether in contract, tort
               (including negligence), breach of statutory duty, or otherwise,
@@ -830,7 +1302,7 @@ const TermsAndConditions: React.FC = () => {
             business names or similar related items (Customer’s Branding) which
             are required to be embroidered or embellished onto the goods, then:
           </p>
-          <ol className="list-disc pl-6 space-y-2">
+          <ol className=" space-y-2">
             <li>
               (a) you give us a fully paid-up, non-exclusive, royalty-free,
               non-transferable licence to copy and modify any materials provided
@@ -859,7 +1331,7 @@ const TermsAndConditions: React.FC = () => {
             <strong>22.1 </strong>
             We will use the personal information you provide to us:
           </p>
-          <ol className="list-disc pl-6 space-y-2">
+          <ol className=" space-y-2">
             <li>(a) to supply the products to you;</li>
             <li>(b) to process your payment for the products; and</li>
             <li>
@@ -884,30 +1356,33 @@ const TermsAndConditions: React.FC = () => {
           >
             23. OTHER IMPORTANT TERMS
           </h3>
-          <ol className="list-disc pl-6 space-y-2">
+          <ol className=" space-y-2">
             <li>
-              (a) We may transfer our rights and obligations under these terms
-              to another organisation.
+              <strong>23.1 </strong> We may transfer our rights and obligations
+              under these terms to another organisation.
             </li>
             <li>
-              (b) You may only transfer your rights or your obligations under
-              these terms to another person if we agree to this in writing to a
-              person who has acquired the product or, where the product is
-              services, any item or property in respect of which we have
-              provided the services.
+              <strong>23.2 </strong>
+              You may only transfer your rights or your obligations under these
+              terms to another person if we agree to this in writing to a person
+              who has acquired the product or, where the product is services,
+              any item or property in respect of which we have provided the
+              services.
             </li>
             <li>
-              (c) This contract is between you and us. No other person shall
-              have any rights to enforce any of its terms.
+              <strong>23.3 </strong>
+              This contract is between you and us. No other person shall have
+              any rights to enforce any of its terms.
             </li>
             <li>
-              (d) Each of the paragraphs of these terms operates separately. If
-              any court or relevant authority decides that any of them are
-              unlawful, the remaining paragraphs will remain in full force and
-              effect.
+              <strong>23.4 </strong>
+              Each of the paragraphs of these terms operates separately. If any
+              court or relevant authority decides that any of them are unlawful,
+              the remaining paragraphs will remain in full force and effect.
             </li>
             <li>
-              (e) If we do not insist immediately that you do anything you are
+              <strong>23.5 </strong>
+              If we do not insist immediately that you do anything you are
               required to do under these terms, or if we delay in taking steps
               against you in respect of your breaking this contract, that will
               not mean that you do not have to do those things and it will not
@@ -917,16 +1392,18 @@ const TermsAndConditions: React.FC = () => {
               at a later date.
             </li>
             <li>
-              (f) These terms are governed by English law and you can bring
-              legal proceedings in respect of the products in the English
-              courts. If you live in Scotland you can bring legal proceedings in
-              respect of the products in either the Scottish or the English
-              courts. If you live in Northern Ireland you can bring legal
-              proceedings in respect of the products in either the Northern
-              Irish or the English courts.
+              <strong>23.6 </strong>
+              These terms are governed by English law and you can bring legal
+              proceedings in respect of the products in the English courts. If
+              you live in Scotland you can bring legal proceedings in respect of
+              the products in either the Scottish or the English courts. If you
+              live in Northern Ireland you can bring legal proceedings in
+              respect of the products in either the Northern Irish or the
+              English courts.
             </li>
             <li>
-              (g) If you are a business, any dispute or claim arising out of or
+            <strong>23.7 </strong>
+             If you are a business, any dispute or claim arising out of or
               in connection with a contract between us or its subject matter or
               formation (including non-contractual disputes or claims) shall be
               governed by and construed in accordance with the law of England

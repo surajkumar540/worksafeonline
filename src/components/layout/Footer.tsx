@@ -3,7 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import AnimatedActionButton from "../common/AnimatedActionButton";
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import SubscribeMail from "./SubscribeMail";
+import SocialConnect from "./SocialLinks";
 
 const Footer = () => {
   const customerLinks = [
@@ -14,7 +15,6 @@ const Footer = () => {
 
   const aboutLinks = [
     { label: "Company Info", href: "/about-us" },
-    { label: "Careers", href: "/about-us" },
     { label: "Reviews", href: "/about-us" },
   ];
 
@@ -153,122 +153,43 @@ const Footer = () => {
           </div>
 
           {/* Mailing List */}
-          <div className="col-span-2 lg:px-8">
-            <h4
-              className={`${bigShoulders.className} font-bold text-center md:text-left text-3xl uppercase mb-4`}
-            >
-              Subscribe to Our Mailing List
-            </h4>
-            <p className="text-white/50 tracking-wide hover:text-primary transition-all duration-200 ease-linear mb-4">
-              Our latest and greatest in your inbox, sign up now.
-            </p>
-            <div className="flex items-center w-fit">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="rounded-l-full w-fit focus:outline-none p-3 text-black"
+          <SubscribeMail />
+        </div>
+
+        <div className="border-t border-white/20 mt-10 md:mt-20" />
+
+        {/* social links */}
+        <SocialConnect />
+
+        <div className="flex flex-col justify-center items-center  w-full relative">
+          <div className="flex absolute rounded-md rotate-3 bg-yellow-500 p-4 justify-center items-center -top-10 left-0 sm:left-auto ">
+            <Link href="/">
+              <Image
+                width={100}
+                unoptimized
+                height={60}
+                alt="Logo"
+                src={
+                  "https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
+                }
+                className="w-40"
               />
-              <button className="bg-yellow-400 font-semibold hover:bg-yellow-500 text-black p-3 rounded-r-full">
-                Subscribe
-              </button>
-            </div>
+            </Link>
           </div>
-        </div>
-
-        <div className="border-t border-white/20 mt-10 md:mt-20"></div>
-
-        <div
-          className={`max-w-9xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold ${bigShoulders.className}`}
-        >
-          <div className="flex items-center space-x-4 mb-4 md:mb-0">
-            <p className="uppercase">Connect with us:</p>
-            {/* <div className="flex space-x-3">
-              <div className="space-x-4 text-center flex justify-center w-full">
-                <Link href="#" className="hover:text-blue-500">
-                  <FaFacebook size={24} />
-                </Link>
-                <Link href="#" className="hover:text-blue-400">
-                  <FaTwitter size={24} />
-                </Link>
-                <Link href="#" className="hover:text-pink-500">
-                  <FaInstagram size={24} />
-                </Link>
-                <Link href="#" className="hover:text-blue-700">
-                  <FaLinkedin size={24} />
-                </Link>
-              </div>
-            </div> */}
-            <div className="flex items-center gap-3">
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-blue-500  group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaFacebook size={24} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaFacebook size={24} />
-                  </Link>
-                </span>
-              </span>
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#00C3F4] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaTwitter size={24} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaTwitter size={24} />
-                  </Link>
-                </span>
-              </span>
-
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#D80085] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaInstagram size={24} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaInstagram size={24} />
-                  </Link>
-                </span>
-              </span>
-
-              <span className="relative flex space-x-2  items-center  transition-all duration-200 ease-in-out rounded-[2px] cursor-pointer bg-[#2D2D2D] hover:bg-[#B72D28] group-hover:text-black group-hover:border-none  py-6 pl-12 pr-2 overflow-hidden group">
-                <span className="absolute whitespace-nowrap text-sm left-4 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                  <Link href="#" className="hover:text-white">
-                    <FaYoutube size={24} />
-                  </Link>
-                </span>
-                <span className="absolute whitespace-nowrap text-sm left-2 w-full transition-all duration-200 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                  <Link href="#" className="hover:text-white">
-                    <FaYoutube size={24} />
-                  </Link>
-                </span>
-              </span>
-            </div>
+          <div className="bg-white  pt-20 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
+            <p className="text-gray-500">
+              Copyright © {new Date().getFullYear()} Axetor. All rights reserved
+            </p>
+            <Image
+              src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
+              alt="Payment"
+              width={100}
+              height={100}
+              priority
+              unoptimized
+              className="object-contain w-72"
+            />
           </div>
-          <div>
-            <p>Customer Service: (084) 123-456 88</p>
-          </div>
-        </div>
-
-        <div className="bg-white text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
-          <p className="text-gray-500">
-            Copyright © {new Date().getFullYear()} Axetor. All rights reserved
-          </p>
-          <Image
-            src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
-            alt="Payment"
-            width={100}
-            height={100}
-            priority
-            unoptimized
-            className="object-contain w-72"
-          />
         </div>
       </footer>
     </>
