@@ -13,7 +13,7 @@ const AddToCartButton = ({
   quantity: number;
   selectedFields: any;
 }) => {
-  const handleCart = (product: any) => {
+  const handleCart = async (product: any) => {
     const updatedData = {
       quantity: quantity,
       MenuId: product.MenuId,
@@ -25,7 +25,7 @@ const AddToCartButton = ({
       ListingImage: product?.ProductImage,
       EndPrice: product?.ProductSellingPrice,
     };
-    handleAddToCart(updatedData);
+    await handleAddToCart(updatedData);
   };
   return (
     <button

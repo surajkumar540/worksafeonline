@@ -81,8 +81,8 @@ const WishlistButton = ({
     setIsVisible((prev) => !prev);
   };
 
-  const selectProductToWishlist = () => {
-    if (handleAddToWishlist(product)) setIsSelected(true);
+  const selectProductToWishlist = async () => {
+    if (await handleAddToWishlist(product)) setIsSelected(true);
   };
 
   return (

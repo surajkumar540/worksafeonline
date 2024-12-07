@@ -8,24 +8,30 @@ import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 import Logo from "@/components/customisation/Logo";
+import { toast } from "react-toastify";
+
+interface QuantitySelectorProps {
+  product: Product;
+  showLogoCustomisation?: boolean;
+}
 
 const QuantitySelector = ({
   product,
   showLogoCustomisation = true,
-}: {
-  product: Product;
-  showLogoCustomisation?: boolean;
-}) => {
+}: QuantitySelectorProps) => {
   const [price, setPrice] = useState({
-    ProductSellingPrice: product.ProductSellingPrice,
-    ProductActualPrice: product.ProductActualPrice,
-  });
-  const [selectedFields, setSelectedFields] = useState({
-    size: [],
-    color: {},
-    fitting: {},
+    ProductSellingPrice: product?.ProductSellingPrice,
+    ProductActualPrice: product?.ProductActualPrice,
   });
   const [countItem, setCountItem] = useState(1);
+  const [filterProductSizes, setFilterProductSizes] = useState<any>(
+    product?.ProductSizes
+  );
+  const [selectedFields, setSelectedFields] = useState({
+    size: [],
+    color: { Colour_Sequence_No: "" },
+    fitting: { Fitting_Sequence_No: "" },
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -36,7 +42,7 @@ const QuantitySelector = ({
       if (filtered.length > 0) {
         const product = filtered[0];
         setSelectedFields({
-          size: product?.Size ?? {},
+          size: product?.Size ?? [],
           color: product?.Color ?? {},
           fitting: product?.Fitting ?? {},
         });
@@ -45,23 +51,101 @@ const QuantitySelector = ({
     }
   }, [product]);
 
-  const increaseCount = () => setCountItem((prev) => prev + 1);
-  const decreaseCount = () => setCountItem((prev) => (prev > 1 ? prev - 1 : 1));
-
   const filterProductFittings = product?.ProductFittings.filter(
-    (fittings: any) => fittings.Fitting.trim() !== "NA"
+    (fittings: any) => fittings?.Fitting?.trim() !== "NA"
   );
+
+  useEffect(() => {
+    const filterProductsForStock = (
+      products: any[],
+      filterProductSizes: any[]
+    ) => {
+      if (!Array.isArray(products) || !Array.isArray(filterProductSizes))
+        return [];
+
+      // Filter out invalid sizes
+      const validProductSizes: any[] =
+        filterProductSizes?.filter(
+          (size: any) => size?.Size?.trim() !== "NA"
+        ) || [];
+
+      // Create a stock map from products
+      const productStockMap = products.reduce((acc, product) => {
+        if (
+          product &&
+          typeof product.Size_Sequence_No !== "undefined" &&
+          typeof product.StockQty !== "undefined"
+        ) {
+          const keyParts = [
+            selectedFields.color ? product.Colour_Sequence_No : null,
+            product.Size_Sequence_No, // Always include size
+            selectedFields.fitting ? product.Fitting_Sequence_No : null,
+          ].filter((part) => part !== null); // Remove null values
+
+          const key = keyParts.join("_");
+          acc[key] = product.StockQty;
+        }
+        return acc;
+      }, {} as Record<string, number>);
+
+      // Map sizes to include stock quantity
+      const updatedSizes = validProductSizes.map((size) => {
+        const keyParts = [
+          selectedFields.color?.Colour_Sequence_No ?? null, // Include selected color if exists
+          size.Size_Sequence_No, // Always include size
+          selectedFields.fitting?.Fitting_Sequence_No ?? null, // Include selected fitting if exists
+        ].filter((part) => part !== null); // Remove null values
+
+        const key = keyParts.join("_");
+
+        const findStockQty = (keyPart: string) => {
+          const matchingKeys = Object.keys(productStockMap).filter((key) =>
+            key.includes(keyPart)
+          );
+          if (matchingKeys.length > 0) return productStockMap[matchingKeys[0]];
+          else return 0;
+        };
+        return {
+          ...size,
+          qty:
+            key && productStockMap[key]
+              ? productStockMap[key]
+              : findStockQty(key),
+        };
+      });
+      return updatedSizes;
+    };
+
+    if (
+      product?.ProductPricingByColourSizeFit &&
+      product?.ProductPricingByColourSizeFit.length > 0 &&
+      Array.isArray(filterProductSizes)
+    ) {
+      const filteredProductsForStock = filterProductsForStock(
+        product.ProductPricingByColourSizeFit,
+        product?.ProductSizes
+      );
+      setFilterProductSizes(filteredProductsForStock);
+    } else {
+      setFilterProductSizes([]);
+    }
+  }, [selectedFields, product]);
 
   useEffect(() => {
     const filterProducts = (products: any[], config: any) => {
       return products.filter((product) => {
+        const sizeMatch = config?.size?.some(
+          (selectedSize: any) =>
+            selectedSize.Size_Sequence_No === product?.Size_Sequence_No
+        );
         return (
-          product?.Size_Sequence_No === config?.size?.Size_Sequence_No &&
+          sizeMatch &&
           product?.Colour_Sequence_No === config?.color?.Colour_Sequence_No &&
           product?.Fitting_Sequence_No === config?.fitting?.Fitting_Sequence_No
         );
       });
     };
+
     if (
       product?.ProductPricingByColourSizeFit &&
       product?.ProductPricingByColourSizeFit.length > 0
@@ -70,22 +154,42 @@ const QuantitySelector = ({
         product?.ProductPricingByColourSizeFit,
         selectedFields
       );
-      if (filteredProducts.length > 0)
+      if (filteredProducts.length > 0) {
         setPrice({
           ProductSellingPrice: filteredProducts[0]?.SPPrice,
           ProductActualPrice: filteredProducts[0]?.TCPrice,
         });
+      }
     }
-    // eslint-disable-next-line
-  }, [selectedFields]);
+  }, [selectedFields, product]);
+
+  const fieldsCheck = () => {
+    if (
+      product?.ProductColour &&
+      product?.ProductColour.length > 0 &&
+      !selectedFields?.color?.Colour_Sequence_No
+    ) {
+      toast.info("Please select a color!");
+      return true;
+    }
+    if (
+      filterProductFittings &&
+      filterProductFittings.length > 0 &&
+      !selectedFields?.fitting?.Fitting_Sequence_No
+    ) {
+      toast.info("Please select a fitting!");
+      return true;
+    }
+    return false;
+  };
 
   return (
     <>
       {price?.ProductActualPrice && price?.ProductSellingPrice && (
         <p className={`mt-4 text-4xl space-x-2 ${bigShoulders.className}`}>
-          <span>{price?.ProductSellingPrice}$</span>
+          <span>£{price.ProductSellingPrice}</span>
           <span className="text-3xl text-gray-500 line-through">
-            {price?.ProductActualPrice}$
+            £{price.ProductActualPrice}
           </span>
         </p>
       )}
@@ -96,20 +200,6 @@ const QuantitySelector = ({
           productColors={product?.ProductColour}
         />
       )}
-      {/* {product?.ProductSizes.length > 0 && (
-        <ProductSizes
-          sizes={product?.ProductSizes}
-          selectedFields={selectedFields}
-          setSelectedFields={setSelectedFields}
-        />
-      )} */}
-      {product?.ProductSizes.length > 0 && (
-        <SizeQuantities
-          sizes={product?.ProductSizes}
-          selectedFields={selectedFields}
-          setSelectedFields={setSelectedFields}
-        />
-      )}
       {filterProductFittings.length > 0 && (
         <ProductFitting
           selectedFields={selectedFields}
@@ -117,30 +207,21 @@ const QuantitySelector = ({
           productFittings={filterProductFittings}
         />
       )}
+      {filterProductSizes.length > 0 && (
+        <SizeQuantities
+          fieldsCheck={fieldsCheck}
+          sizes={filterProductSizes}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+        />
+      )}
       <div className="flex text-center py-5 gap-3">
-        {product?.ProductSizes.length === 1 && (
-          <div className="w-[150px] text-xl flex gap-5 rounded-full justify-center items-center bg-[#F5F5F5] font-bold">
-            <button
-              className="w-full rounded-l-full h-full px-2 pl-4"
-              onClick={decreaseCount}
-            >
-              -
-            </button>
-            <h3>{countItem}</h3>
-            <button
-              className="w-full rounded-r-full h-full px-2 pr-4"
-              onClick={increaseCount}
-            >
-              +
-            </button>
-          </div>
-        )}
         <AddToCartButton
           quantity={countItem}
           selectedFields={selectedFields}
           product={{
             ...product,
-            ProductSellingPrice: price?.ProductSellingPrice,
+            ProductSellingPrice: price.ProductSellingPrice,
           }}
         />
       </div>
