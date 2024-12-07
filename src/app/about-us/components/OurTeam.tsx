@@ -23,7 +23,7 @@ const OurTeam = () => {
             <div className="sm:mt-20 w-full flex justify-center items-center">
                 <AnimatedActionButton
                     text="contact us"
-                    href="https://example.com"
+                    href="/contact"
                     // onClick={() => console.log("Button clicked")}
                     classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"
                     isLoading={false}
