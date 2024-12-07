@@ -33,7 +33,7 @@ const BreadcrumbsHeader: React.FC<BreadcrumbsHeaderProps> = ({ text, category, f
                     <>
                         <li>/</li>
                         <li>
-                            <Link href="/shop" className="hover:text-yellow-400">
+                            <Link href="/shop-all" className="hover:text-yellow-400">
                                 Shop
                             </Link>
                         </li>

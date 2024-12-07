@@ -92,6 +92,7 @@ const FilterSection = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, response, subcategory]);
+
   return (
     <div
       id="filterSection"
@@ -113,12 +114,8 @@ const FilterSection = ({
         )}
         {state.prices && state.prices.length > 0 && (
           <PriceFilter
-            // countKey="Cnt"
             filters={filters}
-            // category={category}
-            // labelKey="menu_name"
             setFilters={setFilters}
-            // subcategory={subcategory}
             options={state.prices}
             heading="Filter By Price"
             handleProducts={handleProducts}

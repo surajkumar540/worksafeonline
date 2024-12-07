@@ -20,7 +20,7 @@ const Breadcrumbs = ({ category, formattedSlug }: BreadcrumbsProps) => {
         </li>
         <li>/</li>
         <li>
-          <Link href="/shop">Shop</Link>
+          <Link href="/shop-all">Shop</Link>
         </li>
         <li>/</li>
         <li>
