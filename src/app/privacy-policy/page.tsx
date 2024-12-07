@@ -281,46 +281,37 @@ const PrivacyPolicy: React.FC = () => {
         </p>
         <ul className="list-inside list-disc mb-4">
           <li>
-            <strong className="text-lg tracking-wide">Identity Data:</strong>{" "}
-            first name, maiden name, last name, username or similar identifier,
-            marital status, title, date of birth, and gender.
+            Identity Data first name, maiden name, last name, username or
+            similar identifier, marital status, title, date of birth, and
+            gender.
           </li>
           <li>
-            <strong className="text-lg tracking-wide">Contact Data:</strong>{" "}
-            billing address, delivery address, email address, and telephone
+            Data billing address, delivery address, email address, and telephone
             numbers.
           </li>
+          <li>Financial Data bank account and payment card details.</li>
           <li>
-            <strong className="text-lg tracking-wide">Financial Data:</strong>{" "}
-            bank account and payment card details.
+            Transaction Data details about payments to and from you and other
+            details of products and services you have purchased from us.
           </li>
           <li>
-            <strong className="text-lg tracking-wide">Transaction Data:</strong>{" "}
-            details about payments to and from you and other details of products
-            and services you have purchased from us.
+            Technical Data internet protocol (IP) address, your login data,
+            browser type and version, time zone setting and location, browser
+            plug-in types and versions, operating system and platform, and other
+            technology on the devices you use to access this website.
           </li>
           <li>
-            <strong className="text-lg tracking-wide">Technical Data:</strong>{" "}
-            internet protocol (IP) address, your login data, browser type and
-            version, time zone setting and location, browser plug-in types and
-            versions, operating system and platform, and other technology on the
-            devices you use to access this website.
+            Profile Data: your username and password, purchases or orders made
+            by you, your interests, preferences, feedback, and survey responses.
           </li>
           <li>
-            <strong className="text-lg tracking-wide">Profile Data:</strong>{" "}
-            your username and password, purchases or orders made by you, your
-            interests, preferences, feedback, and survey responses.
+            Usage Data information about how you use our website, products, and
+            services.
           </li>
           <li>
-            <strong className="text-lg tracking-wide">Usage Data:</strong>{" "}
-            information about how you use our website, products, and services.
-          </li>
-          <li>
-            <strong className="text-lg tracking-wide">
-              Marketing and Communications Data:
-            </strong>{" "}
-            your preferences in receiving marketing from us and our third
-            parties and your communication preferences.
+            Marketing and Communications Data: your preferences in receiving
+            marketing from us and our third parties and your communication
+            preferences.
           </li>
         </ul>
 
@@ -369,10 +360,10 @@ const PrivacyPolicy: React.FC = () => {
           through:
         </p>
         <ul className="list-inside list-disc mb-4">
+          <strong className="text-lg tracking-wide">
+            (a) Direct interactions:
+          </strong>{" "}
           <li>
-            <strong className="text-lg tracking-wide">
-              (a) Direct interactions:
-            </strong>{" "}
             You may give us your Identity, Contact and Financial Data by filling
             in forms or by corresponding with us by post, phone, email or
             otherwise. This includes personal data you provide when you:
@@ -385,20 +376,20 @@ const PrivacyPolicy: React.FC = () => {
               <li>give us feedback or contact us.</li>
             </ul>
           </li>
+          <strong className="text-lg tracking-wide">
+            (b) Automated technologies or interactions:
+          </strong>{" "}
           <li>
-            <strong className="text-lg tracking-wide">
-              (b) Automated technologies or interactions:
-            </strong>{" "}
             As you interact with our website, we will automatically collect
             Technical Data about your equipment, browsing actions and patterns.
             We collect this personal data by using cookies, server logs and
             other similar technologies. We may also receive Technical Data about
             you if you visit other websites employing our cookies.
           </li>
+          <strong className="text-lg tracking-wide">
+            (c) Third parties or publicly available sources:
+          </strong>{" "}
           <li>
-            <strong className="text-lg tracking-wide">
-              (c) Third parties or publicly available sources:
-            </strong>{" "}
             We will receive personal data about you from various third parties
             and public sources as set out below:
             <ul className="list-inside list-disc">
@@ -419,11 +410,88 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
           </li>
         </ul>
+
+        <h3
+          className={`text-2xl font-bold text-gray-800 mb-4 ${bigShoulders.className}`}
+        >
+          3. How is your personal data collected?
+        </h3>
+        <p className="mb-4">
+          We will only use your personal data when the law allows us to. Most
+          commonly, we will use your personal data in the following
+          circumstances:
+        </p>
+        <ul className="list-inside list-disc mb-4">
+          <li>
+            Where we need to perform the contract we are about to enter into or
+            have entered into with you.
+          </li>
+
+          <li>
+            Where it is necessary for our legitimate interests (or those of a
+            third party) and your interests and fundamental rights do not
+            override those interests.
+          </li>
+
+          <li>Where we need to comply with a legal obligation.</li>
+        </ul>
+        <p>
+          Generally, we do not rely on consent as a legal basis for processing
+          your personal data although we will get your consent before sending
+          third party direct marketing communications to you via email or text
+          message. You have the right to withdraw consent to marketing at any
+          time by contacting us.
+        </p>
+
+        <h3 className="text-xl font-semibold my-3">What is a lawful basis?</h3>
+        <p className="mb-4">
+          <strong className="mb-3">Legitimate Interest </strong>
+          means the interest of our business in conducting and managing our
+          business to enable us to give you the best service/product and the
+          best and most secure experience. We make sure we consider and balance
+          any potential impact on you (both positive and negative) and your
+          rights before we process your personal data for our legitimate
+          interests. We do not use your personal data for activities where our
+          interests are overridden by the impact on you (unless we have your
+          consent or are otherwise required or permitted to by law). You can
+          obtain further information about how we assess our legitimate
+          interests against any potential impact on you in respect of specific
+          activities by contacting us.
+        </p>
+
+        <p className="mb-4">
+          <strong className="mb-3">Performance of Contract </strong>
+          Comply with a legal obligation means processing your personal data
+          where it is necessary for compliance with a legal obligation that we
+          are subject to.
+        </p>
+
+        <p className="mb-4">
+          <strong className="mb-3">Comply with a legal obligation </strong>
+          means processing your personal data where it is necessary for
+          compliance with a legal obligation that we are subject to.
+        </p>
+
+        <h3 className="text-xl font-semibold mb-3">
+          Purposes for which we will use your personal data
+        </h3>
+        <p className="mb-4">
+          We have set out below, in a table format, a description of all the
+          ways we plan to use your personal data, and which of the legal bases
+          we rely on to do so. We have also identified what our legitimate
+          interests are where appropriate.
+        </p>
+
+        <p className="mb-4">
+          Note that we may process your personal data for more than one lawful
+          ground depending on the specific purpose for which we are using your
+          data. Please contact us if you need details about the specific legal
+          ground we are relying on to process your personal data where more than
+          one ground has been set out in the table below.
+        </p>
       </div>
+
       <div className="container mx-auto px-4 py-6">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Data Processing Table
-        </h1>
         <div className="overflow-x-auto my-4 shadow-md border border-gray-300 rounded-lg">
           <table className="min-w-full table-auto border-collapse">
             <thead>
@@ -434,8 +502,9 @@ const PrivacyPolicy: React.FC = () => {
                 <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
                   Type of Data
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
-                  Lawful Basis for Processing
+                <th className="border border-gray-300 px-2 py-2 text-left font-semibold text-sm md:text-base">
+                  Lawful basis for processing including basis of legitimate
+                  interest
                 </th>
               </tr>
             </thead>
@@ -551,11 +620,18 @@ const PrivacyPolicy: React.FC = () => {
             for another reason and that reason is compatible with the original
             purpose. If you wish to get an explanation as to how the processing
             for the new purpose is compatible with the original purpose, please
-            contact us. If we need to use your personal data for an unrelated
-            purpose, we will notify you and we will explain the legal basis
-            which allows us to do so. Please note that we may process your
-            personal data without your knowledge or consent, in compliance with
-            the above rules, where this is required or permitted by law.
+            contact us.
+          </p>
+
+          <p className="mt-2 text-lg text-gray-700">
+            If we need to use your personal data for an unrelated purpose, we
+            will notify you and we will explain the legal basis which allows us
+            to do so.
+          </p>
+          <p className="mt-2 text-lg text-gray-700">
+            Please note that we may process your personal data without your
+            knowledge or consent, in compliance with the above rules, where this
+            is required or permitted by law.
           </p>
         </div>
 
@@ -611,15 +687,15 @@ const PrivacyPolicy: React.FC = () => {
                 happens to our business, then the new owners may use your
                 personal data in the same way as set out in this privacy policy.
               </li>
-              <li className="pt-4">
-                We require all third parties to respect the security of your
-                personal data and to treat it in accordance with the law. We do
-                not allow our third-party service providers to use your personal
-                data for their own purposes and only permit them to process your
-                personal data for specified purposes and in accordance with our
-                instructions.
-              </li>
             </ol>
+            <p className="pt-4">
+              We require all third parties to respect the security of your
+              personal data and to treat it in accordance with the law. We do
+              not allow our third-party service providers to use your personal
+              data for their own purposes and only permit them to process your
+              personal data for specified purposes and in accordance with our
+              instructions.
+            </p>
           </div>
         </div>
 
@@ -648,10 +724,12 @@ const PrivacyPolicy: React.FC = () => {
             to your personal data to those employees, agents, contractors and
             other third parties who have a business need to know. They will only
             process your personal data on our instructions and they are subject
-            to a duty of confidentiality. We have put in place procedures to
-            deal with any suspected personal data breach and will notify you and
-            any applicable regulator of a breach where we are legally required
-            to do so..
+            to a duty of confidentiality.
+          </p>
+          <p className="mt-2 text-lg text-gray-700">
+            We have put in place procedures to deal with any suspected personal
+            data breach and will notify you and any applicable regulator of a
+            breach where we are legally required to do so..
           </p>
         </div>
 
@@ -666,38 +744,46 @@ const PrivacyPolicy: React.FC = () => {
           >
             How long will you use my personal data for?
           </h2>
-          <p className="mt-2 text-lg text-gray-700">
+          <p className="mt-4 text-lg text-gray-700">
             We will only retain your personal data for as long as reasonably
             necessary to fulfil the purposes we collected it for, including for
             the purposes of satisfying any legal, regulatory, tax, accounting or
             reporting requirements. We may retain your personal data for a
             longer period in the event of a complaint or if we reasonably
             believe there is a prospect of litigation in respect to our
-            relationship with you. To determine the appropriate retention period
-            for personal data, we consider the amount, nature and sensitivity of
-            the personal data, the potential risk of harm from unauthorised use
-            or disclosure of your personal data, the purposes for which we
-            process your personal data and whether we can achieve those purposes
-            through other means, and the applicable legal, regulatory, tax,
-            accounting or other requirements. Details of retention periods for
-            different aspects of your personal data are available in our
-            retention policy which you can request from us by contacting us. By
-            law we have to keep basic information about our customers (including
-            Contact, Identity, Financial and Transaction Data) for six years
-            after they cease being customers for tax and legal purposes. In some
-            circumstances you can ask us to delete your data: see your legal
-            rights below for further information. In some circumstances we will
-            anonymise your personal data (so that it can no longer be associated
-            with you) for research or statistical purposes, in which case we may
-            use this information indefinitely without further notice to you.
+            relationship with you.
           </p>
+
+          <p className="mt-4 text-lg text-gray-700">
+            To determine the appropriate retention period for personal data, we
+            consider the amount, nature and sensitivity of the personal data,
+            the potential risk of harm from unauthorised use or disclosure of
+            your personal data, the purposes for which we process your personal
+            data and whether we can achieve those purposes through other means,
+            and the applicable legal, regulatory, tax, accounting or other
+            requirements.
+          </p>
+          <p className="mt-4 text-lg text-gray-700">
+            Details of retention periods for different aspects of your personal
+            data are available in our retention policy which you can request
+            from us by contacting us. By law we have to keep basic information
+            about our customers (including Contact, Identity, Financial and
+            Transaction Data) for six years after they cease being customers for
+            tax and legal purposes. In some circumstances you can ask us to
+            delete your data: see your legal rights below for further
+            information. In some circumstances we will anonymise your personal
+            data (so that it can no longer be associated with you) for research
+            or statistical purposes, in which case we may use this information
+            indefinitely without further notice to you.
+          </p>
+          
         </div>
 
         <div>
           <h2
             className={`text-2xl font-bold text-gray-800 ${bigShoulders.className}`}
           >
-            Your Legal Rights
+            8. Your Legal Rights
           </h2>
           <p className="mt-2 text-lg text-gray-700">
             Under certain circumstances, you have rights under data protection
@@ -758,9 +844,9 @@ const PrivacyPolicy: React.FC = () => {
           </li>
           <li>
             <span className="font-semibold text-lg tracking-wide">
-              Request restriction
+              Request restriction of processing
             </span>{" "}
-            of processing of your personal data. This enables you to ask us to
+             of your personal data. This enables you to ask us to
             suspend the processing of your personal data in the following
             scenarios:
             <ul className="list-decimal pl-8 space-y-2 mt-2">
@@ -793,9 +879,9 @@ const PrivacyPolicy: React.FC = () => {
           </li>
           <li>
             <span className="font-semibold text-lg tracking-wide">
-              Withdraw consent
+              Withdraw consent at any time
             </span>{" "}
-            at any time where we are relying on consent to process your personal
+             where we are relying on consent to process your personal
             data. However, this will not affect the lawfulness of any processing
             carried out before you withdraw your consent. If you withdraw your
             consent, we may not be able to provide certain products or services
