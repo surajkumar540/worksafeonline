@@ -16,7 +16,7 @@ const BreadcrumbsHeader: React.FC<BreadcrumbsHeaderProps> = ({ text, category, f
             <ol className="flex space-x-2">
                 <li>
                     <Link href="/" className="hover:text-yellow-400">
-                        Home Page
+                        Home
                     </Link>
                 </li>
 

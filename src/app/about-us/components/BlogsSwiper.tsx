@@ -167,7 +167,7 @@ const BlogsSwiper = ({ slidesPerViewDesktop }: { slidesPerViewDesktop?: number }
             >
                 {blogs.map((blog: any) => (
                     <SwiperSlide key={blog.id}>
-                        <div className="rounded-lg shadow-lg overflow-hidden">
+                        <div className="rounded-lg  overflow-hidden">
                             <Image
                                 src={blog.imageUrl}
                                 alt={blog.title}

@@ -43,7 +43,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
             </span> */}
             <AnimatedActionButton
               text="Our Story"
-              href="https://example.com"
+              href="/about-us"
               // onClick={() => console.log("Button clicked")}
               classes=" md:text-lg mt-4 font-semibold whitespace-nowrap py-6 w-[160px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}

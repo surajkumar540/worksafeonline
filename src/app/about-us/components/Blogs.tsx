@@ -23,7 +23,7 @@ const Blogs = () => {
             <div className="mt-10 w-full flex justify-center items-center">
                 <AnimatedActionButton
                     text="View all post"
-                    href="https://example.com"
+                    href="/"
                     // onClick={() => console.log("Button clicked")}
                     classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[190px] hover:bg-primary bg-white text-black hover:text-black"
                     isLoading={false}
