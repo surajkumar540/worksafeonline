@@ -91,12 +91,6 @@ const Search = () => {
   };
 
   useEffect(() => {
-    // const handleClickOutside = (e: MouseEvent) => {
-    //   if (searchRef.current && e.target !== searchRef.current) {
-    //     setOpenModal(false);
-    //     setSearchText("");
-    //   }
-    // };
     const handleClickOutside = (e: MouseEvent) => {
       let targetElement = e.target as Node | null;
       while (targetElement) {
