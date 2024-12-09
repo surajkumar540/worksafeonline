@@ -7,6 +7,7 @@ import { LinkProps } from "@/types/api";
 import { IoClose } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import { BiMenuAltLeft } from "react-icons/bi";
+import Image from "next/image";
 
 const MobileSidebar = ({ categories }: { categories: any }) => {
   const pathName: any = usePathname();
@@ -32,16 +33,20 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out w-[90%]`}
       >
-        <div className="flex justify-center relative items-center p-4 bg-slate-100 shadow-md">
-          <Link
-            href="/"
-            className="bg-yellow-500 text-black text-center px-2 font-bold"
-          >
-            AXETOR <br /> WORKWEAR
+        <div className="flex justify-center relative items-center p-4 bg-black shadow-md">
+          <Link href="/">
+            <Image
+              width={100}
+              unoptimized
+              height={60}
+              alt="Logo"
+              src="https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
+              className="w-32"
+            />
           </Link>
           <IoClose
             onClick={handleToggle}
-            className="text-black absolute right-5 text-3xl hover:text-primary"
+            className="text-white absolute right-5 text-3xl hover:text-primary"
           />
         </div>
         <div className="flex gap-3 text-black p-6 pb-2 font-sans font-semibold items-center">

@@ -35,7 +35,7 @@ const SocialConnect: React.FC = ( ) => {
 
   return (
     <div
-      className={`max-w-9xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col md:flex-row justify-between items-center text-white font-bold pb-14 lg:pb-4 ${bigShoulders.className}`}
+      className={`max-w-9xl px-10 py-5 mx-auto text-xl md:text-2xl flex flex-col lg:flex-row gap-3 justify-between items-center text-white font-bold pb-4 ${bigShoulders.className}`}
     >
       {/* Social Links Section */}
       <div className="flex items-center space-x-4 mb-4 md:mb-0">

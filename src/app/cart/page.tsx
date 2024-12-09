@@ -58,7 +58,7 @@ export default function Page() {
           {cartUpdated.length === 0 && (
             <AnimatedActionButton
               text="View Products"
-              href="https://example.com"
+              href="/shop-all"
               // onClick={() => console.log("Button clicked")}
               classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}

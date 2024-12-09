@@ -75,7 +75,7 @@ const Footer = async () => {
         </div>
       </div>
 
-      <footer className="bg-[#1C1C1C] text-white pt-20 mb-20 lg:mb-0">
+      <footer className="bg-[#1C1C1C] text-white pt-20 mb-16 md:mb-20 lg:mb-0">
         {/* Top Section */}
         <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {/* Customer Links */}
@@ -152,7 +152,7 @@ const Footer = async () => {
               <p>
                 <a
                   href={`mailto:${data.Email}`}
-                  className="text-blue-500 underline"
+                  className="text-blue-500 text-xs md:text-base underline"
                 >
                   {data.Email}
                 </a>
@@ -171,7 +171,7 @@ const Footer = async () => {
         <SocialConnect />
 
         <div className="flex flex-col justify-center items-center w-full relative">
-          <div className="flex absolute rounded-md bg-black p-4 justify-center items-center -top-10 sm:left-auto ">
+          <div className="hidden lg:flex absolute bg-[#1C1C1C] p-4 justify-center items-center -top-12 sm:left-auto ">
             <Link href="/">
               <Image
                 width={100}
@@ -185,7 +185,7 @@ const Footer = async () => {
               />
             </Link>
           </div>
-          <div className="bg-white pt-16 lg:pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
+          <div className="bg-white pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
             <p className="text-gray-500">
               Copyright © {new Date().getFullYear()} Axetor. All rights reserved
             </p>

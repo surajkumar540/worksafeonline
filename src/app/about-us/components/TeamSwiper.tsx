@@ -11,6 +11,7 @@ import {
   FaTwitter,
 } from "react-icons/fa6";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Teams {
   id: number;
@@ -185,18 +186,18 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
                 <div className="relative font-sans uppercase font-semibold w-full border-black/10 pt-20 flex justify-center overflow-hidden group h-full">
                   <span className="absolute whitespace-nowrap w-[80%] bottom-0 transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] bg-white group-hover:opacity-100 opacity-0 translate-y-0 py-3 rounded-full p-3">
                     <div className="space-x-4 text-center flex justify-center w-full">
-                      <a href="#" className="hover:text-blue-500">
-                        <FaFacebook size={18} />
-                      </a>
-                      <a href="#" className="hover:text-blue-400">
-                        <FaTwitter size={18} />
-                      </a>
-                      <a href="#" className="hover:text-pink-500">
-                        <FaInstagram size={18} />
-                      </a>
-                      <a href="#" className="hover:text-blue-700">
-                        <FaLinkedin size={18} />
-                      </a>
+                      <Link href="#" className="hover:text-blue-500">
+                        <FaFacebook size={22} />
+                      </Link>
+                      <Link href="#" className="hover:text-blue-400">
+                        <FaTwitter size={22} />
+                      </Link>
+                      <Link href="#" className="hover:text-pink-500">
+                        <FaInstagram size={22} />
+                      </Link>
+                      <Link href="#" className="hover:text-blue-700">
+                        <FaLinkedin size={22} />
+                      </Link>
                     </div>
                   </span>
                 </div>

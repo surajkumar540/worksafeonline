@@ -48,8 +48,7 @@ export default function Page() {
           {wishlistUpdated.length === 0 && (
             <AnimatedActionButton
               text="View Products"
-              href="https://example.com"
-              // onClick={() => console.log("Button clicked")}
+              href="/shop-all"
               classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}
               type="submit"
