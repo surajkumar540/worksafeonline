@@ -97,7 +97,7 @@ export default async function Home() {
             </div>
             <AnimatedActionButton
               text="SHOP NOW"
-              href="https://example.com"
+              href="/shop-all"
               // onClick={() => console.log("Button clicked")}
               classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}
@@ -133,7 +133,7 @@ export default async function Home() {
 
             <AnimatedActionButton
               text="SHOP NOW"
-              href="https://example.com"
+              href="/shop-all"
               // onClick={() => console.log("Button clicked")}
               classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}

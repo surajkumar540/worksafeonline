@@ -5,8 +5,9 @@ import { bigShoulders } from "@/app/layout";
 import AnimatedActionButton from "../common/AnimatedActionButton";
 import SubscribeMail from "./SubscribeMail";
 import SocialConnect from "./SocialLinks";
+import { Get } from "@/api/generalApi";
 
-const Footer = () => {
+const Footer = async () => {
   const customerLinks = [
     { label: "Help Center", href: "/faqs" },
     { label: "My Account", href: "/my-account" },
@@ -31,6 +32,8 @@ const Footer = () => {
   //   { icon: "instagram", url: "#" },
   //   { icon: "youtube", url: "#" },
   // ];
+
+  const data = await Get("api/ContactDetail1?app=Worksafe");
 
   return (
     <>
@@ -63,7 +66,7 @@ const Footer = () => {
           </span> */}
           <AnimatedActionButton
             text=" CHECK OUT OUR GUIDES"
-            href="https://example.com"
+            href="/"
             // onClick={() => console.log("Button clicked")}
             classes="md:text-lg font-extrabold whitespace-nowrap py-6 text-wider w-[280px] hover:bg-primary bg-white text-black hover:text-black"
             isLoading={false}
@@ -146,9 +149,15 @@ const Footer = () => {
               Contact
             </h4>
             <div className="text-white/50 space-y-2 tracking-wide">
-              <p>contact@example.com</p>
-              <p>2972 Westheimer Rd. Santa Ana,</p>
-              <p>Illinois 85486</p>
+              <p>
+                <a
+                  href={`mailto:${data.Email}`}
+                  className="text-blue-500 underline"
+                >
+                  {data.Email}
+                </a>
+              </p>
+              <p>{data.HeadQuarter || "Default headquarter address"}</p>
             </div>
           </div>
 
@@ -161,8 +170,8 @@ const Footer = () => {
         {/* social links */}
         <SocialConnect />
 
-        <div className="flex flex-col justify-center items-center  w-full relative">
-          <div className="flex absolute rounded-md rotate-3 bg-yellow-500 p-4 justify-center items-center -top-10 left-0 sm:left-auto ">
+        <div className="flex flex-col justify-center items-center w-full relative">
+          <div className="flex absolute rounded-md bg-black p-4 justify-center items-center -top-10 sm:left-auto ">
             <Link href="/">
               <Image
                 width={100}
@@ -176,7 +185,7 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <div className="bg-white  pt-20 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
+          <div className="bg-white pt-16 lg:pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
             <p className="text-gray-500">
               Copyright © {new Date().getFullYear()} Axetor. All rights reserved
             </p>

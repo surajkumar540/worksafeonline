@@ -52,20 +52,10 @@ const ListingByCategory = ({
             {bannerTitle}
           </p>
           <p className="text-2xl uppercase">{bannerDesc}</p>
-          {/* <span className="relative font-sans uppercase font-semibold w-fit mt-8 flex bg-white text-black space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-36 pr-4 overflow-hidden group">
-            <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-              Discover Now
-            </span>
-            <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-              Discover Now
-            </span>
-            <FaArrowRightLong className="ml-2" />
-          </span> */}
-
 
           <AnimatedActionButton
             text="Discover Now"
-            href="https://example.com"
+            href="/"
             // onClick={() => console.log("Button clicked")}
             classes="uppercase md:text-lg mt-6 font-semibold whitespace-nowrap py-6 w-[190px] hover:bg-primary bg-white text-black hover:text-black"
             isLoading={false}
