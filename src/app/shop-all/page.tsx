@@ -32,7 +32,12 @@ export default async function Page() {
   let categories = {};
 
   if (categoryResponse.status === "fulfilled")
-    categories = { subcategories: categoryResponse?.value?.categories };
+    categories = {
+      subcategories: categoryResponse?.value?.categories.map((item: any) => ({
+        ...item,
+        Cnt: item?.subcategories?.length,
+      })),
+    };
   if (productResponse.status === "fulfilled") products = productResponse?.value;
 
   return (
