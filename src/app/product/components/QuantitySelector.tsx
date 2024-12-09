@@ -1,6 +1,7 @@
 "use client";
 
 import { Product } from "@/types/api";
+import { toast } from "react-toastify";
 import ProductColors from "./ProductColor";
 import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
@@ -8,7 +9,6 @@ import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 import Logo from "@/components/customisation/Logo";
-import { toast } from "react-toastify";
 
 interface QuantitySelectorProps {
   product: Product;
@@ -129,6 +129,7 @@ const QuantitySelector = ({
     } else {
       setFilterProductSizes([]);
     }
+    // eslint-disable-next-line
   }, [selectedFields, product]);
 
   useEffect(() => {

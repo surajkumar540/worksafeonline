@@ -19,11 +19,11 @@ const ProductCard = ({ product }: { product: Product }) => {
         </h3>
         <button className="flex mt-2 justify-between items-center">
           <span className="space-x-1 flex items-center">
-            <span className="text-2xl">£{product?.EndPrice}</span>
+            <span className="text-2xl">£{product?.EndPrice.toFixed(2)}</span>
             {product?.StartPrice &&
               product?.StartPrice !== product?.EndPrice && (
                 <span className="text-xl text-gray-400 line-through">
-                  £{product?.StartPrice}
+                  £{Number(product?.StartPrice).toFixed(2)}
                 </span>
               )}
           </span>

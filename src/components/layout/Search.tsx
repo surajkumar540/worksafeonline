@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { IoMdSearch } from "react-icons/io";
 import { bigShoulders } from "@/app/layout";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 const Search = () => {
   const searchRef = useRef<HTMLDivElement | null>(null);
@@ -91,11 +92,15 @@ const Search = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (searchRef.current && e.target !== searchRef.current) {
-        setOpenModal(false);
-        setSearchText("");
+      let targetElement = e.target as Node | null;
+      while (targetElement) {
+        if (targetElement === searchRef.current) return;
+        targetElement = targetElement.parentNode;
       }
+      setOpenModal(false);
+      setSearchText("");
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -123,17 +128,21 @@ const Search = () => {
               >
                 <Link href={`/product/${product?.MenuId}/${product?.Style}`}>
                   <span className="hover:text-primary flex items-center gap-2">
-                    {/* <Image
-                    src={product?.ListingImage}
-                    alt={product?.Description}
-                    width={32}
-                    height={32}
-                    className="object-contain rounded-full"
-                    /> */}
+                    <Image
+                      width={32}
+                      height={32}
+                      loading="lazy"
+                      alt={`${index + 1}`}
+                      src={
+                        product?.ListingImage ??
+                        "https://www.worksafeonline.co.uk/StandardImages/IMAGE COMING SOON.jpg"
+                      }
+                      className="object-contain w-8 aspect-square rounded-full"
+                    />
                     {product.Description ?? "Unnamed Product"}{" "}
                   </span>
                 </Link>
-                <span>{product?.EndPrice}$</span>
+                <span>£{product?.EndPrice.toFixed(2)}</span>
               </li>
             ))}
           </ul>
