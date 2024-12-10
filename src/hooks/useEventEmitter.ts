@@ -4,6 +4,8 @@ import { Cart } from "@/types/api";
 import { EventEmitter } from "events";
 import { toast } from "react-toastify";
 import { getDeviceData, storeDeviceData } from "@/api/generateDeviceId";
+import { addToWishlist } from "@/api/wishlistApis";
+import { filterData } from "@/api/generalApi";
 
 let eventEmitter: EventEmitter | undefined;
 
@@ -28,46 +30,33 @@ export interface Product {
 export const handleAddToWishlist = async (product: Product) => {
   try {
     const deviceData = getDeviceData();
-    if (!deviceData) await storeDeviceData();
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (!deviceData && !token) await storeDeviceData();
 
-    const storedWishlist = localStorage.getItem("wishlist");
-    const wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
-    if (!Array.isArray(wishlist))
-      throw new Error("Invalid wishlist format in localStorage");
+    const data = await addToWishlist(product?.Style);
+    if (data?.status) {
+      const storedWishlist = localStorage.getItem("wishlist");
+      const wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
+      if (!Array.isArray(wishlist))
+        throw new Error("Invalid wishlist format in localStorage");
 
-    const isAlreadyInWishlist = wishlist.some(
-      (item) => item.ID === (product.Style ?? product.ID)
-    );
+      const isAlreadyInWishlist = wishlist.some(
+        (item) => item === (product.Style ?? product.ID)
+      );
 
-    if (isAlreadyInWishlist) {
-      toast.warn("Already in wishlist!");
-      return false;
-    }
-
-    const productData: Cart = {
-      createdAt: new Date(),
-      Size: product?.Size ?? "",
-      Color: product?.Color ?? "",
-      EndPrice: product?.EndPrice,
-      ID: product.Style ?? product?.ID,
-      Fitting: product?.Fitting ?? "",
-      Quantity: product?.quantity ?? 1,
-      Description: product?.Description,
-      ListingImage: product?.ListingImage,
-      DiscountedPrice: product?.DiscountedPrice ?? 0,
-      CustomisationDetails: product?.CustomisationDetails ?? {},
-      FinalPrice: (product?.quantity ?? 1 * product?.EndPrice).toFixed(2),
-      CategoryData: product?.MenuId ? { categoryId: product?.MenuId } : {},
-    };
-
-    toast.success("Added to wishlist!");
-
-    localStorage.setItem(
-      "wishlist",
-      JSON.stringify([...wishlist, productData])
-    );
-    eventEmitter?.emit("addToWishlist", productData);
-    return true;
+      if (isAlreadyInWishlist) {
+        toast.warn("Already in wishlist!");
+        return false;
+      }
+      const productData: Cart = filterData(product);
+      localStorage.setItem(
+        "wishlist",
+        JSON.stringify([...wishlist, productData?.ID])
+      );
+      eventEmitter?.emit("addToWishlist", productData?.ID);
+      toast.success("Added to wishlist!");
+      return true;
+    } else return false;
   } catch (error) {
     console.error("Error accessing or updating wishlist:", error);
     return false;

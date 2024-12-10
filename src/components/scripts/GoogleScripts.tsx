@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { includes } from "@/utils/polyfills";
+// import { includes } from "@/utils/polyfills";
 import { usePathname } from "next/navigation";
-import { protectedPages } from "@/data/routes";
+// import { protectedPages } from "@/data/routes";
 import eventEmitter from "@/hooks/useEventEmitter";
 
 const GoogleScript = () => {

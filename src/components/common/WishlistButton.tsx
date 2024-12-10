@@ -31,8 +31,7 @@ const WishlistButton = ({
     if (storedWishlist) {
       const parsedWishlist = JSON.parse(storedWishlist);
       if (Array.isArray(parsedWishlist)) {
-        const ids = parsedWishlist.map((item: { ID: string }) => item.ID);
-        setIsSelected(includes(ids, product.Style));
+        setIsSelected(includes(parsedWishlist, product.Style));
       } else console.warn("Wishlist is not in the correct format.");
     }
   }, [product.Style]);

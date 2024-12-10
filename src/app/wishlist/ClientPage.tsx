@@ -2,32 +2,42 @@
 
 import Image from "next/image";
 import { bigShoulders } from "../layout";
-import React, { useEffect, useState } from "react";
+import { filterData } from "@/api/generalApi";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
+import React, { useCallback, useEffect, useState } from "react";
+import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
 import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
+import { toast } from "react-toastify";
 
 export default function ClientPage() {
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      let storedWishlist: any = localStorage.getItem("wishlist");
-      if (storedWishlist) {
-        storedWishlist = JSON.parse(storedWishlist);
-      } else storedWishlist = [];
-      setWishlistUpdated(storedWishlist);
-    }
+  const fetchWishlist = useCallback(async () => {
+    const response = await getWishlist();
+    if (response?.wishlist) {
+      const updatedWishlist = response.wishlist.map((product: any) =>
+        filterData(product)
+      );
+      setWishlistUpdated(updatedWishlist);
+    } else if (response?.message) {
+      toast.info(response?.message);
+      setWishlistUpdated([]);
+    } else setWishlistUpdated([]);
   }, []);
 
-  const handleRemove = (id: string) => {
-    const updatedWishlist = wishlistUpdated.filter(
-      (item: any) => item?.ID !== id
-    );
-    setWishlistUpdated(updatedWishlist);
-    if (eventEmitter) eventEmitter.emit("removeFromWishlist", id);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  useEffect(() => {
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (token) fetchWishlist();
+  }, [fetchWishlist]);
+
+  const handleRemove = async (id: string) => {
+    const removedResponse = await removeFromWishlist(id);
+    if (removedResponse?.status) {
+      eventEmitter?.emit("removeFromWishlist", id);
+      await fetchWishlist();
+    }
   };
   const onAddToCart = async (data: any) => {
     if (await handleAddToCart(data)) handleRemove(data?.ID);

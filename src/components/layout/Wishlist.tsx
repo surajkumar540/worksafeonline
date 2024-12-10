@@ -30,13 +30,13 @@ const Wishlist = () => {
   useEffect(() => {
     const wishlistListener = (product: Product) => {
       setWishlist((prev) => [
-        ...prev.filter((item) => item.ID !== product.ID),
+        ...prev.filter((item) => item !== product),
         product,
       ]);
     };
 
     const removeFromwishlistListener = (id: string) => {
-      setWishlist((prev) => prev.filter((item: any) => item.ID !== id));
+      setWishlist((prev) => prev.filter((item: any) => item !== id));
     };
 
     if (typeof window !== "undefined" && eventEmitter) {

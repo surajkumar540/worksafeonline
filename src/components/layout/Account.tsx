@@ -14,7 +14,7 @@ const Account = () => {
   const handleToggle = useCallback(() => {
     if (loggedIn) return navigate.push("/my-account");
     setIsVisible((prev) => !prev);
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   useEffect(() => {
     document.body.style.overflow = isVisible ? "hidden" : "";

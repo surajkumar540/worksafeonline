@@ -1,3 +1,4 @@
+import { Cart } from "@/types/api";
 import { includes } from "@/utils/polyfills";
 import axios from "axios";
 
@@ -94,4 +95,23 @@ export const getCategoryId = (data: any, names: string[]): number[] => {
   return data
     .filter((item: any) => includes(names, item?.menu_name))
     .map((item: any) => item?.menu_id);
+};
+
+export const filterData = (product: any) => {
+  const productData: Cart = {
+    createdAt: new Date(),
+    Size: product?.Size ?? "",
+    Color: product?.Color ?? "",
+    EndPrice: product?.EndPrice,
+    ID: product.Style ?? product?.ID,
+    Fitting: product?.Fitting ?? "",
+    Quantity: product?.quantity ?? 1,
+    Description: product?.Description,
+    ListingImage: product?.ListingImage,
+    DiscountedPrice: product?.DiscountedPrice ?? 0,
+    CustomisationDetails: product?.CustomisationDetails ?? {},
+    FinalPrice: (product?.quantity ?? 1 * product?.EndPrice).toFixed(2),
+    CategoryData: product?.MenuId ? { categoryId: product?.MenuId } : {},
+  };
+  return productData;
 };

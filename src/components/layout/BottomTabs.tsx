@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { bigShoulders } from "@/app/layout";
 import LoginModal from "../modals/LoginModal";
 import { IoHomeOutline } from "react-icons/io5";
@@ -8,7 +9,6 @@ import { AiFillAppstore } from "react-icons/ai";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
   const navigate = useRouter();
@@ -20,7 +20,7 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
   const handleToggle = useCallback(() => {
     if (loggedIn) return navigate.push("/my-account");
     setIsVisible((prev) => !prev);
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   useEffect(() => {
     document.body.style.overflow = isVisible ? "hidden" : "";

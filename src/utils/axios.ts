@@ -13,7 +13,8 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token =
-      typeof window !== "undefined" && localStorage.getItem("accessToken");
+      typeof window !== "undefined" &&
+      localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
     if (token && config.headers)
       config.headers["Authorization"] = `Bearer ${token}`;
     return config;
@@ -214,5 +215,3 @@ export const Delete = async <T>(
     throw error;
   }
 };
-
-
