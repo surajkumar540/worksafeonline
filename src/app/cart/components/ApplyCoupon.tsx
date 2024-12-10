@@ -14,7 +14,9 @@ const ApplyCoupon = () => {
           type="text"
           placeholder="Enter your coupon code"
         />
-        <button className="w-fit px-4 border-2 border-primary whitespace-nowrap lg:px-12 bg-primary font-sans hover:bg-primary/70 py-4 text-xs font-semibold rounded-full">
+        <button
+          className={`w-fit px-4 whitespace-nowrap lg:px-12 bg-primary font-sans hover:bg-primary/70 py-[18px] text-xs font-semibold rounded-full ${bigShoulders.className}`}
+        >
           APPLY COUPON
         </button>
       </div>

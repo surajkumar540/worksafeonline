@@ -37,21 +37,25 @@ const WishlistCard: React.FC<WishlistCardProps> = ({
             height={200}
             alt={product.Description}
             src={product.ListingImage}
-            className="max-w-20 max-h-20 aspect-square object-cover rounded-md"
+            className="max-w-20 max-h-20 my-auto h-full aspect-square object-cover rounded-md"
           />
         </div>
         <div className="pt-2 md:pt-0">
-          <h2 className="text-lg md:text-xl font-bold text-gray-800">
+          <h2 className="text-lg md:text-xl line-clamp-1 font-bold text-gray-800">
             {product.Description}
           </h2>
-          <p className="text-gray-500 font-medium">{product.EndPrice}$</p>
-          <p className="text-gray-400 text-sm">{newdate.toString()}</p>
-          <button
-            onClick={() => onAddToCart(product)}
-            className="bg-yellow-400 md:hidden my-2 text-black font-semibold px-6 text-sm mr-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-150 ease-in-out"
-          >
-            ADD TO CART
-          </button>
+          <div className="flex md:flex-col justify-between items-center md:items-start gap-5 md:gap-0">
+            <p className="text-gray-500 font-medium">{product.EndPrice}$</p>
+            <p className="text-gray-400 text-sm hidden md:block">
+              {newdate.toString()}
+            </p>
+            <button
+              onClick={() => onAddToCart(product)}
+              className="bg-yellow-400 md:hidden my-2 text-black font-semibold px-6 text-xs md:text-sm mr-2 md:mr-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-150 ease-in-out"
+            >
+              ADD TO CART
+            </button>
+          </div>
         </div>
       </div>
       <button
