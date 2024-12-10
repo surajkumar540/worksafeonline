@@ -1,35 +1,25 @@
-"use client";
+import { Get } from "@/api/generalApi";
+import ClientPage from "./ClientPage";
 
-import { bigShoulders } from "../layout";
-import { useEffect, useState } from "react";
-import Features from "@/components/common/Features";
-import CheckoutForm from "./components/CheckoutForm";
+export async function generateMetadata() {
+  const pageData = await Get("");
+
+  return {
+    title: pageData?.title ?? "Worksafeonline | Checkout",
+    keywords: pageData?.keyword ?? "default, keywords",
+    description: pageData?.descriptions ?? "Default description",
+    alternates: {
+      canonical: `https://www.worksafeonline.co.uk/checkout`,
+    },
+    robots: pageData?.noIndex ? "noindex, nofollow" : "index, follow",
+    icons: {
+      icon: "/logo.ico",
+      apple: "/logo.ico",
+      shortcut: "/logo.ico",
+    },
+  };
+}
 
 export default function Page() {
-  const [cart, setCart] = useState<any>([]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      let cartData: any = localStorage.getItem("cart");
-      if (cartData) cartData = JSON.parse(cartData);
-      setCart(cartData ?? []);
-    }
-  }, []);
-
-  return (
-    <>
-      <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
-        <h1
-          className={`uppercase text-4xl md:text-5xl lg:text-6xl flex items-center font-black ${bigShoulders.className}`}
-        >
-          checkout
-        </h1>
-        <CheckoutForm cart={cart} />
-      </div>
-      {/* <div className="flex items-center justify-center">
-        <PayPalCheckout />
-      </div> */}
-      <Features />
-    </>
-  );
+  return <ClientPage />;
 }

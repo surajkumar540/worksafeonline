@@ -1,11 +1,11 @@
-import TradeSafetyBanner from "./components/TradeSafetyBanner";
+import Blogs from "./components/Blogs";
+import { Get } from "@/api/generalApi";
+import Header from "./components/Header";
 import OurTeam from "./components/OurTeam";
 import Marquee from "./components/Marquee";
 import Features from "@/components/common/Features";
-import Blogs from "./components/Blogs";
 import BusinessStats from "./components/BusinessStats";
-import Header from "./components/Header";
-import { Get } from "@/api/generalApi";
+import TradeSafetyBanner from "./components/TradeSafetyBanner";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
@@ -27,11 +27,7 @@ export async function generateMetadata() {
   };
 }
 
-
-
 const AboutUS = async () => {
-
-
   return (
     <>
       <Header title="About Us" />
