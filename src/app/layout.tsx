@@ -27,7 +27,7 @@ export const bigShoulders = Big_Shoulders_Text({
 
 import "react-toastify/dist/ReactToastify.css"; // Import toastify styles
 import { ToastContainer } from "react-toastify";
-
+import GoogleScript from "@/components/scripts/GoogleScripts";
 
 export default function RootLayout({
   children,
@@ -47,6 +47,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}
       >
         <Navbar />
+        <GoogleScript />
         <div id="modal-root"></div>
         <div className="min-h-screen w-full mx-auto">{children}</div>
         <Footer />

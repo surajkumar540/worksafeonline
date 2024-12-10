@@ -10,7 +10,7 @@ import { includes } from "@/utils/polyfills";
 import { RxEnterFullScreen } from "react-icons/rx";
 import QuickViewModal from "../modals/QuickViewModal";
 // import { PiArrowsClockwiseLight } from "react-icons/pi";
-import { handleAddToWishlist } from "@/hooks/useEventEmitter";
+import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
 
 const WishlistButton = ({
   imgSrc,
@@ -82,7 +82,9 @@ const WishlistButton = ({
   };
 
   const selectProductToWishlist = async () => {
-    if (await handleAddToWishlist(product)) setIsSelected(true);
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (eventEmitter && !token) eventEmitter.emit("openLoginModal");
+    else if (await handleAddToWishlist(product)) setIsSelected(true);
   };
 
   return (

@@ -2,9 +2,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Modal from "../common/Modal";
+import { Post } from "@/utils/axios";
+import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
+// import { includes } from "@/utils/polyfills";
+// import { usePathname } from "next/navigation";
+// import { protectedPages } from "@/data/routes";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import eventEmitter from "@/hooks/useEventEmitter";
+
+interface LoginResponse {
+  status: boolean;
+  token: string;
+}
 
 const LoginModal = ({
   onclose,
@@ -13,6 +24,8 @@ const LoginModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
+  // const pathname = usePathname();
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,8 +61,8 @@ const LoginModal = ({
     if (!formData.password) {
       newErrors.password = "Password is required.";
       valid = false;
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long.";
+    } else if (formData.password.length < 7) {
+      newErrors.password = "Password must be at least 7 characters long.";
       valid = false;
     }
 
@@ -59,11 +72,37 @@ const LoginModal = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      if (!validateForm()) return;
+      setLoading(true);
+      const data = {
+        username: formData?.email,
+        password: formData?.password,
+      };
+      const response: LoginResponse = await Post(
+        "api/NewLogin",
+        data,
+        5000,
+        true
+      );
+      if (response?.status && response?.token) {
+        onclose();
+        eventEmitter?.emit("loggedIn");
+        setFormData({ password: "", email: "" });
+        sessionStorage.setItem("verified", "true");
+        toast.success("User logged in successfully!");
+        localStorage.setItem("WORK_SAFE_ONLINE_USER_TOKEN", response?.token);
+      }
+    } catch (error) {
+      console.log("Login error: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (!validateForm()) return;
-
-    // Handle login logic (API calls)
-    console.log("Form submitted:", formData);
+  const handleClose = () => {
+    // if (!includes(protectedPages, pathname))
+    onclose();
   };
 
   return (
@@ -78,7 +117,7 @@ const LoginModal = ({
         {/* Close Icon */}
         <RxCross1
           size={24}
-          onClick={onclose}
+          onClick={handleClose}
           title="Click to close"
           className="cursor-pointer hover:scale-110 hover:text-primary absolute top-2 z-20 right-3 text-white"
         />
@@ -146,6 +185,7 @@ const LoginModal = ({
               {/* Submit Button */}
               <button
                 type="submit"
+                disabled={loading}
                 className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-lg shadow-md text-lg font-bold hover:bg-primary/80 outline-none ${bigShoulders.className}`}
               >
                 LOGIN

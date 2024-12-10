@@ -1,28 +1,43 @@
 "use client";
 
 import Link from "next/link";
-// import { FiSearch } from "react-icons/fi";
 import { bigShoulders } from "@/app/layout";
-import { useEffect, useState } from "react";
 import LoginModal from "../modals/LoginModal";
 import { IoHomeOutline } from "react-icons/io5";
 import { AiFillAppstore } from "react-icons/ai";
+import eventEmitter from "@/hooks/useEventEmitter";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
+  const navigate = useRouter();
   const wishlistCount = wishlist?.length || 0;
+  const [isVisible, setIsVisible] = useState(false);
+  const [loggedIn, setUserLoggedIn] = useState(false);
   const displayCount = wishlistCount < 10 ? `0${wishlistCount}` : wishlistCount;
 
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const handleToggle = () => setIsVisible(!isVisible);
+  const handleToggle = useCallback(() => {
+    if (loggedIn) return navigate.push("/my-account");
+    setIsVisible((prev) => !prev);
+  }, [loggedIn]);
 
   useEffect(() => {
-    if (isVisible) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
+    document.body.style.overflow = isVisible ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isVisible]);
+
+  useEffect(() => {
+    const handleToggle = () => {
+      setUserLoggedIn(true);
+    };
+    eventEmitter?.on("loggedIn", handleToggle);
+    return () => {
+      eventEmitter?.off("loggedIn", handleToggle);
+    };
+  }, [handleToggle]);
 
   return (
     <div
