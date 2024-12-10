@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
 import { filterData } from "@/api/generalApi";
 import Features from "@/components/common/Features";
@@ -9,7 +10,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
 import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
-import { toast } from "react-toastify";
 
 export default function ClientPage() {
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
@@ -21,6 +21,11 @@ export default function ClientPage() {
         filterData(product)
       );
       setWishlistUpdated(updatedWishlist);
+      updatedWishlist.map((wishlist: any) =>
+        eventEmitter?.emit("addToWishlist", wishlist?.ID)
+      );
+      const ids = updatedWishlist.map((wishlist: any) => wishlist.ID);
+      localStorage.setItem("wishlist", JSON.stringify(ids));
     } else if (response?.message) {
       toast.info(response?.message);
       setWishlistUpdated([]);
