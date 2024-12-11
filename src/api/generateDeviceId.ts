@@ -1,4 +1,5 @@
-import { Fetch } from "@/utils/axios";
+// import { Fetch } from "@/utils/axios";
+import { Get } from "./generalApi";
 
 /**
  * Generates a unique device ID.
@@ -9,7 +10,8 @@ import { Fetch } from "@/utils/axios";
 export const generateDeviceId = async (): Promise<string> => {
   try {
     const url = `api/DeviceID?app=Worksafe`;
-    const response: any = await Fetch(url, {}, 5000, true, false);
+    const response: any = await Get(url);
+    // const response: any = await Fetch(url, {}, 5000, true, false);
     if (response.status) return response.deviceID;
     else return "";
   } catch (error: any) {

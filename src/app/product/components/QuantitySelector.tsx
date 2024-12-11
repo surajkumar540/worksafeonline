@@ -219,6 +219,7 @@ const QuantitySelector = ({
       <div className="flex text-center py-5 gap-3">
         <AddToCartButton
           quantity={countItem}
+          fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
           product={{
             ...product,

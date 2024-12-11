@@ -1,6 +1,7 @@
 import { Fetch, Post } from "@/utils/axios";
+import { getDeviceData } from "./generateDeviceId";
 
-interface Product {
+export interface Product {
   ID?: string;
   Quantity?: number;
   Size_Sequence_No?: number;
@@ -15,10 +16,9 @@ interface Product {
  * @throws Will throw an error if the API request fails.
  * @returns {Promise<any>} The response from the API.
  */
-export const addToCart = async (product: Product): Promise<any> => {
+export const addToCart = async (product: any): Promise<any> => {
   try {
-    const response = await Post(`api/AddToCart1`, {});
-    console.log("Add to cart response:", response, product);
+    const response = await Post(`api/AddToCart12`, product);
     return response;
   } catch (error: any) {
     console.error("Error adding product to cart:", error.message);
@@ -29,16 +29,12 @@ export const addToCart = async (product: Product): Promise<any> => {
 /**
  * Removes a product from the cart.
  * @async
- * @param {string} productId - The ID of the product to remove.
  * @throws Will throw an error if the API request fails.
  * @returns {Promise<any>} The response from the API.
  */
-export const removeProduct = async (productId: string): Promise<any> => {
+export const removeProduct = async (data: any): Promise<any> => {
   try {
-    const response = await Post(`api/RemoveProduct`, {
-      ID: productId,
-    });
-    console.log("Remove product response:", response);
+    const response = await Post(`api/RemoveProduct`, data);
     return response;
   } catch (error: any) {
     console.error("Error removing product from cart:", error.message);
@@ -49,21 +45,12 @@ export const removeProduct = async (productId: string): Promise<any> => {
 /**
  * Updates the quantity of a product in the cart.
  * @async
- * @param {string} productId - The ID of the product to update.
- * @param {number} quantity - The new quantity for the product.
  * @throws Will throw an error if the API request fails.
  * @returns {Promise<any>} The response from the API.
  */
-export const updateQuantity = async (
-  productId: string,
-  quantity: number
-): Promise<any> => {
+export const updateQuantity = async (data: any): Promise<any> => {
   try {
-    const response = await Post(`api/CartQtyCh`, {
-      ID: productId,
-      Quantity: quantity,
-    });
-    console.log("Update quantity response:", response);
+    const response = await Post(`api/CartQtyCh`, data);
     return response;
   } catch (error: any) {
     console.error("Error updating product quantity:", error.message);
@@ -77,10 +64,16 @@ export const updateQuantity = async (
  * @throws Will throw an error if the API request fails.
  * @returns {Promise<any>} The cart details from the API.
  */
-export const getCartDetails = async (deviceId: string): Promise<any> => {
+export const getCartDetails = async (): Promise<any> => {
   try {
-    const response = await Fetch(`api/Cart?DeviceID=` + deviceId);
-    console.log("Get cart details response:", response);
+    const deviceData = getDeviceData();
+    const response = await Fetch(
+      `api/Cart?DeviceID=` + deviceData?.deviceId,
+      {},
+      5000,
+      true,
+      false
+    );
     return response;
   } catch (error: any) {
     console.error("Error fetching cart details:", error.message);
