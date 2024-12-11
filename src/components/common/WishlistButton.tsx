@@ -5,11 +5,10 @@ import { Get } from "@/api/generalApi";
 import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
-import { useEffect, useState } from "react";
 import { includes } from "@/utils/polyfills";
 import { RxEnterFullScreen } from "react-icons/rx";
+import { useEffect, useState, useRef } from "react";
 import QuickViewModal from "../modals/QuickViewModal";
-// import { PiArrowsClockwiseLight } from "react-icons/pi";
 import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
 
 const WishlistButton = ({
@@ -22,9 +21,12 @@ const WishlistButton = ({
   setImgSrc: any;
 }) => {
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [disable, setDIisabled] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const storedWishlist = localStorage.getItem("wishlist");
@@ -81,9 +83,31 @@ const WishlistButton = ({
   };
 
   const selectProductToWishlist = async () => {
-    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-    if (eventEmitter && !token) eventEmitter.emit("openLoginModal");
-    else if (await handleAddToWishlist(product)) setIsSelected(true);
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (eventEmitter && !token) {
+        eventEmitter.emit("openLoginModal");
+      } else if (await handleAddToWishlist(product)) {
+        setIsSelected(true);
+      }
+    } catch (error) {
+      console.log("AddToWishlist error: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const debouncedSelectProductToWishlist = () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      selectProductToWishlist();
+    }, 1000);
   };
 
   return (
@@ -104,16 +128,10 @@ const WishlistButton = ({
           <CiHeart
             size={25}
             title="Add to wishlist"
-            onClick={selectProductToWishlist}
+            onClick={debouncedSelectProductToWishlist}
           />
         )}
       </span>
-      {/* <span
-        onClick={() => handleWishlist(product)}
-        className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-[76px] right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
-      >
-        <PiArrowsClockwiseLight title="Compare" size={23} />
-      </span> */}
       <span
         onClick={() => {
           if (!disable)
