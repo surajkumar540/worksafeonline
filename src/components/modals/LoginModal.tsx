@@ -124,10 +124,12 @@ const LoginModal = ({
 
         {/* Background Image */}
         <Image
-          fill
           priority
+          width={100}
+          height={100}
+          unoptimized
           alt="Login Banner"
-          className="object-cover"
+          className="w-full h-full object-cover"
           src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
         />
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
