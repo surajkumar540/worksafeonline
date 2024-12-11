@@ -8,7 +8,7 @@ const ApplyCoupon = () => {
       >
         Apply Coupon
       </h2>
-      <div className="flex justify-start items-center gap-5">
+      <div className="flex justify-start items-center gap-2 md:gap-5">
         <input
           className="w-full lg:w-1/2 p-4 text-sm border-2 border-gray-300 rounded-full focus:outline-none focus:ring-primary"
           type="text"
