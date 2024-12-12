@@ -3,14 +3,15 @@
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
+import { addToCart } from "@/api/cartApi";
 import { filterData } from "@/api/generalApi";
+import eventEmitter from "@/hooks/useEventEmitter";
 import Features from "@/components/common/Features";
+import AuthFlow from "@/components/modals/AuthFlow";
 import WishlistCard from "./components/WishlistCard";
 import React, { useCallback, useEffect, useState } from "react";
 import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
-import eventEmitter, { handleAddToCart } from "@/hooks/useEventEmitter";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
-import AuthFlow from "@/components/modals/AuthFlow";
 
 export default function ClientPage() {
   const [showModal, setShowModal] = useState(false);
@@ -44,10 +45,24 @@ export default function ClientPage() {
     if (removedResponse?.status) {
       eventEmitter?.emit("removeFromWishlist", id);
       await fetchWishlist();
+      return true;
     }
+    return false;
   };
   const onAddToCart = async (data: any) => {
-    if (await handleAddToCart(data)) handleRemove(data?.ID);
+    if (await handleRemove(data?.ID)) {
+      console.log(data);
+      const updatedData = {
+        BOM: [],
+        Size: [],
+        Colour: "",
+        Fitting: "",
+        DeviceID: "",
+        ProductID: data?.ID,
+      };
+      const resp = await addToCart(updatedData);
+      if (resp?.status) eventEmitter?.emit("addToCart");
+    }
   };
   return (
     <>

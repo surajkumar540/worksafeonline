@@ -50,7 +50,7 @@ export const removeProduct = async (data: any): Promise<any> => {
  */
 export const updateQuantity = async (data: any): Promise<any> => {
   try {
-    const response = await Post(`api/CartQtyCh`, data);
+    const response = await Post(`api/CartQtyCh`, data, 5000, true);
     return response;
   } catch (error: any) {
     console.error("Error updating product quantity:", error.message);

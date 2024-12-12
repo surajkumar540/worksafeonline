@@ -1,20 +1,30 @@
 "use client";
 
 import { bigShoulders } from "../layout";
-import { useEffect, useState } from "react";
+import CartSkeleton from "./CheckoutSkeleton";
+import { getCartDetails } from "@/api/cartApi";
 import Features from "@/components/common/Features";
 import CheckoutForm from "./components/CheckoutForm";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ClientPage() {
-  const [cart, setCart] = useState<any>([]);
+  const [cart, setCart] = useState<any>({});
+  const [loading, setLoading] = useState(true);
+
+  const fetchCart = useCallback(async () => {
+    const response = await getCartDetails();
+    if (response?.status) {
+      setCart(response);
+    } else setCart({});
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      let cartData: any = localStorage.getItem("cart");
-      if (cartData) cartData = JSON.parse(cartData);
-      setCart(cartData ?? []);
-    }
+    fetchCart();
+    // eslint-disable-next-line
   }, []);
+
+  if (loading) return <CartSkeleton />;
 
   return (
     <>

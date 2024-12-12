@@ -1,9 +1,10 @@
 "use client";
+
 import Link from "next/link";
+import BottomTabs from "./BottomTabs";
 import { FaRegHeart } from "react-icons/fa6";
 import React, { useState, useEffect } from "react";
 import eventEmitter from "@/hooks/useEventEmitter";
-import BottomTabs from "./BottomTabs";
 
 type Product = {
   ID: number;

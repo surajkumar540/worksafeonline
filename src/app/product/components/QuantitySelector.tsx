@@ -23,7 +23,7 @@ const QuantitySelector = ({
     ProductSellingPrice: product?.ProductSellingPrice,
     ProductActualPrice: product?.ProductActualPrice,
   });
-  const [countItem, setCountItem] = useState(1);
+  // const [countItem, setCountItem] = useState(1);
   const [filterProductSizes, setFilterProductSizes] = useState<any>(
     product?.ProductSizes
   );
@@ -32,24 +32,6 @@ const QuantitySelector = ({
     color: { Colour_Sequence_No: "" },
     fitting: { Fitting_Sequence_No: "" },
   });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const localStorageCart = JSON.parse(localStorage.getItem("cart") ?? `[]`);
-      const filtered = localStorageCart.filter(
-        (prod: any) => prod.ID === product?.ProductID
-      );
-      if (filtered.length > 0) {
-        const product = filtered[0];
-        setSelectedFields({
-          size: product?.Size ?? [],
-          color: product?.Color ?? {},
-          fitting: product?.Fitting ?? {},
-        });
-        setCountItem(product.Quantity);
-      }
-    }
-  }, [product]);
 
   const filterProductFittings = product?.ProductFittings.filter(
     (fittings: any) => fittings?.Fitting?.trim() !== "NA"
@@ -218,7 +200,6 @@ const QuantitySelector = ({
       )}
       <div className="flex text-center py-5 gap-3">
         <AddToCartButton
-          quantity={countItem}
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
           product={{
@@ -232,7 +213,7 @@ const QuantitySelector = ({
           product={{
             ...(product || {}),
             ...(selectedFields || {}),
-            quantity: countItem || 0,
+            quantity: 0,
           }}
         />
       )}

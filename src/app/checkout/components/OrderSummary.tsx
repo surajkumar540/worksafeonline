@@ -12,16 +12,6 @@ const OrderSummary = ({
   loading: boolean;
   handleSubmit: any;
 }) => {
-  const totalAmount =
-    cart?.reduce((acc: any, item: any) => {
-      if (typeof item?.EndPrice === "number") {
-        return acc + item.EndPrice * item.Quantity;
-      } else {
-        console.error(`Invalid EndPrice for item ID: ${item?.ID}`);
-        return acc;
-      }
-    }, 0) || 0;
-
   return (
     <div className={`p-6 rounded-lg border-4 ${bigShoulders.className}`}>
       <h2 className="text-4xl font-black mb-8 uppercase">Your order</h2>
@@ -29,27 +19,61 @@ const OrderSummary = ({
         <span className="text-2xl font-bold">Product</span>
         <span className="text-2xl font-bold">Subtotal</span>
       </div>
-      {cart.length > 0 &&
-        cart.map((item: any) => {
+      {cart &&
+        cart?.Products &&
+        cart?.Products.length > 0 &&
+        cart?.Products.map((item: any) => {
           return (
             <div
-              key={item.ID}
-              className="flex font-sans tracking-tighter justify-between items-center border-b border-gray-300 py-4 gap-5"
+              key={item.Line}
+              className="flex font-sans tracking-tighter justify-between items-center border-b border-gray-300 py-2 gap-5"
             >
-              <span className="text-gray-500 text-lg">
-                {item.Description} x {item.Quantity}
+              <span className="text-gray-600 text-lg">
+                {item.ProductDescription} x {item.Quantity}
               </span>
-              <span>£{(item.EndPrice * item.Quantity).toFixed(2)}</span>
+              <span className="text-lg">£{item?.LineTotal.toFixed(2)}</span>
             </div>
           );
         })}
       <div className="flex justify-between items-center border-b border-gray-300 py-4">
-        <span className="text-xl font-bold">Subtotal</span>
-        <span className="text-xl font-sans">£{totalAmount.toFixed(2)}</span>
+        <span className="text-xl font-bold">Total Quantity</span>
+        <span className="text-xl font-sans">
+          {cart?.CartTot?.TotalQuantity.toFixed(2)}
+        </span>
+      </div>
+      <div className="flex justify-between items-center border-b border-gray-300 py-4">
+        <span className="text-xl font-bold">Amount excluding Vat</span>
+        <span className="text-xl font-sans">
+          £{cart?.CartTot?.TotalAmountExVat.toFixed(2)}
+        </span>
+      </div>
+      {cart?.CartTot?.ArtworkCost > 0 && (
+        <div className="flex justify-between items-center border-b border-gray-300 py-4">
+          <span className="text-xl font-bold">ArtWork Cost</span>
+          <span className="text-xl font-sans">
+            + £{cart?.CartTot?.ArtworkCost.toFixed(2)}
+          </span>
+        </div>
+      )}
+      {cart?.CartTot?.Discount > 0 && (
+        <div className="flex justify-between items-center border-b border-gray-300 py-4">
+          <span className="text-xl font-bold">Discount Applied</span>
+          <span className="text-xl font-sans">
+            - £{cart?.CartTot?.Discount.toFixed(2)}
+          </span>
+        </div>
+      )}
+      <div className="flex justify-between items-center border-b border-gray-300 py-4">
+        <span className="text-xl font-bold">Vat Amount</span>
+        <span className="text-xl font-sans">
+          + £{cart?.CartTot?.Vat_Amount.toFixed(2)}
+        </span>
       </div>
       <div className="flex justify-between items-center font-semibold pt-4 text-lg mb-4">
-        <span className="text-xl font-bold">Total</span>
-        <span className="text-2xl font-sans">£{totalAmount.toFixed(2)}</span>
+        <span className="text-xl font-bold">Amount to be Paid:</span>
+        <span className="text-2xl font-sans">
+          £{cart?.CartTot?.TotalAmount.toFixed(2)}
+        </span>
       </div>
       <p className="font-sans text-gray-500 pb-5">
         Your personal data will be used to process your order, support your

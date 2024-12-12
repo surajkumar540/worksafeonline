@@ -1,11 +1,11 @@
-import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
-import eventEmitter from "@/hooks/useEventEmitter";
+import React, { useCallback, useState } from "react";
+import { getCartDetails, removeProduct } from "@/api/cartApi";
 import SubTotal from "@/app/wishlist/components/cart/SubTotal";
 import CartItem from "@/app/wishlist/components/cart/cartItems";
-import Image from "next/image";
 
 const CartListModal = ({
   cart,
@@ -18,12 +18,29 @@ const CartListModal = ({
   isOpen: boolean;
   handleToggle: any;
 }) => {
-  const handleRemove = (id: string) => {
-    cart = cart.filter((item: any) => item?.ID !== id);
-    if (cart.length === 0) handleToggle();
-    setCart(cart);
-    if (eventEmitter) eventEmitter.emit("removeFromCart", id);
-    localStorage.setItem("cart", JSON.stringify(cart));
+  const [fetchingResponse, setFetchingResponse] = useState<boolean>(false);
+
+  const fetchCart = useCallback(async () => {
+    const response = await getCartDetails();
+    if (response?.status) {
+      setCart(response);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  // useEffect(() => {
+  //   if (isOpen) fetchCart();
+  // }, [fetchCart, isOpen]);
+
+  const handleRemove = async (id: string) => {
+    if (fetchingResponse) return;
+    setFetchingResponse(true);
+    const removeProductData = { Seq: 0, Qty: 0, Line: id, DeviceID: "" };
+    const response = await removeProduct(removeProductData);
+    if (response?.status) {
+      setFetchingResponse(false);
+      return fetchCart();
+    }
   };
   return (
     <div>
@@ -36,7 +53,7 @@ const CartListModal = ({
           <p
             className={`text-xl font-black uppercase ${bigShoulders.className}`}
           >
-            Shopping Cart ({cart.length})
+            Shopping Cart ({cart?.Products?.length})
           </p>
           <RxCross1
             size={20}
@@ -46,9 +63,9 @@ const CartListModal = ({
           />
         </div>
         <div className="overflow-auto h-full pb-60">
-          {cart && cart.length > 0 ? (
-            cart.map((item: any) => (
-              <React.Fragment key={item?.ID}>
+          {cart?.Products && cart?.Products.length > 0 ? (
+            cart?.Products.map((item: any) => (
+              <React.Fragment key={item?.Line}>
                 <CartItem product={item} handleRemove={handleRemove} />
               </React.Fragment>
             ))
@@ -65,7 +82,7 @@ const CartListModal = ({
           )}
         </div>
         <div className="absolute bottom-0 pb-3 w-full bg-white border-t">
-          <SubTotal cart={cart} />
+          <SubTotal cart={cart?.CartTot} />
           <div className="w-full flex flex-col gap-3 justify-center px-4 text-white items-center">
             <Link
               href={"/cart"}
