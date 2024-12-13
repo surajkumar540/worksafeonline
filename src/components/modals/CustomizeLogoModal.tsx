@@ -11,6 +11,7 @@ import UploadDesign from "../customisation/screens/UploadDesign";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
+import { toast } from "react-toastify";
 
 const CustomizeLogoModal = ({
   data,
@@ -33,22 +34,66 @@ const CustomizeLogoModal = ({
 
   const steps = [
     { label: "Select a Product" },
-    { label: "Choose Logo or Design" },
     { label: "Customize or Assign Options" },
   ];
 
   const customize = [
     { label: "Image/Text" },
+    { label: "Choose Logo or Design" },
+    { label: "Upload / Design" },
     { label: "Print or Embroidery" },
     { label: "Position" },
-    { label: "Upload / Design" },
     { label: "Customisation Details" },
   ];
 
+  const checkEmptyFields = () => {
+    if (currentCustomizeStep === 0) {
+      if (!customizeData.imageText?.id)
+        toast.info("Please select logo or text design!");
+      return customizeData.imageText?.id;
+    }
+    if (currentCustomizeStep === 2) {
+      if (!customizeData?.designImage && customizeData.imageText?.id === 1)
+        toast.info("Please select design image");
+      else if (
+        !(
+          customizeData?.addtext.color &&
+          customizeData?.addtext.font &&
+          customizeData?.addtext.textLine1
+        )
+      )
+        toast.info("Please add design text");
+      return (
+        (customizeData?.addtext.color &&
+          customizeData?.addtext.font &&
+          customizeData?.addtext.textLine1) ||
+        customizeData?.designImage
+      );
+    }
+    if (currentCustomizeStep === 3) {
+      if (!customizeData?.printEmbroidery.id)
+        toast.info("Please select print or embroidery type!");
+      return customizeData?.printEmbroidery.id;
+    }
+    if (currentCustomizeStep === 4) {
+      if (!customizeData?.logoPosition?.id)
+        toast.info("Please select logo position!");
+      return customizeData?.logoPosition.id;
+    }
+    return true;
+  };
+
   const handleCustomizeNext = () => {
+    if (!checkEmptyFields()) return;
     if (currentCustomizeStep < customize.length - 1) {
       setCurrentCustomizeStep(currentCustomizeStep + 1);
     }
+  };
+
+  const handleCustomizeNextId = (id: number) => {
+    if (!checkEmptyFields()) return;
+
+    setCurrentCustomizeStep(id);
   };
 
   const handleFinal = () => {};
@@ -64,11 +109,11 @@ const CustomizeLogoModal = ({
     setCurrentStep(step);
   };
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
+  // const handleNext = () => {
+  //   if (currentStep < steps.length - 1) {
+  //     setCurrentStep(currentStep + 1);
+  //   }
+  // };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
@@ -88,19 +133,12 @@ const CustomizeLogoModal = ({
           );
         case 1:
           return (
-            <PrintEmbroidery
-              customizeData={customizeData}
-              setCustomizeData={setCustomizeData}
+            <Selection
+              handleNext={handleCustomizeNext}
+              handleSetFilterScreen={handleSetFilterScreen}
             />
           );
         case 2:
-          return (
-            <LogoPosition
-              customizeData={customizeData}
-              setCustomizeData={setCustomizeData}
-            />
-          );
-        case 3:
           return (
             <UploadDesign
               product={data}
@@ -109,8 +147,27 @@ const CustomizeLogoModal = ({
               handleCustomizeNext={handleCustomizeNext}
             />
           );
+        case 3:
+          return (
+            <PrintEmbroidery
+              customizeData={customizeData}
+              setCustomizeData={setCustomizeData}
+            />
+          );
         case 4:
-          return <CustomisationDetails data={{ ...data, ...customizeData }} />;
+          return (
+            <LogoPosition
+              customizeData={customizeData}
+              setCustomizeData={setCustomizeData}
+            />
+          );
+        case 5:
+          return (
+            <CustomisationDetails
+              data={{ ...data, ...customizeData }}
+              setCurrentCustomizeStep={setCurrentCustomizeStep}
+            />
+          );
         default:
           return <></>;
       }
@@ -130,7 +187,11 @@ const CustomizeLogoModal = ({
     >
       <div className="flex flex-col gap-5">
         <div className="relative">
-          <Stepper steps={steps} currentStep={currentStep} />
+          <Stepper
+            steps={steps}
+            currentStep={currentStep}
+            handleCustomizeNextId={handleCustomizeNextId}
+          />
           <RxCross1
             size={24}
             onClick={onclose}
@@ -145,12 +206,6 @@ const CustomizeLogoModal = ({
           />
         )}
         {currentStep === 1 && (
-          <Selection
-            handleNext={handleNext}
-            handleSetFilterScreen={handleSetFilterScreen}
-          />
-        )}
-        {currentStep === 2 && (
           <>
             <div className="bg-gray-300 h-[1px]" />
             <p
@@ -162,6 +217,7 @@ const CustomizeLogoModal = ({
               reduceSize={true}
               steps={customize}
               currentStep={currentCustomizeStep}
+              handleCustomizeNextId={handleCustomizeNextId}
             />
             <div className="w-full mx-auto text-center">
               {renderStepContent(currentCustomizeStep)}
@@ -171,11 +227,13 @@ const CustomizeLogoModal = ({
                   onClick={handleCustomizePrevious}
                   className="hover:text-primary transition-all duration-200 ease-linear hover:scale-125 cursor-pointer"
                 />
-                <IoArrowForwardCircle
-                  title="Forward"
-                  onClick={handleCustomizeNext}
-                  className="hover:text-primary transition-all duration-200 ease-linear hover:scale-125 cursor-pointer"
-                />
+                {currentCustomizeStep !== 5 && (
+                  <IoArrowForwardCircle
+                    title="Forward"
+                    onClick={handleCustomizeNext}
+                    className="hover:text-primary transition-all duration-200 ease-linear hover:scale-125 cursor-pointer"
+                  />
+                )}
               </div>
             </div>
           </>

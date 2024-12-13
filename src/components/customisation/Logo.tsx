@@ -1,11 +1,20 @@
 "use client";
 
 import Button from "../common/Button";
+import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { useEffect, useState } from "react";
 import CustomizeLogoModal from "../modals/CustomizeLogoModal";
 
-const Logo = ({ product }: { product: any }) => {
+const Logo = ({
+  product,
+  fieldsCheck,
+  selectedFields,
+}: {
+  product: any;
+  fieldsCheck: any;
+  selectedFields: any;
+}) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const handleToggle = () => setIsVisible(!isVisible);
 
@@ -52,6 +61,15 @@ const Logo = ({ product }: { product: any }) => {
     ProductActualPrice,
     ProductSellingPrice,
   };
+
+  const handleCustomizeLogo = () => {
+    if (fieldsCheck()) return;
+    if (selectedFields?.size.length === 0)
+      return toast.info("Please select a size");
+
+    handleToggle();
+  };
+
   return (
     <>
       <CustomizeLogoModal
@@ -62,7 +80,7 @@ const Logo = ({ product }: { product: any }) => {
       <Button
         type="button"
         text="Customize Logo"
-        onClick={handleToggle}
+        onClick={handleCustomizeLogo}
         classes={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary !rounded-full text-2xl font-bold uppercase bg-black hover:!text-black ${bigShoulders.className}`}
       />
     </>

@@ -9,6 +9,7 @@ import RegisterSuccess from "./login/RegisterSuccess";
 import RegisterAccount from "./login/RegisterAccount";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import StandardLogin from "./login/StandardLogin";
 
 type AuthFlowProps = {
   initialVisibility?: boolean;
@@ -16,6 +17,7 @@ type AuthFlowProps = {
 
 const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
   const [screen, setScreen] = useState("welcome");
+  const [formData, setFormData] = useState({ email: "" });
   const [isVisible, setIsVisible] = useState(initialVisibility);
 
   const onClose = () => setIsVisible(false);
@@ -34,18 +36,26 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
         return <Code setScreen={setScreen} />;
       case "login":
         return <Login setScreen={setScreen} />;
+      case "standardlogin":
+        return <StandardLogin setScreen={setScreen} onClose={onClose} />;
       case "welcome":
-        return <Welcome setScreen={setScreen} />;
+        return <Welcome setScreen={setScreen} onClose={onClose} />;
       case "register":
-        return <Register setScreen={setScreen} />;
+        return (
+          <Register
+            formData={formData}
+            setScreen={setScreen}
+            setFormData={setFormData}
+          />
+        );
       case "register2":
         return <RegisterAccount setScreen={setScreen} />;
       case "registerSuccess":
-        return <RegisterSuccess setScreen={setScreen} />;
+        return <RegisterSuccess formData={formData} setScreen={setScreen} />;
       default:
         return <></>;
     }
-  }, [screen, setScreen]);
+  }, [screen, formData, setFormData]);
 
   return (
     <Modal

@@ -210,6 +210,8 @@ const QuantitySelector = ({
       </div>
       {showLogoCustomisation && (
         <Logo
+          fieldsCheck={fieldsCheck}
+          selectedFields={selectedFields}
           product={{
             ...(product || {}),
             ...(selectedFields || {}),

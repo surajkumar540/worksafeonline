@@ -12,10 +12,8 @@ const TextEditor = ({
 }) => {
   // const widthInCM = 18;
   // const maxWidthInPX = widthInCM * 37.795275; // 1 cm = 37.795275 px
-
-  console.log(selectedFields);
   return (
-    <div className="grid grid-cols-5 gap-5">
+    <div className="grid grid-cols-4 w-4/5 mx-auto mt-5 gap-5">
       <div
         style={{
           color: selectedFields?.color,
@@ -23,7 +21,7 @@ const TextEditor = ({
         }}
         className="col-span-2 flex-col border rounded-lg h-full bg-gray-50 flex justify-center items-center"
       >
-        <div className="relative">
+        <div className="relative w-full">
           <Image
             alt="Logo"
             width={400}
@@ -31,11 +29,11 @@ const TextEditor = ({
             src={product?.ProductImage}
             className="w-full h-full object-cover"
           />
-        </div>
-        <div className="flex flex-col absolute">
-          <span>{selectedFields?.textLine1}</span>
-          <span>{selectedFields?.textLine2}</span>
-          <span>{selectedFields?.textLine3}</span>
+          <div className="flex flex-col absolute inset-0">
+            <span>{selectedFields?.textLine1}</span>
+            <span>{selectedFields?.textLine2}</span>
+            <span>{selectedFields?.textLine3}</span>
+          </div>
         </div>
       </div>
       <div className="col-span-2">
@@ -44,7 +42,6 @@ const TextEditor = ({
           setSelectedFilters={setSelectedFilters}
         />
       </div>
-      <div className="col-span-1"></div>
     </div>
   );
 };

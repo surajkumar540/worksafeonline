@@ -1,11 +1,15 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
-// import { useRouter } from "next/navigation";
 import StarRating from "@/components/common/StarRating";
 
-const CustomisationDetails = ({ data }: { data: any }) => {
+const CustomisationDetails = ({
+  data,
+  setCurrentCustomizeStep,
+}: {
+  data: any;
+  setCurrentCustomizeStep: any;
+}) => {
   const product = data;
-  // const navigate = useRouter();
 
   const handleSaveCustomization = () => {
     const customizationDetails = {
@@ -15,28 +19,12 @@ const CustomisationDetails = ({ data }: { data: any }) => {
       logoPosition: data?.logoPosition,
       printEmbroidery: data?.printEmbroidery,
     };
-
-    const getCartData = localStorage.getItem("cart") || "[]";
-    let cartData = JSON.parse(getCartData);
-
-    const productExists = cartData.some(
-      (cart: any) => cart?.ID === data?.ProductID
-    );
-
-    if (productExists) {
-      cartData = cartData.map((cart: any) => {
-        if (cart?.ID === data?.ProductID)
-          return { ...cart, CustomisationDetails: customizationDetails };
-        return cart;
-      });
-    }
     console.log(customizationDetails);
-    // else
-    //   cartData.push({
-    //     ID: data?.ProductID,
-    //     CustomisationDetails: customizationDetails,
-    //   });
-    // localStorage.setItem("cart", JSON.stringify(cartData));
+    try {
+    } catch (error) {
+      console.log("Customization Details: " + error);
+    } finally {
+    }
   };
 
   return (
@@ -82,7 +70,23 @@ const CustomisationDetails = ({ data }: { data: any }) => {
             £{product?.ProductActualPrice}
           </span>
         </p>
-        <div className="pb-5">
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={handleSaveCustomization}
+            className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-xl font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+          >
+            Save & View Product
+          </button>
+          <button
+            type="button"
+            onClick={() => setCurrentCustomizeStep(0)}
+            className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-xl font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+          >
+            Add Another Logo
+          </button>
+        </div>
+        <div className="py-5">
           <h2
             className={`text-2xl flex gap-2 items-center font-bold ${bigShoulders.className}`}
           >
@@ -175,22 +179,6 @@ const CustomisationDetails = ({ data }: { data: any }) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex gap-2 items-center">
-          <button
-            type="button"
-            onClick={handleSaveCustomization}
-            className={`w-fit flex items-center mt-10 justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-xl font-bold bg-primary/80 text-black ${bigShoulders.className}`}
-          >
-            Save & View Cart
-          </button>
-          <button
-            type="button"
-            onClick={handleSaveCustomization}
-            className={`w-fit flex items-center mt-10 justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-xl font-bold bg-primary/80 text-black ${bigShoulders.className}`}
-          >
-            View Checkout
-          </button>
         </div>
       </div>
     </div>

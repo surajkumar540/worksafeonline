@@ -11,6 +11,7 @@ import { bigShoulders } from "@/app/layout";
 // import { protectedPages } from "@/data/routes";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import eventEmitter from "@/hooks/useEventEmitter";
+import { getDeviceData } from "@/api/generateDeviceId";
 
 interface LoginResponse {
   status: boolean;
@@ -22,7 +23,7 @@ const LoginModal = ({
   isVisible,
 }: {
   isVisible: boolean;
-  onclose: () => void;
+  onclose: any;
 }) => {
   // const pathname = usePathname();
   const [loading, setLoading] = useState<boolean>(false);
@@ -75,9 +76,13 @@ const LoginModal = ({
     try {
       if (!validateForm()) return;
       setLoading(true);
+      const deviceData = getDeviceData();
       const data = {
+        pushID: "",
+        appID: "Worksafe",
         username: formData?.email,
         password: formData?.password,
+        DeviceID: deviceData ? deviceData.deviceId : "",
       };
       const response: LoginResponse = await Post(
         "api/NewLogin",

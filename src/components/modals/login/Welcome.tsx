@@ -1,8 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
+import { getDeviceData, storeDeviceData } from "@/api/generateDeviceId";
 
-const Welcome = ({ setScreen }: { setScreen: any }) => {
+const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
+  const handleGuestLogin = async () => {
+    const toastId = toast.loading("Please wait...");
+    try {
+      const data = getDeviceData();
+      if (!data) await storeDeviceData();
+      onClose();
+      toast.update(toastId, {
+        render: "Logged in as Guest successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (error) {
+      console.log("Register error: " + error);
+      toast.update(toastId, {
+        render: "Something went wrong. Please try again!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    }
+  };
+
   return (
     <div className="absolute inset-0 flex flex-col md:flex-row justify-center items-center p-4 md:p-6 lg:p-10 z-10">
       <div className="w-full lg:w-1/2 flex h-full gap-1 md:border-r md:border-white/20 flex-col justify-between">
@@ -42,7 +67,7 @@ const Welcome = ({ setScreen }: { setScreen: any }) => {
           </button>
           <button
             type="submit"
-            onClick={() => setScreen("login")}
+            onClick={() => setScreen("standardlogin")}
             className={`w-full py-2 px-4 bg-[#1C1C1C] text-primary border border-primary hover:text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary transition outline-none ${bigShoulders.className}`}
           >
             Login
@@ -50,7 +75,7 @@ const Welcome = ({ setScreen }: { setScreen: any }) => {
           <div>
             <button
               type="submit"
-              onClick={() => setScreen("guest")}
+              onClick={handleGuestLogin}
               className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
             >
               Continue as guest

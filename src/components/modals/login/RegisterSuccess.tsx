@@ -4,8 +4,13 @@ import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import { IoArrowBackOutline } from "react-icons/io5";
 
-const RegisterSuccess = ({ setScreen }: { setScreen: any }) => {
-  const email = "sales@worksafeonline.co.uk";
+const RegisterSuccess = ({
+  formData,
+  setScreen,
+}: {
+  formData: any;
+  setScreen: any;
+}) => {
   return (
     <div className="absolute inset-0 flex flex-col md:flex-row justify-center items-center p-4 md:p-6 lg:p-10 z-10">
       <div className="w-full lg:w-1/2 flex h-full gap-1 md:border-r md:border-white/20 flex-col justify-between">
@@ -43,10 +48,10 @@ const RegisterSuccess = ({ setScreen }: { setScreen: any }) => {
         </div>
       </div>
       <div className="w-full lg:w-1/2 space-y-4 md:pl-10">
-        <div className="text-center bg-[#1C1C1C] text-xl border-b border-primary text-primary cursor-not-allowed py-2">
-          {email}
+        <div className="text-center bg-[#1C1C1C]/50 text-xl border-b border-primary text-primary cursor-not-allowed py-2">
+          {formData?.email}
         </div>
-        <p className="text-center text-sm text-white/80">
+        <p className="text-center text-white/80">
           Select &apos;Continue&apos; to register to this account, or choose
           &apos;Register to a different account&apos; to join another group.
         </p>
@@ -59,7 +64,7 @@ const RegisterSuccess = ({ setScreen }: { setScreen: any }) => {
         </button>
         <button
           type="submit"
-          onClick={() => setScreen("register")}
+          onClick={() => setScreen("code")}
           className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
         >
           Register to a different account

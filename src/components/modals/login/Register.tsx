@@ -1,25 +1,46 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
 import { IoArrowBackOutline } from "react-icons/io5";
 
-const Register = ({ setScreen }: { setScreen: any }) => {
+const Register = ({
+  formData,
+  setScreen,
+  setFormData,
+}: {
+  formData: any;
+  setScreen: any;
+  setFormData: any;
+}) => {
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({ email: "" });
-  const [formData, setFormData] = useState({ email: "" });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev: any) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    setErrors({ email: "" });
-    setScreen("registerSuccess");
+    try {
+      setLoading(true);
+      const response: any = await Post("api/WRegister1", formData, 5000, true);
+      if (response.status) {
+        setErrors({ email: "" });
+        setScreen("registerSuccess");
+      }
+    } catch (error) {
+      console.log("Register failed: ", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -62,7 +83,8 @@ const Register = ({ setScreen }: { setScreen: any }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <input
-              type="text"
+              id="email"
+              type="email"
               name="email"
               placeholder="Email ID or Username"
               value={formData.email}
@@ -77,6 +99,7 @@ const Register = ({ setScreen }: { setScreen: any }) => {
           </div>
           <button
             type="submit"
+            disabled={loading}
             onClick={() => setScreen("register")}
             className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >

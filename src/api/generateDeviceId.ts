@@ -37,16 +37,22 @@ const getPlatform = (): string => {
 };
 
 export const storeDeviceData = async () => {
-  const deviceId = await generateDeviceId();
-  if (deviceId) {
-    const deviceData = {
-      deviceId: deviceId, // Unique device ID
-      platform: getPlatform(), // Platform (e.g., Windows, Mac)
-      deviceType: navigator.userAgent, // User agent (browser's type and version)
-      timestamp: new Date().toISOString(), // Current timestamp
-      screenResolution: `${window.innerWidth}x${window.innerHeight}`, // Screen resolution
-    };
-    localStorage.setItem("deviceData", JSON.stringify(deviceData));
+  try {
+    const deviceId = await generateDeviceId();
+    if (deviceId) {
+      const deviceData = {
+        deviceId: deviceId, // Unique device ID
+        platform: getPlatform(), // Platform (e.g., Windows, Mac)
+        deviceType: navigator.userAgent, // User agent (browser's type and version)
+        timestamp: new Date().toISOString(), // Current timestamp
+        screenResolution: `${window.innerWidth}x${window.innerHeight}`, // Screen resolution
+      };
+      localStorage.setItem("deviceData", JSON.stringify(deviceData));
+    }
+    return true;
+  } catch (error) {
+    console.log("Store DeviceData failed: " + error);
+    return false;
   }
 };
 

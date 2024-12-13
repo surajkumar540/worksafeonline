@@ -1,6 +1,7 @@
 import { useState } from "react";
-import ImageUploader from "../uploadDesign/ImageUploader";
+import { toast } from "react-toastify";
 import TextEditor from "../uploadDesign/TextEditor";
+import ImageUploader from "../uploadDesign/ImageUploader";
 
 const UploadDesign = ({
   product,
@@ -25,15 +26,22 @@ const UploadDesign = ({
   });
   const handleProceed = () => {
     setCustomizeData({ ...customizeData, designImage: selectedImage });
-    handleCustomizeNext();
+    // handleCustomizeNext();
   };
   const handleSubmit = () => {
+    if (!selectedFields?.font) return toast.info("Please select a font!");
+    if (!selectedFields?.color) return toast.info("Please select a color!");
+    if (!selectedFields?.textLine1)
+      return toast.info("Please add a text in line 1!");
+
     setCustomizeData({
       ...customizeData,
       addtext: selectedFields,
     });
-    handleCustomizeNext();
+    // handleCustomizeNext();
   };
+
+  console.log(handleCustomizeNext);
 
   return (
     <div className="pb-5">
