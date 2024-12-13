@@ -34,7 +34,7 @@ export default async function Page(ctx: any) {
     const id = subcategory || category;
     const [productsResult, categoriesResult] = await Promise.allSettled([
       Get(`api/ProductsByPageN?category_id=${id}&page=1&pagesize=12`),
-      Get(`api/SubCategories?category_id=${category}`),
+      Get(`api/ProductsByPageN?category_id=${category}&page=1&pagesize=20`),
     ]);
 
     if (productsResult.status === "fulfilled") response = productsResult.value;
@@ -48,7 +48,9 @@ export default async function Page(ctx: any) {
       if (subcategoryMatch) subcategoryName = subcategoryMatch.menu_name;
     }
   } else {
-    response = await Get("api/ProductsByPageN?category_id=0&page=1&pagesize=12");
+    response = await Get(
+      "api/ProductsByPageN?category_id=0&page=1&pagesize=12"
+    );
   }
   return (
     <>

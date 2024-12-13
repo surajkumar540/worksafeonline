@@ -87,7 +87,7 @@ const FilterSection = ({
         fittings: response?.Fittings ?? [],
         pageCount: response?.PageCount ?? 0,
         currentPage: response?.CurrentPage ?? 0,
-        categories: categoryResponse?.subcategories ?? [],
+        categories: categoryResponse?.SubCategories ?? [],
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

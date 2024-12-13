@@ -26,14 +26,15 @@ const AddToCartButton = ({
       ProductID: product?.ProductID,
       Colour: selectedFields?.color?.Colour
         ? selectedFields?.color?.Colour.trim()
-        : "",
+        : "NA",
       Fitting: selectedFields?.fitting?.Fitting
         ? selectedFields?.fitting?.Fitting.trim()
-        : "",
-      Size: selectedFields?.size.map((item: any) => ({
-        Size: item?.Size,
-        Quantity: item?.quantity,
-      })),
+        : "NA",
+      Size:
+        selectedFields?.size.map((item: any) => ({
+          Size: item?.Size,
+          Quantity: item?.quantity,
+        })) ?? [],
     };
     const response = await addToCart(handleAddToCartRequest);
     if (response?.status) eventEmitter?.emit("addToCart", product?.ProductID);
