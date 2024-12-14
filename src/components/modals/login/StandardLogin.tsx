@@ -36,38 +36,38 @@ const StandardLogin = ({
     setErrors({ ...errors, [name]: "" }); // Clear errors on change
   };
 
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = { email: "", password: "" };
+  // const validateForm = () => {
+  //   let valid = true;
+  //   const newErrors = { email: "", password: "" };
 
-    // Email validation
-    if (!formData.email) {
-      newErrors.email = "Email is required.";
-      valid = false;
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-    ) {
-      newErrors.email = "Please enter a valid email address.";
-      valid = false;
-    }
+  //   // Email validation
+  //   if (!formData.email) {
+  //     newErrors.email = "Email is required.";
+  //     valid = false;
+  //   } else if (
+  //     !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+  //   ) {
+  //     newErrors.email = "Please enter a valid email address.";
+  //     valid = false;
+  //   }
 
-    // Password validation
-    if (!formData.password) {
-      newErrors.password = "Password is required.";
-      valid = false;
-    } else if (formData.password.length < 7) {
-      newErrors.password = "Password must be at least 7 characters long.";
-      valid = false;
-    }
+  //   // Password validation
+  //   if (!formData.password) {
+  //     newErrors.password = "Password is required.";
+  //     valid = false;
+  //   } else if (formData.password.length < 7) {
+  //     newErrors.password = "Password must be at least 7 characters long.";
+  //     valid = false;
+  //   }
 
-    setErrors(newErrors);
-    return valid;
-  };
+  //   setErrors(newErrors);
+  //   return valid;
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (!validateForm()) return;
+      // if (!validateForm()) return;
       setLoading(true);
       const deviceData = getDeviceData();
       const data = {

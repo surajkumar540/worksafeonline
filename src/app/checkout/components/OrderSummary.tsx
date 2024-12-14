@@ -31,7 +31,7 @@ const OrderSummary = ({
               <span className="text-gray-600 text-lg">
                 {item.ProductDescription} x {item.Quantity}
               </span>
-              <span className="text-lg">£{item?.LineTotal.toFixed(2)}</span>
+              <span className="text-lg">£ {item?.LineTotal.toFixed(2)}</span>
             </div>
           );
         })}

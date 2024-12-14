@@ -34,6 +34,11 @@ const Register = ({
       const response: any = await Post("api/WRegister1", formData, 5000, true);
       if (response.status) {
         setErrors({ email: "" });
+        setFormData((prev: any) => ({
+          ...prev,
+          custCode: response?.cust,
+          custName: response?.name,
+        }));
         setScreen("registerSuccess");
       }
     } catch (error) {
@@ -79,7 +84,7 @@ const Register = ({
           </p>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 space-y-6 md:space-y-8 md:pl-10">
+      <div className="w-full lg:w-1/2 space-y-6 md:space-y-8 md:pl-6 lg:pl-10">
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <input

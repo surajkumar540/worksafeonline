@@ -56,7 +56,7 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
           </p>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 space-y-6 md:space-y-8 md:pl-10">
+      <div className="w-full lg:w-1/2 space-y-6 md:space-y-8  md:pl-6 lg:pl-10">
         <div className="space-y-4">
           <button
             type="submit"

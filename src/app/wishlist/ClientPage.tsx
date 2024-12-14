@@ -16,29 +16,41 @@ import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 export default function ClientPage() {
   const [showModal, setShowModal] = useState(false);
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
+  const [isFetching, setIsFetching] = useState(false); // To prevent multiple calls
+  const token =
+    typeof window !== "undefined" &&
+    localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
 
   const fetchWishlist = useCallback(async () => {
-    const response = await getWishlist();
-    if (response?.wishlist) {
-      const updatedWishlist = response.wishlist.map((product: any) =>
-        filterData(product)
-      );
-      setWishlistUpdated(updatedWishlist);
-      updatedWishlist.map((wishlist: any) =>
-        eventEmitter?.emit("addToWishlist", wishlist?.ID)
-      );
-      const ids = updatedWishlist.map((wishlist: any) => wishlist.ID);
-      localStorage.setItem("wishlist", JSON.stringify(ids));
-    } else if (response?.message) {
-      toast.info(response?.message);
-      setWishlistUpdated([]);
-    } else setWishlistUpdated([]);
-  }, []);
+    if (isFetching) return; // Prevent duplicate calls
+    setIsFetching(true);
+    try {
+      const response = await getWishlist();
+      if (response?.wishlist) {
+        const updatedWishlist = response.wishlist.map((product: any) =>
+          filterData(product)
+        );
+        setWishlistUpdated(updatedWishlist);
+        updatedWishlist.forEach((wishlist: any) =>
+          eventEmitter?.emit("addToWishlist", wishlist?.ID)
+        );
+        const ids = updatedWishlist.map((wishlist: any) => wishlist.ID);
+        localStorage.setItem("wishlist", JSON.stringify(ids));
+      } else if (response?.message) {
+        toast.info(response?.message);
+        setWishlistUpdated([]);
+      } else {
+        setWishlistUpdated([]);
+      }
+    } finally {
+      setIsFetching(false);
+    }
+  }, [isFetching]);
 
   useEffect(() => {
-    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
     if (token) fetchWishlist();
-  }, [fetchWishlist]);
+    // eslint-disable-next-line
+  }, [token]);
 
   const handleRemove = async (id: string) => {
     const removedResponse = await removeFromWishlist(id);
@@ -49,9 +61,9 @@ export default function ClientPage() {
     }
     return false;
   };
+
   const onAddToCart = async (data: any) => {
     if (await handleRemove(data?.ID)) {
-      console.log(data);
       const updatedData = {
         BOM: [],
         Size: [],
@@ -64,6 +76,7 @@ export default function ClientPage() {
       if (resp?.status) eventEmitter?.emit("addToCart");
     }
   };
+
   return (
     <>
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">

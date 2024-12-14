@@ -5,11 +5,11 @@ import Modal from "../common/Modal";
 import Welcome from "./login/Welcome";
 import Register from "./login/Register";
 import { RxCross1 } from "react-icons/rx";
+import StandardLogin from "./login/StandardLogin";
 import RegisterSuccess from "./login/RegisterSuccess";
 import RegisterAccount from "./login/RegisterAccount";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
-import StandardLogin from "./login/StandardLogin";
 
 type AuthFlowProps = {
   initialVisibility?: boolean;
@@ -17,8 +17,14 @@ type AuthFlowProps = {
 
 const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
   const [screen, setScreen] = useState("welcome");
-  const [formData, setFormData] = useState({ email: "" });
   const [isVisible, setIsVisible] = useState(initialVisibility);
+  const [formData, setFormData] = useState({
+    code: "",
+    email: "",
+    codeName: "",
+    custCode: "",
+    custName: "",
+  });
 
   const onClose = () => setIsVisible(false);
 
@@ -33,9 +39,21 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
   const renderComponent = useCallback(() => {
     switch (screen) {
       case "code":
-        return <Code setScreen={setScreen} />;
+        return (
+          <Code
+            formData={formData}
+            setScreen={setScreen}
+            setFormData={setFormData}
+          />
+        );
       case "login":
-        return <Login setScreen={setScreen} />;
+        return (
+          <Login
+            onClose={onClose}
+            setScreen={setScreen}
+            email={formData?.email}
+          />
+        );
       case "standardlogin":
         return <StandardLogin setScreen={setScreen} onClose={onClose} />;
       case "welcome":
@@ -49,7 +67,13 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
           />
         );
       case "register2":
-        return <RegisterAccount setScreen={setScreen} />;
+        return (
+          <RegisterAccount
+            formData={formData}
+            setScreen={setScreen}
+            setFormData={setFormData}
+          />
+        );
       case "registerSuccess":
         return <RegisterSuccess formData={formData} setScreen={setScreen} />;
       default:
