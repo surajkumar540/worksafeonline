@@ -12,12 +12,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 
 type AuthFlowProps = {
-  initialVisibility?: boolean;
+  onClose: any;
+  isVisible: boolean;
 };
 
-const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
+const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
   const [screen, setScreen] = useState("welcome");
-  const [isVisible, setIsVisible] = useState(initialVisibility);
   const [formData, setFormData] = useState({
     code: "",
     email: "",
@@ -25,8 +25,6 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
     custCode: "",
     custName: "",
   });
-
-  const onClose = () => setIsVisible(false);
 
   useEffect(() => {
     if (isVisible) document.body.style.overflow = "hidden";
@@ -79,6 +77,7 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ initialVisibility = true }) => {
       default:
         return <></>;
     }
+    // eslint-disable-next-line
   }, [screen, formData, setFormData]);
 
   return (

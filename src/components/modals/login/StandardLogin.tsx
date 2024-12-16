@@ -1,5 +1,5 @@
+import axios from "axios";
 import { useState } from "react";
-import { Post } from "@/utils/axios";
 import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -8,8 +8,9 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { getDeviceData } from "@/api/generateDeviceId";
 
 interface LoginResponse {
-  status: boolean;
   token: string;
+  status: boolean;
+  message: string;
 }
 
 const StandardLogin = ({
@@ -77,12 +78,11 @@ const StandardLogin = ({
         password: formData?.password,
         DeviceID: deviceData ? deviceData.deviceId : "",
       };
-      const response: LoginResponse = await Post(
-        "api/NewLogin",
-        data,
-        5000,
-        true
+      const responseData: any = await axios.post(
+        "https://johntrn.worksafeonline.co.uk/api/NewLogin",
+        data
       );
+      const response: LoginResponse = responseData?.data;
       if (response?.status && response?.token) {
         eventEmitter?.emit("loggedIn");
         setFormData({ password: "", email: "" });
@@ -90,9 +90,11 @@ const StandardLogin = ({
         toast.success("User logged in successfully!");
         localStorage.setItem("WORK_SAFE_ONLINE_USER_TOKEN", response?.token);
         onClose();
-      }
+      } else if (!response?.status && response?.message)
+        toast.error(response?.message);
     } catch (error) {
       console.log("Login error: " + error);
+      toast.error("Invalid login credentials");
     } finally {
       setLoading(false);
     }

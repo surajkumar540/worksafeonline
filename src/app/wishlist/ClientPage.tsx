@@ -7,14 +7,12 @@ import { addToCart } from "@/api/cartApi";
 import { filterData } from "@/api/generalApi";
 import eventEmitter from "@/hooks/useEventEmitter";
 import Features from "@/components/common/Features";
-import AuthFlow from "@/components/modals/AuthFlow";
 import WishlistCard from "./components/WishlistCard";
 import React, { useCallback, useEffect, useState } from "react";
 import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 export default function ClientPage() {
-  const [showModal, setShowModal] = useState(false);
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
   const [isFetching, setIsFetching] = useState(false); // To prevent multiple calls
   const token =
@@ -80,10 +78,8 @@ export default function ClientPage() {
   return (
     <>
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
-        {showModal && <AuthFlow initialVisibility={showModal} />}
         <div className="flex justify-between items-center">
           <h1
-            onClick={() => setShowModal(true)}
             className={`uppercase text-3xl md:text-5xl lg:text-7xl flex items-center font-black ${bigShoulders.className}`}
           >
             Wishlist{" "}

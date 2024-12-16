@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import AuthFlow from "../modals/AuthFlow";
 import { useRouter } from "next/navigation";
 import { bigShoulders } from "@/app/layout";
-import LoginModal from "../modals/LoginModal";
 import { IoHomeOutline } from "react-icons/io5";
 import { AiFillAppstore } from "react-icons/ai";
 import eventEmitter from "@/hooks/useEventEmitter";
@@ -39,11 +39,13 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
     };
   }, [handleToggle]);
 
+  const onClose = () => setIsVisible(false);
+
   return (
     <div
       className={`w-full fixed left-0 lg:hidden text-black backdrop-blur-2xl uppercase justify-center items-center bottom-0 grid grid-cols-4 rounded-t-2xl bg-white/50 shadow-md border-t-2 z-50 ${bigShoulders.className}`}
     >
-      <LoginModal isVisible={isVisible} onclose={handleToggle} />
+      <AuthFlow onClose={onClose} isVisible={isVisible} />
       {/* <SearchModal isOpen={isVisibleSearch} handleToggle={handleToggle} /> */}
       <Link href={"/"}>
         <span className="py-2 md:py-3 flex flex-col justify-center items-center">
