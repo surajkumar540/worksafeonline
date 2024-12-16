@@ -53,7 +53,7 @@ const CartListModal = ({
           <p
             className={`text-xl font-black uppercase ${bigShoulders.className}`}
           >
-            Shopping Cart ({cart?.Products?.length})
+            Shopping Cart ({cart?.Products?.length ?? 0})
           </p>
           <RxCross1
             size={20}
@@ -81,25 +81,27 @@ const CartListModal = ({
             />
           )}
         </div>
-        <div className="absolute bottom-0 pb-3 w-full bg-white border-t">
-          <SubTotal cart={cart?.CartTot} />
-          <div className="w-full flex flex-col gap-3 justify-center px-4 text-white items-center">
-            <Link
-              href={"/cart"}
-              onClick={handleToggle}
-              className="bg-primary rounded-full uppercase hover:bg-primary/70 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
-            >
-              View Cart
-            </Link>
-            <Link
-              href={"/checkout"}
-              onClick={handleToggle}
-              className="bg-black rounded-full uppercase hover:bg-transparent/80 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
-            >
-              Checkout
-            </Link>
+        {cart?.Products && cart?.Products.length > 0 && (
+          <div className="absolute bottom-0 pb-3 w-full bg-white border-t">
+            <SubTotal cart={cart?.CartTot} />
+            <div className="w-full flex flex-col gap-3 justify-center px-4 text-white items-center">
+              <Link
+                href={"/cart"}
+                onClick={handleToggle}
+                className="bg-primary rounded-full uppercase hover:bg-primary/70 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
+              >
+                View Cart
+              </Link>
+              <Link
+                href={"/checkout"}
+                onClick={handleToggle}
+                className="bg-black rounded-full uppercase hover:bg-transparent/80 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
+              >
+                Checkout
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {isOpen && (
         <div

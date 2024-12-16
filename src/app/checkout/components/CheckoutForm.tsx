@@ -208,13 +208,15 @@ const CheckoutForm = ({ cart }: { cart: any }) => {
           </form>
         </div>
       </div>
-      <div className="w-full lg:w-2/5">
-        <OrderSummary
-          cart={cart}
-          loading={loading}
-          handleSubmit={handleSubmit}
-        />
-      </div>
+      {cart && cart?.Products && cart?.Products.length > 0 && (
+        <div className="w-full lg:w-2/5">
+          <OrderSummary
+            cart={cart}
+            loading={loading}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      )}
     </div>
   );
 };
