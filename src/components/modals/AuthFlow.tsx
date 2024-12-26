@@ -10,6 +10,7 @@ import RegisterSuccess from "./login/RegisterSuccess";
 import RegisterAccount from "./login/RegisterAccount";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import ConfirmationCode from "./login/confirmationCode";
 
 type AuthFlowProps = {
   onClose: any;
@@ -25,6 +26,19 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
     custCode: "",
     custName: "",
   });
+
+  useEffect(() => {
+    if (isVisible) {
+      setFormData({
+        code: "",
+        email: "",
+        codeName: "",
+        custCode: "",
+        custName: "",
+      });
+      setScreen("welcome");
+    }
+  }, [isVisible]);
 
   useEffect(() => {
     if (isVisible) document.body.style.overflow = "hidden";
@@ -52,6 +66,8 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
             email={formData?.email}
           />
         );
+      case "confirmationCode":
+        return <ConfirmationCode formData={formData} setScreen={setScreen} />;
       case "standardlogin":
         return <StandardLogin setScreen={setScreen} onClose={onClose} />;
       case "welcome":

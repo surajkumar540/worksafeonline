@@ -43,6 +43,12 @@ const Register = ({
       }
     } catch (error) {
       console.log("Register failed: ", error);
+      setScreen("confirmationCode");
+      setFormData((prev: any) => ({
+        ...prev,
+        custCode: "",
+        custName: "",
+      }));
     } finally {
       setLoading(false);
     }
@@ -108,7 +114,7 @@ const Register = ({
             onClick={() => setScreen("register")}
             className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
-            Continue
+            {loading ? "Please wait..." : "Continue"}
           </button>
           <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}

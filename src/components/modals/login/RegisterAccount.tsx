@@ -17,6 +17,8 @@ const RegisterAccount = ({
   const [errors, setErrors] = useState({ depot: "", template: "" });
   const [depotList, setDepotList] = useState([]);
   const [templateList, setTemplateList] = useState([]);
+  const [filteredDepotList, setFilteredDepotList] = useState([]);
+  const [filteredTemplateList, setFilteredTemplateList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,14 +41,38 @@ const RegisterAccount = ({
   }, [formData?.custCode]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
+
+    if (name === "depot" && value.length >= 3) {
+      const filtered = depotList.filter((code: any) =>
+        code.Depot.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredDepotList(filtered);
+    } else if (name === "template" && value.length >= 3) {
+      const filtered = templateList.filter((code: any) =>
+        code.Description.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredTemplateList(filtered);
+    } else {
+      if (name === "depot") setFilteredDepotList([]);
+      if (name === "template") setFilteredTemplateList([]);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData?.depot) {
+      setErrors((prev) => ({ ...prev, depot: "Depot is required." }));
+      return;
+    }
+    if (!formData?.template) {
+      setErrors((prev) => ({ ...prev, template: "Template is required." }));
+      return;
+    }
+
     try {
       const response: any = await Post("api/WRegisterCodeGroup1", {
         code: "",
@@ -56,11 +82,38 @@ const RegisterAccount = ({
         depot: formData?.depot ?? "",
         customer: formData?.custCode,
       });
-      if (response?.status) setScreen("login");
+      if (response?.status) {
+        setScreen("login");
+      } else {
+        console.error("Submission failed:", response);
+        setErrors((prev) => ({
+          ...prev,
+          depot: response?.message || "Failed to register. Please try again.",
+        }));
+      }
     } catch (error) {
-      setErrors({ depot: "", template: "" });
-      console.log("Register error: " + error);
+      console.error("Register error:", error);
+      setErrors((prev) => ({
+        ...prev,
+        depot: "An error occurred. Please try again later.",
+      }));
     }
+  };
+
+  const handleSelectCode = (selectedName: string) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      depot: selectedName,
+    }));
+    setFilteredDepotList([]); // Clear the filtered list
+  };
+
+  const handleSelectTemplateCode = (selectedName: string) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      template: selectedName,
+    }));
+    setFilteredTemplateList([]); // Clear the filtered list
   };
 
   return (
@@ -70,7 +123,7 @@ const RegisterAccount = ({
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
               size={25}
-              onClick={() => setScreen("welcome")}
+              onClick={() => setScreen("registerSuccess")}
               className="text-primary cursor-pointer"
             />
           </span>
@@ -106,63 +159,65 @@ const RegisterAccount = ({
             Please select below to continue
           </p>
           <div className="mb-6">
-            <select
+            <input
+              type="text"
+              id="depot"
               name="depot"
-              // required
+              required
               onChange={handleChange}
               value={formData.depot || ""}
+              placeholder="Enter Depot"
               className={`w-full p-2 border-b text-white outline-none bg-transparent ${
                 errors.depot ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
-            >
-              <option value="" disabled>
-                Select Depot
-              </option>
-              {depotList.length > 0 &&
-                depotList.map((depot: any, index) => (
-                  <option
-                    key={index}
-                    value={depot?.Depot}
-                    className="text-black"
-                  >
-                    {depot?.Name}
-                  </option>
-                ))}
-            </select>
+            />
             {errors.depot && (
               <p className="text-red-500 text-sm mt-1">{errors.depot}</p>
             )}
+            {filteredDepotList.length > 0 && (
+              <ul className="absolute shadow-2xl bg-black text-primary mt-2 w-full h-fit overflow-y-auto transition">
+                {filteredDepotList.map((codeObj: any, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSelectCode(codeObj.Depot)}
+                    className="px-4 py-2 hover:border-b hover:border-primary hover:text-primary cursor-pointer"
+                  >
+                    {codeObj.Depot}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-
           <div className="mb-6">
-            <select
+            <input
+              type="text"
+              id="template"
               name="template"
-              // required
+              required
               onChange={handleChange}
               value={formData.template || ""}
+              placeholder="Enter Template"
               className={`w-full p-2 border-b text-white outline-none bg-transparent ${
                 errors.template ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
-            >
-              <option value="" disabled>
-                Select Template
-              </option>
-              {templateList.length > 0 &&
-                templateList.map((template: any, index) => (
-                  <option
-                    key={index}
-                    className="text-black"
-                    value={template.Template}
-                  >
-                    {template?.Description}
-                  </option>
-                ))}
-            </select>
+            />
             {errors.template && (
               <p className="text-red-500 text-sm mt-1">{errors.template}</p>
             )}
+            {filteredTemplateList.length > 0 && (
+              <ul className="absolute shadow-2xl bg-black text-primary mt-2 w-full h-fit overflow-y-auto transition">
+                {filteredTemplateList.map((codeObj: any, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSelectTemplateCode(codeObj.Template)}
+                    className="px-4 py-2 hover:border-b hover:border-primary hover:text-primary cursor-pointer"
+                  >
+                    {codeObj.Description}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-
           <button
             type="submit"
             className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}

@@ -64,7 +64,7 @@ const RegisterSuccess = ({
         </button>
         <button
           type="submit"
-          onClick={() => setScreen("code")}
+          onClick={() => setScreen("confirmationCode")}
           className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
         >
           Register to a different account

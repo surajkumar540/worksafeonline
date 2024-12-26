@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Fetch } from "@/utils/axios";
 import { Get } from "@/api/generalApi";
+import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { Fetch, Post } from "@/utils/axios";
-import { toast } from "react-toastify";
 
 interface CodeType {
   Code: string;
@@ -92,21 +92,6 @@ const Code = ({
     setScreen("registerSuccess");
   };
 
-  const handleSkip = async () => {
-    try {
-      const response: any = await Post(
-        "api/WNormalRegister1",
-        { code: "Worksafe", email: formData?.email },
-        5000,
-        true
-      );
-      if (response?.status) setScreen("login");
-      else if (response?.message) toast.error(response?.message);
-    } catch (error) {
-      console.log("SKipped", error);
-    }
-  };
-
   return (
     <div className="absolute inset-0 flex flex-col md:flex-row justify-center items-center p-4 md:p-6 lg:p-10 z-10">
       <div className="w-full lg:w-1/2 flex h-full gap-1 md:border-r md:border-white/20 flex-col justify-between">
@@ -114,7 +99,7 @@ const Code = ({
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
               size={25}
-              onClick={() => setScreen("register")}
+              onClick={() => setScreen("confirmationCode")}
               className="text-primary cursor-pointer"
             />
           </span>
@@ -150,9 +135,10 @@ const Code = ({
               type="text"
               id="codeName"
               name="codeName"
+              required
               onChange={handleChange}
               value={formData.codeName}
-              placeholder="Company or Group Code (Optional)"
+              placeholder="Company or Group Code"
               className={`w-full p-2 border-b text-white outline-none bg-transparent ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
@@ -179,13 +165,6 @@ const Code = ({
           </button>
         </form>
         <div>
-          <button
-            type="button"
-            onClick={handleSkip}
-            className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
-          >
-            Skip to next
-          </button>
           <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
