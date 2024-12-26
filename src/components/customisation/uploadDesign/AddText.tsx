@@ -1,3 +1,5 @@
+import { bigShoulders } from "@/app/layout";
+
 const colors = [
   { name: "Red", value: "#FF0000" },
   { name: "Green", value: "#008000" },
@@ -60,15 +62,15 @@ const AddText = ({
 
   return (
     <div className="flex flex-col space-y-3">
-      {/* Color Selector */}
-      <p className="font-bold flex justify-start items-center text-xl underline underline-offset-2">
-        Add Text Details
+      <p className={`${bigShoulders.className} text-3xl font-black`}>
+        Add
+        <span className="text-primary"> Text</span> Details
       </p>
       <select
         id="color"
         onChange={handleColorChange}
         value={selectedFields?.color}
-        className="border p-3 rounded-lg outline-none"
+        className="border-b border-b-gray-600 py-3 outline-none"
       >
         <option value="">Select Color</option>
         {colors.map((color) => (
@@ -83,7 +85,7 @@ const AddText = ({
         id="font"
         onChange={handleFontChange}
         value={selectedFields?.font}
-        className="border p-3 rounded-lg outline-none"
+        className="border-b border-b-gray-600 py-3 outline-none"
       >
         <option value="">Select Font</option>
         {fonts.map((font) => (
@@ -100,7 +102,7 @@ const AddText = ({
         name="textLine1"
         onChange={handleInputChange}
         placeholder="Enter Line 1 Text here"
-        className="border p-3 rounded-lg outline-none"
+        className="border-b border-b-gray-600 py-3 outline-none"
       />
       <input
         type="text"
@@ -108,7 +110,7 @@ const AddText = ({
         name="textLine2"
         onChange={handleInputChange}
         placeholder="Enter Line 2 Text here (optional)"
-        className="border p-3 rounded-lg outline-none"
+        className="border-b border-b-gray-600 py-3 outline-none"
       />
       <input
         type="text"
@@ -116,7 +118,7 @@ const AddText = ({
         name="textLine3"
         onChange={handleInputChange}
         placeholder="Enter Line 3 Text here (optional)"
-        className="border p-3 rounded-lg outline-none"
+        className="border-b border-b-gray-600 py-3 outline-none"
       />
     </div>
   );

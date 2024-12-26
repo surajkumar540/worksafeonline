@@ -1,17 +1,17 @@
 import Modal from "../common/Modal";
+// import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
 import { useCallback, useState } from "react";
 import Stepper from "../customisation/Stepper";
 import ImageText from "../customisation/screens/ImageText";
-import Selection from "../customisation/screens/Selection";
+// import Selection from "../customisation/screens/Selection";
 import SavedLogos from "../customisation/screens/SavedLogos";
 import LogoPosition from "../customisation/screens/LogoPosition";
-import UploadDesign from "../customisation/screens/UploadDesign";
+// import UploadDesign from "../customisation/screens/UploadDesign";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
-import { toast } from "react-toastify";
 
 const CustomizeLogoModal = ({
   data,
@@ -39,59 +39,58 @@ const CustomizeLogoModal = ({
 
   const customize = [
     { label: "Image/Text" },
-    { label: "Choose Logo or Design" },
-    { label: "Upload / Design" },
-    { label: "Print or Embroidery" },
+    { label: "Choose / Upload / Design" },
     { label: "Position" },
+    { label: "Print or Embroidery" },
     { label: "Customisation Details" },
   ];
 
-  const checkEmptyFields = () => {
-    if (currentCustomizeStep === 0) {
-      if (!customizeData.imageText?.id)
-        toast.info("Please select logo or text design!");
-      return customizeData.imageText?.id;
-    }
-    if (currentCustomizeStep === 2) {
-      if (!customizeData?.designImage && customizeData.imageText?.id === 1)
-        toast.info("Please select design image");
-      else if (
-        !(
-          customizeData?.addtext.color &&
-          customizeData?.addtext.font &&
-          customizeData?.addtext.textLine1
-        )
-      )
-        toast.info("Please add design text");
-      return (
-        (customizeData?.addtext.color &&
-          customizeData?.addtext.font &&
-          customizeData?.addtext.textLine1) ||
-        customizeData?.designImage
-      );
-    }
-    if (currentCustomizeStep === 3) {
-      if (!customizeData?.printEmbroidery.id)
-        toast.info("Please select print or embroidery type!");
-      return customizeData?.printEmbroidery.id;
-    }
-    if (currentCustomizeStep === 4) {
-      if (!customizeData?.logoPosition?.id)
-        toast.info("Please select logo position!");
-      return customizeData?.logoPosition.id;
-    }
-    return true;
-  };
+  // const checkEmptyFields = () => {
+  //   if (currentCustomizeStep === 0) {
+  //     if (!customizeData.imageText?.id)
+  //       toast.info("Please select logo or text design!");
+  //     return customizeData.imageText?.id;
+  //   }
+  //   if (currentCustomizeStep === 2) {
+  //     if (!customizeData?.designImage && customizeData.imageText?.id === 1)
+  //       toast.info("Please select design image");
+  //     else if (
+  //       !(
+  //         customizeData?.addtext.color &&
+  //         customizeData?.addtext.font &&
+  //         customizeData?.addtext.textLine1
+  //       )
+  //     )
+  //       toast.info("Please add design text");
+  //     return (
+  //       (customizeData?.addtext.color &&
+  //         customizeData?.addtext.font &&
+  //         customizeData?.addtext.textLine1) ||
+  //       customizeData?.designImage
+  //     );
+  //   }
+  //   if (currentCustomizeStep === 3) {
+  //     if (!customizeData?.printEmbroidery.id)
+  //       toast.info("Please select print or embroidery type!");
+  //     return customizeData?.printEmbroidery.id;
+  //   }
+  //   if (currentCustomizeStep === 4) {
+  //     if (!customizeData?.logoPosition?.id)
+  //       toast.info("Please select logo position!");
+  //     return customizeData?.logoPosition.id;
+  //   }
+  //   return true;
+  // };
 
   const handleCustomizeNext = () => {
-    if (!checkEmptyFields()) return;
+    // if (!checkEmptyFields()) return;
     if (currentCustomizeStep < customize.length - 1) {
       setCurrentCustomizeStep(currentCustomizeStep + 1);
     }
   };
 
   const handleCustomizeNextId = (id: number) => {
-    if (!checkEmptyFields()) return;
+    // if (!checkEmptyFields()) return;
 
     setCurrentCustomizeStep(id);
   };
@@ -108,12 +107,6 @@ const CustomizeLogoModal = ({
   const handleSetFilterScreen = (step: number) => {
     setCurrentStep(step);
   };
-
-  // const handleNext = () => {
-  //   if (currentStep < steps.length - 1) {
-  //     setCurrentStep(currentStep + 1);
-  //   }
-  // };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
@@ -133,20 +126,28 @@ const CustomizeLogoModal = ({
           );
         case 1:
           return (
-            <Selection
-              handleNext={handleCustomizeNext}
-              handleSetFilterScreen={handleSetFilterScreen}
-            />
-          );
-        case 2:
-          return (
-            <UploadDesign
-              product={data}
+            // <Selection
+            //   handleNext={handleCustomizeNext}
+            //   handleSetFilterScreen={handleSetFilterScreen}
+            // />
+            <SavedLogos
+              data={data}
+              handleFinal={handleFinal}
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
               handleCustomizeNext={handleCustomizeNext}
+              handleSetFilterScreen={handleSetFilterScreen}
             />
           );
+        // case 2:
+        //   return (
+        //     <UploadDesign
+        //       product={data}
+        //       customizeData={customizeData}
+        //       setCustomizeData={setCustomizeData}
+        //       handleCustomizeNext={handleCustomizeNext}
+        //     />
+        //   );
         case 3:
           return (
             <PrintEmbroidery
@@ -154,14 +155,14 @@ const CustomizeLogoModal = ({
               setCustomizeData={setCustomizeData}
             />
           );
-        case 4:
+        case 2:
           return (
             <LogoPosition
               customizeData={customizeData}
               setCustomizeData={setCustomizeData}
             />
           );
-        case 5:
+        case 4:
           return (
             <CustomisationDetails
               data={{ ...data, ...customizeData }}
@@ -199,12 +200,9 @@ const CustomizeLogoModal = ({
             className="cursor-pointer hover:scale-110 hover:text-primary absolute top-1 right-5 text-black"
           />
         </div>
-        {currentStep === 3 && (
-          <SavedLogos
-            handleFinal={handleFinal}
-            handleSetFilterScreen={handleSetFilterScreen}
-          />
-        )}
+        {/* {currentStep === 3 && (
+          
+        )} */}
         {currentStep === 1 && (
           <>
             <div className="bg-gray-300 h-[1px]" />
@@ -238,22 +236,6 @@ const CustomizeLogoModal = ({
             </div>
           </>
         )}
-        {/* <div className="flex justify-between items-center gap-2">
-          <button
-            onClick={handlePrevious}
-            disabled={currentStep === 1}
-            className="px-4 py-2 bg-black w-fit text-white rounded-md disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Back
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentStep === steps.length - 1}
-            className="px-4 py-2 bg-black w-fit text-white rounded-md disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Continue
-          </button>
-        </div> */}
       </div>
     </Modal>
   );

@@ -76,8 +76,7 @@ const PrintEmbroidery = ({
               selectedOption === option.id
                 ? "border-green-500 scale-105"
                 : "border-gray-200"
-            } transition-all duration-300 bg-white`}
-            whileTap={{ scale: 0.95 }}
+            } transition-all duration-200 active:scale-[0.8] bg-white`}
             onClick={() => handleSelect(option)}
             variants={optionVariants}
           >
@@ -85,10 +84,11 @@ const PrintEmbroidery = ({
               <div className="text-4xl py-3">
                 <Image
                   alt="Image"
-                  width={200}
+                  width={250}
                   height={75}
+                  unoptimized
                   src={option.icon}
-                  className="w-auto object-contain"
+                  className="w-full object-contain"
                 />
               </div>
               <p className="text-gray-500 flex text-sm text-center relative">

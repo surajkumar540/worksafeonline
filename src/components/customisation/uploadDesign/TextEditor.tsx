@@ -1,5 +1,5 @@
 import AddText from "./AddText";
-import Image from "next/image";
+// import Image from "next/image";
 
 const TextEditor = ({
   product,
@@ -10,11 +10,12 @@ const TextEditor = ({
   selectedFields: any;
   setSelectedFilters: any;
 }) => {
+  console.log(product);
   // const widthInCM = 18;
   // const maxWidthInPX = widthInCM * 37.795275; // 1 cm = 37.795275 px
   return (
-    <div className="grid grid-cols-4 w-4/5 mx-auto mt-5 gap-5">
-      <div
+    <div className="grid grid-cols-4 w-full mx-auto mt-5 gap-5">
+      {/* <div
         style={{
           color: selectedFields?.color,
           fontFamily: selectedFields?.font,
@@ -35,8 +36,8 @@ const TextEditor = ({
             <span>{selectedFields?.textLine3}</span>
           </div>
         </div>
-      </div>
-      <div className="col-span-2">
+      </div> */}
+      <div className="col-span-4">
         <AddText
           selectedFields={selectedFields}
           setSelectedFilters={setSelectedFilters}

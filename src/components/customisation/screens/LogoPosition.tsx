@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { bigShoulders } from "@/app/layout";
+import SizeSelector from "./SizeSelector";
 
 interface Option {
   id: number;
@@ -129,7 +130,7 @@ const LogoPosition = ({
 
   return (
     <motion.div
-      className="flex gap-20 py-5 lg:px-[10%] items-center justify-center"
+      className="flex gap-5 py-5 lg:px-[10%] items-center justify-between"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -168,7 +169,7 @@ const LogoPosition = ({
         </div>
       </div>
 
-      <div className="w-1/4 flex items-center justify-center">
+      <div className="w-1/4 flex flex-col items-center justify-center">
         {selectedOption && (
           <motion.div
             className="p-6 rounded-xl border-2 bg-white flex flex-col items-center"
@@ -198,6 +199,7 @@ const LogoPosition = ({
             </div>
           </motion.div>
         )}
+        <SizeSelector />
       </div>
     </motion.div>
   );

@@ -79,8 +79,7 @@ const ImageText = ({
               selectedOption === option.id
                 ? "border-green-500 scale-105"
                 : "border-gray-100"
-            } transition-all duration-200 ease-linear bg-white`}
-            whileTap={{ scale: 0.95 }}
+            } transition-all duration-200 active:scale-[0.8] ease-linear bg-white`}
             onClick={() => handleSelect(option)}
             variants={optionVariants}
           >

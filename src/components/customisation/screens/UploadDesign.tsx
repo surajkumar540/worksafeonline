@@ -14,6 +14,7 @@ const UploadDesign = ({
   setCustomizeData: any;
   handleCustomizeNext: any;
 }) => {
+  console.log(handleCustomizeNext);
   const [selectedImage, setSelectedImage] = useState<string | null>(
     customizeData?.designImage ?? null
   );
@@ -38,15 +39,12 @@ const UploadDesign = ({
       ...customizeData,
       addtext: selectedFields,
     });
-    // handleCustomizeNext();
   };
 
-  console.log(handleCustomizeNext);
-
   return (
-    <div className="pb-5">
+    <div className="pb-5 w-1/2">
       {customizeData?.imageText?.id === 1 ? (
-        <>
+        <div className="flex w-full flex-col justify-center items-center">
           <ImageUploader
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
@@ -60,9 +58,9 @@ const UploadDesign = ({
               Upload logo
             </button>
           )}
-        </>
+        </div>
       ) : (
-        <>
+        <div className="w-full">
           <TextEditor
             product={product}
             selectedFields={selectedFields}
@@ -71,11 +69,11 @@ const UploadDesign = ({
           <button
             type="button"
             onClick={handleSubmit}
-            className="bg-blue-500 text-white mt-4 px-6 py-2 rounded-md"
+            className="bg-primary uppercase font-semibold transition text-black mt-4 px-8 py-3 w-full rounded-full"
           >
             Upload Data
           </button>
-        </>
+        </div>
       )}
     </div>
   );

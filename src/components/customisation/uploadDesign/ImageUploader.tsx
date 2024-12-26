@@ -45,7 +45,7 @@ const ImageUploader = ({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4">
+    <div className="flex flex-col w-full justify-center items-center space-y-4">
       <input
         type="file"
         accept="image/*"
@@ -54,7 +54,7 @@ const ImageUploader = ({
         className="hidden"
       />
       {selectedImage ? (
-        <div className="w-1/4 relative flex justify-center items-center">
+        <div className="w-1/2 relative flex justify-center items-center">
           <Image
             width={100}
             height={100}
@@ -80,7 +80,7 @@ const ImageUploader = ({
           onClick={() => fileInputRef.current?.click()}
           className="relative flex flex-col justify-start w-full h-48 border-2 border-dashed border-gray-400 rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
         >
-          <div className="flex flex-col justify-center items-center h-full text-gray-600">
+          <div className="flex flex-col text-center justify-center items-center h-full text-gray-600">
             <div className="text-xs space-y-1">
               <p className="font-bold text-base text-black">
                 Files Types we Accept

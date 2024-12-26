@@ -9,18 +9,12 @@ const Selection = ({
 }) => {
   return (
     <>
-      {/* <div className="bg-gray-300 h-[1px]" /> */}
-      {/* <p
-        className={`${bigShoulders.className} text-4xl mt-3 text-center font-black uppercase`}
-      >
-        <span className="text-primary">Choose Logo</span> or Design
-      </p> */}
       <p className="text-base text-gray-800 font-semibold text-center my-5">
         Select an option below to proceed with your branding
       </p>
-      <div className="w-1/2 mx-auto mt-2">
+      <div className="w-full lg:w-1/2 mx-auto mt-2">
         <div className="w-full max-w-xl mx-auto pb-6">
-          <div className="flex justify-between gap-5">
+          <div className="flex flex-col md:flex-row justify-between gap-5">
             <button
               onClick={() => handleSetFilterScreen(3)}
               className="w-full bg-gradient-to-r outline-none from-primary to-primary/50 text-black py-4 px-8 rounded-xl hover:bg-primary/80 transition-all duration-300 ease-in-out shadow-md transform hover:scale-105"
