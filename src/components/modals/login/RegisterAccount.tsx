@@ -46,9 +46,9 @@ const RegisterAccount = ({
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
 
-    if (name === "depot" && value.length >= 2) {
+    if (name === "depot" && value.length >= 3) {
       const filtered = depotList.filter((code: any) =>
-        code.Depot.toLowerCase().includes(value.toLowerCase())
+        code.Name.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredDepotList(filtered);
     } else if (name === "template" && value.length >= 3) {
@@ -68,20 +68,24 @@ const RegisterAccount = ({
       setErrors((prev) => ({ ...prev, depot: "Depot is required." }));
       return;
     }
-    if (!formData?.template) {
-      setErrors((prev) => ({ ...prev, template: "Template is required." }));
-      return;
-    }
+    // if (!formData?.template) {
+    //   setErrors((prev) => ({ ...prev, template: "Template is required." }));
+    //   return;
+    // }
 
     try {
       let url = "api/WRegisterCode1";
       if (formData?.code) url = "/api/WRegisterCodeGroup1";
 
+      const depotValue: any = depotList.filter(
+        (item: any) => item?.Name === formData?.depot
+      );
+
       let data: any = {
         appID: "Worksafe",
         email: formData?.email,
         customer: formData?.cust,
-        depot: formData?.depot ?? "",
+        depot: depotValue ? depotValue[depotValue.length - 1]?.Depot : "",
       };
       if (formData?.code) data.gCode = formData?.code;
       data.code = data?.gCode ? "" : formData?.code;
@@ -183,10 +187,10 @@ const RegisterAccount = ({
                 {filteredDepotList.map((codeObj: any, index) => (
                   <li
                     key={index}
-                    onClick={() => handleSelectCode(codeObj.Depot)}
+                    onClick={() => handleSelectCode(codeObj.Name)}
                     className="px-4 py-2 hover:border-b hover:border-primary hover:text-primary cursor-pointer"
                   >
-                    {codeObj.Depot}
+                    {codeObj.Name}
                   </li>
                 ))}
               </ul>
