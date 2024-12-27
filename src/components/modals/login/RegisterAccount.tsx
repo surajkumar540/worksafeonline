@@ -209,7 +209,9 @@ const RegisterAccount = ({
                 {filteredTemplateList.map((codeObj: any, index) => (
                   <li
                     key={index}
-                    onClick={() => handleSelectTemplateCode(codeObj.Template)}
+                    onClick={() =>
+                      handleSelectTemplateCode(codeObj.Description)
+                    }
                     className="px-4 py-2 hover:border-b hover:border-primary hover:text-primary cursor-pointer"
                   >
                     {codeObj.Description}
