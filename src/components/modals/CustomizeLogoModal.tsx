@@ -102,6 +102,7 @@ const CustomizeLogoModal = ({
       default:
         return null;
     }
+    // eslint-disable-next-line
   }, [currentCustomizeStep, customizeData, data]);
 
   if (!data) return null;

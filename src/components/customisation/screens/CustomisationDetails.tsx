@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
-import StarRating from "@/components/common/StarRating";
+// import StarRating from "@/components/common/StarRating";
 
 const CustomisationDetails = ({
   data,

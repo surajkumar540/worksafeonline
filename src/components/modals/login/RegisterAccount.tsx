@@ -38,7 +38,7 @@ const RegisterAccount = ({
       }
     };
     fetchData();
-  }, [formData?.custCode]);
+  }, [formData?.cust]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -81,7 +81,7 @@ const RegisterAccount = ({
         (item: any) => item?.Name === formData?.depot
       );
 
-      let data: any = {
+      const data: any = {
         appID: "Worksafe",
         email: formData?.email,
         customer: formData?.cust,
