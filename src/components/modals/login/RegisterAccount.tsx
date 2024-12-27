@@ -26,8 +26,8 @@ const RegisterAccount = ({
         const depoUrl = "api/Depot";
         const tempUrl = "api/Template";
         const [depotResp, templateResp]: any = await Promise.all([
-          Fetch(depoUrl, { Customer: formData?.custCode }, 5000, true, false),
-          Fetch(tempUrl, { Customer: formData?.custCode }, 5000, true, false),
+          Fetch(depoUrl, { Customer: formData?.cust }, 5000, true, false),
+          Fetch(tempUrl, { Customer: formData?.cust }, 5000, true, false),
         ]);
         setDepotList(depotResp?.Depot || []);
         setTemplateList(templateResp?.Template || []);
@@ -46,7 +46,7 @@ const RegisterAccount = ({
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
 
-    if (name === "depot" && value.length >= 3) {
+    if (name === "depot" && value.length >= 2) {
       const filtered = depotList.filter((code: any) =>
         code.Depot.toLowerCase().includes(value.toLowerCase())
       );
@@ -74,17 +74,21 @@ const RegisterAccount = ({
     }
 
     try {
-      const response: any = await Post("api/WRegisterCodeGroup1", {
-        code: "",
+      let url = "api/WRegisterCode1";
+      if (formData?.code) url = "/api/WRegisterCodeGroup1";
+
+      let data: any = {
         appID: "Worksafe",
-        gCode: formData?.code,
         email: formData?.email,
+        customer: formData?.cust,
         depot: formData?.depot ?? "",
-        customer: formData?.custCode,
-      });
-      if (response?.status) {
-        setScreen("login");
-      } else {
+      };
+      if (formData?.code) data.gCode = formData?.code;
+      data.code = data?.gCode ? "" : formData?.code;
+
+      const response: any = await Post(url, data);
+      if (response?.status) setScreen("login");
+      else {
         console.error("Submission failed:", response);
         setErrors((prev) => ({
           ...prev,
@@ -152,8 +156,8 @@ const RegisterAccount = ({
       </div>
       <div className="w-full lg:w-1/2 md:pl-10">
         <form onSubmit={handleSubmit}>
-          <div className="text-center text-sm bg-primary rounded-full text-black cursor-not-allowed py-2">
-            {formData?.custCode} {formData?.custName}
+          <div className="text-center bg-primary rounded-full text-black cursor-not-allowed py-2">
+            {formData?.cust} {formData?.custName}
           </div>
           <p className="text-center text-lg py-4 text-white/80">
             Please select below to continue
@@ -193,7 +197,6 @@ const RegisterAccount = ({
               type="text"
               id="template"
               name="template"
-              required
               onChange={handleChange}
               value={formData.template || ""}
               placeholder="Enter Template"

@@ -49,7 +49,7 @@ const RegisterSuccess = ({
       </div>
       <div className="w-full lg:w-1/2 space-y-4 md:pl-6 lg:pl-10">
         <div className="text-center bg-[#1C1C1C]/50 text-xl border-b border-primary text-primary cursor-not-allowed py-2">
-          {formData?.custCode} {formData?.custName}
+          {formData?.cust} {formData?.custName}
         </div>
         <p className="text-center text-white/80">
           Select &apos;Continue&apos; to register to this account, or choose

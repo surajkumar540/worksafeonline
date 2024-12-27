@@ -31,22 +31,34 @@ const Register = ({
     e.preventDefault();
     try {
       setLoading(true);
-      const response: any = await Post("api/WRegister1", formData, 5000, true);
-      if (response.status) {
+      const response: any = await Post(
+        "api/WRegister1",
+        { email: formData?.email },
+        5000,
+        true
+      );
+      if (response.status && response?.name && response?.cust) {
         setErrors({ email: "" });
         setFormData((prev: any) => ({
           ...prev,
-          custCode: response?.cust,
+          cust: response?.cust,
           custName: response?.name,
         }));
         setScreen("registerSuccess");
+      } else if (response?.status && response?.cust && !response?.name) {
+        setScreen("confirmationCode");
+        setFormData((prev: any) => ({
+          ...prev,
+          cust: "",
+          custName: "",
+        }));
       }
     } catch (error) {
       console.log("Register failed: ", error);
       setScreen("confirmationCode");
       setFormData((prev: any) => ({
         ...prev,
-        custCode: "",
+        cust: "",
         custName: "",
       }));
     } finally {

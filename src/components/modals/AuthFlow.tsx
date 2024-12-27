@@ -20,8 +20,9 @@ type AuthFlowProps = {
 const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
   const [screen, setScreen] = useState("welcome");
   const [formData, setFormData] = useState({
-    code: "",
-    email: "",
+    cust: "", // customer
+    code: "", // customer code
+    email: "", // email address
     codeName: "",
     custCode: "",
     custName: "",
@@ -31,6 +32,7 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
     if (isVisible) {
       setFormData({
         code: "",
+        cust: "",
         email: "",
         codeName: "",
         custCode: "",

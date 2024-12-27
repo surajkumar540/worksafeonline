@@ -74,9 +74,7 @@ const Code = ({
       return toast.info("Please enter code!");
     const response: any = await Fetch(
       "api/GroupCustomer",
-      {
-        code: formData?.code,
-      },
+      { code: formData?.code },
       5000,
       true
     );
@@ -84,7 +82,7 @@ const Code = ({
       setFormData((prev: any) => ({
         ...prev,
         cust: response?.cust ?? "",
-        custCode: response?.code ?? "",
+        code: response?.code ?? "",
         custName: response?.name ?? "",
       }));
     }
