@@ -41,13 +41,13 @@ const RegisterSuccess = ({
           >
             Register!
           </h2>
-          <p className="text-center md:text-left text-white/80">
-            We have found your email address is registered to the following
-            account:
-          </p>
         </div>
       </div>
       <div className="w-full lg:w-1/2 space-y-4 md:pl-6 lg:pl-10">
+        <p className="text-center text-white/80">
+          We have found your email address is registered to the following
+          account:
+        </p>
         <div className="text-center bg-[#1C1C1C]/50 text-xl border-b border-primary text-primary cursor-not-allowed py-2">
           {formData?.cust} {formData?.custName}
         </div>
