@@ -3,6 +3,8 @@
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import eventEmitter from "@/hooks/useEventEmitter";
+// import { useEffect } from "react";
+// import { Fetch } from "@/utils/axios";
 
 export default function Page() {
   const router = useRouter();
@@ -12,6 +14,13 @@ export default function Page() {
     eventEmitter?.emit("loggedOut");
     return router.replace("/");
   };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     const response = await Fetch("/api/MyAccountProfile");
+  //     console.log(response);
+  //   };
+  //   fetchUserData();
+  // }, []);
   return (
     <div className="p-8">
       <span onClick={logout}>

@@ -67,13 +67,12 @@ export const updateQuantity = async (data: any): Promise<any> => {
 export const getCartDetails = async (): Promise<any> => {
   try {
     const deviceData = getDeviceData();
-    const response = await Fetch(
-      `api/Cart?DeviceID=` + deviceData?.deviceId,
-      {},
-      5000,
-      true,
-      false
-    );
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (!deviceData?.deviceId && !token) return;
+
+    let param: any = { DeviceID: "" };
+    if (deviceData?.deviceId) param.DeviceID = deviceData?.deviceId;
+    const response = await Fetch("api/Cart", param, 5000, true, false);
     return response;
   } catch (error: any) {
     console.error("Error fetching cart details:", error.message);
