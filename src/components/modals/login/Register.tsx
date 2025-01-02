@@ -109,6 +109,7 @@ const Register = ({
               id="email"
               type="email"
               name="email"
+              required
               placeholder="Email ID or Username"
               value={formData.email}
               onChange={handleChange}

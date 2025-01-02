@@ -70,7 +70,7 @@ export const getCartDetails = async (): Promise<any> => {
     const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
     if (!deviceData?.deviceId && !token) return;
 
-    let param: any = { DeviceID: "" };
+    const param: any = { DeviceID: "" };
     if (deviceData?.deviceId) param.DeviceID = deviceData?.deviceId;
     const response = await Fetch("api/Cart", param, 5000, true, false);
     return response;

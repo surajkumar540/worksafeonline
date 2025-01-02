@@ -1,25 +1,24 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { LinkProps } from "@/types/api";
 import { usePathname } from "next/navigation";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useState } from "react";
 
 const ItemHover = ({ link }: { link: LinkProps }) => {
   const pathName: any = usePathname();
-  const [show, setShow] = useState<boolean>(false);
+  // const [show, setShow] = useState<boolean>(false);
   const isActive = (path: string) => pathName === path;
   const [showLink, setLinkShow] = useState<string | null>("");
 
   const handleGroupHover = (path: string) => {
     setLinkShow(path);
-    console.log(show);
   };
   return (
     <>
       <Link
-        onClick={() => setShow(false)}
+        // onClick={() => setShow(false)}
         onMouseEnter={() => handleGroupHover(link.href)}
         className={`font-semibold 2xl:text-xl text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear ${
           isActive(link.href) && "text-primary"
