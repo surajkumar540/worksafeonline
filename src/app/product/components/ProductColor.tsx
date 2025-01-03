@@ -1,6 +1,6 @@
 import { includes } from "@/utils/polyfills";
 
-const extractColorFromDescription = (description: string) => {
+export const extractColorFromDescription = (description: string) => {
   return description.split("/").map((color) => color.trim());
 };
 

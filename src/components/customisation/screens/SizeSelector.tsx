@@ -9,11 +9,11 @@ const SizeSelector = () => {
 
   return (
     <div className="w-full text-left mt-5 mx-auto">
-      <h2 className="text-xl font-semibold mb-2">Select Size</h2>
+      <h2 className="text-xl text-center font-semibold mb-2">Select Size</h2>
 
-      <div className="space-y-2">
+      <div className="flex justify-center">
         {/* Small */}
-        <label className="flex space-x-3 justify-start items-start">
+        <label className="flex flex-col space-y-3 w-1/3 p-2 text-center">
           <input
             type="radio"
             name="size"
@@ -22,13 +22,14 @@ const SizeSelector = () => {
             onChange={handleSizeChange}
             className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
-          <span className="">
-            <strong>Small</strong> - Best for compact designs.
+          <span className="text-xs font-normal flex flex-col">
+            <strong className="text-lg pb-1 font-semibold">Small</strong> Best
+            for compact designs.
           </span>
         </label>
 
         {/* Medium */}
-        <label className="flex space-x-3 justify-start items-start">
+        <label className="flex flex-col space-y-3 w-1/3 p-2 text-center">
           <input
             type="radio"
             name="size"
@@ -37,13 +38,14 @@ const SizeSelector = () => {
             onChange={handleSizeChange}
             className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
-          <span className="">
-            <strong>Medium</strong> - Perfect balance of size and clarity.
+          <span className="text-xs font-normal flex flex-col">
+            <strong className="text-lg pb-1 font-semibold">Medium</strong>{" "}
+            Perfect balance of size and clarity.
           </span>
         </label>
 
         {/* Large */}
-        <label className="flex space-x-3 justify-start items-start">
+        <label className="flex flex-col space-y-3 w-1/3 p-2 text-center">
           <input
             type="radio"
             name="size"
@@ -52,18 +54,12 @@ const SizeSelector = () => {
             onChange={handleSizeChange}
             className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
-          <span className="">
-            <strong>Large</strong> - Ideal for bold and prominent designs.
+          <span className="text-xs font-normal flex flex-col">
+            <strong className="text-lg pb-1 font-semibold">Large</strong> Ideal
+            for bold and prominent designs.
           </span>
         </label>
       </div>
-
-      <p className="mt-4 text-gray-700">
-        Selected Size:{" "}
-        <strong>
-          {selectedSize.charAt(0).toUpperCase() + selectedSize.slice(1)}
-        </strong>
-      </p>
     </div>
   );
 };

@@ -18,12 +18,12 @@ const ImageUploader = ({
     const file = event.target.files?.[0];
 
     if (file) {
-      const maxSizeInBytes = 1024 * 1024; // 1 MB
+      const maxSizeInBytes = 1024 * 1024 * 10; // 10 MB
       const validTypes = ["image/png", "image/jpeg", "image/jpg"];
 
       if (file.size > maxSizeInBytes) {
         return toast.warn(
-          "File size exceeds 1 MB. Please select a smaller file."
+          "File size exceeds 10 MB. Please select a smaller file."
         );
       }
 
@@ -86,7 +86,7 @@ const ImageUploader = ({
                 Files Types we Accept
               </p>
               <p>Jpg, jpeg, Gif, Ai, Pdf, Svg, Psd, Bmp, Tiff, Tif</p>
-              <p>Max file size: 200MB</p>
+              <p>Max file size: 10MB</p>
             </div>
             <span>
               <BiCloudUpload size={75} className="text-gray-500" />

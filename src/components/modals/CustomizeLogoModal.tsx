@@ -29,10 +29,10 @@ const CustomizeLogoModal = ({
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
-  const steps = [
-    { label: "Select a Product" },
-    { label: "Customize or Assign Options" },
-  ];
+  // const steps = [
+  //   { label: "Select a Product" },
+  //   { label: "Customize or Assign Options" },
+  // ];
 
   const customize = [
     { label: "Image/Text" },
@@ -43,9 +43,9 @@ const CustomizeLogoModal = ({
   ];
 
   const handleCustomizeNext = () => {
-    if (currentCustomizeStep < customize.length - 1) {
-      setCurrentCustomizeStep(currentCustomizeStep + 1);
-    }
+    // if (customize.length - 1) {
+    setCurrentCustomizeStep(currentCustomizeStep + 1);
+    // }
   };
 
   const handleCustomizeNextId = (id: number) => {
@@ -116,11 +116,11 @@ const CustomizeLogoModal = ({
     >
       <div className="flex flex-col gap-5">
         <div className="relative">
-          <Stepper
+          {/* <Stepper
             steps={steps}
             currentStep={currentStep}
             handleCustomizeNextId={handleCustomizeNextId}
-          />
+          /> */}
           <RxCross1
             size={24}
             onClick={onclose}
@@ -130,7 +130,6 @@ const CustomizeLogoModal = ({
         </div>
         {currentStep === 1 && (
           <>
-            <div className="bg-gray-300 h-[1px]" />
             <p
               className={`${bigShoulders.className} text-4xl text-center font-black uppercase`}
             >
@@ -142,20 +141,31 @@ const CustomizeLogoModal = ({
               currentStep={currentCustomizeStep}
               handleCustomizeNextId={handleCustomizeNextId}
             />
-            <div className="w-full mx-auto text-center">
+            <div className="bg-gray-300 h-[1px]" />
+            <div className="w-full mx-auto text-center pb-3">
               {renderStepContent()}
-              <div className="flex space-x-4 text-4xl justify-center items-center">
-                <IoArrowBackCircle
-                  title="Back"
+              <div className="flex space-x-4 justify-center items-center">
+                <p
                   onClick={handleCustomizePrevious}
-                  className="hover:text-primary transition-all duration-200 ease-linear hover:scale-125 cursor-pointer"
-                />
-                {currentCustomizeStep !== customize.length - 1 && (
-                  <IoArrowForwardCircle
-                    title="Forward"
-                    onClick={handleCustomizeNext}
-                    className="hover:text-primary transition-all duration-200 ease-linear hover:scale-125 cursor-pointer"
+                  className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
+                >
+                  <IoArrowBackCircle
+                    title="Back"
+                    className="text-2xl group-hover:text-white"
                   />
+                  Previous
+                </p>
+                {currentCustomizeStep !== customize.length - 1 && (
+                  <p
+                    onClick={handleCustomizeNext}
+                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 pl-4 pr-3 py-2 rounded-full"
+                  >
+                    Next
+                    <IoArrowForwardCircle
+                      title="Forward"
+                      className="text-2xl group-hover:text-white"
+                    />
+                  </p>
                 )}
               </div>
             </div>

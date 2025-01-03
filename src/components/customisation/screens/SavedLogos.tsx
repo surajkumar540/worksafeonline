@@ -60,25 +60,12 @@ const SavedLogos = ({
     {
       designImage: logo2,
     },
-    {
-      designImage: logo1,
-    },
-    {
-      designImage: logo3,
-    },
-    {
-      designImage: logo2,
-    },
-    {
-      designImage: logo1,
-    },
   ];
   return (
     <>
-      <div className="bg-gray-300 h-[1px]" />
+      <GalleryFilters />
       <div className="flex items-center my-5 justify-between gap-10">
         <div className="w-1/2">
-          <GalleryFilters />
           <p
             className={`${bigShoulders.className} text-2xl mb-5 text-center font-black`}
           >

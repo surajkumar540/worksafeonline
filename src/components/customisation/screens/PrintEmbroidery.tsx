@@ -62,21 +62,32 @@ const PrintEmbroidery = ({
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center space-y-6 p-6"
+      className="flex items-center justify-between gap-20 w-full py-6 px-6 lg:px-20"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+      <div className="h-full w-full lg:w-1/2">
+        <Image
+          priority
+          unoptimized
+          width={100}
+          alt="Immage"
+          height={100}
+          className="w-full object-contain rounded-2xl mx-auto"
+          src={"/assets/logoOptimize/printing.jpg"}
+        />
+      </div>
+      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-7">
         {options.map((option) => (
           <motion.div
             key={option.id}
             className={`p-6 rounded-xl border-4 cursor-pointer ${
               selectedOption === option.id
-                ? "border-green-500 scale-105"
+                ? "border-primary"
                 : "border-gray-200"
-            } transition-all duration-200 active:scale-[0.8] bg-white`}
+            } transition-all duration-200 active:scale-[0.95] bg-white`}
             onClick={() => handleSelect(option)}
             variants={optionVariants}
           >

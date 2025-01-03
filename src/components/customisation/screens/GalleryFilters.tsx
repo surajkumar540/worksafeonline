@@ -1,3 +1,4 @@
+import { bigShoulders } from "@/app/layout";
 import { useState } from "react";
 import { BsFilterLeft } from "react-icons/bs";
 
@@ -36,10 +37,9 @@ const GalleryFilters = () => {
         <p className="flex items-center font-extralight text-lg gap-2">
           <span>
             <BsFilterLeft size={25} />
-          </span>{" "}
+          </span>
           Filters
         </p>
-        {/* Clear All Button */}
         <button
           onClick={clearAllFilters}
           className="px-4 py-1.5 bg-primary text-black text-sm font-medium rounded-md hover:bg-primary/70 transition duration-200"
@@ -47,93 +47,152 @@ const GalleryFilters = () => {
           Clear All
         </button>
       </div>
-      <div className="flex flex-wrap">
-        {/* Print/Embroidery Filter */}
-        <div className="w-1/2 mb-3">
-          <label className="block text-left text-sm font-medium text-gray-700 mb-2">
-            Print/Embroidery
-          </label>
-          <select
-            value={selectedFilters.printEmb}
-            onChange={(e) => handleFilterChange("printEmb", e.target.value)}
-            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          >
-            <option value="">Select</option>
-            <option value="print">Print</option>
-            <option value="embroidery">Embroidery</option>
-          </select>
-        </div>
-        {/* Text/Logo Filter */}
-        <div className="w-1/2 pl-5 mb-3">
-          <label className="block text-left text-sm font-medium text-gray-700 mb-2">
-            Text/Logo
-          </label>
-          <select
-            value={selectedFilters.textLogo}
-            onChange={(e) => handleFilterChange("textLogo", e.target.value)}
-            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          >
-            <option value="">Select</option>
-            <option value="text">Text</option>
-            <option value="logo">Logo</option>
-          </select>
-        </div>
-        {/* Recently Used */}
-        <div className="flex justify-between items-center gap-5">
-          <div className="flex items-center">
-            <input
-              id="recentlyUsed"
-              type="radio"
-              checked={selectedFilters.recentlyUsed}
-              onChange={(e) =>
-                handleFilterChange("recentlyUsed", e.target.checked)
-              }
-              className="min-w-5 min-h-5 text-primary focus:ring-primary border-gray-300 rounded"
-            />
+      <div className="space-y-4 bg-gray-50 rounded-xl p-4">
+        <div className="flex justify-evenly items-center">
+          {/* Print/Embroidery Filter */}
+          <div className="">
             <label
-              htmlFor="recentlyUsed"
-              className="ml-2 text-base font-medium text-gray-700"
+              className={`block text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
-              Recently Used
+              Print/Embroidery
             </label>
+            <div className="flex gap-10">
+              <div className="flex items-center">
+                <input
+                  id="print"
+                  type="radio"
+                  value="print"
+                  checked={selectedFilters.printEmb === "print"}
+                  onChange={() => handleFilterChange("printEmb", "print")}
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="print"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Print
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="embroidery"
+                  type="radio"
+                  value="embroidery"
+                  checked={selectedFilters.printEmb === "embroidery"}
+                  onChange={() => handleFilterChange("printEmb", "embroidery")}
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="embroidery"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Embroidery
+                </label>
+              </div>
+            </div>
           </div>
-
-          {/* Favorites */}
-          <div className="flex items-center">
-            <input
-              id="favorites"
-              type="radio"
-              checked={selectedFilters.favorites}
-              onChange={(e) =>
-                handleFilterChange("favorites", e.target.checked)
-              }
-              className="min-w-5 min-h-5 text-primary focus:ring-primary border-gray-300 rounded"
-            />
+          {/* Text/Logo Filter */}
+          <div className="">
             <label
-              htmlFor="favorites"
-              className="ml-2 text-base font-medium text-gray-700"
+              className={`block text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
-              Favorites
+              Text/Logo
             </label>
+            <div className="flex gap-10">
+              <div className="flex items-center">
+                <input
+                  id="text"
+                  type="radio"
+                  value="text"
+                  checked={selectedFilters.textLogo === "text"}
+                  onChange={() => handleFilterChange("textLogo", "text")}
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="text"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Text
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="logo"
+                  type="radio"
+                  value="logo"
+                  checked={selectedFilters.textLogo === "logo"}
+                  onChange={() => handleFilterChange("textLogo", "logo")}
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="logo"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Logo
+                </label>
+              </div>
+            </div>
           </div>
-
-          {/* Combination Logos */}
-          <div className="flex items-center">
-            <input
-              id="combinationLogos"
-              type="radio"
-              checked={selectedFilters.combinationLogos}
-              onChange={(e) =>
-                handleFilterChange("combinationLogos", e.target.checked)
-              }
-              className="min-w-5 min-h-5 text-primary focus:ring-primary border-gray-300 rounded"
-            />
+          {/* Recently Used, Favorites, Combination Logos */}
+          <div>
             <label
-              htmlFor="combinationLogos"
-              className="ml-2 text-base font-medium text-gray-700"
+              className={`block text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
-              Combination Logos
+              Preferences
             </label>
+            <div className="flex flex-wrap gap-5">
+              <div className="flex items-center">
+                <input
+                  id="recentlyUsed"
+                  type="radio"
+                  checked={selectedFilters.recentlyUsed}
+                  onChange={(e) =>
+                    handleFilterChange("recentlyUsed", e.target.checked)
+                  }
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="recentlyUsed"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Recently Used
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="favorites"
+                  type="radio"
+                  checked={selectedFilters.favorites}
+                  onChange={(e) =>
+                    handleFilterChange("favorites", e.target.checked)
+                  }
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="favorites"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Favorites
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="combinationLogos"
+                  type="radio"
+                  checked={selectedFilters.combinationLogos}
+                  onChange={(e) =>
+                    handleFilterChange("combinationLogos", e.target.checked)
+                  }
+                  className="text-primary focus:ring-primary min-w-6 min-h-6 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="combinationLogos"
+                  className="ml-2 text-sm font-medium text-gray-800"
+                >
+                  Combination Logos
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
