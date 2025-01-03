@@ -1,22 +1,40 @@
+import { Post } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaUser, FaPhone } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { useState } from "react";
 
 const AddressCard = ({
   type,
   address,
+  fetchUserData,
   handleSelected,
   selectedAddress,
 }: {
   type: string;
   address: any;
+  fetchUserData: any;
   handleSelected?: any;
   selectedAddress?: any;
 }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleEdit = (id: number | string) => {
     router.push(`/edit-address?address_id=${id}&type=${type}`);
+  };
+  const handleDelete = async (id: number | string) => {
+    try {
+      setLoading(true);
+      const response: any = await Post("/api/DeleteAddress", {
+        address_id: id,
+      });
+      if (response?.status) fetchUserData();
+    } catch (error) {
+      console.log("Delete Address: " + error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div
@@ -55,6 +73,7 @@ const AddressCard = ({
         {address?.AllowEdit === 1 && (
           <button
             title="Edit Address"
+            disabled={loading}
             onClick={() => handleEdit(address?.ID)}
             className="flex items-center text-sm gap-1 px-2 py-1.5 text-white bg-primary/80 hover:bg-primary rounded-md transition"
           >
@@ -65,10 +84,12 @@ const AddressCard = ({
         {address?.AllowDelete === 1 && (
           <button
             title="Delete Address"
+            disabled={loading}
+            onClick={() => handleDelete(address?.ID)}
             className="flex items-center text-sm gap-1 px-2 py-1.5 text-white bg-red-500 hover:bg-red-600 rounded-md transition"
           >
             <MdDelete className="text-xl" />
-            Delete
+            {loading ? "Deleting..." : "Delete"}
           </button>
         )}
       </div>

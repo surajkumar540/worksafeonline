@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { Post } from "@/utils/axios";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { Fetch, Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
+import { useRouter } from "next/navigation";
 
 const CreateAddressForm = ({ address }: { address?: any }) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [countries, setCountries] = useState([]);
   const [formData, setFormData] = useState<any>(
     address?.address_id
       ? address
@@ -24,6 +28,20 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
         }
   );
 
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const response: any = await Fetch(
+        "/api/Countries",
+        {},
+        5000,
+        true,
+        false
+      );
+      if (response.status) setCountries(response?.Countries);
+    };
+    fetchCountries();
+  }, []);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -37,12 +55,31 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await Post("/api/Address", formData);
-      toast.success("Address saved successfully!");
-      console.log(response);
+      setLoading(true);
+      const response: any = await Post("/api/Address", formData);
+      if (response.status) {
+        setFormData({
+          address_id: 0,
+          first_name: "",
+          address_line1: "",
+          town: "",
+          county: "",
+          country: "",
+          post_code: "",
+          mobile: "",
+          email: "",
+          invaddress: 0,
+          deladdress: 0,
+          dinvaddress: 0,
+          ddeladdress: 0,
+        });
+        return router.replace("/my-address");
+      }
     } catch (error) {
       toast.error("Failed to save the address. Please try again.");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -127,16 +164,25 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
           <label htmlFor="country" className="block font-semibold text-lg">
             Country
           </label>
-          <input
-            type="text"
+          <select
             id="country"
             name="country"
+            required
             value={formData.country}
             onChange={handleInputChange}
             className="mt-1 p-3 block w-full rounded-full border-gray-300 shadow-sm focus:ring-2 outline-none focus:border-primary focus:ring-primary"
-            placeholder="Enter country"
-            required
-          />
+          >
+            <option value="">Select a country</option>
+            {countries &&
+              countries.length > 0 &&
+              countries.map((country: any) => {
+                return (
+                  <option key={country?.Country} value={country?.Country}>
+                    {country?.Name}
+                  </option>
+                );
+              })}
+          </select>
         </div>
 
         {/* Post Code */}
@@ -250,9 +296,16 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
         <div className="col-span-2">
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-primary/80 text-black text-xl font-bold py-3 rounded-full uppercase hover:bg-primary transition"
           >
-            {address?.address_id ? "Update Address" : "Save Address"}
+            {address?.address_id
+              ? loading
+                ? "Updating..."
+                : "Update Address"
+              : loading
+              ? "Please wait...."
+              : "Save Address"}
           </button>
         </div>
       </form>

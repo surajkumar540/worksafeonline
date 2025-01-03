@@ -5,7 +5,7 @@ import { bigShoulders } from "../layout";
 import { IoCreate } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import AddressCard from "./component/AddressCard";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AccountLayout from "@/components/account/AccountLayout";
 
 export default function Page() {
@@ -14,29 +14,30 @@ export default function Page() {
   const [accountDetail, setaccountDetail] = useState<any>({});
   const [selectedAddress, setSelectedAddress] = useState<any>();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token =
-          typeof window !== "undefined" &&
-          localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-        if (!token) return router.replace("/");
-        const response: { status: boolean } = await Fetch(
-          "/api/MyAccountProfile",
-          {},
-          5000,
-          true,
-          false
-        );
-        if (response.status) setaccountDetail(response);
-        setLoading(false);
-      } catch (error) {
-        console.log("Account Details Error: ", error);
-        return router.replace("/");
-      }
-    };
-    fetchUserData();
+  const fetchUserData = useCallback(async () => {
+    try {
+      const token =
+        typeof window !== "undefined" &&
+        localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return router.replace("/");
+      const response: { status: boolean } = await Fetch(
+        "/api/MyAccountProfile",
+        {},
+        5000,
+        true,
+        false
+      );
+      if (response.status) setaccountDetail(response);
+      setLoading(false);
+    } catch (error) {
+      console.log("Account Details Error: ", error);
+      return router.replace("/");
+    }
   }, [router]);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
 
   const handleSelected = (id: string | number) => {
     setSelectedAddress(id);
@@ -83,6 +84,7 @@ export default function Page() {
                       <AddressCard
                         type="billing"
                         address={address}
+                        fetchUserData={fetchUserData}
                         handleSelected={handleSelected}
                         selectedAddress={selectedAddress}
                       />
@@ -103,6 +105,7 @@ export default function Page() {
                       <AddressCard
                         type="delivery"
                         address={address}
+                        fetchUserData={fetchUserData}
                         handleSelected={handleSelected}
                         selectedAddress={selectedAddress}
                       />
