@@ -39,6 +39,16 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
     };
   }, [handleToggle]);
 
+  useEffect(() => {
+    const handleToggle = () => {
+      setUserLoggedIn(false);
+    };
+    eventEmitter?.on("loggedOut", handleToggle);
+    return () => {
+      eventEmitter?.off("loggedOut", handleToggle);
+    };
+  }, [handleToggle]);
+
   const onClose = () => setIsVisible(false);
 
   return (

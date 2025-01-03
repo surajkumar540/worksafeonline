@@ -25,7 +25,7 @@ const AccountLayout = ({
 
   const logout = () => {
     localStorage.clear();
-    toast.info("User logged out!");
+    toast.success("User logged out!");
     eventEmitter?.emit("loggedOut");
     return router.replace("/");
   };

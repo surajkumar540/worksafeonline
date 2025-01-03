@@ -5,7 +5,6 @@ import { FaRegUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { useEffect, useState, useCallback } from "react";
-import { toast } from "react-toastify";
 
 const Account = () => {
   const navigate = useRouter();
@@ -13,10 +12,7 @@ const Account = () => {
   const [loggedIn, setUserLoggedIn] = useState(false);
 
   const handleToggle = useCallback(() => {
-    if (loggedIn) {
-      toast.info("You have already logged in!");
-      return navigate.push("/my-account");
-    }
+    if (loggedIn) return navigate.push("/my-account");
     setIsVisible((prev) => !prev);
   }, [loggedIn, navigate]);
 
@@ -41,6 +37,16 @@ const Account = () => {
     eventEmitter?.on("loggedIn", handleToggle);
     return () => {
       eventEmitter?.off("loggedIn", handleToggle);
+    };
+  }, [handleToggle]);
+
+  useEffect(() => {
+    const handleToggle = () => {
+      setUserLoggedIn(false);
+    };
+    eventEmitter?.on("loggedOut", handleToggle);
+    return () => {
+      eventEmitter?.off("loggedOut", handleToggle);
     };
   }, [handleToggle]);
 
