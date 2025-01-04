@@ -42,7 +42,7 @@ const UploadDesign = ({
   };
 
   return (
-    <div className="pb-5 w-1/2">
+    <div className="pb-5 w-full">
       {customizeData?.imageText?.id === 1 ? (
         <div className="flex w-full flex-col justify-center items-center">
           <ImageUploader

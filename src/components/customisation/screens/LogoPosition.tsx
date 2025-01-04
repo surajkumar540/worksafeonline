@@ -169,34 +169,41 @@ const LogoPosition = ({
         </div>
       </div>
 
-      <div className="w-1/3 pl-10 h-full mx-auto flex flex-col items-center justify-between">
+      <div className="w-1/3 h-full mx-auto flex flex-col items-center justify-between">
         {selectedOption && (
           <motion.div
-            className="p-6 rounded-xl border-2 bg-white flex flex-col items-center"
+            className="p-2 rounded-xl border-2 bg-white flex flex-col items-center"
             variants={optionVariants}
           >
             <div className="w-full h-full py-3 flex justify-center items-center">
               {[...options, ...optionsBack, ...optionsSide].find(
                 (option) => option.id === selectedOption
               )?.icon ? (
-                <Image
-                  alt="Selected Icon"
-                  priority
-                  unoptimized
-                  className="w-full"
-                  width={400} // adjust width as necessary
-                  height={250} // adjust height as necessary
-                  src={
-                    [...options, ...optionsBack, ...optionsSide].find(
-                      (option) => option.id === selectedOption
-                    )?.icon || "" // Fallback to an empty string if undefined
-                  }
-                />
+                <>
+                  <Image
+                    alt="Selected Icon"
+                    priority
+                    unoptimized
+                    className="w-40"
+                    width={524} // adjust width as necessary
+                    height={350} // adjust height as necessary
+                    src={
+                      [...options, ...optionsBack, ...optionsSide].find(
+                        (option) => option.id === selectedOption
+                      )?.icon || "" // Fallback to an empty string if undefined
+                    }
+                  />
+                </>
               ) : (
                 // Optionally render a placeholder or empty state when there's no icon
                 <div>No icon available</div>
               )}
             </div>
+            <p className="text-sm font-semibold">
+              {[...options, ...optionsBack, ...optionsSide].find(
+                (option) => option.id === selectedOption
+              )?.title || ""}
+            </p>
           </motion.div>
         )}
         <SizeSelector />

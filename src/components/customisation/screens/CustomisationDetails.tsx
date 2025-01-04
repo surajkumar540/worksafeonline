@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MdDelete } from "react-icons/md";
 import { bigShoulders } from "@/app/layout";
+import logo1 from "../../../../public/assets/logo/logo1.png";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
 
 const CustomisationDetails = ({
@@ -40,27 +41,28 @@ const CustomisationDetails = ({
       >
         Summary
       </h3>
-      <div className="flex flex-wrap justify-center items-start">
-        <div className="w-1/5">
-          <p className="text-lg font-semibold pb-5">Product</p>
+      <div className="flex justify-center items-start">
+        <div className="w-1/5 h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2">Product</p>
           <Image
             priority
             unoptimized
             width={400}
             height={400}
             alt="ProductImage"
-            src={product?.ProductImage}
-            className="w-fit mx-auto object-contain"
+            src={product?.ProductImage ?? logo1}
+            className="w-32 h-32 object-contain"
           />
           <h1
-            className={`text-lg pt-2 font-black uppercase ${bigShoulders.className}`}
+            className={`text-lg font-black uppercase text-center ${bigShoulders.className}`}
           >
             {product.ProductName}
           </h1>
-          <p className="text-xs">({product?.Composition})</p>
+          <p className="text-xs text-center">({product?.Composition})</p>
         </div>
-        <div className="w-[10%] flex flex-col justify-center items-center">
-          <p className="text-lg font-semibold pb-5">Colour</p>
+
+        <div className="w-[10%] h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col justify-between items-center">
+          <p className="font-semibold pb-2">Colour</p>
           <div className="flex">
             <div
               style={{ backgroundColor: primaryColor }}
@@ -77,63 +79,74 @@ const CustomisationDetails = ({
               ></div>
             )}
           </div>
-          <p className="text-sm font-bold pt-2">
+          <p className="text-sm font-bold pt-2 text-center">
             {data?.color?.Colour_Description.trim()}
           </p>
         </div>
-        <div className="w-1/5">
-          <p className="text-lg font-semibold pb-5">Logo</p>
+
+        <div className="w-1/5 h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2">Logo</p>
           <Image
             priority
             unoptimized
             width={400}
             height={400}
             alt="ProductImage"
-            src={data?.designImage}
-            className="w-40 mx-auto object-contain"
+            src={logo1}
+            className="w-32 h-32 object-contain"
           />
-          <p className="text-sm font-bold pt-2">Medium</p>
+          <p className="text-sm font-bold pt-2 text-center">Medium</p>
         </div>
-        <div className="w-1/5">
-          <p className="text-lg font-semibold pb-5">Logo Position</p>
+
+        <div className="w-1/5 h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2">Logo Position</p>
           <Image
             priority
             unoptimized
             width={400}
             height={400}
             alt="ProductImage"
-            src={data?.logoPosition?.icon}
-            className="w-3/5 mx-auto object-contain"
+            src={data?.logoPosition?.icon ?? logo1}
+            className="w-32 h-32 object-contain"
           />
-          <p className="text-sm font-bold pt-2 capitalize">
+          <p className="text-sm font-bold pt-2 capitalize text-center">
             {data?.logoPosition?.title.split("-").join(" ")}
           </p>
         </div>
-        <div className="w-1/5">
-          <p className="text-lg font-semibold pb-5">Application</p>
+
+        <div className="w-1/5 h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2">Application</p>
           <Image
             priority
             unoptimized
             width={400}
             height={400}
             alt="ProductImage"
-            src={data?.printEmbroidery?.icon}
-            className="w-40 mx-auto object-contain"
+            src={data?.printEmbroidery?.icon ?? logo1}
+            className="w-32 h-32 object-contain"
           />
-          <p className="text-sm pt-2 capitalize">
+          <p className="text-sm pt-2 capitalize text-center">
             ({data?.printEmbroidery?.maxWidth})
           </p>
-          <p className="text-sm capitalize">({data?.printEmbroidery?.price})</p>
-          <p className="text-sm capitalize">({data?.printEmbroidery?.terms})</p>
+          <p className="text-sm capitalize text-center">
+            ({data?.printEmbroidery?.price})
+          </p>
+          <p className="text-sm capitalize text-center">
+            ({data?.printEmbroidery?.terms})
+          </p>
         </div>
-        <div className="w-[10%] flex flex-col justify-center items-center">
-          <p className="text-lg font-semibold pb-5">Delete Logo</p>
+
+        <div className="w-[10%] h-72 m-1 rounded-xl p-3 bg-gray-50 flex flex-col justify-between items-center">
+          <p className="font-semibold pb-2">Delete Logo</p>
           <p className="text-4xl hover:scale-150 mt-10 transition cursor-pointer text-red-500">
             <MdDelete title="Delete Logo" />
           </p>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
       </div>
-      <div className="flex gap-2 mt-10 mb-5 justify-end w-full">
+      <div className="flex gap-2 mt-5 mb-2 justify-end w-full">
         <button
           type="button"
           onClick={() => setCurrentCustomizeStep(0)}

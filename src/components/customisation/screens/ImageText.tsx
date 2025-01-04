@@ -67,7 +67,7 @@ const ImageText = ({
 
   return (
     <motion.div
-      className="flex items-center justify-between gap-20 w-full py-6 px-6 lg:px-20"
+      className="flex items-center justify-between gap-5 w-full pb-3 px-6 lg:px-28"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -84,7 +84,7 @@ const ImageText = ({
           src={"/assets/logoOptimize/printing.jpg"}
         />
       </div>
-      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-7">
+      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-3">
         {options.map((option) => (
           <motion.div
             key={option.id}

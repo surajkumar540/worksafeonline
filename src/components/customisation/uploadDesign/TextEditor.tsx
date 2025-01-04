@@ -14,7 +14,7 @@ const TextEditor = ({
   // const widthInCM = 18;
   // const maxWidthInPX = widthInCM * 37.795275; // 1 cm = 37.795275 px
   return (
-    <div className="grid grid-cols-4 w-full mx-auto mt-5 gap-5">
+    <div className="flex justify-center items-start w-full mx-auto mb-5 gap-5">
       {/* <div
         style={{
           color: selectedFields?.color,
@@ -37,12 +37,13 @@ const TextEditor = ({
           </div>
         </div>
       </div> */}
-      <div className="col-span-4">
+      <div className="w-1/2">
         <AddText
           selectedFields={selectedFields}
           setSelectedFilters={setSelectedFilters}
         />
       </div>
+      <div className="w-1/2"></div>
     </div>
   );
 };

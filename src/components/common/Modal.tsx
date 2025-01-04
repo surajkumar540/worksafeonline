@@ -37,7 +37,7 @@ const Modal: React.FC<ModalProps> = ({
         exit={{ scale: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-white overflow-scroll no-scrollbar max-h-[90vh] rounded-xl">
+        <div className="bg-white overflow-scroll no-scrollbar max-h-[95vh] rounded-xl">
           {showCloseButton && (
             <p className="w-full flex justify-end items-center p-4 pb-0">
               <RxCross1

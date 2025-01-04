@@ -78,7 +78,7 @@ const ImageUploader = ({
       ) : (
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="relative flex flex-col justify-start w-full h-48 border-2 border-dashed border-gray-400 rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
+          className="relative flex flex-col justify-start w-full h-40 border-2 border-dashed border-gray-400 rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
         >
           <div className="flex flex-col text-center justify-center items-center h-full text-gray-600">
             <div className="text-xs space-y-1">
@@ -89,7 +89,7 @@ const ImageUploader = ({
               <p>Max file size: 10MB</p>
             </div>
             <span>
-              <BiCloudUpload size={75} className="text-gray-500" />
+              <BiCloudUpload size={50} className="text-gray-500" />
             </span>
             <span className="text-gray-600 text-sm">
               Click to upload or Browse

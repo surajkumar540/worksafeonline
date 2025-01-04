@@ -1,6 +1,7 @@
+import Link from "next/link";
+import Image from "next/image";
 import Modal from "../common/Modal";
 import { RxCross1 } from "react-icons/rx";
-import { bigShoulders } from "@/app/layout";
 import { useState, useCallback } from "react";
 import Stepper from "../customisation/Stepper";
 import ImageText from "../customisation/screens/ImageText";
@@ -9,6 +10,7 @@ import LogoPosition from "../customisation/screens/LogoPosition";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
+import TextEditor from "../customisation/uploadDesign/TextEditor";
 
 const CustomizeLogoModal = ({
   data,
@@ -27,6 +29,13 @@ const CustomizeLogoModal = ({
     printEmbroidery: {},
   });
   const [currentStep, setCurrentStep] = useState<number>(1);
+  const [selectedFields, setSelectedFilters] = useState({
+    font: "Arial, sans-serif",
+    color: "#000000",
+    textLine1: "",
+    textLine2: "",
+    textLine3: "",
+  });
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
   // const steps = [
@@ -36,10 +45,10 @@ const CustomizeLogoModal = ({
 
   const customize = [
     { label: "Image/Text" },
-    { label: "Choose / Upload / Design" },
-    { label: "Position" },
+    { label: "Choose / Upload Design" },
     { label: "Print or Embroidery" },
-    { label: "Customisation Details" },
+    { label: "Position" },
+    { label: "Summary" },
   ];
 
   const handleCustomizeNext = () => {
@@ -71,23 +80,35 @@ const CustomizeLogoModal = ({
         );
       case 1:
         return (
-          <SavedLogos
-            data={data}
-            customizeData={customizeData}
-            setCustomizeData={setCustomizeData}
-            handleCustomizeNext={handleCustomizeNext}
-          />
+          <>
+            {customizeData?.imageText?.id !== 1 ? (
+              <>
+                <TextEditor
+                  product={data}
+                  selectedFields={selectedFields}
+                  setSelectedFilters={setSelectedFilters}
+                />
+              </>
+            ) : (
+              <SavedLogos
+                data={data}
+                customizeData={customizeData}
+                setCustomizeData={setCustomizeData}
+                handleCustomizeNext={handleCustomizeNext}
+              />
+            )}
+          </>
         );
       case 2:
         return (
-          <LogoPosition
+          <PrintEmbroidery
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
         );
       case 3:
         return (
-          <PrintEmbroidery
+          <LogoPosition
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
@@ -112,49 +133,76 @@ const CustomizeLogoModal = ({
       onClose={onclose}
       isVisible={isVisible}
       showCloseButton={false}
-      width="w-[95vw] md:w-[90%]"
+      width="w-[95vw] md:w-[80%]"
     >
-      <div className="flex flex-col gap-5">
-        <div className="relative">
-          {/* <Stepper
+      <div className="flex flex-col">
+        {/* <div className="relative"> */}
+        {/* <Stepper
             steps={steps}
             currentStep={currentStep}
             handleCustomizeNextId={handleCustomizeNextId}
           /> */}
-          <RxCross1
+        {/* <RxCross1
             size={24}
             onClick={onclose}
             title="Click to close"
             className="cursor-pointer hover:scale-110 hover:text-primary absolute top-1 right-5 text-black"
-          />
-        </div>
+          /> */}
+        {/* </div> */}
         {currentStep === 1 && (
           <>
-            <p
-              className={`${bigShoulders.className} text-4xl text-center font-black uppercase`}
-            >
-              <span className="text-primary">Customize</span> it now
-            </p>
-            <Stepper
-              reduceSize={true}
-              steps={customize}
-              currentStep={currentCustomizeStep}
-              handleCustomizeNextId={handleCustomizeNextId}
-            />
+            <div className="flex justify-between pb-4 items-center">
+              {/* <p
+                className={`${bigShoulders.className} text-lg text-center font-black uppercase`}
+              >
+                <span className="text-primary">Customize</span> <br />
+                it now
+              </p> */}
+              <Link href="/">
+                <Image
+                  width={100}
+                  unoptimized
+                  height={60}
+                  alt="Logo"
+                  src={
+                    "https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
+                  }
+                  className="w-32 bg-black p-2"
+                />
+              </Link>
+              <Stepper
+                reduceSize={true}
+                steps={customize}
+                currentStep={currentCustomizeStep}
+                handleCustomizeNextId={handleCustomizeNextId}
+              />
+              <RxCross1
+                size={24}
+                onClick={onclose}
+                title="Click to close"
+                className="cursor-pointer hover:scale-110 hover:text-primary text-black"
+              />
+            </div>
             <div className="bg-gray-300 h-[1px]" />
-            <div className="w-full mx-auto text-center pb-3">
+            <div className="w-full mx-auto text-center py-3">
               {renderStepContent()}
-              <div className="flex space-x-4 justify-center items-center">
-                <p
-                  onClick={handleCustomizePrevious}
-                  className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
-                >
-                  <IoArrowBackCircle
-                    title="Back"
-                    className="text-2xl group-hover:text-white"
-                  />
-                  Previous
-                </p>
+              <div
+                className={`flex space-x-4 items-center ${
+                  currentCustomizeStep === 0 ? "justify-end" : "justify-between"
+                }`}
+              >
+                {currentCustomizeStep !== 0 && (
+                  <p
+                    onClick={handleCustomizePrevious}
+                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
+                  >
+                    <IoArrowBackCircle
+                      title="Back"
+                      className="text-2xl group-hover:text-white"
+                    />
+                    Back
+                  </p>
+                )}
                 {currentCustomizeStep !== customize.length - 1 && (
                   <p
                     onClick={handleCustomizeNext}
