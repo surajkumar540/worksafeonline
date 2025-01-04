@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import TextEditor from "../uploadDesign/TextEditor";
 import ImageUploader from "../uploadDesign/ImageUploader";
 
@@ -18,27 +18,27 @@ const UploadDesign = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(
     customizeData?.designImage ?? null
   );
-  const [selectedFields, setSelectedFilters] = useState({
-    font: "Arial, sans-serif",
-    color: "#000000",
-    textLine1: "",
-    textLine2: "",
-    textLine3: "",
-  });
+  // const [selectedFields, setSelectedFilters] = useState({
+  //   font: "Arial, sans-serif",
+  //   color: "#000000",
+  //   textLine1: "",
+  //   textLine2: "",
+  //   textLine3: "",
+  // });
   const handleProceed = () => {
     setCustomizeData({ ...customizeData, designImage: selectedImage });
     // handleCustomizeNext();
   };
   const handleSubmit = () => {
-    if (!selectedFields?.font) return toast.info("Please select a font!");
-    if (!selectedFields?.color) return toast.info("Please select a color!");
-    if (!selectedFields?.textLine1)
-      return toast.info("Please add a text in line 1!");
+    // if (!selectedFields?.font) return toast.info("Please select a font!");
+    // if (!selectedFields?.color) return toast.info("Please select a color!");
+    // if (!selectedFields?.textLine1)
+    //   return toast.info("Please add a text in line 1!");
 
-    setCustomizeData({
-      ...customizeData,
-      addtext: selectedFields,
-    });
+    // setCustomizeData({
+    //   ...customizeData,
+    //   addtext: selectedFields,
+    // });
   };
 
   return (
@@ -61,11 +61,7 @@ const UploadDesign = ({
         </div>
       ) : (
         <div className="w-full">
-          <TextEditor
-            product={product}
-            selectedFields={selectedFields}
-            setSelectedFilters={setSelectedFilters}
-          />
+          <TextEditor product={product} />
           <button
             type="button"
             onClick={handleSubmit}

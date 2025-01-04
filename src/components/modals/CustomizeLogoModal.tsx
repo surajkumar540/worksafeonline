@@ -29,13 +29,6 @@ const CustomizeLogoModal = ({
     printEmbroidery: {},
   });
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [selectedFields, setSelectedFilters] = useState({
-    font: "Arial, sans-serif",
-    color: "#000000",
-    textLine1: "",
-    textLine2: "",
-    textLine3: "",
-  });
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
   // const steps = [
@@ -83,11 +76,7 @@ const CustomizeLogoModal = ({
           <>
             {customizeData?.imageText?.id !== 1 ? (
               <>
-                <TextEditor
-                  product={data}
-                  selectedFields={selectedFields}
-                  setSelectedFilters={setSelectedFilters}
-                />
+                <TextEditor product={data} />
               </>
             ) : (
               <SavedLogos

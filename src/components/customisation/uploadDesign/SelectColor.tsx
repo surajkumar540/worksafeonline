@@ -1,27 +1,22 @@
-import { bigShoulders } from "@/app/layout";
 import { useState } from "react";
+import { bigShoulders } from "@/app/layout";
 import { IoAddOutline } from "react-icons/io5";
 
 const colorsData = [
   { name: "Red", value: "#FF0000" },
   { name: "Blue", value: "#0000FF" },
   { name: "Cyan", value: "#00FFFF" },
-  { name: "Gray", value: "#808080" },
   { name: "Lime", value: "#00FF00" },
-  { name: "Gold", value: "#FFD700" },
   { name: "Navy", value: "#000080" },
-  { name: "White", value: "#FFFFFF" },
   { name: "Black", value: "#000000" },
   { name: "Green", value: "#008000" },
-  { name: "Brown", value: "#A52A2A" },
   { name: "Yellow", value: "#FFFF00" },
   { name: "Orange", value: "#FFA500" },
   { name: "Purple", value: "#800080" },
-  { name: "Maroon", value: "#800000" },
   { name: "Magenta", value: "#FF00FF" },
 ];
 
-const SelectColor = () => {
+const SelectColor = ({ handleColorChange }: { handleColorChange: any }) => {
   const [colors, setColors] = useState(colorsData);
   const [newColor, setNewColor] = useState("#000000");
   const [selectedColor, setSelectedColor] = useState("");
@@ -29,9 +24,9 @@ const SelectColor = () => {
   return (
     <div>
       <h4
-        className={`text-left font-bold pb-2 text-xl ${bigShoulders.className}`}
+        className={`text-left font-bold pb-2 text-lg ${bigShoulders.className}`}
       >
-        Select Color:
+        Choose Color:
       </h4>
       <div className="flex flex-wrap gap-2">
         {colors.map((color: any) => {
@@ -39,7 +34,10 @@ const SelectColor = () => {
           return (
             <div
               key={color.value}
-              onClick={() => setSelectedColor(color.value)}
+              onClick={() => {
+                setSelectedColor(color.value);
+                handleColorChange(color.value);
+              }}
               style={{
                 boxShadow: !isSelected
                   ? "0 2px 4px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.2)"
@@ -88,6 +86,7 @@ const SelectColor = () => {
                 onClick={() => {
                   setColors([...colors, { name: newColor, value: newColor }]);
                   setSelectedColor(newColor);
+                  handleColorChange(newColor);
                 }}
                 className="w-full whitespace-nowrap text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
               >

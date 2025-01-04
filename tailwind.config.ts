@@ -8,6 +8,20 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        arial: ["Arial", "sans-serif"],
+        verdana: ["Verdana", "sans-serif"],
+        helvetica: ["Helvetica", "sans-serif"],
+        tahoma: ["Tahoma", "sans-serif"],
+        trebuchet: ["'Trebuchet MS'", "sans-serif"],
+        times: ["'Times New Roman'", "serif"],
+        georgia: ["Georgia", "serif"],
+        courier: ["'Courier New'", "monospace"],
+        palatino: ["Palatino", "serif"],
+        garamond: ["Garamond", "serif"],
+        segoe: ["'Segoe UI'", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+      },
       colors: {
         primary: "#FFC700",
       },
