@@ -1,39 +1,81 @@
 "use client";
 
-import { Fetch } from "@/utils/axios";
+import { Fetch, Post } from "@/utils/axios";
 import { bigShoulders } from "../layout";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { useCallback, useEffect, useState } from "react";
 import AccountLayout from "@/components/account/AccountLayout";
 
 export default function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [accountDetail, setaccountDetail] = useState<any>({});
+  const [isEditing, setIsEditing] = useState(false);
+  const [accountDetail, setAccountDetail] = useState<any>({});
+  const [editableFields, setEditableFields] = useState({
+    name: "",
+    mobile: "",
+  });
+
+  const fetchUserData = useCallback(async () => {
+    try {
+      const token =
+        typeof window !== "undefined" &&
+        localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return router.replace("/");
+      const response: { status: boolean; account_details: any } = await Fetch(
+        "/api/MyAccountProfile",
+        {},
+        5000,
+        true,
+        false
+      );
+      if (response.status) {
+        setAccountDetail(response);
+        setEditableFields({
+          name: response?.account_details?.ContactName || "",
+          mobile: response?.account_details?.Telephone || "",
+        });
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log("Account Details Error: ", error);
+      return router.replace("/");
+    }
+  }, [router]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token =
-          typeof window !== "undefined" &&
-          localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-        if (!token) return router.replace("/");
-        const response: { status: boolean } = await Fetch(
-          "/api/MyAccountProfile",
-          {},
-          5000,
-          true,
-          false
-        );
-        if (response.status) setaccountDetail(response);
-        setLoading(false);
-      } catch (error) {
-        console.log("Account Details Error: ", error);
-        return router.replace("/");
-      }
-    };
     fetchUserData();
-  }, [router]);
+  }, [router, fetchUserData]);
+
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditableFields({
+      ...editableFields,
+      [name]: value,
+    });
+  };
+
+  const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    if (/^\d*$/.test(value)) {
+      setEditableFields({ ...editableFields, [name]: value });
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      await Post("/api/ChangeNameMob", editableFields, 5000, true);
+      setIsEditing(false);
+      fetchUserData();
+    } catch (error) {
+      console.error("Error saving account details: ", error);
+    }
+  };
 
   if (loading)
     return (
@@ -57,29 +99,78 @@ export default function Page() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 gap-5">
             <div className="bg-white p-5 rounded-2xl shadow-md text-black font-bold">
-              Name :{" "}
-              <p className="text-sm text-gray-400">
-                {accountDetail?.account_details?.ContactName
-                  ? accountDetail?.account_details?.ContactName
-                  : "-"}
-              </p>
+              Name :
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="name"
+                  autoComplete="off"
+                  value={editableFields.name}
+                  onChange={handleFieldChange}
+                  placeholder="Enter your name"
+                  className="mt-2 block w-full border font-normal border-gray-300 rounded-lg outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
+                />
+              ) : (
+                <p className="text-sm text-gray-400">
+                  {accountDetail?.account_details?.ContactName || "-"}
+                </p>
+              )}
             </div>
             <div className="bg-white p-5 rounded-2xl shadow-md text-black font-bold">
-              Phone Number :{" "}
-              <p className="text-sm text-gray-400">
-                {accountDetail?.account_details?.Telephone
-                  ? accountDetail?.account_details?.Telephone
-                  : "-"}
-              </p>
+              Phone Number :
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="mobile"
+                  maxLength={15}
+                  autoComplete="off"
+                  inputMode="numeric"
+                  value={editableFields.mobile}
+                  onChange={handleMobileChange}
+                  placeholder="Enter your mobile number"
+                  className="mt-2 block w-full border font-normal border-gray-300 rounded-lg outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
+                />
+              ) : (
+                <p className="text-sm text-gray-400">
+                  {accountDetail?.account_details?.Telephone || "-"}
+                </p>
+              )}
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-md text-black font-bold">
-              Email Address :{" "}
+            <div className="bg-white group relative p-5 rounded-2xl shadow-md text-black font-bold cursor-pointer">
+              Email Address :
               <p className="text-sm text-gray-400">
-                {accountDetail?.account_details?.Email
-                  ? accountDetail?.account_details?.Email
-                  : "-"}
+                {accountDetail?.account_details?.Email || "-"}
               </p>
+              <span className="absolute group-hover:block hidden border top-24 left-0 bg-white shadow-md p-3 rounded-lg text-xs text-gray-600 font-normal">
+                {accountDetail?.account_details?.message}
+              </span>
             </div>
+          </div>
+          <div className="mt-5 flex gap-2">
+            {isEditing ? (
+              <>
+                <button
+                  onClick={handleSave}
+                  className="bg-primary/80 hover:bg-primary transition text-white px-4 py-1.5 rounded-lg"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={handleEditToggle}
+                  className="bg-black text-white px-4 py-1.5 transition rounded-lg"
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={handleEditToggle}
+                className="bg-primary inline-flex items-center text-white px-4 py-1.5 rounded-lg"
+              >
+                <MdModeEdit className="text-xl mr-1" />
+                Edit Details
+              </button>
+            )}
           </div>
         </div>
       </AccountLayout>

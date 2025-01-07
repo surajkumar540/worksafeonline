@@ -86,6 +86,14 @@ const AccountLayout = ({
             </Link>
             <Link
               className={`whitespace-nowrap text-center lg:text-left ${
+                pathname === "/reset-password" ? activeClass : inActiveClass
+              } ${bigShoulders.className}`}
+              href={"/reset-password"}
+            >
+              Reset Password
+            </Link>
+            <Link
+              className={`whitespace-nowrap text-center lg:text-left ${
                 pathname === "/my-address" || pathname === "/edit-address"
                   ? activeClass
                   : inActiveClass
