@@ -62,7 +62,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="print"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Print
                 </label>
@@ -78,7 +78,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="embroidery"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Embroidery
                 </label>
@@ -104,7 +104,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="text"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Text
                 </label>
@@ -120,7 +120,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="logo"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Logo
                 </label>
@@ -147,7 +147,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="recentlyUsed"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Recently Used
                 </label>
@@ -164,7 +164,7 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="favorites"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
                   Favorites
                 </label>
@@ -181,9 +181,9 @@ const GalleryFilters = () => {
                 />
                 <label
                   htmlFor="combinationLogos"
-                  className="ml-1 text-xs font-medium text-gray-800"
+                  className="ml-1 text-sm font-medium text-gray-800"
                 >
-                  Combination Logos
+                  My Logos
                 </label>
               </div>
             </div>

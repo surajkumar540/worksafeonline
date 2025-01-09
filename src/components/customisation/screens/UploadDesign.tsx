@@ -14,7 +14,7 @@ const UploadDesign = ({
   setCustomizeData: any;
   handleCustomizeNext: any;
 }) => {
-  console.log(handleCustomizeNext);
+  console.log(handleCustomizeNext, setCustomizeData);
   const [selectedImage, setSelectedImage] = useState<string | null>(
     customizeData?.designImage ?? null
   );
@@ -25,16 +25,15 @@ const UploadDesign = ({
   //   textLine2: "",
   //   textLine3: "",
   // });
-  const handleProceed = () => {
-    setCustomizeData({ ...customizeData, designImage: selectedImage });
-    // handleCustomizeNext();
-  };
+  // const handleProceed = () => {
+  // setCustomizeData({ ...customizeData, designImage: selectedImage });
+  // handleCustomizeNext();
+  // };
   const handleSubmit = () => {
     // if (!selectedFields?.font) return toast.info("Please select a font!");
     // if (!selectedFields?.color) return toast.info("Please select a color!");
     // if (!selectedFields?.textLine1)
     //   return toast.info("Please add a text in line 1!");
-
     // setCustomizeData({
     //   ...customizeData,
     //   addtext: selectedFields,
@@ -49,7 +48,7 @@ const UploadDesign = ({
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
           />
-          {selectedImage && !customizeData?.designImage && (
+          {/* {selectedImage && !customizeData?.designImage && (
             <button
               type="button"
               onClick={handleProceed}
@@ -57,7 +56,7 @@ const UploadDesign = ({
             >
               Upload logo
             </button>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="w-full">

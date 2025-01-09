@@ -6,9 +6,9 @@ interface ModalProps {
   width?: string;
   isVisible: boolean;
   onClose: () => void;
-  removePadding?: boolean;
   showCloseButton?: boolean;
   children: React.ReactNode;
+  removePadding?: boolean | string;
 }
 
 const Modal: React.FC<ModalProps> = ({

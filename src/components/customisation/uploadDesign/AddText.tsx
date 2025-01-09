@@ -3,6 +3,7 @@ import SelectColor from "./SelectColor";
 import { bigShoulders } from "@/app/layout";
 import TextSizeSelector from "./TextSizeSelector";
 import CharacterSpacingSelector from "./CharacterSpacingSelector";
+import FontWeightSelector from "./FontWeightSelector";
 
 const fonts = [
   { name: "Arial", value: "Arial, sans-serif" },
@@ -62,10 +63,10 @@ const AddText: React.FC<AddTextProps> = ({
     <div className="flex flex-col space-y-2">
       <SelectColor handleColorChange={handleColorChange} />
 
-      <div className="grid grid-cols-3 items-center gap-2">
-        <div>
+      <div className="grid grid-cols-4 items-center gap-2">
+        <div className="col-span-4 flex justify-between mt-5 items-center gap-20">
           <h4
-            className={`text-left font-bold pt-5 pb-1 text-lg ${bigShoulders.className}`}
+            className={`text-left font-bold whitespace-nowrap text-xl ${bigShoulders.className}`}
           >
             Select font:
           </h4>
@@ -76,7 +77,7 @@ const AddText: React.FC<AddTextProps> = ({
               onClick={() => setDropdownOpen((prev) => !prev)}
               onBlur={() => setDropdownOpen(false)}
               aria-expanded={dropdownOpen}
-              className="border border-gray-200 text-left px-1 py-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary rounded-full"
+              className="border border-gray-300 text-left p-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary rounded-full"
             >
               {selectedFields?.font || "Select Font"}
             </div>
@@ -103,31 +104,49 @@ const AddText: React.FC<AddTextProps> = ({
             )}
           </div>
         </div>
-        <TextSizeSelector setSelectedFilters={setSelectedFilters} />
-        <CharacterSpacingSelector setSelectedFilters={setSelectedFilters} />
+        {/* <TextSizeSelector setSelectedFilters={setSelectedFilters} />
+        <CharacterSpacingSelector setSelectedFilters={setSelectedFilters} /> */}
       </div>
 
       {/* Text Inputs */}
       <h4
-        className={`text-left font-bold pt-3 text-lg ${bigShoulders.className}`}
+        className={`text-left font-bold pt-3 text-xl ${bigShoulders.className}`}
       >
         Add Text:
       </h4>
-      {["textLine1", "textLine2", "textLine3"].map((name, index) => (
-        <input
-          key={name}
-          type="text"
-          maxLength={50}
-          name={name}
-          placeholder={`Enter ${name.replace("textLine", "Line ")} Text here${
-            index > 0 ? " (optional)" : ""
-          }`}
-          onChange={handleInputChange}
-          onKeyDown={(e) => handleKeyPress(e, index)}
-          ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
-          className="border border-gray-200 rounded-full p-3 outline-none"
-        />
-      ))}
+      <div className="space-y-2">
+        {["textLine1", "textLine2", "textLine3"].map((name, index) => (
+          <div key={name} className="grid grid-cols-5 gap-2 items-center">
+            <input
+              type="text"
+              maxLength={30}
+              name={name}
+              placeholder={`Enter Text ${name.replace("textLine", "Line ")} ${
+                index > 0 ? "(optional)" : ""
+              }`}
+              onChange={handleInputChange}
+              onKeyDown={(e) => handleKeyPress(e, index)}
+              ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
+              className="border col-span-2 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/80 rounded-full p-3 outline-none"
+            />
+            <TextSizeSelector
+              hideText={true}
+              size={`textSize${index + 1}`}
+              setSelectedFilters={setSelectedFilters}
+            />
+            <CharacterSpacingSelector
+              hideText={true}
+              space={`spacing${index + 1}`}
+              setSelectedFilters={setSelectedFilters}
+            />
+            <FontWeightSelector
+              hideText={true}
+              font={`fontWeight${index + 1}`}
+              setSelectedFilters={setSelectedFilters}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -54,10 +54,10 @@ const ImageUploader = ({
         className="hidden"
       />
       {selectedImage ? (
-        <div className="w-1/2 relative flex justify-center items-center">
+        <div className="w-3/4 relative flex justify-center items-center">
           <Image
-            width={100}
-            height={100}
+            width={150}
+            height={150}
             priority
             unoptimized
             alt="Selected"
@@ -78,9 +78,9 @@ const ImageUploader = ({
       ) : (
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="relative flex flex-col justify-start w-full h-40 border-2 border-dashed border-gray-400 rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
+          className="relative group flex flex-col w-full mx-auto justify-start rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
         >
-          <div className="flex flex-col text-center justify-center items-center h-full text-gray-600">
+          <div className="hidden group-hover:flex absolute bg-white -top-32 z-30 right-10 border shadow-md py-4 px-8 rounded-lg flex-col text-center justify-center items-center h-32 text-gray-600">
             <div className="text-xs space-y-1">
               <p className="font-bold text-base text-black">
                 Files Types we Accept
@@ -91,10 +91,17 @@ const ImageUploader = ({
             <span>
               <BiCloudUpload size={50} className="text-gray-500" />
             </span>
-            <span className="text-gray-600 text-sm">
+            {/* <span className="text-gray-600 text-sm">
               Click to upload or Browse
-            </span>
+            </span> */}
           </div>
+          <button
+            type="button"
+            // onClick={handleProceed}
+            className="bg-blue-500 text-white w-full mt-4 px-6 py-2 rounded-md"
+          >
+            Upload logo
+          </button>
         </div>
       )}
     </div>

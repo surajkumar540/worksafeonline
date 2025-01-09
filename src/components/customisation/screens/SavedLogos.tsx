@@ -189,8 +189,8 @@ const SavedLogos = ({
                 <div
                   className={`${
                     isLogoSelected?.id === data?.id
-                      ? "border-2 border-black"
-                      : "border border-gray-300"
+                      ? "border border-black"
+                      : "shadow border border-gray-100"
                   } rounded-lg transition h-24 cursor-pointer bg-white p-2 flex flex-col items-center justify-center`}
                 >
                   <div className="h-full w-full flex items-center justify-center">
@@ -210,13 +210,15 @@ const SavedLogos = ({
                     {data.description}
                   </p>
                 </div>
-                <div className="hidden group-hover:block absolute bg-white top-0 shadow-md rounded-lg z-50 p-3 border">
+                <div className="hidden group-hover:block absolute bg-gray-50 -top-24 left-0 shadow-md rounded-lg z-50 p-2 pt-3">
                   <div className="text-sm text-left space-y-1">
-                    <p>Logo - {data.name}</p>
-                    <p className="whitespace-nowrap">
-                      Description - {data.description}
+                    <p className="font-semibold leading-3">
+                      {data.name}
+                      <span className="text-xs pl-1 font-normal text-gray-500">
+                        ({data.description})
+                      </span>
                     </p>
-                    <p>Price - {data.Pricing}</p>
+                    <p className="font-semibold">Cost - {data.Pricing}</p>
                   </div>
                 </div>
               </div>

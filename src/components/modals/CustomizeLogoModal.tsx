@@ -11,6 +11,7 @@ import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
 import TextEditor from "../customisation/uploadDesign/TextEditor";
+import { bigShoulders } from "@/app/layout";
 
 const CustomizeLogoModal = ({
   data,
@@ -120,43 +121,24 @@ const CustomizeLogoModal = ({
   return (
     <Modal
       onClose={onclose}
+      removePadding="p-0"
       isVisible={isVisible}
       showCloseButton={false}
       width="w-[95vw] md:w-[80%]"
     >
-      <div className="flex flex-col">
-        {/* <div className="relative"> */}
-        {/* <Stepper
-            steps={steps}
-            currentStep={currentStep}
-            handleCustomizeNextId={handleCustomizeNextId}
-          /> */}
-        {/* <RxCross1
-            size={24}
-            onClick={onclose}
-            title="Click to close"
-            className="cursor-pointer hover:scale-110 hover:text-primary absolute top-1 right-5 text-black"
-          /> */}
-        {/* </div> */}
+      <div className="flex flex-col relative">
         {currentStep === 1 && (
           <>
-            <div className="flex justify-between pb-4 items-center">
-              {/* <p
-                className={`${bigShoulders.className} text-lg text-center font-black uppercase`}
-              >
-                <span className="text-primary">Customize</span> <br />
-                it now
-              </p> */}
+            <div className="flex justify-between sticky z-50 top-0 p-4 bg-white shadow-md items-center">
               <Link href="/">
                 <Image
+                  priority
+                  alt="Logo"
                   width={100}
                   unoptimized
                   height={60}
-                  alt="Logo"
-                  src={
-                    "https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
-                  }
-                  className="w-32 bg-black p-2"
+                  className="w-32"
+                  src="https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
                 />
               </Link>
               <Stepper
@@ -172,18 +154,20 @@ const CustomizeLogoModal = ({
                 className="cursor-pointer hover:scale-110 hover:text-primary text-black"
               />
             </div>
-            <div className="bg-gray-300 h-[1px]" />
-            <div className="w-full mx-auto text-center py-3">
-              {renderStepContent()}
+            <div className="w-full mx-auto text-center pt-4">
+              <div className="px-4 mb-24">{renderStepContent()}</div>
               <div
-                className={`flex space-x-4 items-center ${
+                style={{
+                  boxShadow: "0 20px 10px -25px rgba(0,0,0,0.45) inset",
+                }}
+                className={`flex w-full fixed bottom-0 rounded-b-xl overflow-hidden z-50 bg-white p-4 items-center ${
                   currentCustomizeStep === 0 ? "justify-end" : "justify-between"
                 }`}
               >
                 {currentCustomizeStep !== 0 && (
                   <p
                     onClick={handleCustomizePrevious}
-                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
+                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
                   >
                     <IoArrowBackCircle
                       title="Back"
@@ -195,7 +179,7 @@ const CustomizeLogoModal = ({
                 {currentCustomizeStep !== customize.length - 1 && (
                   <p
                     onClick={handleCustomizeNext}
-                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex hover:scale-110 transition cursor-pointer items-center gap-1 pl-4 pr-3 py-2 rounded-full"
+                    className="bg-black text-white relative group hover:text-white hover:bg-primary flex transition cursor-pointer items-center gap-1 pl-4 pr-3 py-2 rounded-full"
                   >
                     Next
                     <IoArrowForwardCircle
@@ -203,6 +187,24 @@ const CustomizeLogoModal = ({
                       className="text-2xl group-hover:text-white"
                     />
                   </p>
+                )}
+                {currentCustomizeStep === customize.length - 1 && (
+                  <div className="flex gap-2 justify-end w-full">
+                    <button
+                      type="button"
+                      onClick={() => setCurrentCustomizeStep(0)}
+                      className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-lg font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+                    >
+                      Add Another Logo
+                    </button>
+                    <button
+                      type="button"
+                      // onClick={handleSaveCustomization}
+                      className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-lg font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+                    >
+                      Save & View Product
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
