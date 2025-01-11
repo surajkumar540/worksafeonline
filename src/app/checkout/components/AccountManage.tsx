@@ -58,15 +58,15 @@ const AccountManage = ({
               You can log in to access your saved details, or proceed as a
               guest.
             </p>
-            <div className="flex mt-5 gap-3">
+            <div className="flex flex-wrap mt-5 gap-3">
               <button
                 onClick={handleSignIn}
-                className="w-fit px-6 py-2 text-white bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
+                className="w-full md:w-fit whitespace-nowrap px-6 py-2 text-white bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
               >
                 Log In
               </button>
               <button
-                className="w-fit px-6 py-2 text-[#F06022] bg-white border hover:bg-[#F06022] hover:text-white border-[#F06022] font-medium transition-colors"
+                className="w-full md:w-fit whitespace-nowrap px-6 py-2 text-[#F06022] bg-white border hover:bg-[#F06022] hover:text-white border-[#F06022] font-medium transition-colors"
                 onClick={handleContinue}
               >
                 Continue With Express Checkout
