@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { addToCart } from "@/api/cartApi";
 import { bigShoulders } from "@/app/layout";
 import eventEmitter from "@/hooks/useEventEmitter";
-import { getDeviceData } from "@/api/generateDeviceId";
+import { getDeviceCheck } from "@/api/generateDeviceId";
 
 const AddToCartButton = ({
   product,
@@ -21,13 +21,7 @@ const AddToCartButton = ({
     if (selectedFields?.size.length === 0)
       return toast.info("Please select a size");
 
-    let deviceId: any = "";
-    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-    if (!token) {
-      deviceId = getDeviceData();
-      deviceId = deviceId?.deviceId;
-    } else deviceId = "";
-
+    const deviceId = getDeviceCheck();
     const handleAddToCartRequest = {
       BOM: [],
       DeviceID: deviceId,

@@ -69,3 +69,14 @@ export const updateDeviceData = (newData: Partial<any>) => {
     localStorage.setItem("deviceData", JSON.stringify(updatedData));
   }
 };
+
+export const getDeviceCheck = () => {
+  let deviceId: any = "";
+  const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+  if (!token) {
+    deviceId = getDeviceData();
+    deviceId = deviceId?.deviceId;
+  } else deviceId = "";
+
+  return deviceId;
+};
