@@ -9,10 +9,10 @@ interface OrderTotalsProps {
 const OrderTotals: React.FC<OrderTotalsProps> = ({ cart, handleSubmit }) => {
   return (
     <div>
-      <h2 className="text-lg font-semibold uppercase rounded-t-xl bg-black text-white py-2 px-4">
+      <h2 className="text-lg font-semibold uppercase lg:rounded-t-xl bg-black text-white py-2 px-4">
         Order <span className="text-secondary">Totals</span>
       </h2>
-      <div className="bg-gray-50 p-4 rounded-b-xl pt-2">
+      <div className="lg:bg-gray-50 p-4 rounded-b-xl pt-2">
         <div className="flex justify-between items-center pt-2">
           <span className="text-sm font-bold">Total Quantity</span>
           <span className="text-base font-semibold font-sans">
@@ -47,13 +47,13 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({ cart, handleSubmit }) => {
             + £{cart?.CartTot?.Vat_Amount.toFixed(2)}
           </span>
         </div>
-        <div className="flex justify-between text-secondary items-center font-semibold pt-2 text-2xl mb-5">
+        <div className="flex justify-between text-secondary items-center font-semibold pt-2 text-xl md:text-2xl mb-5">
           <span className="font-bold">Final Amount:</span>
-          <span className="text-2xl font-bold font-sans">
+          <span className="text-xl md:text-2xl font-bold font-sans">
             £{cart?.CartTot?.TotalAmount.toFixed(2)}
           </span>
         </div>
-        <p className="font-sans text-sm text-gray-700">
+        <p className="font-sans text-xs md:text-sm text-gray-700">
           Your personal data will be used to process your order, support your
           experience throughout this website, and for other purposes described
           in our{" "}
@@ -68,7 +68,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({ cart, handleSubmit }) => {
         <button
           type="button"
           onClick={handleSubmit}
-          className="bg-green-500 w-full flex gap-2 items-center justify-center text-white py-2.5 text-lg px-5 hover:bg-green-700 transition mt-3"
+          className="bg-green-500 w-full flex gap-2 items-center justify-center text-white py-2.5 md:text-lg px-5 hover:bg-green-700 transition mt-3"
         >
           <IoBagCheckOutline className="text-2xl" />
           Confirm Checkout

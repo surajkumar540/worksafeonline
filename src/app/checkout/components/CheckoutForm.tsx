@@ -34,17 +34,17 @@ export const Accordion = ({
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div className="rounded-lg shadow-md border border-gray-100 mb-5">
+    <div className="rounded-lg md:shadow-md border border-gray-300 md:border-gray-100 mb-5">
       <button
-        className={`w-full px-5 py-3 flex justify-between items-center text-left text-lg font-bold ${bigShoulders.className}`}
+        className={`w-full px-3 md:px-5 py-2.5 md:py-3 flex justify-between items-center text-left md:text-lg font-bold ${bigShoulders.className}`}
         onClick={toggle}
       >
         <h2
-          className={`uppercase text-xl lg:text-2xl flex gap-2 items-center text-[#F06022] font-extrabold ${bigShoulders.className}`}
+          className={`uppercase text-lg lg:text-2xl flex gap-2 items-center text-[#F06022] font-extrabold ${bigShoulders.className}`}
         >
           <Icon /> {title}
         </h2>
-        <span className="text-4xl">{isOpen ? "-" : "+"}</span>
+        <span className="text-2xl md:text-4xl">{isOpen ? "-" : "+"}</span>
       </button>
       <div
         ref={contentRef}
@@ -55,7 +55,7 @@ export const Accordion = ({
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px", // Dynamically set height
         }}
       >
-        <div className="p-5">{children}</div>
+        <div className="p-3 md:p-5">{children}</div>
       </div>
     </div>
   );
@@ -87,7 +87,7 @@ const CheckoutForm = ({
     <div className="w-full">
       <Accordion title={title} Icon={icon} activateScreen={activateScreen}>
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">
             <Text
               field={{
                 ...formFields[2],
@@ -114,11 +114,11 @@ const CheckoutForm = ({
             />
           </div>
           <h3
-            className={`uppercase mt-5 text-lg lg:text-xl flex items-center font-extrabold ${bigShoulders.className}`}
+            className={`uppercase mt-5 text-2xl lg:text-xl flex items-center font-extrabold ${bigShoulders.className}`}
           >
             Address details
           </h3>
-          <div className="grid mt-5 grid-cols-1 md:grid-cols-4 gap-5 items-center">
+          <div className="grid mt-5 grid-cols-1 lg:grid-cols-4 gap-5 items-center">
             <Text
               field={{
                 ...formFields[4],
@@ -143,7 +143,7 @@ const CheckoutForm = ({
               handleInputChange={handleInputChange}
               error={errors[formFields[7].name]}
             />
-            <div></div>
+            <div className="hidden lg:block"></div>
             <Text
               field={{
                 ...formFields[8],
@@ -160,8 +160,8 @@ const CheckoutForm = ({
               handleInputChange={handleInputChange}
               error={errors[formFields[3].name]}
             />
-            <div></div>
-            <div></div>
+            <div className="hidden lg:block"></div>
+            <div className="hidden lg:block"></div>
             <button
               className="w-full px-6 py-3 text-white rounded-full bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
               onClick={() => {

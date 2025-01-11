@@ -18,10 +18,10 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({
 }) => {
   return (
     <div>
-      <h2 className="text-lg font-semibold uppercase rounded-t-xl bg-black text-white py-2 px-4">
+      <h2 className="text-lg font-semibold uppercase lg:rounded-t-xl bg-black text-white py-2 px-4">
         {title} <span className="text-secondary">Address</span>
       </h2>
-      <div className="grid grid-cols-2 bg-gray-50 rounded-b-xl p-4 gap-2 text-sm">
+      <div className="grid grid-cols-2 lg:bg-gray-50 rounded-b-xl p-4 gap-2 text-sm">
         <p className="font-bold">Company/Your Name:</p>
         <p className="">{address.name}</p>
 

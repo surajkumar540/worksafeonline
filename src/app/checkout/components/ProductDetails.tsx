@@ -29,7 +29,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
     <div className="overflow-x-scroll no-scrollbar">
       <table className="w-full border-collapse whitespace-nowrap">
         <thead>
-          <tr className="bg-[#F06022] font-semibold uppercase text-sm text-white">
+          <tr className="bg-[#F06022] font-semibold md:uppercase text-xs md:text-sm text-white">
             <th className="p-3 border text-center">S. No.</th>
             <th className="p-3 border text-center">Image</th>
             <th className="p-3 border text-left">Product Code</th>

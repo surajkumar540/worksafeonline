@@ -3,10 +3,10 @@ import React from "react";
 const OrderReference = () => {
   return (
     <div>
-      <h2 className="text-lg font-semibold uppercase rounded-t-xl bg-black text-white py-2 px-4">
+      <h2 className="text-lg font-semibold uppercase lg:rounded-t-xl bg-black text-white py-2 px-4">
         Order <span className="text-secondary">Reference</span>
       </h2>
-      <div className="text-sm p-4 bg-gray-50 rounded-b-xl space-y-3">
+      <div className="text-sm p-4 lg:bg-gray-50 rounded-b-xl space-y-3">
         <div>
           <label className="font-bold block mb-2">Your Reference:</label>
           <input

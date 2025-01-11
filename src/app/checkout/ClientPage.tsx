@@ -142,7 +142,7 @@ export default function ClientPage() {
             >
               <div className="space-y-5">
                 <ProductDetails cart={cart} />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
                   <DeliveryAddress
                     title="Delivery"
                     address={mockData.deliveryAddress}
@@ -152,7 +152,7 @@ export default function ClientPage() {
                     address={mockData.invoiceAddress}
                   />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
                   <OrderReference />
                   <div>
                     <OrderTotals cart={cart} handleSubmit={handleSubmit} />
