@@ -1,222 +1,179 @@
 "use client";
 
-import { useState } from "react";
 import { formFields } from "./formType";
-import OrderSummary from "./OrderSummary";
 import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
 import Select from "@/components/input/Select";
-import TextArea from "@/components/input/TextArea";
+import { useEffect, useRef, useState } from "react";
 
-const CheckoutForm = ({ cart }: { cart: any }) => {
-  const [errors, setErrors] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(false);
-  const [formData, setFormData] = useState<any>({
-    city: "",
-    state: "",
-    email: "",
-    zipcode: "",
-    lastName: "",
-    firstName: "",
-    orderNotes: "",
-    countryCode: "",
-    phomenumber: "",
-    companyName: "",
-    addressLine1: "",
-    addressLine2: "",
-  });
+export const Accordion = ({
+  Icon,
+  title,
+  children,
+  activateScreen,
+}: {
+  title: string;
+  activateScreen: number;
+  Icon: React.ElementType;
+  children: React.ReactNode;
+}) => {
+  const [isOpen, setIsOpen] = useState(activateScreen === 0 ? true : false);
 
-  const validateForm = () => {
-    const newErrors: any = {};
-    formFields.forEach((field) => {
-      const value = formData[field.name];
-      if (newErrors[field.name]) return;
-      if (field.required && !value) {
-        newErrors[field.name] = `${field.label} is required`;
-        return;
-      }
-      if (field.validation) {
-        const validationError = field.validation(value);
-        if (validationError) newErrors[field.name] = validationError;
-      }
-    });
-    return newErrors;
-  };
+  useEffect(() => {
+    setIsOpen(
+      (activateScreen === 1 && title === "Billing Details") ||
+        (activateScreen === 2 && title === "Delivery Details") ||
+        (activateScreen === 0 && title === "Your Login ID")
+        ? true
+        : false
+    );
+  }, [activateScreen, title]);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors); // Set errors to state if validation fails
-      return;
-    }
-    try {
-      setErrors({});
-      setLoading(true);
-      console.log(formData);
-    } catch (error) {
-      console.log("An error occurred:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const contentRef = useRef<HTMLDivElement>(null);
 
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <div className="rounded-lg shadow-md border border-gray-100 mb-5">
+      <button
+        className={`w-full px-5 py-3 flex justify-between items-center text-left text-lg font-bold ${bigShoulders.className}`}
+        onClick={toggle}
+      >
+        <h2
+          className={`uppercase text-xl lg:text-2xl flex gap-2 items-center text-[#F06022] font-extrabold ${bigShoulders.className}`}
+        >
+          <Icon /> {title}
+        </h2>
+        <span className="text-4xl">{isOpen ? "-" : "+"}</span>
+      </button>
+      <div
+        ref={contentRef}
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+        style={{
+          maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px", // Dynamically set height
+        }}
+      >
+        <div className="p-5">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const CheckoutForm = ({
+  icon,
+  title,
+  errors,
+  formData,
+  setFormData,
+  activateScreen,
+  setActivateScreen,
+}: {
+  icon: any;
+  title: any;
+  errors: any;
+  formData: any;
+  setFormData: any;
+  activateScreen: number;
+  setActivateScreen: any;
+}) => {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:gap-20 mt-5 md:mt-10">
-      <div className="w-full lg:w-3/5">
+    <div className="w-full">
+      <Accordion title={title} Icon={icon} activateScreen={activateScreen}>
         <div>
-          <h2
-            className={`uppercase text-2xl lg:text-3xl flex items-center font-extrabold ${bigShoulders.className}`}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 items-center">
+            <Text
+              field={{
+                ...formFields[2],
+                value: formData[formFields[2].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[2].name]}
+            />
+            <Text
+              field={{
+                ...formFields[9],
+                value: formData[formFields[9].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[9].name]}
+            />
+            <Text
+              field={{
+                ...formFields[10],
+                value: formData[formFields[10].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[10].name]}
+            />
+          </div>
+          <h3
+            className={`uppercase mt-5 text-lg lg:text-xl flex items-center font-extrabold ${bigShoulders.className}`}
           >
-            billing details
-          </h2>
-          <form onSubmit={handleSubmit} className="py-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
-              <Text
-                field={{
-                  ...formFields[0],
-                  value: formData[formFields[0].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[0].name]}
-              />
-              <Text
-                field={{
-                  ...formFields[1],
-                  value: formData[formFields[1].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[1].name]}
-              />
-            </div>
-            <div className="mt-5">
-              <Text
-                field={{
-                  ...formFields[2],
-                  value: formData[formFields[2].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[2].name]}
-              />
-            </div>
-            <h3
-              className={`uppercase mt-5 text-2xl lg:text-3xl flex items-center font-extrabold ${bigShoulders.className}`}
+            Address details
+          </h3>
+          <div className="grid mt-5 grid-cols-1 md:grid-cols-4 gap-5 items-center">
+            <Text
+              field={{
+                ...formFields[4],
+                value: formData[formFields[4].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[4].name]}
+            />
+            <Text
+              field={{
+                ...formFields[6],
+                value: formData[formFields[6].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[6].name]}
+            />
+            <Text
+              field={{
+                ...formFields[7],
+                value: formData[formFields[7].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[7].name]}
+            />
+            <div></div>
+            <Text
+              field={{
+                ...formFields[8],
+                value: formData[formFields[8].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[8].name]}
+            />
+            <Select
+              field={{
+                ...formFields[3],
+                value: formData[formFields[3].name] || "",
+              }}
+              handleInputChange={handleInputChange}
+              error={errors[formFields[3].name]}
+            />
+            <div></div>
+            <div></div>
+            <button
+              className="w-full px-6 py-3 text-white rounded-full bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
+              onClick={() => {
+                if (activateScreen === 1) setActivateScreen(2);
+                if (activateScreen === 2) setActivateScreen(3);
+              }}
             >
-              Address details
-            </h3>
-            <div className="mt-5">
-              <Text
-                field={{
-                  ...formFields[4],
-                  value: formData[formFields[4].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[4].name]}
-              />
-            </div>
-            <div className="mt-5">
-              <Text
-                field={{
-                  ...formFields[5],
-                  value: formData[formFields[5].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[5].name]}
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
-              <div className="mt-5">
-                <Text
-                  field={{
-                    ...formFields[6],
-                    value: formData[formFields[6].name] || "",
-                  }}
-                  handleInputChange={handleInputChange}
-                  error={errors[formFields[6].name]}
-                />
-              </div>
-              <div className="">
-                <Text
-                  field={{
-                    ...formFields[7],
-                    value: formData[formFields[7].name] || "",
-                  }}
-                  handleInputChange={handleInputChange}
-                  error={errors[formFields[7].name]}
-                />
-              </div>
-              <div className="">
-                <Text
-                  field={{
-                    ...formFields[8],
-                    value: formData[formFields[8].name] || "",
-                  }}
-                  handleInputChange={handleInputChange}
-                  error={errors[formFields[8].name]}
-                />
-              </div>
-              <div className="">
-                <Select
-                  field={{
-                    ...formFields[3],
-                    value: formData[formFields[3].name] || "",
-                  }}
-                  handleInputChange={handleInputChange}
-                  error={errors[formFields[3].name]}
-                />
-              </div>
-            </div>
-            <div className="mt-5">
-              <Text
-                field={{
-                  ...formFields[9],
-                  value: formData[formFields[9].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[9].name]}
-              />
-            </div>
-            <div className="mt-5">
-              <Text
-                field={{
-                  ...formFields[10],
-                  value: formData[formFields[10].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[10].name]}
-              />
-            </div>
-            <h3
-              className={`uppercase mt-5 text-2xl lg:text-3xl flex items-center font-extrabold ${bigShoulders.className}`}
-            >
-              Additional information
-            </h3>
-            <div className="mt-5">
-              <TextArea
-                field={{
-                  ...formFields[11],
-                  value: formData[formFields[11].name] || "",
-                }}
-                handleInputChange={handleInputChange}
-              />
-            </div>
-          </form>
+              Continue With Express Checkout
+            </button>
+          </div>
         </div>
-      </div>
-      {cart && cart?.Products && cart?.Products.length > 0 && (
-        <div className="w-full lg:w-2/5">
-          <OrderSummary
-            cart={cart}
-            loading={loading}
-            handleSubmit={handleSubmit}
-          />
-        </div>
-      )}
+      </Accordion>
     </div>
   );
 };

@@ -8,7 +8,6 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 
 const ItemHover = ({ link }: { link: LinkProps }) => {
   const pathName: any = usePathname();
-  // const [show, setShow] = useState<boolean>(false);
   const isActive = (path: string) => pathName === path;
   const [showLink, setLinkShow] = useState<string | null>("");
 
@@ -18,13 +17,12 @@ const ItemHover = ({ link }: { link: LinkProps }) => {
   return (
     <>
       <Link
-        // onClick={() => setShow(false)}
+        passHref
         onMouseEnter={() => handleGroupHover(link.href)}
         className={`font-semibold 2xl:text-xl text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear ${
           isActive(link.href) && "text-primary"
         }`}
         href={link?.href}
-        passHref
       >
         {link?.label} {link.icon && <RiArrowDropDownLine size={20} />}
       </Link>

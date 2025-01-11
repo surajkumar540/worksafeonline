@@ -24,6 +24,7 @@ export default {
       },
       colors: {
         primary: "#FFC700",
+        secondary: "#F06022",
       },
       boxShadow: {
         corner:

@@ -12,7 +12,8 @@ const Account = () => {
   const [loggedIn, setUserLoggedIn] = useState(false);
 
   const handleToggle = useCallback(() => {
-    if (loggedIn) return navigate.push("/my-account");
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (loggedIn || token) return navigate.push("/my-account");
     setIsVisible((prev) => !prev);
   }, [loggedIn, navigate]);
 

@@ -56,9 +56,10 @@ export const formFields: FormField[] = [
   },
   {
     type: "text",
+    required: true,
     name: "companyName",
-    label: "Company name (optional)",
-    placeholder: "Enter your company name",
+    label: "Company / your name ",
+    placeholder: "Enter company / your name",
     validation: (value) => {
       if (value && value.length > 100)
         return "Company name cannot exceed 100 characters";
@@ -69,7 +70,7 @@ export const formFields: FormField[] = [
     type: "select",
     required: true,
     name: "countryCode",
-    label: "Country / Region",
+    label: "Country",
     placeholder: "Select Country",
     options: countries.map((country: any) => ({
       value: country.name,
@@ -79,13 +80,12 @@ export const formFields: FormField[] = [
   {
     type: "text",
     required: true,
+    label: "Address",
     name: "addressLine1",
-    label: "Address Line 1",
     placeholder: "House number and street name",
     validation: (value) => {
-      if (!value) return "Address Line 1 is required";
-      if (value.length > 255)
-        return "Address Line 1 cannot exceed 255 characters";
+      if (!value) return "Address is required";
+      if (value.length > 255) return "Address cannot exceed 255 characters";
       return null;
     },
   },
@@ -114,13 +114,13 @@ export const formFields: FormField[] = [
   },
   {
     type: "text",
-    name: "state",
-    label: "State",
+    name: "county",
+    label: "County",
     required: true,
-    placeholder: "Enter your state",
+    placeholder: "Enter your county",
     validation: (value) => {
-      if (!value) return "State is required";
-      if (value.length > 50) return "State name cannot exceed 50 characters";
+      if (!value) return "County is required";
+      if (value.length > 50) return "County name cannot exceed 50 characters";
       return null;
     },
   },
@@ -128,20 +128,20 @@ export const formFields: FormField[] = [
     type: "text",
     required: true,
     name: "zipcode",
-    label: "Zip Code",
-    placeholder: "Enter zip code",
+    label: "Post Code",
+    placeholder: "Enter post code",
     validation: (value) => {
-      if (!value) return "Zip code is required";
+      if (!value) return "Post code is required";
       if (value.length < 5 || value.length > 10)
-        return "Zip code must be between 5 and 10 characters";
+        return "Post code must be between 5 and 10 characters";
       return null;
     },
   },
   {
     type: "text",
     required: true,
-    label: "Phone",
-    name: "phomenumber",
+    label: "Telephone",
+    name: "Telephone",
     placeholder: "Enter your phone number",
     validation: (value) => {
       if (!value) return "Phone number is required";

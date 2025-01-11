@@ -27,7 +27,7 @@ const Text: FC<TextProps> = ({
     <div className="relative">
       <label
         htmlFor={field.name}
-        className={`block text-gray-700 text-xl font-extrabold mb-2 ${bigShoulders.className}`}
+        className={`block text-gray-700 text-lg font-extrabold mb-2 ${bigShoulders.className}`}
       >
         {field.label}
         {field.required && <span className="text-red-500">*</span>}

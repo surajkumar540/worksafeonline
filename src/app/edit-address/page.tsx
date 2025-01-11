@@ -2,6 +2,7 @@
 
 import { Fetch } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
+import Loader from "@/components/common/Loader";
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AccountLayout from "@/components/account/AccountLayout";
@@ -70,12 +71,7 @@ function EditAddressContent() {
     fetchUserData();
   }, [router, type, address_id]);
 
-  if (loading)
-    return (
-      <div className="h-screen flex justify-center font-semibold items-center text-3xl">
-        Loading...
-      </div>
-    );
+  if (loading) return <Loader />;
 
   return (
     <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-12">
