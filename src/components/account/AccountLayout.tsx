@@ -7,6 +7,7 @@ import { LuUser } from "react-icons/lu";
 import { bigShoulders } from "@/app/layout";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { usePathname, useRouter } from "next/navigation";
+import { getDeviceData } from "@/api/generateDeviceId";
 
 const AccountLayout = ({
   children,
@@ -24,7 +25,10 @@ const AccountLayout = ({
     "text-xl font-semibold hover:text-primary rounded-full w-full transition px-4 py-2";
 
   const logout = () => {
+    const deviceData = getDeviceData();
     localStorage.clear();
+    if (deviceData)
+      localStorage.setItem("deviceData", JSON.stringify(deviceData));
     toast.success("User logged out!");
     eventEmitter?.emit("loggedOut");
     return router.replace("/");

@@ -23,6 +23,7 @@ export const Accordion = ({
     setIsOpen(
       (activateScreen === 1 && title === "Billing Details") ||
         (activateScreen === 2 && title === "Delivery Details") ||
+        (activateScreen === 3 && title === "Order Details") ||
         (activateScreen === 0 && title === "Your Login ID")
         ? true
         : false

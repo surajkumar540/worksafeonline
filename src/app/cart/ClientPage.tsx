@@ -8,6 +8,7 @@ import CartSummary from "./components/CartSummary";
 import eventEmitter from "@/hooks/useEventEmitter";
 import ApplyCoupon from "./components/ApplyCoupon";
 import Features from "@/components/common/Features";
+import { getDeviceData } from "@/api/generateDeviceId";
 import React, { useCallback, useEffect, useState } from "react";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 import { getCartDetails, removeProduct, updateQuantity } from "@/api/cartApi";
@@ -45,11 +46,19 @@ export default function ClientPage() {
   const handleUpdateQuantity = async (id: string, Quantity: number) => {
     if (fetchingResponse) return;
     setFetchingResponse(true);
+
+    let deviceId: any = "";
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (!token) {
+      deviceId = getDeviceData();
+      deviceId = deviceId?.deviceId;
+    } else deviceId = "";
+
     const updateProductData = {
       Seq: 0,
       Line: id,
-      DeviceID: "",
       Qty: Quantity,
+      DeviceID: deviceId,
     };
     const response = await updateQuantity(updateProductData);
     if (response?.status) {
