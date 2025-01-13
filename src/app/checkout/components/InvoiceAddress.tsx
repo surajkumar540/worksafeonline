@@ -1,23 +1,26 @@
 "use client";
 
+import { Fetch } from "@/utils/axios";
 import AddressCard from "./AddressCard";
 import { Accordion } from "./Accordion";
 import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
-import { FaAddressBook } from "react-icons/fa";
 import Select from "@/components/input/Select";
+import { FaAddressBook } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
-import { BillingFormField as formFields } from "./formType";
+import { getDeviceCheck } from "@/api/generateDeviceId";
+import { InvoiceFormFields as formFields } from "./formType";
 
-const CheckoutForm = ({
+const InvoiceAddress = ({
   errors,
   isOpen,
   formData,
+  formRef2,
   setIsOpen,
-  formRef1,
   countries,
   setFormData,
   accountDetail,
+  setUpdatedCart,
   selectedAddress,
   handleButtonClick,
   setSelectedAddress,
@@ -25,69 +28,78 @@ const CheckoutForm = ({
 }: {
   errors: any;
   formData: any;
+  formRef2: any;
   setIsOpen: any;
-  formRef1: any;
-  isOpen: boolean;
   countries: any;
+  isOpen: boolean;
   setFormData: any;
   accountDetail: any;
+  setUpdatedCart: any;
   selectedAddress: any;
   handleButtonClick: any;
   setSelectedAddress: any;
   handleForm1Validation: any;
 }) => {
   const [options, setOptions] = useState([]);
-
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
-
-  useEffect(() => {
-    if (selectedAddress?.billingAddressId?.ID) {
-      const add = selectedAddress?.billingAddressId;
-      const address = {
-        DAdd: add?.Addr,
-        DEmail: add?.EMail,
-        DCounty: add?.County,
-        DPCode: add?.Post_Code,
-        DPTown: add?.Post_Town,
-        DName: add?.Customer_Name,
-        DTelephone: add?.Telephone,
-        AddressCode: add?.Address_Code,
-        DCountryCode: add?.Country_Code,
-      };
-      setFormData((prev: any) => ({ ...prev, ...address }));
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    handleButtonClick("orderSummary");
+    let url = "api/AddressSelect";
+    const data: any = { PostCode: formData.PCode };
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (!token) {
+      data.DeviceID = getDeviceCheck();
+      url = "api/ExpressAddressSelect";
     }
-    // eslint-disable-next-line
-  }, [selectedAddress?.billingAddressId?.ID]);
+    const response: any = await Fetch(url, data, 5000, true, false);
+    if (response?.status) setUpdatedCart(response?.pricedetails);
+  };
 
   useEffect(() => {
     setOptions(countries);
     // eslint-disable-next-line
   }, [countries.length]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    handleButtonClick("invoiceAddress");
-  };
+  useEffect(() => {
+    if (selectedAddress?.invoiceAddressId?.ID) {
+      const add = selectedAddress?.invoiceAddressId;
+      const address = {
+        Add: add?.Addr,
+        Email: add?.EMail,
+        County: add?.County,
+        PCode: add?.Post_Code,
+        PTown: add?.Post_Town,
+        Name: add?.Customer_Name,
+        Telephone: add?.Telephone,
+        CountryCode: add?.Country_Code,
+        InvAddressCode: add?.Address_Code,
+      };
+      setFormData((prev: any) => ({ ...prev, ...address }));
+    }
+    // eslint-disable-next-line
+  }, [selectedAddress?.invoiceAddressId?.ID]);
+
   return (
     <div className="w-full">
       <Accordion
         isOpen={isOpen}
         Icon={FaAddressBook}
         setIsOpen={setIsOpen}
-        title={"Billing Details"}
+        title="Delivery Details"
         handleForm1Validation={handleForm1Validation}
       >
         <div>
           <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-2">
-            {accountDetail?.my_BillingAddress &&
-              accountDetail?.my_BillingAddress.map((address: any) => {
+            {accountDetail?.my_DeliveryAddress &&
+              accountDetail?.my_DeliveryAddress.map((address: any) => {
                 return (
                   <React.Fragment key={address?.ID}>
                     <AddressCard
-                      type="billing"
+                      type="invoice"
                       address={address}
                       selectedAddress={selectedAddress}
                       handleSelected={setSelectedAddress}
@@ -96,15 +108,15 @@ const CheckoutForm = ({
                 );
               })}
           </div>
-          {accountDetail?.my_BillingAddress &&
-            accountDetail?.my_BillingAddress.length > 0 && (
+          {accountDetail?.my_DeliveryAddress &&
+            accountDetail?.my_DeliveryAddress.length > 0 && (
               <div className="flex items-center gap-4 my-5">
                 <div className="h-[2px] flex-grow bg-gray-200"></div>
                 <span className="text-gray-700 font-medium">Or </span>
                 <div className="h-[2px] flex-grow bg-gray-200"></div>
               </div>
             )}
-          <form ref={formRef1} onSubmit={handleSubmit}>
+          <form ref={formRef2} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">
               <Text
                 field={{
@@ -132,7 +144,7 @@ const CheckoutForm = ({
               />
             </div>
             <h3
-              className={`uppercase mt-5 text-2xl lg:text-xl flex items-center font-extrabold ${bigShoulders.className}`}
+              className={`uppercase text-secondary mt-5 text-2xl lg:text-xl flex items-center font-extrabold ${bigShoulders.className}`}
             >
               Address details
             </h3>
@@ -180,13 +192,12 @@ const CheckoutForm = ({
                 handleInputChange={handleInputChange}
                 error={errors[formFields[7].name]}
               />
-
               <div className="hidden lg:block"></div>
               <div className="hidden lg:block"></div>
               <div className="hidden lg:block"></div>
               <button
                 type="submit"
-                className="w-full px-6 py-4 text-white rounded-full bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
+                className="w-full px-6 py-3.5 text-white rounded-full bg-[#F06022] hover:bg-[#F06022]/80 font-medium transition-colors"
               >
                 Continue With Express Checkout
               </button>
@@ -198,4 +209,4 @@ const CheckoutForm = ({
   );
 };
 
-export default CheckoutForm;
+export default InvoiceAddress;

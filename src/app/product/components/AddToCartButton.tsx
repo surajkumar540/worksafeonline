@@ -11,14 +11,16 @@ const AddToCartButton = ({
   product,
   fieldsCheck,
   selectedFields,
+  filterProductSizes,
 }: {
   product: Product;
   fieldsCheck: any;
   selectedFields: any;
+  filterProductSizes: any;
 }) => {
   const handleCart = async (product: any) => {
     if (fieldsCheck()) return;
-    if (selectedFields?.size.length === 0)
+    if (selectedFields?.size.length === 0 && filterProductSizes.length > 0)
       return toast.info("Please select a size");
 
     const deviceId = getDeviceCheck();
@@ -33,10 +35,12 @@ const AddToCartButton = ({
         ? selectedFields?.fitting?.Fitting.trim()
         : "NA",
       Size:
-        selectedFields?.size.map((item: any) => ({
-          Size: item?.Size,
-          Quantity: item?.quantity,
-        })) ?? [],
+        filterProductSizes.length > 0 && selectedFields?.size.length > 0
+          ? selectedFields?.size.map((item: any) => ({
+              Size: item?.Size,
+              Quantity: item?.quantity,
+            }))
+          : [{ size: "NA", Quantity: 1 }],
     };
     const response = await addToCart(handleAddToCartRequest);
     if (response?.status) eventEmitter?.emit("addToCart", product?.ProductID);

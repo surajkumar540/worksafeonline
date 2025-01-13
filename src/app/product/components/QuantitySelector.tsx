@@ -202,6 +202,7 @@ const QuantitySelector = ({
         <AddToCartButton
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
+          filterProductSizes={filterProductSizes}
           product={{
             ...product,
             ProductSellingPrice: price.ProductSellingPrice,

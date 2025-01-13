@@ -1,73 +1,186 @@
 "use client";
 
 import { bigShoulders } from "../layout";
-import { mockData } from "./components/data";
+import { Fetch, Post } from "@/utils/axios";
+import { useRouter } from "next/navigation";
 import CartSkeleton from "./CheckoutSkeleton";
 import { getCartDetails } from "@/api/cartApi";
-import { RiLoginBoxFill } from "react-icons/ri";
-import { formFields } from "./components/formType";
+import { FaShoppingCart } from "react-icons/fa";
+import { checkFormFields, getSelectFormattedData } from "@/api/generalApi";
+import { Accordion } from "./components/Accordion";
 import OrderTotals from "./components/OrderTotals";
 import Features from "@/components/common/Features";
+import CheckoutForm from "./components/CheckoutForm";
 import AccountManage from "./components/AccountManage";
-import { useCallback, useEffect, useState } from "react";
+import { getDeviceCheck } from "@/api/generateDeviceId";
 import ProductDetails from "./components/ProductDetails";
 import OrderReference from "./components/OrderReference";
+import InvoiceAddress from "./components/InvoiceAddress";
+import BillingAddress from "./components/BillingAddress";
 import DeliveryAddress from "./components/DeliveryAddress";
-import { FaAddressBook, FaShoppingCart } from "react-icons/fa";
-import CheckoutForm, { Accordion } from "./components/CheckoutForm";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { BillingFormField, InvoiceFormFields } from "./components/formType";
+import eventEmitter from "@/hooks/useEventEmitter";
+import { toast } from "react-toastify";
 
 export default function ClientPage() {
+  // navigation and form fields
+  const router = useRouter();
+  const formRef1 = useRef<HTMLFormElement>(null);
+  const formRef2 = useRef<HTMLFormElement>(null);
+
+  // cart information
   const [cart, setCart] = useState<any>({});
-  const [loading, setLoading] = useState(true);
-  const [errors, setErrors] = useState<any>({});
-  const [activateScreen, setActivateScreen] = useState<any>(null);
+  const [updatedCart, setUpdatedCart] = useState<any>({});
+
+  // loading state changes here
+  const [loading, setLoading] = useState<boolean>(true);
   const [formloading, setFormLoading] = useState<boolean>(false);
-  const [formData, setFormData] = useState<any>({
-    city: "",
-    state: "",
-    email: "",
-    zipcode: "",
-    lastName: "",
-    firstName: "",
-    orderNotes: "",
-    countryCode: "",
-    phomenumber: "",
-    companyName: "",
-    addressLine1: "",
-    addressLine2: "",
+  const [accordionStates, setAccordionStates] = useState({
+    askLogin: true,
+    orderSummary: false,
+    billingAddress: false,
+    invoiceAddress: false,
   });
 
-  console.log(formloading);
+  // account state changes here
+  const [accountDetail, setaccountDetail] = useState<any>({});
+  const [selectedAddress, setSelectedAddress] = useState<any>({
+    billingAddressId: {},
+    invoiceAddressId: {},
+  });
 
-  useEffect(() => {
-    const token =
-      typeof window !== "undefined" &&
-      localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-    if (token) setActivateScreen(1);
-    else setActivateScreen(0);
-  }, []);
+  // formmanagement changes here
+  const [errors, setErrors] = useState<any>({});
+  const [countries, setCountries] = useState([]);
+  const [formData, setFormData] = useState<any>({
+    Add: "",
+    DAdd: "",
+    Name: "",
+    DName: "",
+    PTown: "",
+    Email: "",
+    PCode: "",
+    DPTown: "",
+    DPCode: "",
+    DEmail: "",
+    County: "",
+    Coupon: "",
+    Express: 0,
+    DCounty: "",
+    DeviceID: "",
+    Comments: "",
+    Telephone: "",
+    Collection: 0,
+    TermsAgreed: 1,
+    DTelephone: "",
+    AddressCode: "",
+    CountryCode: "",
+    Customer_Ref: "",
+    DCountryCode: "",
+    InvAddressCode: "",
+    Despatch_Comments: "",
+  });
+
+  const handleForm1Validation = () => {
+    return checkFormFields(formRef1, [
+      "DName",
+      "DAdd",
+      "DEmail",
+      "DPTown",
+      "DPCode",
+      "DTelephone",
+      "DCountryCode",
+    ]);
+  };
+  const handleForm2Validation = () => {
+    return checkFormFields(formRef2, [
+      "Name",
+      "Add",
+      "Email",
+      "PTown",
+      "PCode",
+      "Telephone",
+      "CountryCode",
+    ]);
+  };
+  const handleAddressCompletion = () => {
+    if (handleForm2Validation() && handleForm1Validation()) {
+      setAccordionStates((prev) => ({
+        ...prev,
+        orderSummary: true,
+      }));
+    }
+  };
 
   const fetchCart = useCallback(async () => {
     try {
       const response = await getCartDetails();
       if (response?.status) setCart(response);
-      else setCart({});
+      else {
+        setCart({});
+        router.replace("/shop-all");
+      }
     } catch (error) {
       setCart({});
       console.log("Error fetching Cart: " + error);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     fetchCart();
+  }, [fetchCart]);
+
+  const fetchUserData = useCallback(async () => {
+    try {
+      const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return;
+      const url = "/api/MyAccountProfile";
+      const response: any = await Fetch(url, {}, 5000, true, false);
+      if (response?.status) setaccountDetail(response);
+      setLoading(false);
+    } catch (error) {
+      console.log("Account Details Error]: ", error);
+      return;
+    }
     // eslint-disable-next-line
+  }, [router]);
+
+  useEffect(() => {
+    const fetchData = () => {
+      setTimeout(() => {
+        fetchUserData();
+        fetchCart();
+      }, 500);
+    };
+    eventEmitter?.on("loggedIn", fetchData);
+    return () => {
+      eventEmitter?.off("loggedIn", fetchData);
+    };
+    // eslint-disable-next-line
+  }, [fetchUserData]);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const url = "/api/Countries";
+      const response: any = await Fetch(url, {}, 5000, true, false);
+      if (response.status) {
+        const data = getSelectFormattedData(response?.Countries);
+        setCountries(data);
+      }
+    };
+    fetchCountries();
   }, []);
 
   const validateForm = () => {
     const newErrors: any = {};
-    formFields.forEach((field) => {
+    [...InvoiceFormFields, ...BillingFormField].forEach((field) => {
       const value = formData[field.name];
       if (newErrors[field.name]) return;
       if (field.required && !value) {
@@ -82,7 +195,7 @@ export default function ClientPage() {
     return newErrors;
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -90,14 +203,34 @@ export default function ClientPage() {
       return;
     }
     try {
-      setErrors({});
-      setFormLoading(true);
-      console.log(formData);
+      const data = {
+        ...formData,
+        DeviceID: getDeviceCheck(),
+        Express: getDeviceCheck() === "" ? 0 : 1,
+      };
+      const url = "api/CofirmCheckoutWorksafe";
+      const response: any = await Post(url, data, 5000, true);
+      if (response?.status) {
+        if (response?.message) toast.success(response?.message);
+        setErrors({});
+        localStorage.setItem("OrderID", response?.OrderID);
+        router.replace("/thank-you");
+      }
     } catch (error) {
       console.log("An error occurred:", error);
     } finally {
       setFormLoading(false);
     }
+  };
+
+  const handleButtonClick = (activeScreen: any) => {
+    setAccordionStates((prevState: any) => {
+      const updatedStates = Object.keys(prevState).reduce((acc, key) => {
+        acc[key] = key === activeScreen; // Only the active screen is true
+        return acc;
+      }, {} as any);
+      return updatedStates;
+    });
   };
 
   if (loading) return <CartSkeleton />;
@@ -112,52 +245,84 @@ export default function ClientPage() {
         </h1>
         <div className="flex flex-col mt-5">
           <AccountManage
-            icon={RiLoginBoxFill}
-            activateScreen={activateScreen}
-            setActivateScreen={setActivateScreen}
+            isOpen={accordionStates.askLogin}
+            handleButtonClick={handleButtonClick}
+            setIsOpen={(isOpen: any) =>
+              setAccordionStates((prev) => ({ ...prev, askLogin: isOpen }))
+            }
           />
           <CheckoutForm
             errors={errors}
             formData={formData}
-            icon={FaAddressBook}
-            title="Billing Details"
+            formRef1={formRef1}
+            countries={countries}
+            accountDetail={accountDetail}
+            selectedAddress={selectedAddress}
+            handleButtonClick={handleButtonClick}
+            setSelectedAddress={setSelectedAddress}
+            isOpen={accordionStates.billingAddress}
+            handleForm1Validation={handleForm1Validation}
+            setIsOpen={(isOpen: any) =>
+              setAccordionStates((prev) => ({
+                ...prev,
+                billingAddress: isOpen,
+              }))
+            }
             setFormData={setFormData}
-            activateScreen={activateScreen}
-            setActivateScreen={setActivateScreen}
           />
-          <CheckoutForm
+          <InvoiceAddress
             errors={errors}
             formData={formData}
-            icon={FaAddressBook}
-            title="Delivery Details"
+            formRef2={formRef2}
+            countries={countries}
+            accountDetail={accountDetail}
+            setUpdatedCart={setUpdatedCart}
+            selectedAddress={selectedAddress}
+            handleButtonClick={handleButtonClick}
+            setSelectedAddress={setSelectedAddress}
+            isOpen={accordionStates.invoiceAddress}
+            handleForm1Validation={handleForm2Validation}
+            setIsOpen={(isOpen: any) =>
+              setAccordionStates((prev) => ({
+                ...prev,
+                invoiceAddress: isOpen,
+              }))
+            }
             setFormData={setFormData}
-            activateScreen={activateScreen}
-            setActivateScreen={setActivateScreen}
           />
           {cart && cart?.Products && cart?.Products.length > 0 && (
             <Accordion
               Icon={FaShoppingCart}
+              handleForm1Validation={handleAddressCompletion}
               title="Order Details"
-              activateScreen={activateScreen}
+              isOpen={accordionStates.orderSummary}
+              setIsOpen={(isOpen: any) =>
+                setAccordionStates((prev) => ({
+                  ...prev,
+                  orderSummary: isOpen,
+                }))
+              }
             >
               <div className="space-y-5">
                 <ProductDetails cart={cart} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
-                  <DeliveryAddress
-                    title="Delivery"
-                    address={mockData.deliveryAddress}
-                  />
-                  <DeliveryAddress
-                    title="Invoice"
-                    address={mockData.invoiceAddress}
-                  />
+                  <DeliveryAddress title="Delivery" address={formData} />
+                  <BillingAddress title="Invoice" address={formData} />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
-                  <OrderReference />
-                  <div>
-                    <OrderTotals cart={cart} handleSubmit={handleSubmit} />
-                  </div>
-                </div>
+                <form
+                  onSubmit={handleSubmit}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10"
+                >
+                  <OrderReference
+                    formData={formData}
+                    setFormData={setFormData}
+                  />
+                  <OrderTotals
+                    cart={cart}
+                    updatedCart={updatedCart}
+                    formloading={formloading}
+                  />
+                </form>
               </div>
             </Accordion>
           )}

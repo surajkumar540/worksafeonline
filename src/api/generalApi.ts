@@ -115,3 +115,29 @@ export const filterData = (product: any) => {
   };
   return productData;
 };
+
+export const checkFormFields = (
+  formRef: React.RefObject<HTMLFormElement>,
+  fields: string[]
+) => {
+  if (!formRef.current)
+    return { isValid: false, values: {}, missingFields: [] };
+
+  const formData = new FormData(formRef.current);
+
+  const values: Record<string, string> = {};
+  formData.forEach((value, key) => {
+    values[key] = value.toString().trim();
+  });
+
+  const missingFields = fields.filter((field) => !values[field]);
+  return missingFields.length === 0;
+};
+
+export const getSelectFormattedData = (data: any) => {
+  const response = data.map((option: any) => ({
+    label: option?.Country,
+    value: option?.Name,
+  }));
+  return response;
+};

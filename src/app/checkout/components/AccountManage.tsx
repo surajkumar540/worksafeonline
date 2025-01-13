@@ -1,30 +1,33 @@
+import { Accordion } from "./Accordion";
 import { bigShoulders } from "@/app/layout";
-import { Accordion } from "./CheckoutForm";
+import { RiLoginBoxFill } from "react-icons/ri";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { useCallback, useEffect, useState } from "react";
 
 const AccountManage = ({
-  icon,
-  activateScreen,
-  setActivateScreen,
+  isOpen,
+  setIsOpen,
+  handleButtonClick,
 }: {
-  icon: any;
-  activateScreen: number;
-  setActivateScreen: any;
+  setIsOpen: any;
+  isOpen: boolean;
+  handleButtonClick: any;
 }) => {
   const [loggedIn, setUserLoggedIn] = useState<boolean>(false);
-
-  const handleToggle = useCallback(() => {
-    setUserLoggedIn(true);
-  }, []);
 
   const handleSignIn = () => {
     eventEmitter?.emit("openLoginModal");
   };
 
-  const handleContinue = () => {
-    setActivateScreen(1);
-  };
+  const handleContinue = useCallback(() => {
+    handleButtonClick("billingAddress");
+    // eslint-disable-next-line
+  }, []);
+
+  const handleToggle = useCallback(() => {
+    setUserLoggedIn(true);
+    handleContinue();
+  }, [handleContinue]);
 
   useEffect(() => {
     eventEmitter?.on("loggedIn", handleToggle);
@@ -44,9 +47,11 @@ const AccountManage = ({
     <>
       {!loggedIn && (
         <Accordion
-          Icon={icon}
+          isOpen={isOpen}
+          Icon={RiLoginBoxFill}
           title="Your Login ID"
-          activateScreen={activateScreen}
+          setIsOpen={setIsOpen}
+          handleForm1Validation={() => true}
         >
           <div>
             <h2

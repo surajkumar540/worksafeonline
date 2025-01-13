@@ -1,14 +1,14 @@
 interface DeliveryAddressProps {
   title: string;
   address: {
-    name: string;
-    address: string;
-    postTown: string;
-    county: string;
-    postCode: string;
-    country: string;
-    telephone: string;
-    email: string;
+    Add: string;
+    Name: string;
+    PTown: string;
+    PCode: string;
+    Email: string;
+    County: string;
+    Telephone: string;
+    CountryCode: string;
   };
 }
 
@@ -23,28 +23,28 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({
       </h2>
       <div className="grid grid-cols-2 lg:bg-gray-50 rounded-b-xl p-4 gap-2 text-sm">
         <p className="font-bold">Company/Your Name:</p>
-        <p className="">{address.name}</p>
+        <p className="">{address.Name ? address.Name : "-"}</p>
 
         <p className="font-bold">Address:</p>
-        <p className="">{address.address}</p>
+        <p className="">{address.Add ? address.Add : "-"}</p>
 
         <p className="font-bold">Post Town:</p>
-        <p className="">{address.postTown}</p>
+        <p className="">{address.PTown ? address.PTown : "-"}</p>
 
         <p className="font-bold">County:</p>
-        <p className="">{address.county}</p>
+        <p className="">{address.County ? address.County : "-"}</p>
 
         <p className="font-bold">Post Code:</p>
-        <p className="">{address.postCode}</p>
+        <p className="">{address.PCode ? address.PCode : "-"}</p>
 
         <p className="font-bold">Country:</p>
-        <p className="">{address.country}</p>
+        <p className="">{address.CountryCode ? address.CountryCode : "-"}</p>
 
         <p className="font-bold">Telephone:</p>
-        <p className="">{address.telephone}</p>
+        <p className="">{address.Telephone ? address.Telephone : "-"}</p>
 
         <p className="font-bold">Email:</p>
-        <p className="">{address.email}</p>
+        <p className="">{address.Email ? address.Email : "-"}</p>
       </div>
     </div>
   );
