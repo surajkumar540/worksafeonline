@@ -3,7 +3,6 @@
 import { Fetch } from "@/utils/axios";
 import { bigShoulders } from "../layout";
 import { useRouter } from "next/navigation";
-import { getCartDetails } from "@/api/cartApi";
 import OrderCard from "./components/OrderCard";
 import Loader from "@/components/common/Loader";
 import { useCallback, useEffect, useState } from "react";
@@ -40,10 +39,15 @@ export default function Page() {
   }, [router]);
 
   const fetchCart = useCallback(async () => {
-    const response = await getCartDetails();
-    if (response?.status) {
-      setCart(response);
-    } else setCart({});
+    const response: any = await Fetch(
+      "api/MyAccountOrders",
+      { page: 1, pagesize: 50 },
+      5000,
+      true,
+      false
+    );
+    if (response?.status) setCart(response?.my_orders);
+    else setCart({});
     setLoading(false);
   }, []);
 

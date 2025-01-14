@@ -5,15 +5,16 @@ interface ProductDetailsProps {
   cart: {
     Products: {
       Line: number;
-      ProductImage: string;
+      Line_No: number;
+      ImgUrl: string;
       ProductCode: string;
-      ProductDescription: string;
+      Description: string;
       Colour: string;
-      Fitting: string;
+      Fit: string;
       Size: string;
       Quantity: number;
-      SalesPrice: number;
-      LineTotal: number;
+      Sales_Price: number;
+      Line_Total: number;
       BulkDiscount: string;
       ArtworkExist: number;
       ArtworkTotalPerQty: number;
@@ -35,7 +36,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
             <th className="p-3 border text-left">Product Code</th>
             <th className="p-3 border w-1/2 text-left">Description</th>
             <th className="p-3 border text-center">Colour</th>
-            <th className="p-3 border text-center">Fitting</th>
+            <th className="p-3 border text-center">Fit</th>
             <th className="p-3 border text-center">Size</th>
             <th className="p-3 border text-center">Quantity</th>
             <th className="p-3 border text-center">Price</th>
@@ -43,32 +44,32 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
           </tr>
         </thead>
         <tbody>
-          {cart?.Products.map((product, index: number) => (
+          {cart?.Products.map((product) => (
             <tr
-              key={product.Line}
+              key={product.Line_No}
               className="hover:bg-gray-50 text-xs cursor-pointer border-b"
             >
-              <td className="px-2 text-sm text-center">{index + 1}.</td>
+              <td className="px-2 text-sm text-center">{product.Line_No}.</td>
               <td className="px-2 flex items-center py-1">
                 <Image
                   width={100}
                   height={100}
-                  src={product.ProductImage}
-                  alt={product.ProductDescription}
+                  src={product.ImgUrl}
+                  alt={product.Description}
                   className="w-9 h-9 object-contain"
                 />
               </td>
               <td className="px-2 text-center">{product.ProductCode}</td>
-              <td className="px-2">{product.ProductDescription}</td>
+              <td className="px-2">{product.Description}</td>
               <td className="px-2 text-center">{product.Colour}</td>
-              <td className="px-2 text-center">{product.Fitting}</td>
+              <td className="px-2 text-center">{product.Fit}</td>
               <td className="px-2 text-center">{product.Size}</td>
               <td className="px-2 text-center">X {product.Quantity}</td>
               <td className="px-2 text-center">
-                £{product.SalesPrice && product.SalesPrice.toFixed(2)}
+                £{product.Sales_Price && product.Sales_Price.toFixed(2)}
               </td>
               <td className="px-2 text-base font-semibold text-center">
-                £{product.LineTotal && product.LineTotal.toFixed(2)}
+                £{product.Line_Total && product.Line_Total.toFixed(2)}
               </td>
             </tr>
           ))}
