@@ -19,6 +19,7 @@ export interface FormField {
   name: string;
   label: string;
   accept?: string;
+  pattern?: string;
   maxLength?: number;
   multiple?: boolean;
   required?: boolean;
@@ -33,6 +34,7 @@ export const InvoiceFormFields: FormField[] = [
     type: "text",
     name: "Name",
     required: true,
+    maxLength: 40,
     label: "Company / your name ",
     placeholder: "Enter company / your name",
     validation: (value) => {
@@ -42,17 +44,18 @@ export const InvoiceFormFields: FormField[] = [
     },
   },
   {
-    type: "text",
+    type: "stringNumeric",
     required: true,
     label: "Telephone",
     name: "Telephone",
-    maxLength: 15,
+    maxLength: 20,
+    pattern: "d*",
     placeholder: "Enter your phone number",
     validation: (value) => {
       if (!value) return "Phone number is required";
-      const phoneRegEx = /^[0-9]{10,15}$/;
+      const phoneRegEx = /^[0-9]{10,20}$/;
       if (!phoneRegEx.test(value))
-        return "Phone number must be between 10 and 15 digits";
+        return "Phone number must be between 10 and 20 digits";
       return null;
     },
   },
@@ -60,6 +63,7 @@ export const InvoiceFormFields: FormField[] = [
     name: "Email",
     type: "email",
     required: true,
+    maxLength: 50,
     label: "Email address",
     placeholder: "Enter your email",
     validation: (value) => {
@@ -75,6 +79,7 @@ export const InvoiceFormFields: FormField[] = [
     name: "Add",
     required: true,
     label: "Address",
+    maxLength: 200,
     placeholder: "House number and street name",
     validation: (value) => {
       if (!value) return "Address is required";
@@ -94,6 +99,7 @@ export const InvoiceFormFields: FormField[] = [
     type: "text",
     name: "County",
     label: "County",
+    maxLength: 30,
     placeholder: "Enter your county",
     validation: (value) => {
       if (!value) return "County is required";
@@ -105,6 +111,7 @@ export const InvoiceFormFields: FormField[] = [
     type: "text",
     name: "PTown",
     required: true,
+    maxLength: 30,
     label: "Town / City",
     placeholder: "Enter your city",
     validation: (value) => {
@@ -134,6 +141,7 @@ export const BillingFormField: FormField[] = [
     type: "text",
     required: true,
     name: "DName",
+    maxLength: 40,
     label: "Company / your name ",
     placeholder: "Enter company / your name",
     validation: (value) => {
@@ -143,17 +151,18 @@ export const BillingFormField: FormField[] = [
     },
   },
   {
-    type: "text",
+    type: "stringNumeric",
     required: true,
     label: "Telephone",
     name: "DTelephone",
-    maxLength: 15,
+    maxLength: 20,
+    pattern: "d*",
     placeholder: "Enter your phone number",
     validation: (value) => {
       if (!value) return "Phone number is required";
-      const phoneRegEx = /^[0-9]{10,15}$/;
+      const phoneRegEx = /^[0-9]{10,20}$/;
       if (!phoneRegEx.test(value))
-        return "Phone number must be between 10 and 15 digits";
+        return "Phone number must be between 10 and 20 digits";
       return null;
     },
   },
@@ -161,6 +170,7 @@ export const BillingFormField: FormField[] = [
     name: "DEmail",
     type: "email",
     required: true,
+    maxLength: 50,
     label: "Email address",
     placeholder: "Enter your email",
     validation: (value) => {
@@ -176,6 +186,7 @@ export const BillingFormField: FormField[] = [
     name: "DAdd",
     required: true,
     label: "Address",
+    maxLength: 200,
     placeholder: "House number and street name",
     validation: (value) => {
       if (!value) return "Address is required";
@@ -195,6 +206,7 @@ export const BillingFormField: FormField[] = [
     type: "text",
     name: "DCounty",
     label: "County",
+    maxLength: 30,
     placeholder: "Enter your county",
     validation: (value) => {
       if (!value) return "County is required";
@@ -207,6 +219,7 @@ export const BillingFormField: FormField[] = [
     name: "DPTown",
     required: true,
     label: "Town / City",
+    maxLength: 30,
     placeholder: "Enter your city",
     validation: (value) => {
       if (!value) return "City is required";

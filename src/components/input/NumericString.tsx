@@ -1,6 +1,9 @@
 import React, { FC } from "react";
+import { bigShoulders } from "@/app/layout";
+import ErrorText from "@/app/checkout/components/Error";
 
 interface NumericStringInputProps {
+  error?: string;
   field: {
     name: string;
     label: string;
@@ -16,6 +19,7 @@ interface NumericStringInputProps {
 }
 
 const NumericStringInput: FC<NumericStringInputProps> = ({
+  error,
   field,
   handleInputChange,
   className,
@@ -24,7 +28,7 @@ const NumericStringInput: FC<NumericStringInputProps> = ({
     <div className="relative">
       <label
         htmlFor={field.name}
-        className="block font-medium text-gray-700 mb-2"
+        className={`block text-gray-700 text-lg font-extrabold mb-2 ${bigShoulders.className}`}
       >
         {field.label}
         {field.required && <span className="text-red-500">*</span>}
@@ -49,8 +53,9 @@ const NumericStringInput: FC<NumericStringInputProps> = ({
           }
         }}
         maxLength={field.maxLength}
-        className={`border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
+        className={`border border-gray-300 text-lg rounded-full p-3 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${className}`}
       />
+      <ErrorText error={error} />
     </div>
   );
 };

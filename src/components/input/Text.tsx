@@ -7,6 +7,7 @@ interface TextProps {
     name?: string;
     label?: string;
     value?: string;
+    pattern?: string;
     required?: boolean;
     maxLength?: number;
     placeholder?: string;
@@ -38,6 +39,7 @@ const Text: FC<TextProps> = ({
         id={field.name}
         name={field.name}
         value={field?.value}
+        pattern={field.pattern}
         required={field.required}
         maxLength={field.maxLength}
         disabled={field.isDisabled}

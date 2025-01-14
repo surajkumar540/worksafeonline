@@ -8,6 +8,7 @@ import { FaAddressBook } from "react-icons/fa";
 import Select from "@/components/input/Select";
 import React, { useEffect, useState } from "react";
 import { BillingFormField as formFields } from "./formType";
+import NumericStringInput from "@/components/input/NumericString";
 
 const CheckoutForm = ({
   errors,
@@ -114,7 +115,7 @@ const CheckoutForm = ({
                 handleInputChange={handleInputChange}
                 error={errors[formFields[0].name]}
               />
-              <Text
+              <NumericStringInput
                 field={{
                   ...formFields[1],
                   value: formData[formFields[1].name] || "",
@@ -175,7 +176,9 @@ const CheckoutForm = ({
               <Text
                 field={{
                   ...formFields[7],
-                  value: formData[formFields[7].name] || "",
+                  value: formData[formFields[7].name]
+                    ? formData[formFields[7].name].toUpperCase()
+                    : "",
                 }}
                 handleInputChange={handleInputChange}
                 error={errors[formFields[7].name]}
