@@ -4,7 +4,7 @@ import { IoImages } from "react-icons/io5";
 import { bigShoulders } from "@/app/layout";
 import { FaTextHeight } from "react-icons/fa";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 interface Option {
   id: number;
@@ -18,16 +18,16 @@ interface Option {
 const options: Option[] = [
   {
     id: 1,
-    title: "Logo / Image",
-    description: "Add a custom logo or image to your project.",
+    title: "ADD LOGO",
+    description: "Add MY LOGO or Upload NEW LOGO.",
     price: "£10",
     terms: "By selecting this option, you agree to our ",
     icon: <IoImages />,
   },
   {
     id: 2,
-    title: "Type Text",
-    description: "Add text content with custom styling.",
+    title: "ADD TEXT",
+    description: "Personalise with your choose of Text.",
     price: "£5",
     terms: "By selecting this option, you agree to our ",
     icon: <FaTextHeight />,
@@ -67,7 +67,7 @@ const ImageText = ({
 
   return (
     <motion.div
-      className="flex items-center justify-between gap-5 w-full pb-3 px-6 lg:px-28"
+      className="flex items-center mt-6 justify-between gap-10 w-full pb-3 px-6 lg:px-28"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -84,7 +84,7 @@ const ImageText = ({
           src={"/assets/logoOptimize/printing.jpg"}
         />
       </div>
-      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-3">
+      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-5">
         {options.map((option) => (
           <motion.div
             key={option.id}
@@ -103,16 +103,16 @@ const ImageText = ({
               >
                 {option.title}
               </h3>
-              <p className={`text-gray-700 font-semibold text-center ${bigShoulders.className}`}>
+              <p className={`text-gray-700 text-lg font-semibold text-center ${bigShoulders.className}`}>
                 {option.description}
               </p>
               {/* <p className="text-xl font-bold text-green-500">{option.price}</p> */}
-              <p className="text-xs text-gray-500 text-center">
+              {/* <p className="text-xs text-gray-500 text-center">
                 {option.terms}
                 <Link href={"/terms-and-conditions"} className="hover:underline text-blue-500">
                   terms and conditions.
                 </Link>
-              </p>
+              </p> */}
             </div>
           </motion.div>
         ))}

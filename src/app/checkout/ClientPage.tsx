@@ -1,14 +1,15 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
 import { Fetch, Post } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import CartSkeleton from "./CheckoutSkeleton";
 import { getCartDetails } from "@/api/cartApi";
 import { FaShoppingCart } from "react-icons/fa";
-import { checkFormFields, getSelectFormattedData } from "@/api/generalApi";
 import { Accordion } from "./components/Accordion";
 import OrderTotals from "./components/OrderTotals";
+import eventEmitter from "@/hooks/useEventEmitter";
 import Features from "@/components/common/Features";
 import CheckoutForm from "./components/CheckoutForm";
 import AccountManage from "./components/AccountManage";
@@ -17,11 +18,12 @@ import ProductDetails from "./components/ProductDetails";
 import OrderReference from "./components/OrderReference";
 import InvoiceAddress from "./components/InvoiceAddress";
 import BillingAddress from "./components/BillingAddress";
+import ApplyCoupon from "../cart/components/ApplyCoupon";
 import DeliveryAddress from "./components/DeliveryAddress";
+import AvailableCoupon from "../cart/components/AvailableCoupon";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { checkFormFields, getSelectFormattedData } from "@/api/generalApi";
 import { BillingFormField, InvoiceFormFields } from "./components/formType";
-import eventEmitter from "@/hooks/useEventEmitter";
-import { toast } from "react-toastify";
 
 export default function ClientPage() {
   // navigation and form fields
@@ -31,6 +33,7 @@ export default function ClientPage() {
 
   // cart information
   const [cart, setCart] = useState<any>({});
+  const [couponList, setCouponList] = useState([]);
   const [updatedCart, setUpdatedCart] = useState<any>({});
 
   // loading state changes here
@@ -113,6 +116,17 @@ export default function ClientPage() {
     }
   };
 
+  const fetchCouponList = async () => {
+    try {
+      const response: any = await Fetch("api/Coupons", {}, 5000, true, false);
+      if (response.status && response?.CouponList?.length > 0)
+        setCouponList(response.CouponList);
+      else setCouponList([]);
+    } catch (error) {
+      console.log("Error fetching coupon list:", error);
+      setCouponList([]);
+    }
+  };
   const fetchCart = useCallback(async () => {
     try {
       const response = await getCartDetails();
@@ -131,7 +145,9 @@ export default function ClientPage() {
 
   useEffect(() => {
     fetchCart();
-  }, [fetchCart]);
+    fetchCouponList();
+    // eslint-disable-next-line
+  }, []);
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -233,6 +249,40 @@ export default function ClientPage() {
     });
   };
 
+  const applyCoupon = async (couponCode: string) => {
+    try {
+      if (!couponCode) return toast.info("Please enter a valid coupon code!");
+      if (!formData?.DPCode)
+        return toast.info("Please enter a delivery post code!");
+      const data = {
+        Coupon: couponCode,
+        DeviceID: getDeviceCheck(),
+        PostCode: formData?.DPCode,
+      };
+      const url = "api/ApplyCode";
+      const response: any = await Fetch(url, data, 5000, true, false);
+      if (response?.status) setUpdatedCart(response?.pricedetails);
+    } catch (error) {
+      console.log("Failed to apply coupon:", error);
+    }
+  };
+
+  const removeCoupon = async () => {
+    try {
+      if (!formData?.DPCode)
+        return toast.info("Please enter a delivery post code!");
+      const data = {
+        DeviceID: getDeviceCheck(),
+        PostCode: formData?.DPCode,
+      };
+      const url = "api/RemoveCode";
+      const response: any = await Fetch(url, data, 5000, true, false);
+      if (response?.status) setUpdatedCart(response?.pricedetails);
+    } catch (error) {
+      console.log("Failed to apply coupon:", error);
+    }
+  };
+
   if (loading) return <CartSkeleton />;
 
   return (
@@ -309,14 +359,32 @@ export default function ClientPage() {
                   <DeliveryAddress title="Delivery" address={formData} />
                   <BillingAddress title="Invoice" address={formData} />
                 </div>
+                {couponList && couponList.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
+                    <AvailableCoupon
+                      couponList={couponList}
+                      applyCoupon={applyCoupon}
+                      selectedCoupon={formData}
+                      setSelectedCoupon={setFormData}
+                    />
+                    <ApplyCoupon
+                      applyCoupon={applyCoupon}
+                      selectedCoupon={formData}
+                      removeCoupon={removeCoupon}
+                      setSelectedCoupon={setFormData}
+                    />
+                  </div>
+                )}
                 <form
                   onSubmit={handleSubmit}
                   className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10"
                 >
-                  <OrderReference
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
+                  <div>
+                    <OrderReference
+                      formData={formData}
+                      setFormData={setFormData}
+                    />
+                  </div>
                   <OrderTotals
                     cart={cart}
                     updatedCart={updatedCart}

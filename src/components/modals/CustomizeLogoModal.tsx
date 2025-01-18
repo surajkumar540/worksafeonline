@@ -32,15 +32,10 @@ const CustomizeLogoModal = ({
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0);
 
-  // const steps = [
-  //   { label: "Select a Product" },
-  //   { label: "Customize or Assign Options" },
-  // ];
-
   const customize = [
-    { label: "Image/Text" },
-    { label: "Choose / Upload Design" },
-    { label: "Print or Embroidery" },
+    { label: "Logo / Text" },
+    { label: "Select / Upload / Add Text" },
+    { label: "Print / Embroidery" },
     { label: "Position" },
     { label: "Summary" },
   ];
@@ -137,7 +132,7 @@ const CustomizeLogoModal = ({
                   width={100}
                   unoptimized
                   height={60}
-                  className="w-32"
+                  className="w-32 bg-black p-1"
                   src="https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
                 />
               </Link>
@@ -154,7 +149,7 @@ const CustomizeLogoModal = ({
                 className="cursor-pointer hover:scale-110 hover:text-primary text-black"
               />
             </div>
-            <div className="w-full mx-auto text-center pt-4">
+            <div className="w-full mx-auto text-center mt-4">
               <div className="px-4 mb-24">{renderStepContent()}</div>
               <div
                 style={{

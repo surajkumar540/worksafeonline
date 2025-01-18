@@ -27,16 +27,16 @@ const TextEditor = ({ product }: { product: any }) => {
           setSelectedFilters={setSelectedFilters}
         />
       </div>
-      <div className="w-1/3 my-auto">
+      <div className="w-1/3 my-auto min-h-full">
         <div
           style={{
             color: selectedFields?.color,
             fontFamily: selectedFields?.font,
           }}
-          className="col-span-2 flex-col rounded-lg h-full bg-gray-50 flex justify-center items-center"
+          className="col-span-2 flex-col rounded-lg py-10 min-h-full bg-gray-100 flex justify-center items-center"
         >
           <div className="relative w-full">
-            <div className={`flex flex-col absolute inset-0`}>
+            <div className={`flex flex-col`}>
               <span
                 className={`${selectedFields?.textSize1} ${selectedFields?.spacing1} ${selectedFields?.fontWeight1}`}
               >

@@ -68,7 +68,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
         {Coupon && (
           <div className="flex justify-between items-center pt-2">
             <span className="text-sm font-bold">Coupon Code</span>
-            <span className="text-base font-semibold font-sans">{Coupon}</span>
+            <span className="text-base text-secondary font-bold font-sans">{Coupon}</span>
           </div>
         )}
         {(CouponDiscount > 0 || cart?.CartTot?.CouponDiscount > 0) && (

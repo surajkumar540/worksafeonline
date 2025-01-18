@@ -18,7 +18,7 @@ const CharacterSpacingSelector = ({
   };
 
   return (
-    <div>
+    <div className="relative">
       {!hideText && (
         <h4
           className={`text-left font-bold pt-5 pb-1 text-lg ${bigShoulders.className}`}
@@ -30,7 +30,7 @@ const CharacterSpacingSelector = ({
         id="character-spacing"
         value={characterSpacing}
         onChange={(e) => handleCharacterSpacingChange(e.target.value)}
-        className="border border-gray-300 text-sm px-2 py-3.5 rounded-full w-full outline-none focus:ring-2 focus:ring-primary"
+        className="border appearance-none border-gray-300 text-sm px-3 py-3 rounded-full w-full outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
       >
         <option value="">Select Spacing</option>
         <option value="tracking-tighter">Tighter</option>
@@ -40,6 +40,9 @@ const CharacterSpacingSelector = ({
         <option value="tracking-wider">Wider</option>
         <option value="tracking-widest">Widest</option>
       </select>
+      <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-sm text-black">
+        ▼
+      </span>
     </div>
   );
 };

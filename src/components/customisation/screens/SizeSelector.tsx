@@ -23,8 +23,8 @@ const SizeSelector = () => {
             className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
           <span className="text-xs font-normal flex flex-col">
-            <strong className="text-lg pb-1 font-semibold">Small</strong> Best
-            for compact designs.
+            <strong className="text-lg pb-1 font-semibold">Small</strong> Ideal
+            for most embroidered logos.
           </span>
         </label>
 
@@ -40,7 +40,7 @@ const SizeSelector = () => {
           />
           <span className="text-xs font-normal flex flex-col">
             <strong className="text-lg pb-1 font-semibold">Medium</strong>{" "}
-            Perfect balance of size and clarity.
+            Perfect balance for size, clarity and impact.
           </span>
         </label>
 
@@ -55,8 +55,8 @@ const SizeSelector = () => {
             className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
           <span className="text-xs font-normal flex flex-col">
-            <strong className="text-lg pb-1 font-semibold">Large</strong> Ideal
-            for bold and prominent designs.
+            <strong className="text-lg pb-1 font-semibold">Large</strong> Great
+            value for large printed designs.
           </span>
         </label>
       </div>

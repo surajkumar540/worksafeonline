@@ -6,6 +6,7 @@ import CharacterSpacingSelector from "./CharacterSpacingSelector";
 import FontWeightSelector from "./FontWeightSelector";
 
 const fonts = [
+  { name: "Select Font", value: "" },
   { name: "Arial", value: "Arial, sans-serif" },
   { name: "Verdana", value: "Verdana, sans-serif" },
   { name: "Helvetica", value: "Helvetica, sans-serif" },
@@ -77,7 +78,7 @@ const AddText: React.FC<AddTextProps> = ({
               onClick={() => setDropdownOpen((prev) => !prev)}
               onBlur={() => setDropdownOpen(false)}
               aria-expanded={dropdownOpen}
-              className="border border-gray-300 text-left p-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary rounded-full"
+              className="border border-gray-300 text-left p-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full"
             >
               {selectedFields?.font || "Select Font"}
             </div>
@@ -127,7 +128,7 @@ const AddText: React.FC<AddTextProps> = ({
               onChange={handleInputChange}
               onKeyDown={(e) => handleKeyPress(e, index)}
               ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
-              className="border col-span-2 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/80 rounded-full p-3 outline-none"
+              className="border col-span-2 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full p-3 outline-none"
             />
             <TextSizeSelector
               hideText={true}

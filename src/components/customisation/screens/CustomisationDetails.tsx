@@ -42,8 +42,8 @@ const CustomisationDetails = ({
         Summary
       </h3>
       <div className="flex justify-center items-start">
-        <div className="w-1/5 h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col items-center justify-between">
-          <p className="font-semibold pb-2">Product</p>
+        <div className="w-1/5 h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Product</p>
           <Image
             priority
             unoptimized
@@ -61,8 +61,8 @@ const CustomisationDetails = ({
           {/* <p className="text-xs text-center">({product?.Composition})</p> */}
         </div>
 
-        <div className="w-[10%] h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col justify-between items-center">
-          <p className="font-semibold pb-2">Colour</p>
+        <div className="w-[10%] h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col justify-between items-center">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Colour</p>
           <div className="flex rounded-full overflow-hidden">
             <div
               style={{ backgroundColor: primaryColor }}
@@ -84,8 +84,8 @@ const CustomisationDetails = ({
           </p>
         </div>
 
-        <div className="w-1/5 h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col items-center justify-between">
-          <p className="font-semibold pb-2">Logo</p>
+        <div className="w-1/5 h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Logo</p>
           <Image
             priority
             unoptimized
@@ -98,8 +98,8 @@ const CustomisationDetails = ({
           <p className="text-sm font-bold pt-2 text-center">Medium</p>
         </div>
 
-        <div className="w-1/5 h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col items-center justify-between">
-          <p className="font-semibold pb-2">Logo Position</p>
+        <div className="w-1/5 h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Logo Position</p>
           <Image
             priority
             unoptimized
@@ -114,8 +114,8 @@ const CustomisationDetails = ({
           </p>
         </div>
 
-        <div className="w-1/5 h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col items-center justify-between">
-          <p className="font-semibold pb-2">Application</p>
+        <div className="w-1/5 h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col items-center justify-between">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Application</p>
           <Image
             priority
             unoptimized
@@ -137,8 +137,8 @@ const CustomisationDetails = ({
           </p> */}
         </div>
 
-        <div className="w-[10%] h-60 m-1 rounded-xl p-2 bg-gray-50 flex flex-col justify-between items-center">
-          <p className="font-semibold pb-2">Delete</p>
+        <div className="w-[10%] h-60 m-1 rounded-xl py-2 bg-gray-50 flex flex-col justify-between items-center">
+          <p className="font-semibold pb-2 border-b-8 border-white w-full">Delete</p>
           <p className="text-4xl hover:scale-150 mt-10 transition cursor-pointer text-red-500">
             <MdDelete title="Delete Logo" />
           </p>

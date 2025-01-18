@@ -6,7 +6,6 @@ import CartSkeleton from "./CartSkeleton";
 import CartItem from "./components/CartItem";
 import CartSummary from "./components/CartSummary";
 import eventEmitter from "@/hooks/useEventEmitter";
-import ApplyCoupon from "./components/ApplyCoupon";
 import Features from "@/components/common/Features";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 import React, { useCallback, useEffect, useState } from "react";
@@ -98,7 +97,6 @@ export default function ClientPage() {
                   handleRemove={handleRemove}
                   handleUpdateQuantity={handleUpdateQuantity}
                 />
-                <ApplyCoupon />
               </div>
               <div className="col-span-2 lg:col-span-1">
                 <CartSummary cart={cart?.CartTot} />

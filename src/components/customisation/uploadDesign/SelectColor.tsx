@@ -26,7 +26,7 @@ const SelectColor = ({ handleColorChange }: { handleColorChange: any }) => {
       <h4
         className={`text-left font-bold pb-2 text-lg ${bigShoulders.className}`}
       >
-        Choose Color:
+        Choose Colour:
       </h4>
       <div className="flex flex-wrap gap-2">
         {colors.map((color: any) => {

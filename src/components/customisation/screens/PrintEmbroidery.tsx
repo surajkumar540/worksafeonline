@@ -17,7 +17,7 @@ const options: Option[] = [
     title: "Print",
     maxWidth: "30cm",
     price: "£2.99 (One-time setup)",
-    terms: "Best for companies graphics and gradients",
+    terms: "Ideal for Medium & Large images, Job Titles and Personalised Names",
     icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
   },
   {
@@ -25,7 +25,7 @@ const options: Option[] = [
     title: "Embroidery",
     maxWidth: "25cm",
     price: "£4.99 (One-time setup)",
-    terms: "Best for solid colours and durability.",
+    terms: "Ideal for company logos and durability.",
     icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
   },
 ];
@@ -62,7 +62,7 @@ const PrintEmbroidery = ({
 
   return (
     <motion.div
-      className="flex items-center justify-between gap-5 w-full pb-3 px-6 lg:px-28"
+      className="flex items-center justify-between gap-10 mt-6 w-full pb-3 px-6 lg:px-28"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
