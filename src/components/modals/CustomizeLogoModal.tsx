@@ -2,16 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import Modal from "../common/Modal";
 import { RxCross1 } from "react-icons/rx";
+import { bigShoulders } from "@/app/layout";
 import { useState, useCallback } from "react";
 import Stepper from "../customisation/Stepper";
 import ImageText from "../customisation/screens/ImageText";
 import SavedLogos from "../customisation/screens/SavedLogos";
 import LogoPosition from "../customisation/screens/LogoPosition";
+import TextEditor from "../customisation/uploadDesign/TextEditor";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
-import TextEditor from "../customisation/uploadDesign/TextEditor";
-import { bigShoulders } from "@/app/layout";
 
 const CustomizeLogoModal = ({
   data,

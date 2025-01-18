@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { bigShoulders } from "@/app/layout";
 import React, { useEffect, useState } from "react";
 import { containerVariants, itemVariants } from "@/animation/framer";
+import { debounce } from "@/api/generalApi";
 
 const SizeQuantities = ({
   sizes,
@@ -40,21 +41,26 @@ const SizeQuantities = ({
       const currentQuantity = prev[size.Size] || 0;
       if (currentQuantity < size.qty) {
         const newQuantity = currentQuantity + 1;
-        const updatedSize = { ...size, quantity: newQuantity };
-
-        setSelectedFields((prevFields: any) => {
-          const updatedFields = { ...prevFields };
-          if (!updatedFields.size) updatedFields.size = [];
-          const existingSizeIndex = updatedFields.size.findIndex(
-            (item: any) => item.Size === size.Size
-          );
-          if (existingSizeIndex === -1) updatedFields.size.push(updatedSize);
-          else updatedFields.size[existingSizeIndex] = updatedSize;
-          return updatedFields;
-        });
         return { ...prev, [size.Size]: newQuantity };
       }
       return prev;
+    });
+
+    setSelectedFields((prevFields: any) => {
+      const updatedFields = { ...prevFields };
+      if (!updatedFields.size) updatedFields.size = [];
+      const existingSizeIndex = updatedFields.size.findIndex(
+        (item: any) => item.Size === size.Size
+      );
+      const updatedSize = {
+        ...size,
+        quantity: (quantities[size.Size] || 0) + 1,
+      };
+
+      if (existingSizeIndex === -1) updatedFields.size.push(updatedSize);
+      else updatedFields.size[existingSizeIndex] = updatedSize;
+
+      return updatedFields;
     });
   };
 
@@ -63,23 +69,30 @@ const SizeQuantities = ({
 
     setQuantities((prev) => {
       const newQuantity = Math.max((prev[size.Size] || 0) - 1, 0);
-      const updatedSize = { ...size, quantity: newQuantity };
+      return { ...prev, [size.Size]: newQuantity };
+    });
 
-      setSelectedFields((prevFields: any) => {
-        const updatedFields = { ...prevFields };
-        if (!updatedFields.size) updatedFields.size = [];
-        const existingSizeIndex = updatedFields.size.findIndex(
-          (item: any) => item.Size === size.Size
-        );
-        if (existingSizeIndex === -1) updatedFields.size.push(updatedSize);
-        else updatedFields.size[existingSizeIndex] = updatedSize;
-        if (newQuantity === 0)
+    setSelectedFields((prevFields: any) => {
+      const updatedFields = { ...prevFields };
+      if (!updatedFields.size) updatedFields.size = [];
+
+      const existingSizeIndex = updatedFields.size.findIndex(
+        (item: any) => item.Size === size.Size
+      );
+
+      if (existingSizeIndex !== -1) {
+        if ((quantities[size.Size] || 0) - 1 <= 0) {
           updatedFields.size = updatedFields.size.filter(
             (item: any) => item.Size !== size.Size
           );
-        return updatedFields;
-      });
-      return { ...prev, [size.Size]: newQuantity };
+        } else {
+          updatedFields.size[existingSizeIndex] = {
+            ...updatedFields.size[existingSizeIndex],
+            quantity: (quantities[size.Size] || 0) - 1,
+          };
+        }
+      }
+      return updatedFields;
     });
   };
 
@@ -113,23 +126,24 @@ const SizeQuantities = ({
               <div className={`px-1 pt-px pb-1 mt-1 bg-white rounded-b-lg`}>
                 <div className="flex items-center justify-between mt-2">
                   <button
-                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.8] transition rounded ${
+                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.9] transition rounded ${
                       isActive
-                        ? "bg-primary/70 text-black hover:bg-primary scale-1-5"
+                        ? "bg-primary/70 text-black hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
-                    onClick={() => handleDecrement(size)}
+                    onClick={debounce(() => handleDecrement(size), 150)}
                   >
                     -
                   </button>
                   <span className="text-sm">{quantities[size.Size] || 0}</span>
                   <button
-                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.8] transition rounded ${
+                    className={`w-5 h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition rounded ${
                       isActive
-                        ? "bg-primary/70 text-black hover:bg-primary scale-1-5"
+                        ? "bg-primary/70 text-black hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
-                    onClick={() => handleIncrement(size)}
+                    disabled={quantities[size.Size] === size.qty}
+                    onClick={debounce(() => handleIncrement(size), 0)}
                   >
                     +
                   </button>
