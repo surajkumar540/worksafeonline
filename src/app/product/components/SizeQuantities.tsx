@@ -143,7 +143,7 @@ const SizeQuantities = ({
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
                     disabled={quantities[size.Size] === size.qty}
-                    onClick={debounce(() => handleIncrement(size), 0)}
+                    onClick={debounce(() => handleIncrement(size), 150)}
                   >
                     +
                   </button>
