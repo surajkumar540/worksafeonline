@@ -1,87 +1,107 @@
-const OrderCard = ({ cart }: { cart: any }) => {
+import Link from "next/link";
+import React from "react";
+
+interface Order {
+  Seq: number;
+  Email: string;
+  OrderID: number;
+  FlagTrack: number;
+  OrderedBy: string;
+  Order_Date: string;
+  TotalValue: number;
+  TotalEvent: number;
+  FlagReturn: number;
+  FlagCancel: number;
+  Customer_Ref: string;
+  Customer_Name: string;
+  PaymentStatus: string;
+}
+
+const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
   return (
-    <div className="bg-white p-5 rounded-xl shadow-md space-y-4">
-      {/* Header */}
-      <div className="flex border-b border-primary pb-3 justify-between items-center">
-        <span className="uppercase font-bold text-gray-800">
-          Product ({cart?.CartTot?.TotalQuantity})
-        </span>
-        <span className="uppercase font-bold text-gray-800">Subtotal</span>
-      </div>
-
-      {/* Products */}
-      <div className="border-b border-primary">
-        {cart?.Products?.length > 0 ? (
-          cart.Products.map((item: any) => (
-            <div
-              key={item.Line}
-              className="flex justify-between items-center pb-3 text-gray-700 text-sm"
+    <div className="overflow-x-auto no-scrollbar mt-5">
+      <table className="min-w-full whitespace-nowrap border-collapse bg-white text-sm text-gray-800">
+        <thead className="bg-primary/80 text-black font-semibold">
+          <tr>
+            <th className="border border-primary px-4 text-center py-3">#</th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Order ID
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Customer Name
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Reference
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Order Date
+            </th>
+            <th className="border border-primary px-4 py-3 text-right">
+              Total Value
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">Email</th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Payment Status
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order, index) => (
+            <tr
+              key={order.Seq}
+              className={`cursor-pointer ${
+                index % 2 !== 0 ? "bg-primary/20" : "bg-white"
+              }`}
             >
-              <span>
-                {item.ProductDescription}{" "}
-                <span className="font-semibold">x {item.Quantity}</span>
-              </span>
-              <span className="text-gray-800 font-medium">
-                £{item?.LineTotal.toFixed(2)}
-              </span>
-            </div>
-          ))
-        ) : (
-          <div className="text-gray-500 italic">No products in the cart.</div>
-        )}
-      </div>
-
-      {/* Amounts */}
-      <div className="space-y-3 text-sm">
-        <div className="flex justify-between items-center">
-          <span>Amount excluding VAT</span>
-          <span className="font-medium">
-            £{cart?.CartTot?.TotalAmountExVat.toFixed(2)}
-          </span>
-        </div>
-        {cart?.CartTot?.ArtworkCost > 0 && (
-          <div className="flex justify-between items-center">
-            <span>Artwork Cost</span>
-            <span className="text-yellow-600 font-medium">
-              + £{cart?.CartTot?.ArtworkCost.toFixed(2)}
-            </span>
-          </div>
-        )}
-        {cart?.CartTot?.Discount > 0 && (
-          <div className="flex justify-between items-center">
-            <span>Discount Applied</span>
-            <span className="text-red-500 font-medium">
-              - £{cart?.CartTot?.Discount.toFixed(2)}
-            </span>
-          </div>
-        )}
-        <div className="flex justify-between items-center">
-          <span>VAT Amount</span>
-          <span className="font-medium">
-            + £{cart?.CartTot?.Vat_Amount.toFixed(2)}
-          </span>
-        </div>
-      </div>
-
-      {/* Final Amount */}
-      <div className="flex justify-between items-center text-primary font-semibold text-lg">
-        <span>Final Amount:</span>
-        <span className="text-2xl font-bold">
-          £{cart?.CartTot?.TotalAmount.toFixed(2)}
-        </span>
-      </div>
-
-      {/* Order Details Button */}
-      <div className="text-right">
-        <button
-          className="bg-primary text-black w-full px-5 py-2 rounded-lg transition"
-          onClick={() => alert("View order details")}
-        >
-          Show Order Details
-        </button>
-      </div>
+              <td className="border border-primary text-center px-4 py-3">
+                {order.Seq ? order.Seq : "-"}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                {order.OrderID ? order.OrderID : "-"}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                {order.Customer_Name ? order.Customer_Name : "-"}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                {order.Customer_Ref ? order.Customer_Ref : "-"}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                {order.Order_Date ? order.Order_Date : "-"}
+              </td>
+              <td className="border border-primary font-semibold px-4 py-3 text-left">
+                £ {order.TotalValue ? order.TotalValue.toFixed(2) : "-"}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                {order.Email ? order.Email : "-"}
+              </td>
+              <td
+                className={`border border-primary px-4 py-3 ${
+                  order.PaymentStatus === "success"
+                    ? "text-green-700"
+                    : "text-red-600"
+                }`}
+              >
+                {order.PaymentStatus}
+              </td>
+              <td className="border border-primary px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={"/order-history/" + order.OrderID}
+                    className="bg-secondary/80 text-white px-2 py-1 rounded text-xs hover:bg-secondary transition"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default OrderCard;
+export default OrderHistoryTable;

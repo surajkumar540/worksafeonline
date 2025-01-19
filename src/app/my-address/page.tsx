@@ -73,7 +73,7 @@ export default function Page() {
             <h2 className={`${bigShoulders.className} text-xl font-semibold`}>
               My Billing Address
             </h2>
-            <div className="grid grid-cols-2 gap-5 my-3">
+            <div className="grid md:grid-cols-2 gap-5 my-3">
               {accountDetail?.my_BillingAddress?.length > 0 &&
                 accountDetail?.my_BillingAddress.map((address: any) => {
                   return (
@@ -94,7 +94,7 @@ export default function Page() {
             >
               My Delivery Address
             </h2>
-            <div className="grid grid-cols-2 gap-5 my-3">
+            <div className="grid md:grid-cols-2 gap-5 my-3">
               {accountDetail?.my_DeliveryAddress?.length > 0 &&
                 accountDetail?.my_DeliveryAddress.map((address: any) => {
                   return (

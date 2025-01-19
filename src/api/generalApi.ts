@@ -151,3 +151,10 @@ export const debounce = (func: any, delay: number) => {
     }, delay);
   };
 };
+
+export const formatKey = (key: string): string => {
+  return key
+    .replace(/([a-z])([A-Z])/g, "$1 $2") // Add space between camelCase words
+    .replace(/_/g, " ") // Replace underscores with spaces
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+};

@@ -1,14 +1,14 @@
 "use client";
 
 import { Fetch } from "@/utils/axios";
-import { bigShoulders } from "../layout";
+import { bigShoulders } from "@/app/layout";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/common/Loader";
-import OrderHistoryTable from "./components/OrderCard";
+import OrderDetails from "./components/OrderDetails";
 import { useCallback, useEffect, useState } from "react";
 import AccountLayout from "@/components/account/AccountLayout";
 
-export default function Page() {
+export default function ClientPage({ orderId }: { orderId: string | number }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [orderHistory, setOrderHistory] = useState<any>({});
@@ -22,7 +22,7 @@ export default function Page() {
       if (!token) return router.replace("/");
 
       const url = "/api/MyAccountProfile";
-      const url2 = "api/MyAccountOrders?page=1&pagesize=100";
+      const url2 = "api/MyOrderDetails?OrderID=" + orderId;
       const fetchProfile = Fetch(url, {}, 5000, true, false);
       const fetchOrders = Fetch(url2, {}, 5000, true, false);
 
@@ -37,18 +37,18 @@ export default function Page() {
 
       // Handle orders fetch result
       if (ordersResult.status === "fulfilled" && ordersResult.value?.status)
-        setOrderHistory(ordersResult.value?.my_orders || []);
+        setOrderHistory(ordersResult.value?.my_orders || {});
 
       setLoading(false);
     } catch (error) {
       console.error("Fetch Data Error: ", error);
       router.replace("/");
     }
-  }, [router]);
+  }, [router, orderId]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (orderId) fetchData();
+  }, [fetchData, orderId]);
 
   if (loading) return <Loader />;
 
@@ -59,13 +59,9 @@ export default function Page() {
           <h1
             className={`uppercase text-lg md:text-2xl lg:text-4xl flex items-center gap-2 font-black ${bigShoulders.className}`}
           >
-            Order <span className="text-primary"> History</span>
+            Order <span className="text-primary"> Details</span>
           </h1>
-          {orderHistory && orderHistory.length > 0 ? (
-            <OrderHistoryTable orders={orderHistory} />
-          ) : (
-            <p>No history found</p>
-          )}
+          <OrderDetails data={orderHistory} />
         </div>
       </AccountLayout>
     </div>

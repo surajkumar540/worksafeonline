@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import { LuUser } from "react-icons/lu";
 import { bigShoulders } from "@/app/layout";
 import eventEmitter from "@/hooks/useEventEmitter";
-import { usePathname, useRouter } from "next/navigation";
 import { getDeviceData } from "@/api/generateDeviceId";
+import { usePathname, useRouter } from "next/navigation";
 
 const AccountLayout = ({
   children,
@@ -20,7 +20,7 @@ const AccountLayout = ({
   const pathname = usePathname();
 
   const activeClass =
-    "text-black bg-primary rounded-full font-semibold text-xl px-4 py-2 w-full";
+    "text-black bg-primary rounded-xl lg:rounded-full font-semibold text-xl px-4 py-2 w-full";
   const inActiveClass =
     "text-xl font-semibold hover:text-primary rounded-full w-full transition px-4 py-2";
 
@@ -62,7 +62,7 @@ const AccountLayout = ({
                   alt="Profile Image"
                   width={124}
                   height={124}
-                  className="w-fit aspect-square rounded-full object-cover"
+                  className="w-full aspect-square rounded-full object-cover"
                 />
               ) : (
                 <LuUser />
@@ -79,7 +79,7 @@ const AccountLayout = ({
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:grid-cols-1 lg:mt-7">
             <Link
-              className={`whitespace-nowrap text-center lg:text-left ${
+              className={`whitespace-nowrap text-left ${
                 pathname === "/my-account" || pathname === "/create-address"
                   ? activeClass
                   : inActiveClass
@@ -89,7 +89,7 @@ const AccountLayout = ({
               Personal Information
             </Link>
             <Link
-              className={`whitespace-nowrap text-center lg:text-left ${
+              className={`whitespace-nowrap text-left ${
                 pathname === "/reset-password" ? activeClass : inActiveClass
               } ${bigShoulders.className}`}
               href={"/reset-password"}
@@ -97,7 +97,7 @@ const AccountLayout = ({
               Reset Password
             </Link>
             <Link
-              className={`whitespace-nowrap text-center lg:text-left ${
+              className={`whitespace-nowrap text-left ${
                 pathname === "/my-address" || pathname === "/edit-address"
                   ? activeClass
                   : inActiveClass
@@ -107,17 +107,7 @@ const AccountLayout = ({
               My Addresses
             </Link>
             <Link
-              className={`whitespace-nowrap text-center lg:text-left ${
-                pathname === "/billing-and-payment"
-                  ? activeClass
-                  : inActiveClass
-              } ${bigShoulders.className}`}
-              href={"/billing-and-payment"}
-            >
-              Billing & Payments
-            </Link>
-            <Link
-              className={`whitespace-nowrap text-center lg:text-left ${
+              className={`whitespace-nowrap text-left ${
                 pathname === "/order-history" ? activeClass : inActiveClass
               } ${bigShoulders.className}`}
               href={"/order-history"}

@@ -39,7 +39,7 @@ const AddressCard = ({
   return (
     <div
       onClick={() => handleSelected(address?.ID)}
-      className={`text-black p-4 pb-2 h-fit transition-all border-2 cursor-pointer duration-200 rounded-xl ${
+      className={`text-black p-4 pb-2 h-fit bg-white transition-all border-2 cursor-pointer duration-200 rounded-xl ${
         selectedAddress === address?.ID ? "border-primary" : "border-primary/20"
       }`}
     >
