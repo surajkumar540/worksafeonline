@@ -80,24 +80,22 @@ const ImageUploader = ({
           onClick={() => fileInputRef.current?.click()}
           className="relative group flex flex-col w-full mx-auto justify-start rounded-xl cursor-pointer hover:border-gray-400 transition-colors duration-300"
         >
-          <div className="hidden group-hover:flex absolute bg-white -top-32 z-30 right-10 border shadow-md py-4 px-8 rounded-lg flex-col text-center justify-center items-center h-32 text-gray-600">
+          <div className="hidden group-hover:block absolute bg-white -top-32 z-30 w-full border shadow-md pt-2 pb-1 px-8 rounded-lg text-center mx-auto text-gray-600">
             <div className="text-xs space-y-1">
-              <p className="font-bold text-base text-black">
+              <p className="font-bold text-lg whitespace-nowrap text-black">
                 Files Types we Accept
               </p>
-              <p>Jpg, jpeg, Gif, Ai, Pdf, Svg, Psd, Bmp, Tiff, Tif</p>
+              <p className="text-xs">
+                Jpg, jpeg, Gif, Ai, Pdf, Svg, Psd, Bmp, Tiff, Tif
+              </p>
               <p>Max file size: 10MB</p>
             </div>
-            <span>
-              <BiCloudUpload size={50} className="text-gray-500" />
+            <span className="flex justify-center">
+              <BiCloudUpload size={40} className="text-gray-500" />
             </span>
-            {/* <span className="text-gray-600 text-sm">
-              Click to upload or Browse
-            </span> */}
           </div>
           <button
             type="button"
-            // onClick={handleProceed}
             className="bg-blue-500 text-white w-full mt-4 px-6 py-2 rounded-md"
           >
             Upload logo

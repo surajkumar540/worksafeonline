@@ -213,6 +213,7 @@ const QuantitySelector = ({
         <Logo
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
+          filterProductSizes={filterProductSizes}
           product={{
             ...(product || {}),
             ...(selectedFields || {}),

@@ -33,8 +33,8 @@ const GalleryFilters = () => {
 
   return (
     <div className="mb-5">
-      <div className="space-y-4 bg-gray-50 rounded-xl p-4">
-        <div className="flex justify-between gap-10 items-start">
+      <div className="space-y-4 bg-gray-50 rounded-xl p-3">
+        <div className="flex justify-between gap-10 items-center">
           <p
             className={`flex text-sm uppercase items-center font-black text-gray-700 gap-2 ${bigShoulders.className}`}
           >
@@ -45,11 +45,11 @@ const GalleryFilters = () => {
           </p>
           {/* Print/Embroidery Filter */}
           <div className="">
-            <label
+            {/* <label
               className={`block text-sm text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
               Print/Embroidery
-            </label>
+            </label> */}
             <div className="flex gap-5">
               <div className="flex items-center">
                 <input
@@ -86,12 +86,12 @@ const GalleryFilters = () => {
             </div>
           </div>
           {/* Text/Logo Filter */}
-          {/* <div className="">
-            <label
+          <div className="">
+            {/* <label
               className={`block text-sm text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
               Text/Logo
-            </label>
+            </label> */}
             <div className="flex gap-5">
               <div className="flex items-center">
                 <input
@@ -126,14 +126,14 @@ const GalleryFilters = () => {
                 </label>
               </div>
             </div>
-          </div> */}
+          </div>
           {/* Recently Used, Favorites, Combination Logos */}
           <div>
-            <label
+            {/* <label
               className={`block text-sm text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
             >
               Preferences
-            </label>
+            </label> */}
             <div className="flex flex-wrap gap-5">
               <div className="flex items-center">
                 <input

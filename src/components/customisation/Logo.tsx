@@ -10,10 +10,12 @@ const Logo = ({
   product,
   fieldsCheck,
   selectedFields,
+  filterProductSizes,
 }: {
   product: any;
   fieldsCheck: any;
   selectedFields: any;
+  filterProductSizes: any;
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const handleToggle = () => setIsVisible(!isVisible);
@@ -64,7 +66,11 @@ const Logo = ({
 
   const handleCustomizeLogo = () => {
     if (fieldsCheck()) return;
-    if (selectedFields?.size.length === 0)
+    if (
+      filterProductSizes &&
+      filterProductSizes.length > 0 &&
+      selectedFields?.size.length === 0
+    )
       return toast.info("Please select a size");
 
     handleToggle();

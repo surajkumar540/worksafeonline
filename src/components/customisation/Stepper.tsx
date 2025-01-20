@@ -10,6 +10,7 @@ interface StepperProps {
   currentStep: number;
   reduceSize?: boolean;
   handleCustomizeNextId?: any;
+  handleCustomizePrevious: any;
 }
 
 const Stepper: React.FC<StepperProps> = ({
@@ -17,11 +18,19 @@ const Stepper: React.FC<StepperProps> = ({
   reduceSize,
   currentStep,
   handleCustomizeNextId,
+  handleCustomizePrevious,
 }) => {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 w-full">
       {steps.map((step, index) => (
-        <div key={index} className="flex items-center space-x-2">
+        <div
+          onClick={() => {
+            if (index < currentStep) handleCustomizePrevious();
+            else handleCustomizeNextId(index);
+          }}
+          key={index}
+          className="flex items-center space-x-2"
+        >
           {/* Step Circle */}
           <motion.div
             className={`w-[26px] h-[26px] text-sm cursor-pointer rounded-full flex items-center justify-center ${
@@ -32,7 +41,6 @@ const Stepper: React.FC<StepperProps> = ({
                 : "bg-gray-300 text-gray-700" // Incomplete step
             }`}
             initial={{ scale: 0.8 }}
-            onClick={() => handleCustomizeNextId(index)}
             animate={{ scale: index <= currentStep ? 1 : 0.8 }}
             transition={{ duration: 0.3 }}
           >
@@ -41,7 +49,7 @@ const Stepper: React.FC<StepperProps> = ({
 
           {/* Step Label */}
           <motion.div
-            className={`font-extrabold ${
+            className={`cursor-pointer font-extrabold ${
               reduceSize ? "text-sm uppercase" : "text-xl"
             } ${bigShoulders.className} ${
               index <= currentStep

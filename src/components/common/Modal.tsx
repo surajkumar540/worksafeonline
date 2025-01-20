@@ -5,6 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 interface ModalProps {
   width?: string;
   isVisible: boolean;
+  minHeight?: string;
   onClose: () => void;
   showCloseButton?: boolean;
   children: React.ReactNode;
@@ -14,8 +15,9 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
-  removePadding,
   isVisible,
+  minHeight,
+  removePadding,
   width = "w-[95vw] md:w-4/5",
   showCloseButton = true,
 }) => {
@@ -37,7 +39,11 @@ const Modal: React.FC<ModalProps> = ({
         exit={{ scale: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-white overflow-scroll no-scrollbar max-h-[95vh] rounded-xl">
+        <div
+          className={`bg-white overflow-scroll no-scrollbar max-h-[95vh] rounded-xl ${
+            minHeight && minHeight
+          }`}
+        >
           {showCloseButton && (
             <p className="w-full flex justify-end items-center p-4 pb-0">
               <RxCross1

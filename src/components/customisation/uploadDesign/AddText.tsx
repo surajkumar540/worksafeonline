@@ -4,6 +4,8 @@ import { bigShoulders } from "@/app/layout";
 import TextSizeSelector from "./TextSizeSelector";
 import CharacterSpacingSelector from "./CharacterSpacingSelector";
 import FontWeightSelector from "./FontWeightSelector";
+import ItalicButton from "./ItalicText";
+import TextAlignButtons from "./TextAlignButtons";
 
 const fonts = [
   { name: "Select Font", value: "" },
@@ -105,8 +107,6 @@ const AddText: React.FC<AddTextProps> = ({
             )}
           </div>
         </div>
-        {/* <TextSizeSelector setSelectedFilters={setSelectedFilters} />
-        <CharacterSpacingSelector setSelectedFilters={setSelectedFilters} /> */}
       </div>
 
       {/* Text Inputs */}
@@ -117,7 +117,7 @@ const AddText: React.FC<AddTextProps> = ({
       </h4>
       <div className="space-y-2">
         {["textLine1", "textLine2", "textLine3"].map((name, index) => (
-          <div key={name} className="grid grid-cols-5 gap-2 items-center">
+          <div key={name} className="flex gap-3 justify-center items-center">
             <input
               type="text"
               maxLength={30}
@@ -128,7 +128,7 @@ const AddText: React.FC<AddTextProps> = ({
               onChange={handleInputChange}
               onKeyDown={(e) => handleKeyPress(e, index)}
               ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
-              className="border col-span-2 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full p-3 outline-none"
+              className="border w-36 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full p-3 outline-none"
             />
             <TextSizeSelector
               hideText={true}
@@ -136,13 +136,19 @@ const AddText: React.FC<AddTextProps> = ({
               setSelectedFilters={setSelectedFilters}
             />
             <CharacterSpacingSelector
-              hideText={true}
               space={`spacing${index + 1}`}
               setSelectedFilters={setSelectedFilters}
             />
             <FontWeightSelector
-              hideText={true}
               font={`fontWeight${index + 1}`}
+              setSelectedFilters={setSelectedFilters}
+            />
+            <ItalicButton
+              font={`fontStyle${index + 1}`}
+              setSelectedFilters={setSelectedFilters}
+            />
+            <TextAlignButtons
+              font={`textAlign${index + 1}`}
               setSelectedFilters={setSelectedFilters}
             />
           </div>

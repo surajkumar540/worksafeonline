@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { bigShoulders } from "@/app/layout";
 import SizeSelector from "./SizeSelector";
+import { useEffect, useState } from "react";
+import { bigShoulders } from "@/app/layout";
+import { includes } from "@/utils/polyfills";
 
 interface Option {
   id: number;
@@ -77,15 +78,38 @@ const LogoPosition = ({
   customizeData: any;
   setCustomizeData: any;
 }) => {
-  const [selectedOption, setSelectedOption] = useState<number | null>(
-    customizeData?.logoPosition?.id ?? null
+  // Change selectedOption to an array to store multiple selected options
+  const [selectedOptions, setSelectedOptions] = useState<number[]>(
+    (Array.isArray(customizeData?.logoPosition) &&
+      customizeData?.logoPosition?.map((option: any) => option.id)) ??
+      []
   );
 
-  const handleSelect = (option: any) => {
-    setSelectedOption(option?.id);
-    setCustomizeData((prev: any) => ({ ...prev, logoPosition: option }));
-    // handleCustomizeNext();
+  const handleSelect = (option: Option) => {
+    setSelectedOptions((prevSelected) => {
+      const updatedSelected = Array.isArray(prevSelected)
+        ? includes(prevSelected, option.id)
+          ? prevSelected.filter((id) => id !== option.id)
+          : [...prevSelected, option.id]
+        : [option.id]; // If it's not an array, set it as an array with the selected id
+
+      return updatedSelected;
+    });
   };
+
+  useEffect(() => {
+    if (selectedOptions.length > 0) {
+      const updatedLogoPositions = options
+        .concat(optionsBack, optionsSide)
+        .filter((item) => includes(selectedOptions, item?.id));
+
+      // Only update if the selected options have changed
+      setCustomizeData((prev: any) => ({
+        ...prev,
+        logoPosition: updatedLogoPositions,
+      }));
+    }
+  }, [selectedOptions, setCustomizeData]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -103,10 +127,10 @@ const LogoPosition = ({
   const renderOption = (option: Option) => (
     <motion.div
       key={option.id}
-      className={`rounded-lg p-2 border-2 cursor-pointer ${
-        selectedOption === option.id
-          ? "border-green-500 scale-105"
-          : "border-gray-200"
+      className={`rounded-lg p-2 cursor-pointer ${
+        includes(selectedOptions, option.id)
+          ? "border-green-500 border-4 scale-105"
+          : "border-gray-200 border-4"
       } transition-all duration-300 bg-white`}
       whileTap={{ scale: 0.95 }}
       onClick={() => handleSelect(option)}
@@ -143,7 +167,7 @@ const LogoPosition = ({
           >
             Front
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
             {options.map(renderOption)}
           </div>
         </div>
@@ -153,7 +177,7 @@ const LogoPosition = ({
           >
             Back
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
             {optionsBack.map(renderOption)}
           </div>
         </div>
@@ -163,50 +187,56 @@ const LogoPosition = ({
           >
             Left / Right
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
             {optionsSide.map(renderOption)}
           </div>
         </div>
       </div>
 
       <div className="w-1/3 h-full mx-auto flex flex-col items-center justify-between">
-        {selectedOption && (
+        {selectedOptions.length > 0 && (
           <motion.div
             className="p-2 rounded-xl border-2 bg-white flex flex-col items-center"
             variants={optionVariants}
           >
             <div className="w-full h-full py-3 flex justify-center items-center">
-              {[...options, ...optionsBack, ...optionsSide].find(
-                (option) => option.id === selectedOption
-              )?.icon ? (
-                <>
+              {selectedOptions.map((id) => {
+                const option = [
+                  ...options,
+                  ...optionsBack,
+                  ...optionsSide,
+                ].find((option) => option.id === id);
+                return option?.icon ? (
                   <Image
+                    key={id}
                     alt="Selected Icon"
                     priority
                     unoptimized
                     className="w-40"
                     width={524} // adjust width as necessary
                     height={350} // adjust height as necessary
-                    src={
-                      [...options, ...optionsBack, ...optionsSide].find(
-                        (option) => option.id === selectedOption
-                      )?.icon || "" // Fallback to an empty string if undefined
-                    }
+                    src={option.icon}
                   />
-                </>
-              ) : (
-                // Optionally render a placeholder or empty state when there's no icon
-                <div>No icon available</div>
-              )}
+                ) : (
+                  <div key={id}>No icon available</div>
+                );
+              })}
             </div>
             <p className="text-sm font-semibold">
-              {[...options, ...optionsBack, ...optionsSide].find(
-                (option) => option.id === selectedOption
-              )?.title || ""}
+              {selectedOptions
+                .map((id) => {
+                  const option = [
+                    ...options,
+                    ...optionsBack,
+                    ...optionsSide,
+                  ].find((option) => option.id === id);
+                  return option?.title || "";
+                })
+                .join(", ")}
             </p>
           </motion.div>
         )}
-        <SizeSelector />
+        <SizeSelector logoPosition={selectedOptions} />
       </div>
     </motion.div>
   );

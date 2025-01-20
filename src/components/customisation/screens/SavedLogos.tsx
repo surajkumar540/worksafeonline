@@ -12,14 +12,11 @@ import logo3 from "../../../../public/assets/logo/logo3.png";
 import logo1 from "../../../../public/assets/logo/logo1.png";
 
 const SavedLogos = ({
-  data,
   handleFinal,
   customizeData,
   setCustomizeData,
-  handleCustomizeNext,
   handleSetFilterScreen,
 }: {
-  data: any;
   handleFinal?: any;
   customizeData: any;
   setCustomizeData: any;
@@ -179,7 +176,7 @@ const SavedLogos = ({
               </div>
             )}
           </div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {product.map((data: any, index: number) => (
               <div
                 key={index}
@@ -189,7 +186,7 @@ const SavedLogos = ({
                 <div
                   className={`${
                     isLogoSelected?.id === data?.id
-                      ? "border border-black"
+                      ? "border-4 border-primary"
                       : "shadow border border-gray-100"
                   } rounded-lg transition h-24 cursor-pointer bg-white p-2 flex flex-col items-center justify-center`}
                 >
@@ -210,7 +207,9 @@ const SavedLogos = ({
                     {data.description}
                   </p>
                 </div>
-                <div className="hidden group-hover:block absolute bg-gray-50 -top-24 left-0 shadow-md rounded-lg z-50 p-2 pt-3">
+
+                {/* Tooltip */}
+                <div className="hidden group-hover:block absolute top-24 left-28 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50 shadow-md rounded-lg z-50 w-full max-w-xs p-2 pt-3">
                   <div className="text-sm text-left space-y-1">
                     <p className="font-semibold leading-3">
                       {data.name}
@@ -228,7 +227,6 @@ const SavedLogos = ({
         <p className="text-gray-600 text-lg">or</p>
         <div className="w-2/5">
           <UploadDesign
-            product={data}
             customizeData={{
               ...customizeData,
               ...(isLogoSelected && {
@@ -236,11 +234,10 @@ const SavedLogos = ({
               }),
             }}
             setCustomizeData={setCustomizeData}
-            handleCustomizeNext={handleCustomizeNext}
           />
           {!isLogoSelected?.id && customizeData?.imageText?.id === 1 && (
             <textarea
-              rows={5}
+              rows={3}
               className="w-full border border-gray-300 text-sm rounded-lg p-3 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
               placeholder="Add Notes (optional)..."
             ></textarea>

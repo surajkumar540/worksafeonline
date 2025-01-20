@@ -18,7 +18,7 @@ const TextSizeSelector = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-32">
       {!hideText && (
         <h4
           className={`text-left font-bold pt-5 pb-1 text-lg ${bigShoulders.className}`}
