@@ -92,10 +92,29 @@ const LogoPosition = ({
           ? prevSelected.filter((id) => id !== option.id)
           : [...prevSelected, option.id]
         : [option.id]; // If it's not an array, set it as an array with the selected id
-
       return updatedSelected;
     });
   };
+
+  // // This function will handle the selection of an option along with its size
+  // const handleSelectSelected = (option: string | number, size: string) => {
+  //   // Check if the option already exists in selectedOptions
+  //   setSelectedOptions((prevSelected: any) => {
+  //     const existingOptionIndex = prevSelected.findIndex(
+  //       (item: any) => item.id === option
+  //     );
+
+  //     if (existingOptionIndex > -1) {
+  //       // Option already exists, update size
+  //       const updatedOptions = [...prevSelected];
+  //       updatedOptions[existingOptionIndex].size = size;
+  //       return updatedOptions;
+  //     }
+
+  //     // Option doesn't exist, add a new one
+  //     return [...prevSelected, { id: option, size }];
+  //   });
+  // };
 
   useEffect(() => {
     if (selectedOptions.length > 0) {
@@ -154,13 +173,19 @@ const LogoPosition = ({
 
   return (
     <motion.div
-      className="flex gap-5 py-5 lg:px-10 items-center justify-between"
+      className="flex gap-5 py-5 lg:px-10 items-start justify-between"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       viewport={{ once: true }}
     >
       <div className="flex w-2/3 flex-col space-y-4 border-r">
+        <p
+          className={`${bigShoulders.className} text-2xl uppercase text-center font-black`}
+        >
+          Choose logo
+          <span className="text-primary"> Position/s*</span>
+        </p>
         <div className="flex gap-5 items-center">
           <p
             className={`text-xl w-28 font-extrabold uppercase ${bigShoulders.className}`}
@@ -194,12 +219,18 @@ const LogoPosition = ({
       </div>
 
       <div className="w-1/3 h-full mx-auto flex flex-col items-center justify-between">
+        <p
+          className={`${bigShoulders.className} pb-4 text-2xl uppercase text-center font-black`}
+        >
+          Selected
+          <span className="text-primary"> Position/s</span>
+        </p>
         {selectedOptions.length > 0 && (
           <motion.div
-            className="p-2 rounded-xl border-2 bg-white flex flex-col items-center"
+            className="bg-white flex flex-col items-center"
             variants={optionVariants}
           >
-            <div className="w-full h-full py-3 flex justify-center items-center">
+            <div className="w-full h-full gap-3 py-3 flex justify-center items-center">
               {selectedOptions.map((id) => {
                 const option = [
                   ...options,
@@ -209,13 +240,14 @@ const LogoPosition = ({
                 return option?.icon ? (
                   <Image
                     key={id}
-                    alt="Selected Icon"
                     priority
                     unoptimized
-                    className="w-40"
-                    width={524} // adjust width as necessary
-                    height={350} // adjust height as necessary
+                    width={524}
+                    height={350}
                     src={option.icon}
+                    alt="Selected Icon"
+                    // onClick={() => handleSelectSelected(option.id)}
+                    className="w-fit object-contain border-2 p-2 rounded-xl cursor-pointer"
                   />
                 ) : (
                   <div key={id}>No icon available</div>
