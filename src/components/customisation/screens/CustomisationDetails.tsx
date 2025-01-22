@@ -26,7 +26,7 @@ const CustomisationDetails = ({
         Summary
       </h3>
       <div className="grid grid-cols-6 gap-2">
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Product
           </p>
@@ -37,7 +37,7 @@ const CustomisationDetails = ({
               width={400}
               height={400}
               alt="ProductImage"
-              className="w-fit object-contain"
+              className="w-3/4 object-contain"
               src={product?.ProductImage ?? logo1}
             />
             <h1
@@ -47,7 +47,7 @@ const CustomisationDetails = ({
             </h1>
           </div>
         </div>
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Colour
           </p>
@@ -75,7 +75,7 @@ const CustomisationDetails = ({
             </p>
           </div>
         </div>
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Logo / Text
           </p>
@@ -87,7 +87,7 @@ const CustomisationDetails = ({
               height={400}
               alt="ProductImage"
               src={logo1}
-              className="w-fit object-contain"
+              className="w-3/4 object-contain"
             />
             <p
               className={`text-sm font-bold uppercase pt-2 text-center ${bigShoulders.className}`}
@@ -96,7 +96,7 @@ const CustomisationDetails = ({
             </p>
           </div>
         </div>
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Logo Position
           </p>
@@ -108,7 +108,7 @@ const CustomisationDetails = ({
               height={400}
               alt="ProductImage"
               src={data?.logoPosition?.icon ?? logo1}
-              className="w-fit object-contain"
+              className="w-3/4 object-contain"
             />
             <p
               className={`text-sm font-bold pt-2 uppercase text-center ${bigShoulders.className}`}
@@ -121,7 +121,7 @@ const CustomisationDetails = ({
             </p>
           </div>
         </div>
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Application
           </p>
@@ -133,15 +133,15 @@ const CustomisationDetails = ({
               height={400}
               alt="ProductImage"
               src={data?.printEmbroidery?.icon ?? logo1}
-              className="w-4/5 object-contain"
+              className="w-3/4 object-contain"
             />
           </div>
         </div>
-        <div className="h-auto rounded-xl py-2 bg-gray-100">
+        <div className="h-56 rounded-xl py-2 bg-gray-100">
           <p className="font-semibold pb-2 border-b-8 border-white w-full">
             Delete
           </p>
-          <div className="flex p-2 flex-col justify-center h-full items-center">
+          <div className="flex p-2 flex-col justify-center mb-10 h-full items-center">
             <p className="text-4xl hover:scale-150 mt-10 transition cursor-pointer text-red-500">
               <MdDelete title="Delete Logo" />
             </p>

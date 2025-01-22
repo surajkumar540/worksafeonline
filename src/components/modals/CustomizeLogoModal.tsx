@@ -8,6 +8,7 @@ import TextEditor from "../customisation/uploadDesign/TextEditor";
 import { InterationButton, NextButton, PrevButton } from "./Button";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
+import { Fetch } from "@/utils/axios";
 
 const CustomizeLogoModal = ({
   data,
@@ -18,6 +19,7 @@ const CustomizeLogoModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
+  const [modalData, setModalData] = useState<any>({});
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
     addtext: {},
@@ -35,6 +37,19 @@ const CustomizeLogoModal = ({
     { label: "Position" },
     { label: "Summary" },
   ];
+
+  const fetchCustomization = useCallback(async () => {
+    if (!data?.ProductID) return;
+    const url = "api/CustomizeLogoPopUp?style=" + data.ProductID;
+    const response: any = await Fetch(url, {}, 5000, true, false);
+    if (response) setModalData(response);
+  }, [data?.ProductID]);
+
+  console.log(modalData);
+
+  useEffect(() => {
+    fetchCustomization();
+  }, [fetchCustomization]);
 
   // func is called when go to next step
   const handleCustomizeNext = (id?: number) => {
@@ -75,6 +90,7 @@ const CustomizeLogoModal = ({
       case 0:
         return (
           <ImageText
+            modalData={modalData}
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
@@ -84,14 +100,15 @@ const CustomizeLogoModal = ({
           <>
             {customizeData?.imageText?.id !== 1 ? (
               <TextEditor
+                modalData={modalData}
                 customizeData={customizeData}
                 setCustomizeData={setCustomizeData}
               />
             ) : (
               <SavedLogos
+                modalData={modalData}
                 customizeData={customizeData}
                 setCustomizeData={setCustomizeData}
-                handleCustomizeNext={handleCustomizeNext}
               />
             )}
           </>
@@ -99,6 +116,7 @@ const CustomizeLogoModal = ({
       case 2:
         return (
           <PrintEmbroidery
+            modalData={modalData}
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
@@ -179,6 +197,7 @@ const CustomizeLogoModal = ({
         <Header
           onClose={onclose}
           customize={customize}
+          logo={modalData?.HeaderLogo}
           handleCustomizeNext={handleCustomizeNext}
           currentCustomizeStep={currentCustomizeStep}
           handleCustomizePrevious={handleCustomizePrevious}

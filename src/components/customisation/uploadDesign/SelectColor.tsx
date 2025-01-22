@@ -16,7 +16,13 @@ const colorsData = [
   { name: "Magenta", value: "#FF00FF" },
 ];
 
-const SelectColor = ({ handleColorChange }: { handleColorChange: any }) => {
+const SelectColor = ({
+  modalData,
+  handleColorChange,
+}: {
+  modalData: any;
+  handleColorChange: any;
+}) => {
   const [colors, setColors] = useState(colorsData);
   const [newColor, setNewColor] = useState("#000000");
   const [selectedColor, setSelectedColor] = useState("");
@@ -77,6 +83,10 @@ const SelectColor = ({ handleColorChange }: { handleColorChange: any }) => {
             <span title="Add Color" className="text-xl text-black font-bold">
               <IoAddOutline />
             </span>
+
+            <p className="text-xs group-hover:block hidden absolute top-10 left-0 w-40 bg-white border rounded-lg p-2 shadow-md text-left text-gray-600">
+              Disclaimer: {modalData?.TextColourDisclaimer}
+            </p>
           </div>
 
           {/* Color Picker with Add Button */}

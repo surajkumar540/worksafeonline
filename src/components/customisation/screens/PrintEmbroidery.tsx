@@ -4,42 +4,44 @@ import { motion } from "framer-motion";
 
 interface Option {
   id: number;
-  icon: string;
-  title: string;
+  icon: any;
   price: string;
   terms: string;
+  Disclaimer: string;
   maxWidth: string;
 }
 
-const options: Option[] = [
-  {
-    id: 1,
-    title: "Print",
-    maxWidth: "30cm",
-    price: "£2.99 (One-time setup)",
-    terms: "Ideal for Medium & Large images, Job Titles and Personalised Names",
-    icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
-  },
-  {
-    id: 2,
-    title: "Embroidery",
-    maxWidth: "25cm",
-    price: "£4.99 (One-time setup)",
-    terms: "Ideal for company logos and durability.",
-    icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
-  },
-];
-
 const PrintEmbroidery = ({
+  modalData,
   customizeData,
   setCustomizeData,
 }: {
+  modalData: any;
   customizeData: any;
   setCustomizeData: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(
     customizeData?.printEmbroidery?.id ?? null
   );
+
+  const options: Option[] = [
+    {
+      id: 1,
+      maxWidth: "30cm",
+      price: modalData?.PrintSetupCost + " (One-time setup)",
+      Disclaimer: modalData?.EmbroideryDisclaimer,
+      terms: modalData?.PrintSetupText,
+      icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
+    },
+    {
+      id: 2,
+      maxWidth: "25cm",
+      Disclaimer: modalData?.PrintDisclaimer,
+      price: modalData?.EmbroiderySetupCost + " (One-time setup)",
+      terms: modalData?.EmbroiderySetupText,
+      icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
+    },
+  ];
 
   const handleSelect = (option: any) => {
     setSelectedOption(option?.id);
@@ -85,13 +87,21 @@ const PrintEmbroidery = ({
             key={option.id}
             className={`p-4 rounded-xl border-4 cursor-pointer ${
               selectedOption === option.id
-                ? "border-primary"
+                ? "border-green-500"
                 : "border-gray-200"
             } transition-all duration-200 active:scale-[0.95] bg-white`}
             onClick={() => handleSelect(option)}
             variants={optionVariants}
           >
-            <div className="flex flex-col items-center space-y-3">
+            <div className="flex flex-col relative items-center space-y-3">
+              <span className="text-gray-500 absolute right-0 flex text-sm text-center">
+                <span className="ml-1 bg-secondary text-white rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">
+                  i
+                  <span className="absolute top-full left-1/2 transform -translate-x-1/2 w-40 font-normal mt-1 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {option?.Disclaimer}
+                  </span>
+                </span>
+              </span>
               <div className="text-4xl py-3">
                 <Image
                   alt="Image"
@@ -102,15 +112,6 @@ const PrintEmbroidery = ({
                   className="w-full object-contain"
                 />
               </div>
-              <p className="text-gray-500 flex text-sm text-center relative">
-                Max Width: {option.maxWidth}
-                <span className="ml-1 bg-primary text-black rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">
-                  i
-                  <span className="absolute top-full left-1/2 transform -translate-x-1/2 w-40 font-normal mt-1 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {option?.terms}
-                  </span>
-                </span>
-              </p>
               <p className="text-lg font-bold text-green-600 text-center">
                 {option.price}
               </p>

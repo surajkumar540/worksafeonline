@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { toast } from "react-toastify";
 import { BiCloudUpload } from "react-icons/bi";
 import Image from "next/image";
+import { bigShoulders } from "@/app/layout";
 
 const ImageUploader = ({
   selectedImage,
@@ -70,7 +71,7 @@ const ImageUploader = ({
               e.stopPropagation();
               handleRemoveImage();
             }}
-            className="absolute -top-3 -right-3 bg-gray-400 text-white w-7 h-7 flex justify-center items-center aspect-square rounded-full p-1 hover:bg-gray-500 transition-all duration-200 ease-linear"
+            className="absolute -top-3 -right-3 bg-red-500 text-white w-7 h-7 flex justify-center items-center aspect-square rounded-full p-1 hover:bg-gray-500 transition-all duration-200 ease-linear"
           >
             ✕
           </button>
@@ -96,7 +97,7 @@ const ImageUploader = ({
           </div>
           <button
             type="button"
-            className="bg-blue-500 text-white w-full mt-4 px-6 py-2 rounded-md"
+            className={`bg-blue-500 text-white w-full text-xl mt-4 px-6 py-1 font-bold rounded-md ${bigShoulders.className}`}
           >
             Upload logo
           </button>

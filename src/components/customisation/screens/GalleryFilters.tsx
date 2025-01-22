@@ -1,6 +1,7 @@
 import { bigShoulders } from "@/app/layout";
 import { useState } from "react";
 import { BsFilterLeft } from "react-icons/bs";
+import { IoMdSearch } from "react-icons/io";
 
 const GalleryFilters = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -34,7 +35,7 @@ const GalleryFilters = () => {
   return (
     <div className="mb-5">
       <div className="space-y-4 bg-gray-50 rounded-xl p-3">
-        <div className="flex justify-between gap-10 items-center">
+        <div className="flex justify-between gap-2 items-center">
           <p
             className={`flex text-sm uppercase items-center font-black text-gray-700 gap-2 ${bigShoulders.className}`}
           >
@@ -43,7 +44,12 @@ const GalleryFilters = () => {
             </span>
             Filters
           </p>
-          {/* Print/Embroidery Filter */}
+          <button
+            onClick={clearAllFilters}
+            className="px-2 py-1 whitespace-nowrap hover:bg-black border border-black hover:text-white text-black text-sm font-medium rounded-md transition"
+          >
+            Clear All
+          </button>
           <div className="">
             {/* <label
               className={`block text-sm text-center font-black uppercase text-gray-700 mb-2 ${bigShoulders.className}`}
@@ -189,10 +195,11 @@ const GalleryFilters = () => {
             </div>
           </div>
           <button
-            onClick={clearAllFilters}
-            className="px-2 py-1 hover:bg-black border border-black hover:text-white text-black text-sm font-medium rounded-md transition"
+            className="relative flex items-center gap-1 w-fit px-4 py-1 text-black cursor-pointer"
+            // onClick={() => showSearchBar(!searchBar)}
           >
-            Clear All
+            Search{" "}
+            <IoMdSearch size={20} title="Search" className="text-black" />
           </button>
         </div>
       </div>

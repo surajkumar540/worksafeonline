@@ -5,6 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import Stepper from "../customisation/Stepper";
 
 interface HeaderProps {
+  logo: string; // Replace with actual logo URL
   customize: any; // Adjust type to match `customize` object structure
   onClose: () => void;
   currentCustomizeStep: number;
@@ -13,6 +14,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
+  logo,
   onClose,
   customize,
   currentCustomizeStep,
@@ -37,8 +39,8 @@ const Header: React.FC<HeaderProps> = ({
           width={100}
           unoptimized
           height={60}
+          src={logo}
           className="w-32 bg-black p-1"
-          src="https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
         />
       </Link>
 

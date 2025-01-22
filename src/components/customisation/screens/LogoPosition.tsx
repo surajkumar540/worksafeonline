@@ -4,6 +4,7 @@ import SizeSelector from "./SizeSelector";
 import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { includes } from "@/utils/polyfills";
+import { toast } from "react-toastify";
 
 interface Option {
   id: number;
@@ -30,6 +31,16 @@ const options = [
   },
   {
     id: 4,
+    title: "front-top-center",
+    icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/17.jpg",
+  },
+  {
+    id: 5,
+    title: "front-center-right",
+    icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/5.jpg",
+  },
+  {
+    id: 6,
     title: "front-top-center",
     icon: "https://www.clothes2order.com/images/c2o_new_2013/layout/checkout/positions/17.jpg",
   },
@@ -86,6 +97,9 @@ const LogoPosition = ({
   );
 
   const handleSelect = (option: Option) => {
+    if (!includes(selectedOptions, option.id) && selectedOptions.length === 3)
+      return toast.info("You can add upto 3 options");
+
     setSelectedOptions((prevSelected) => {
       const updatedSelected = Array.isArray(prevSelected)
         ? includes(prevSelected, option.id)
@@ -164,7 +178,7 @@ const LogoPosition = ({
             width={100} // adjust width as necessary
             height={75} // adjust height as necessary
             src={option.icon}
-            className="w-fit object-contain"
+            className="min-w-24 max-w-24 object-contain"
           />
         </div>
       </div>
@@ -179,7 +193,7 @@ const LogoPosition = ({
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <div className="flex w-2/3 flex-col space-y-4 border-r">
+      <div className="flex w-2/3 flex-col space-y-4 border-r pr-10">
         <p
           className={`${bigShoulders.className} text-2xl uppercase text-center font-black`}
         >
@@ -188,37 +202,37 @@ const LogoPosition = ({
         </p>
         <div className="flex gap-5 items-center">
           <p
-            className={`text-xl w-28 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
           >
             Front
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+          <div className="flex w-4/5 overflow-auto no-scrollbar py-3 gap-2">
             {options.map(renderOption)}
           </div>
         </div>
         <div className="flex gap-5 items-center">
           <p
-            className={`text-xl w-28 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
           >
             Back
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+          <div className="flex w-4/5 overflow-auto no-scrollbar pb-3 gap-2">
             {optionsBack.map(renderOption)}
           </div>
         </div>
         <div className="flex gap-5 items-center">
           <p
-            className={`text-xl whitespace-nowrap w-28 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl whitespace-nowrap w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
           >
             Left / Right
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+          <div className="flex w-4/5 overflow-auto no-scrollbar pb-3 gap-2">
             {optionsSide.map(renderOption)}
           </div>
         </div>
       </div>
 
-      <div className="w-1/3 h-full mx-auto flex flex-col items-center justify-between">
+      <div className="w-1/3 pl-10 h-full mx-auto flex flex-col items-center justify-between">
         <p
           className={`${bigShoulders.className} pb-4 text-2xl uppercase text-center font-black`}
         >
@@ -230,7 +244,7 @@ const LogoPosition = ({
             className="bg-white flex flex-col items-center"
             variants={optionVariants}
           >
-            <div className="w-full h-full gap-3 py-3 flex justify-center items-center">
+            <div className="w-full h-full gap-3 py-3 flex flex-wrap justify-center items-center">
               {selectedOptions.map((id) => {
                 const option = [
                   ...options,
@@ -247,7 +261,7 @@ const LogoPosition = ({
                     src={option.icon}
                     alt="Selected Icon"
                     // onClick={() => handleSelectSelected(option.id)}
-                    className="w-fit object-contain border-2 p-2 rounded-xl cursor-pointer"
+                    className="min-w-28 max-w-28 object-contain border-2 p-2 rounded-xl cursor-pointer"
                   />
                 ) : (
                   <div key={id}>No icon available</div>

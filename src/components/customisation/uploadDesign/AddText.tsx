@@ -24,14 +24,18 @@ const fonts = [
 ];
 
 interface AddTextProps {
+  modalData: any;
   setSelectedFilters: any;
   selectedFields: Record<string, string | undefined>;
 }
 
 const AddText: React.FC<AddTextProps> = ({
+  modalData,
   selectedFields,
   setSelectedFilters,
 }) => {
+  // const [index, setIndex] = useState(1);
+  const index = 1;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -63,78 +67,89 @@ const AddText: React.FC<AddTextProps> = ({
   };
 
   return (
-    <div className="flex flex-col space-y-2">
-      <SelectColor handleColorChange={handleColorChange} />
+    <>
+      <div className="w-3/5 flex flex-col space-y-2">
+        <SelectColor
+          modalData={modalData}
+          handleColorChange={handleColorChange}
+        />
 
-      <div className="grid grid-cols-4 items-center gap-2">
-        <div className="col-span-4 flex justify-between mt-5 items-center gap-20">
-          <h4
-            className={`text-left font-bold whitespace-nowrap text-xl ${bigShoulders.className}`}
-          >
-            Select font:
-          </h4>
-          <div className="relative w-full">
-            {/* Trigger Button */}
-            <div
-              tabIndex={0}
-              onClick={() => setDropdownOpen((prev) => !prev)}
-              onBlur={() => setDropdownOpen(false)}
-              aria-expanded={dropdownOpen}
-              className="border border-gray-300 text-left p-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full"
+        <div className="grid grid-cols-4 items-center gap-2">
+          <div className="col-span-4 flex justify-between mt-5 items-center gap-20">
+            <h4
+              className={`text-left font-bold whitespace-nowrap text-xl ${bigShoulders.className}`}
             >
-              {selectedFields?.font || "Select Font"}
-            </div>
-
-            {/* Dropdown List */}
-            {dropdownOpen && (
-              <ul
-                className="absolute left-0 top-full mt-1 h-48 overflow-auto w-full border border-gray-300 bg-white shadow-md rounded z-10"
-                role="listbox"
+              Select font:
+            </h4>
+            <div className="relative w-full">
+              {/* Trigger Button */}
+              <div
+                tabIndex={0}
+                onClick={() => setDropdownOpen((prev) => !prev)}
+                onBlur={() => setDropdownOpen(false)}
+                aria-expanded={dropdownOpen}
+                className="border border-gray-300 text-left p-3 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full"
               >
-                {fonts.map((font) => (
-                  <li
-                    tabIndex={0}
-                    key={font.value}
-                    onMouseDown={(e) => e.preventDefault()} // Prevent blur on click
-                    onClick={() => handleFontChange(font.value)}
-                    style={{ fontFamily: font.value }}
-                    className="py-2 px-4 cursor-pointer hover:bg-gray-100"
-                  >
-                    {font.name}
-                  </li>
-                ))}
-              </ul>
-            )}
+                {selectedFields?.font || "Select Font"}
+              </div>
+
+              {/* Dropdown List */}
+              {dropdownOpen && (
+                <ul
+                  className="absolute left-0 top-full mt-1 h-48 overflow-auto w-full border border-gray-300 bg-white shadow-md rounded z-10"
+                  role="listbox"
+                >
+                  {fonts.map((font) => (
+                    <li
+                      tabIndex={0}
+                      key={font.value}
+                      onMouseDown={(e) => e.preventDefault()} // Prevent blur on click
+                      onClick={() => handleFontChange(font.value)}
+                      style={{ fontFamily: font.value }}
+                      className="py-2 px-4 cursor-pointer hover:bg-gray-100"
+                    >
+                      {font.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Text Inputs */}
-      <h4
-        className={`text-left font-bold pt-3 text-xl ${bigShoulders.className}`}
-      >
-        Add Text:
-      </h4>
-      <div className="space-y-2">
-        {["textLine1", "textLine2", "textLine3"].map((name, index) => (
-          <div key={name} className="flex gap-3 justify-center items-center">
-            <input
-              type="text"
-              maxLength={30}
-              name={name}
-              placeholder={`Enter Text ${name.replace("textLine", "Line ")} ${
-                index > 0 ? "(optional)" : ""
-              }`}
-              onChange={handleInputChange}
-              onKeyDown={(e) => handleKeyPress(e, index)}
-              ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
-              className="border w-36 text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full p-3 outline-none"
-            />
-            <TextSizeSelector
-              hideText={true}
-              size={`textSize${index + 1}`}
-              setSelectedFilters={setSelectedFilters}
-            />
+        {/* Text Inputs */}
+        <h4
+          className={`text-left font-bold pt-3 text-xl ${bigShoulders.className}`}
+        >
+          Add Text:
+        </h4>
+        <div className="space-y-2">
+          {["textLine1", "textLine2", "textLine3"].map((name, index) => (
+            <div key={name} className="flex gap-3 justify-center items-center">
+              <input
+                type="text"
+                maxLength={30}
+                name={name}
+                placeholder={`Enter Text ${name.replace("textLine", "Line ")} ${
+                  index > 0 ? "(optional)" : ""
+                }`}
+                onChange={handleInputChange}
+                onKeyDown={(e) => handleKeyPress(e, index)}
+                ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
+                className="border w-full text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full p-3 outline-none"
+              />
+              <TextSizeSelector
+                hideText={true}
+                size={`textSize${index + 1}`}
+                setSelectedFilters={setSelectedFilters}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="w-2/5 my-auto min-h-full">
+        <div className="space-y-2">
+          <div className="flex gap-3 mb-5 justify-center items-center">
             <CharacterSpacingSelector
               space={`spacing${index + 1}`}
               setSelectedFilters={setSelectedFilters}
@@ -152,9 +167,41 @@ const AddText: React.FC<AddTextProps> = ({
               setSelectedFilters={setSelectedFilters}
             />
           </div>
-        ))}
+        </div>
+        <div
+          style={{
+            color: selectedFields?.color,
+            fontFamily: selectedFields?.font,
+          }}
+          className="col-span-2 flex-col rounded-lg py-10 min-h-full bg-gray-100 flex justify-center items-center"
+        >
+          <div className="relative w-fit">
+            <div className={`flex flex-col`}>
+              <span
+                className={`${selectedFields?.textSize1} ${selectedFields?.fontStyle1} ${selectedFields?.textAlign1} ${selectedFields?.spacing1} ${selectedFields?.fontWeight1}`}
+              >
+                {selectedFields?.textLine1}
+              </span>
+              <span
+                className={`${selectedFields?.textSize2} ${selectedFields?.fontStyle2} ${selectedFields?.textAlign2} ${selectedFields?.spacing2} ${selectedFields?.fontWeight2}`}
+              >
+                {selectedFields?.textLine2}
+              </span>
+              <span
+                className={`${selectedFields?.textSize3} ${selectedFields?.fontStyle3} ${selectedFields?.textAlign3} ${selectedFields?.spacing3} ${selectedFields?.fontWeight3}`}
+              >
+                {selectedFields?.textLine3}
+              </span>
+            </div>
+          </div>
+        </div>
+        <textarea
+          rows={2}
+          className="w-full border mt-5 border-gray-300 text-xs rounded-lg p-2 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary resize-none"
+          placeholder="Add Notes (optional)..."
+        ></textarea>
       </div>
-    </div>
+    </>
   );
 };
 

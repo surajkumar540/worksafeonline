@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { RxCross1 } from "react-icons/rx";
+// import { RxCross1 } from "react-icons/rx";
 import UploadDesign from "./UploadDesign";
 import { MdDelete } from "react-icons/md";
-import { IoMdSearch } from "react-icons/io";
+// import { IoMdSearch } from "react-icons/io";
 import { bigShoulders } from "@/app/layout";
 import { FaRegHeart } from "react-icons/fa6";
 import GalleryFilters from "./GalleryFilters";
@@ -12,23 +12,19 @@ import logo3 from "../../../../public/assets/logo/logo3.png";
 import logo1 from "../../../../public/assets/logo/logo1.png";
 
 const SavedLogos = ({
-  handleFinal,
+  modalData,
   customizeData,
   setCustomizeData,
-  handleSetFilterScreen,
 }: {
-  handleFinal?: any;
+  modalData: any;
   customizeData: any;
   setCustomizeData: any;
-  handleCustomizeNext: any;
-  handleSetFilterScreen?: any;
 }) => {
-  const [searchText, setSearchText] = useState("");
-  const [searchBar, showSearchBar] = useState(false);
+  // const [searchText, setSearchText] = useState("");
+  // const [searchBar, showSearchBar] = useState(false);
   const [selectedFav, setSelectedFav] = useState("");
   const [isLogoSelected, setIsLogoSelected] = useState<any>({});
 
-  console.log(handleFinal, handleSetFilterScreen);
   const product = [
     {
       id: 1,
@@ -128,16 +124,16 @@ const SavedLogos = ({
     },
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchText(e.target.value);
+  // };
 
   return (
     <>
       <GalleryFilters />
-      <div className="flex items-center my-5 justify-between gap-10">
+      <div className="flex items-start my-5 justify-between gap-20">
         <div className="w-3/5">
-          <div>
+          {/* <div>
             {searchBar ? (
               <div className="flex mb-5 justify-between items-center gap-5">
                 <div className="relative hidden w-full lg:block">
@@ -175,7 +171,17 @@ const SavedLogos = ({
                 </button>
               </div>
             )}
+          </div> */}
+          <div className="flex items-center justify-center mt-2 mb-6">
+            <div className="h-1 bg-green-500 flex-1"></div>
+            <span
+              className={`px-4 text-3xl text-green-500 font-bold ${bigShoulders.className}`}
+            >
+              CHOOSE MY LOGO
+            </span>
+            <div className="h-1 bg-green-500 flex-1"></div>
           </div>
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {product.map((data: any, index: number) => (
               <div
@@ -186,7 +192,7 @@ const SavedLogos = ({
                 <div
                   className={`${
                     isLogoSelected?.id === data?.id
-                      ? "border-4 border-primary"
+                      ? "border-4 border-green-500"
                       : "shadow border border-gray-100"
                   } rounded-lg transition h-24 cursor-pointer bg-white p-2 flex flex-col items-center justify-center`}
                 >
@@ -224,8 +230,17 @@ const SavedLogos = ({
             ))}
           </div>
         </div>
-        <p className="text-gray-600 text-lg">or</p>
+        {/* <p className="text-gray-600 text-lg">or</p> */}
         <div className="w-2/5">
+          <div className="flex items-center justify-center mt-2 mb-6">
+            <div className="h-1 bg-blue-500 flex-1"></div>
+            <span
+              className={`px-4 text-3xl text-blue-500 font-bold ${bigShoulders.className}`}
+            >
+              UPLOAD NEW LOGO
+            </span>
+            <div className="h-1 bg-blue-500 flex-1"></div>
+          </div>
           <UploadDesign
             customizeData={{
               ...customizeData,
@@ -237,11 +252,14 @@ const SavedLogos = ({
           />
           {!isLogoSelected?.id && customizeData?.imageText?.id === 1 && (
             <textarea
-              rows={3}
+              rows={2}
               className="w-full border border-gray-300 text-sm rounded-lg p-3 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
               placeholder="Add Notes (optional)..."
             ></textarea>
           )}
+          <p className="text-xs text-left text-gray-400">
+            Disclaimer: {modalData?.LogoColourDisclaimer}
+          </p>
           {isLogoSelected?.id && (
             <div className="h-full w-full flex flex-col items-center justify-center">
               <div
