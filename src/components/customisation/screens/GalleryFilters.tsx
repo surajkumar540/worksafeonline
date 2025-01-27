@@ -1,9 +1,7 @@
-import { bigShoulders } from "@/app/layout";
 import { useState } from "react";
-import { BsFilterLeft } from "react-icons/bs";
+import { bigShoulders } from "@/app/layout";
 import { IoMdSearch } from "react-icons/io";
-import { RxCross1 } from "react-icons/rx";
-
+import { BsFilterLeft } from "react-icons/bs";
 const GalleryFilters = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedFilters, setSelectedFilters] = useState({
@@ -25,10 +23,10 @@ const GalleryFilters = () => {
     }));
   };
 
-  const handleSearch = () => {
-    console.log("Filters applied:", selectedFilters);
+  // const handleSearch = () => {
+  //   console.log("Filters applied:", selectedFilters);
     // Perform search or filter logic
-  };
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
