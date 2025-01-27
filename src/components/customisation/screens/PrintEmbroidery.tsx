@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { bigShoulders } from "@/app/layout";
 
 interface Option {
   id: number;
@@ -28,7 +29,7 @@ const PrintEmbroidery = ({
     {
       id: 1,
       maxWidth: "30cm",
-      price: modalData?.PrintSetupCost + " (One-time setup)",
+      price: "Print Size Disclaimer - 30 cm",
       Disclaimer: modalData?.EmbroideryDisclaimer,
       terms: modalData?.PrintSetupText,
       icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
@@ -37,7 +38,7 @@ const PrintEmbroidery = ({
       id: 2,
       maxWidth: "25cm",
       Disclaimer: modalData?.PrintDisclaimer,
-      price: modalData?.EmbroiderySetupCost + " (One-time setup)",
+      price: "Embriodery Size Disclaimer - 30 cm",
       terms: modalData?.EmbroiderySetupText,
       icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
     },
@@ -97,7 +98,7 @@ const PrintEmbroidery = ({
               <span className="text-gray-500 absolute right-0 flex text-sm text-center">
                 <span className="ml-1 bg-secondary text-white rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">
                   i
-                  <span className="absolute top-full left-1/2 transform -translate-x-1/2 w-40 font-normal mt-1 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="absolute top-full left-1/2 transform -translate-x-1/2 w-28 font-normal mt-1 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     {option?.Disclaimer}
                   </span>
                 </span>
@@ -112,11 +113,15 @@ const PrintEmbroidery = ({
                   className="w-full object-contain"
                 />
               </div>
-              <p className="text-lg font-bold text-green-600 text-center">
-                {option.price}
-              </p>
-              <p className="text-xs text-gray-500 text-center">
+              <p
+                className={`text-sm text-black font-bold text-center ${bigShoulders.className}`}
+              >
                 {option.terms}
+              </p>
+              <p
+                className={`text-sm text-black font-bold text-center ${bigShoulders.className}`}
+              >
+                {option.price}
               </p>
             </div>
           </motion.div>

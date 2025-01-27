@@ -97,9 +97,9 @@ const ImageUploader = ({
           </div>
           <button
             type="button"
-            className={`bg-blue-500 text-white w-full text-xl mt-4 px-6 py-1 font-bold rounded-md ${bigShoulders.className}`}
+            className={`bg-blue-500 uppercase text-white w-full text-xl mt-4 px-6 py-1 font-semibold rounded-md ${bigShoulders.className}`}
           >
-            Upload logo
+            Upload NEW logo
           </button>
         </div>
       )}

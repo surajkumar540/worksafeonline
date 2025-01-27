@@ -24,6 +24,17 @@ const SavedLogos = ({
   // const [searchBar, showSearchBar] = useState(false);
   const [selectedFav, setSelectedFav] = useState("");
   const [isLogoSelected, setIsLogoSelected] = useState<any>({});
+  const [isOptionSelected, setIsOptionSelected] = useState<
+    "option1" | "option2" | null
+  >(null);
+
+  const handleOption1Select = () => {
+    setIsOptionSelected("option1");
+  };
+
+  const handleOption2Select = () => {
+    setIsOptionSelected("option2");
+  };
 
   const product = [
     {
@@ -128,11 +139,20 @@ const SavedLogos = ({
   //   setSearchText(e.target.value);
   // };
 
+  const logoSelected = isLogoSelected?.id ? true : false;
+
   return (
     <>
       <GalleryFilters />
-      <div className="flex items-start my-5 justify-between gap-20">
-        <div className="w-3/5">
+      <div className="flex items-start my-5 justify-between gap-8">
+        <div
+          onClick={handleOption1Select}
+          className={`w-3/5 border-2 rounded-2xl p-5 ${
+            isOptionSelected === "option1" && logoSelected
+              ? "opacity-100 border-green-500"
+              : "opacity-50 border-black"
+          }`}
+        >
           {/* <div>
             {searchBar ? (
               <div className="flex mb-5 justify-between items-center gap-5">
@@ -172,14 +192,17 @@ const SavedLogos = ({
               </div>
             )}
           </div> */}
-          <div className="flex items-center justify-center mt-2 mb-6">
-            <div className="h-1 bg-green-500 flex-1"></div>
+          <div className="flex text-2xl uppercase font-semibold items-center justify-center mb-6">
+            {/* <div className="h-1 bg-green-500 flex-1"></div> */}
             <span
-              className={`px-4 text-3xl text-green-500 font-bold ${bigShoulders.className}`}
+              className={`border border-green-500 text-xl text-green-500 px-2 p-0.5 rounded-md ${bigShoulders.className}`}
             >
-              CHOOSE MY LOGO
+              Option 1
             </span>
-            <div className="h-1 bg-green-500 flex-1"></div>
+            <span className={`px-2 text-black ${bigShoulders.className}`}>
+              - CHOOSE MY LOGO
+            </span>
+            {/* <div className="h-1 bg-green-500 flex-1"></div> */}
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -193,7 +216,7 @@ const SavedLogos = ({
                   className={`${
                     isLogoSelected?.id === data?.id
                       ? "border-4 border-green-500"
-                      : "shadow border border-gray-100"
+                      : "border-4 border-gray-100"
                   } rounded-lg transition h-24 cursor-pointer bg-white p-2 flex flex-col items-center justify-center`}
                 >
                   <div className="h-full w-full flex items-center justify-center">
@@ -230,16 +253,35 @@ const SavedLogos = ({
             ))}
           </div>
         </div>
-        {/* <p className="text-gray-600 text-lg">or</p> */}
-        <div className="w-2/5">
-          <div className="flex items-center justify-center mt-2 mb-6">
-            <div className="h-1 bg-blue-500 flex-1"></div>
-            <span
-              className={`px-4 text-3xl text-blue-500 font-bold ${bigShoulders.className}`}
-            >
-              UPLOAD NEW LOGO
+        <div className="flex items-center justify-center h-96">
+          <div
+            className={`flex flex-col items-center text-2xl uppercase font-semibold h-full transition-opacity duration-300`}
+          >
+            <div className="w-0.5 bg-black flex-grow"></div>
+            <span className={`py-2 text-black ${bigShoulders.className}`}>
+              or
             </span>
-            <div className="h-1 bg-blue-500 flex-1"></div>
+            <div className="w-0.5 bg-black flex-grow"></div>
+          </div>
+        </div>
+        {/* <p className="text-gray-600 text-lg">or</p> */}
+        <div
+          onClick={handleOption2Select}
+          className={`w-2/5 border-2 p-5 rounded-2xl ${
+            isLogoSelected.designImage ? "border-green-500" : "border-black"
+          } ${isOptionSelected === "option2" ? "opacity-100" : "opacity-50"}`}
+        >
+          <div className="flex text-2xl uppercase font-semibold items-center justify-center mb-6">
+            {/* <div className="h-1 bg-green-500 flex-1"></div> */}
+            <span
+              className={`border border-green-500 text-xl text-green-500 px-2 p-0.5 rounded-md ${bigShoulders.className}`}
+            >
+              Option 2
+            </span>
+            <span className={`px-2 text-black ${bigShoulders.className}`}>
+              - UPLOAD NEW LOGO
+            </span>
+            {/* <div className="h-1 bg-green-500 flex-1"></div> */}
           </div>
           <UploadDesign
             customizeData={{
@@ -252,8 +294,8 @@ const SavedLogos = ({
           />
           {!isLogoSelected?.id && customizeData?.imageText?.id === 1 && (
             <textarea
-              rows={2}
-              className="w-full border border-gray-300 text-sm rounded-lg p-3 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+              rows={4}
+              className={`w-full border border-gray-300 text-sm rounded-lg p-3 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none ${bigShoulders.className}`}
               placeholder="Add Notes (optional)..."
             ></textarea>
           )}

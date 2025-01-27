@@ -1,5 +1,5 @@
 import { bigShoulders } from "@/app/layout";
-import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
+// import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 
 type ButtonHandler = () => void;
 
@@ -13,12 +13,12 @@ export const PrevButton: React.FC<PrevButtonProps> = ({
   return (
     <button
       onClick={handleCustomizePrevious}
-      className="bg-green-500 text-white relative group hover:text-white hover:bg-green-700 flex transition cursor-pointer items-center gap-1 px-4 py-2 rounded-full"
+      className={`bg-green-500 text-white uppercase relative text-xl group hover:text-white hover:bg-green-700 flex transition cursor-pointer items-center gap-1 px-6 py-1.5 rounded-full ${bigShoulders.className}`}
     >
-      <IoArrowBackCircle
+      {/* <IoArrowBackCircle
         title="Back"
         className="text-2xl group-hover:text-white"
-      />
+      /> */}
       Back
     </button>
   );
@@ -37,15 +37,17 @@ export const NextButton: React.FC<NextButtonProps> = ({
     <button
       disabled={isDisabled}
       onClick={handleCustomizeNext}
-      className={`disabled:cursor-none text-white relative group flex transition cursor-pointer items-center gap-1 pl-4 pr-3 py-2 rounded-full ${
+      className={`${
+        bigShoulders.className
+      } disabled:cursor-none text-white relative group flex transition cursor-pointer items-center gap-1 px-6 text-xl py-1.5 uppercase rounded-full ${
         isDisabled ? "bg-gray-500" : "hover:bg-green-700 bg-green-500"
       }`}
     >
       Next
-      <IoArrowForwardCircle
+      {/* <IoArrowForwardCircle
         title="Forward"
         className="text-2xl group-hover:text-white"
-      />
+      /> */}
     </button>
   );
 };

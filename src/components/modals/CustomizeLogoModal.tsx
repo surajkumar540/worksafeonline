@@ -206,7 +206,7 @@ const CustomizeLogoModal = ({
           <div className="px-4 mb-24">{renderStepContent()}</div>
           <div
             style={{ boxShadow: "0 20px 10px -25px rgba(0,0,0,0.45) inset" }}
-            className={`flex w-full fixed bottom-0 rounded-b-xl overflow-hidden z-50 bg-white p-4 items-center ${
+            className={`flex w-full fixed bottom-0 rounded-b-xl overflow-hidden z-50 bg-white p-3 items-center ${
               currentCustomizeStep === 0 ? "justify-end" : "justify-between"
             }`}
           >

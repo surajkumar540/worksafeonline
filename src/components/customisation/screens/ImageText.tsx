@@ -1,4 +1,3 @@
-// import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -120,15 +119,12 @@ const ImageText = ({
               <h3 className="text-2xl font-extrabold text-center">
                 {option.title}
               </h3>
-              <p className="text-gray-700 text-lg font-semibold text-center">
-                {option.description}
-              </p>
-              {/* <p className="text-gray-700 text-sm font-semibold text-center">
-                {option.description2}{" "}
-                <Link href={option.terms} className="underline text-blue-500">
-                  Terms
-                </Link>
-              </p> */}
+              <div
+                className="text-lg font-semibold text-center"
+                dangerouslySetInnerHTML={{
+                  __html: option.description,
+                }}
+              />
             </div>
           </motion.div>
         ))}

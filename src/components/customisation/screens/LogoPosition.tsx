@@ -193,40 +193,49 @@ const LogoPosition = ({
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <div className="flex w-2/3 flex-col space-y-4 border-r pr-10">
+      <div className="flex w-2/3 flex-col space-y-2 border-r pr-10">
         <p
-          className={`${bigShoulders.className} text-2xl uppercase text-center font-black`}
+          className={`${bigShoulders.className} relative text-2xl w-fit uppercase text-center font-black`}
         >
           Choose logo
           <span className="text-primary"> Position/s*</span>
+          <span className="text-gray-500 absolute top-0 right-0 flex text-sm text-center">
+            <span className="ml-1 bg-secondary text-white rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">
+              i
+              <span className="absolute w-28 font-normal mt-1 bg-gray-800 text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                Must be Selected as per color
+              </span>
+            </span>
+          </span>
         </p>
-        <div className="flex gap-5 items-center">
+        <SizeSelector logoPosition={selectedOptions} />
+        <div className="flex pt-2 flex-col">
           <p
-            className={`text-xl w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl text-left font-extrabold uppercase ${bigShoulders.className}`}
           >
             Front
           </p>
-          <div className="flex w-4/5 overflow-auto no-scrollbar py-3 gap-2">
+          <div className="flex overflow-auto no-scrollbar py-3 gap-2">
             {options.map(renderOption)}
           </div>
         </div>
-        <div className="flex gap-5 items-center">
+        <div className="flex flex-col">
           <p
-            className={`text-xl w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl text-left pb-2 font-extrabold uppercase ${bigShoulders.className}`}
           >
             Back
           </p>
-          <div className="flex w-4/5 overflow-auto no-scrollbar pb-3 gap-2">
+          <div className="flex overflow-auto no-scrollbar pb-3 gap-2">
             {optionsBack.map(renderOption)}
           </div>
         </div>
-        <div className="flex gap-5 items-center">
+        <div className="flex flex-col">
           <p
-            className={`text-xl whitespace-nowrap w-1/5 font-extrabold uppercase ${bigShoulders.className}`}
+            className={`text-xl text-left pb-2 whitespace-nowrap font-extrabold uppercase ${bigShoulders.className}`}
           >
             Left / Right
           </p>
-          <div className="flex w-4/5 overflow-auto no-scrollbar pb-3 gap-2">
+          <div className="flex overflow-auto no-scrollbar pb-3 gap-2">
             {optionsSide.map(renderOption)}
           </div>
         </div>
@@ -234,7 +243,7 @@ const LogoPosition = ({
 
       <div className="w-1/3 pl-10 h-full mx-auto flex flex-col items-center justify-between">
         <p
-          className={`${bigShoulders.className} pb-4 text-2xl uppercase text-center font-black`}
+          className={`${bigShoulders.className} relative pb-4 text-2xl uppercase text-center font-black`}
         >
           Selected
           <span className="text-primary"> Position/s</span>
@@ -282,7 +291,6 @@ const LogoPosition = ({
             </p>
           </motion.div>
         )}
-        <SizeSelector logoPosition={selectedOptions} />
       </div>
     </motion.div>
   );

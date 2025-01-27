@@ -25,127 +25,124 @@ const CustomisationDetails = ({
       >
         Summary
       </h3>
-      <div className="grid grid-cols-6 gap-2">
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Product
+
+      <div className="grid grid-cols-6 gap-2 px-28">
+        {/* Column Titles */}
+        {[
+          "Product",
+          "Colour",
+          "Logo / Text",
+          "Logo Position",
+          "Application",
+          "Delete",
+        ].map((title) => (
+          <p
+            key={title}
+            className="font-semibold text-sm bg-gray-100 py-2 rounded-t-xl text-center"
+          >
+            {title}
           </p>
-          <div className="flex p-2 flex-col justify-center items-center">
-            <Image
-              priority
-              unoptimized
-              width={400}
-              height={400}
-              alt="ProductImage"
-              className="w-3/4 object-contain"
-              src={product?.ProductImage ?? logo1}
-            />
-            <h1
-              className={`text-sm mt-2 font-semibold uppercase text-center ${bigShoulders.className}`}
-            >
-              {product.ProductName} (Code - {product.ProductID})
-            </h1>
-          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-6 gap-2 px-28 mt-2">
+        {/* Product */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
+          <Image
+            priority
+            unoptimized
+            width={200}
+            height={200}
+            alt="Product Image"
+            src={product?.ProductImage ?? logo1}
+            className="object-contain w-3/4"
+          />
+          <h1
+            className={`text-sm mt-2 font-semibold text-center ${bigShoulders.className}`}
+          >
+            {product.ProductName} (Code - {product.ProductID})
+          </h1>
         </div>
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Colour
-          </p>
-          <div className="flex p-2 flex-col h-full justify-center items-center">
-            <div className="flex rounded-full overflow-hidden">
+
+        {/* Colour */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
+          <div className="flex rounded-full overflow-hidden">
+            <div
+              style={{ backgroundColor: primaryColor }}
+              className={`h-16 ${
+                primaryColor && secondaryColor ? "w-8" : "w-16"
+              }`}
+            ></div>
+            {secondaryColor && (
               <div
-                style={{ backgroundColor: primaryColor }}
-                className={`h-20 ${
-                  primaryColor && secondaryColor ? "w-10" : "w-20"
+                style={{ backgroundColor: secondaryColor }}
+                className={`h-16 ${
+                  primaryColor && secondaryColor ? "w-8" : "w-16"
                 }`}
               ></div>
-              {secondaryColor && (
-                <div
-                  style={{ backgroundColor: secondaryColor }}
-                  className={`h-20 ${
-                    primaryColor && secondaryColor ? "w-10" : "w-20"
-                  }`}
-                ></div>
-              )}
-            </div>
-            <p
-              className={`text-sm font-semibold pt-2 uppercase text-center ${bigShoulders.className}`}
-            >
-              {data?.color?.Colour_Description.trim()}
-            </p>
+            )}
           </div>
-        </div>
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Logo / Text
+          <p
+            className={`text-sm font-semibold pt-2 text-center ${bigShoulders.className}`}
+          >
+            {data?.color?.Colour_Description?.trim()}
           </p>
-          <div className="flex p-2 flex-col justify-center items-center">
-            <Image
-              priority
-              unoptimized
-              width={400}
-              height={400}
-              alt="ProductImage"
-              src={logo1}
-              className="w-3/4 object-contain"
-            />
-            <p
-              className={`text-sm font-bold uppercase pt-2 text-center ${bigShoulders.className}`}
-            >
-              Medium
-            </p>
-          </div>
         </div>
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Logo Position
+
+        {/* Logo / Text */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
+          <Image
+            priority
+            unoptimized
+            width={200}
+            height={200}
+            alt="Logo"
+            src={logo1}
+            className="object-contain w-3/4"
+          />
+          <p
+            className={`text-sm font-bold text-center ${bigShoulders.className}`}
+          >
+            Medium
           </p>
-          <div className="flex p-2 flex-col justify-center items-center">
-            <Image
-              priority
-              unoptimized
-              width={400}
-              height={400}
-              alt="ProductImage"
-              src={data?.logoPosition?.icon ?? logo1}
-              className="w-3/4 object-contain"
-            />
-            <p
-              className={`text-sm font-bold pt-2 uppercase text-center ${bigShoulders.className}`}
-            >
-              {data.logoPosition
-                .map((id: any) => {
-                  return id?.title;
-                })
-                .join(", ")}{" "}
-            </p>
-          </div>
         </div>
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Application
+
+        {/* Logo Position */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
+          <Image
+            priority
+            unoptimized
+            width={200}
+            height={200}
+            alt="Logo Position"
+            src={data?.logoPosition?.icon ?? logo1}
+            className="object-contain w-3/4"
+          />
+          <p
+            className={`text-xs font-bold pt-2 text-center ${bigShoulders.className}`}
+          >
+            {data?.logoPosition?.map((id: any) => id?.title).join(", ")}
           </p>
-          <div className="flex p-2 flex-col justify-center h-full items-center">
-            <Image
-              priority
-              unoptimized
-              width={400}
-              height={400}
-              alt="ProductImage"
-              src={data?.printEmbroidery?.icon ?? logo1}
-              className="w-3/4 object-contain"
-            />
-          </div>
         </div>
-        <div className="h-56 rounded-xl py-2 bg-gray-100">
-          <p className="font-semibold pb-2 border-b-8 border-white w-full">
-            Delete
+
+        {/* Application */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex items-center justify-center p-2">
+          <Image
+            priority
+            unoptimized
+            width={200}
+            height={200}
+            alt="Application"
+            src={data?.printEmbroidery?.icon ?? logo1}
+            className="object-contain w-3/4"
+          />
+        </div>
+
+        {/* Delete */}
+        <div className="h-48 bg-gray-100 rounded-b-xl flex items-center justify-center p-2">
+          <p className="text-4xl cursor-pointer text-red-500 hover:scale-150 transition">
+            <MdDelete title="Delete Logo" />
           </p>
-          <div className="flex p-2 flex-col justify-center mb-10 h-full items-center">
-            <p className="text-4xl hover:scale-150 mt-10 transition cursor-pointer text-red-500">
-              <MdDelete title="Delete Logo" />
-            </p>
-          </div>
         </div>
       </div>
     </>
