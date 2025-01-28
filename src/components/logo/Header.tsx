@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Stepper from "../logo/Stepper";
 import { RxCross1 } from "react-icons/rx";
-import Stepper from "../customisation/Stepper";
 
 interface HeaderProps {
   logo: string; // Replace with actual logo URL

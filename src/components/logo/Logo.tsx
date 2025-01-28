@@ -4,7 +4,7 @@ import Button from "../common/Button";
 import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { useEffect, useState } from "react";
-import CustomizeLogoModal from "../modals/CustomizeLogoModal";
+import CustomizeLogoModal from "./CustomizeLogoModal";
 
 const Logo = ({
   product,

@@ -2,13 +2,13 @@
 
 import { Product } from "@/types/api";
 import { toast } from "react-toastify";
+import Logo from "@/components/logo/Logo";
 import ProductColors from "./ProductColor";
 import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
-import Logo from "@/components/customisation/Logo";
 
 interface QuantitySelectorProps {
   product: Product;

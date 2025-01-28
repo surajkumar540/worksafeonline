@@ -1,5 +1,4 @@
 import { bigShoulders } from "@/app/layout";
-// import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 
 type ButtonHandler = () => void;
 

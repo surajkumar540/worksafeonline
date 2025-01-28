@@ -10,6 +10,17 @@ import { InterationButton, NextButton, PrevButton } from "./Button";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
 
+import { fetchRequest, getScreenActiveStatus } from "./general";
+
+// describe the steps
+const customize = [
+  { label: "Logo / Text" },
+  { label: "Select / Upload / Add Text" },
+  { label: "Print / Embroidery" },
+  { label: "Position" },
+  { label: "Summary" },
+];
+
 const CustomizeLogoModal = ({
   data,
   onclose,
@@ -19,44 +30,33 @@ const CustomizeLogoModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
-  const [fonts, setFonts] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [modalData, setModalData] = useState<any>({});
-  const [savedLogos, setSavedLogos] = useState<any>([]);
-  const [savedTexts, setSavedTexts] = useState<any>([]);
-  const [artWorkPositions, setArtWorkPosition] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
+    data,
     addtext: {},
     imageText: {},
     designImage: "",
     logoPosition: [],
     printEmbroidery: {},
-  }); // used to determine the current state
+  });
+  const [localData, setLocalData] = useState<any>({
+    textColours: [],
+    modalData: {},
+    savedLogos: [],
+    artworkList: [],
+    textFontFamily: [],
+    artworkTemplate: [],
+  });
 
-  // describe the steps
-  const customize = [
-    { label: "Logo / Text" },
-    { label: "Select / Upload / Add Text" },
-    { label: "Print / Embroidery" },
-    { label: "Position" },
-    { label: "Summary" },
-  ];
-
-  const fetchCustomization = useCallback(async () => {
-    if (!data?.ProductID) return;
-    const url = "api/CustomizeLogoPopUp?style=" + data.ProductID;
-    const response: any = await Fetch(url, {}, 5000, true, false);
-    if (response) setModalData(response);
-  }, [data?.ProductID]);
-
-  useEffect(() => {
-    fetchCustomization();
-  }, [fetchCustomization]);
+  const setLocalState = (key: string, data: any) => {
+    setLocalData((prevState: any) => ({ ...prevState, [key]: data }));
+  };
+  console.log(localData);
 
   // func is called when go to next step
   const handleCustomizeNext = (id?: number) => {
-    if (!getScreenActiveStatus()) return;
+    if (!getScreenActiveStatus(customizeData, currentCustomizeStep)) return;
 
     if (typeof id === "number") return setCurrentCustomizeStep(id);
     setCurrentCustomizeStep(currentCustomizeStep + 1);
@@ -70,6 +70,7 @@ const CustomizeLogoModal = ({
   // func is called when modal is opened
   const resetModal = useCallback(() => {
     setCustomizeData({
+      data,
       addtext: {},
       imageText: {},
       designImage: "",
@@ -77,39 +78,23 @@ const CustomizeLogoModal = ({
       printEmbroidery: {},
     });
     setCurrentCustomizeStep(0);
+    // eslint-disable-next-line
   }, []);
-
-  // func is called when user click on add to cart button
-  const handleAddToCart = async () => {};
 
   // render when user re-opens the logo modal
   useEffect(() => {
     if (isVisible) resetModal();
   }, [isVisible, resetModal]);
 
-  useEffect(() => {
-    const fetchTexts = async (url: string, state: any) => {
-      try {
-        const param = { style: data?.ProductID, search: "" };
-        const response: any = await Fetch(url, param, 5000, true, false);
-        if (response?.status) state(response.artworkList);
-      } catch (error) {
-        console.log("Error fetching artwork: " + error);
-      }
-    };
-    if (isVisible && data?.ProductID) {
-      const url = "api/ArtworkList";
-      const url2 = "api/TextArtworkList";
-      fetchTexts(url, setSavedLogos);
-      fetchTexts(url2, setSavedTexts);
-    }
-  }, [isVisible, data?.ProductID]);
+  // func is called when user click on add to cart button
+  const handleAddToCart = async () => {};
 
   const getFilteredResults = async (params: Record<string, any>) => {
     try {
       const url = "api/FilterArtworkList";
       const response: any = await Post(url, params, 5000, true);
-      if (response.status) setSavedLogos(response?.artworkList || []);
+      if (response.status)
+        setLocalState("savedLogos", response?.artworkList || []);
     } catch (error) {
       console.log("Error calling API:", error);
     }
@@ -119,58 +104,37 @@ const CustomizeLogoModal = ({
     try {
       const url = "api/FilterTextArtworkList";
       const response: any = await Post(url, params, 5000, true);
-      if (response.status) setSavedTexts(response?.artworkList || []);
+      if (response.status)
+        setLocalState("artworkList", response?.artworkList || []);
     } catch (error) {
       console.log("Error calling API:", error);
     }
   };
 
+  // to get artwork list & static data from server
   useEffect(() => {
-    const getDesignPosition = async (param: any) => {
-      try {
-        console.log(param);
-        const url =
-          "api/DesignProductPositionTemplate?artwork=AW10808&product=BS955";
-        const response: any = await Fetch(url, {}, 5000, true);
-        if (response.status) setArtWorkPosition(response.artworkTemplate);
-      } catch (error) {
-        console.log("Error fetching artwork: " + error);
-      }
+    const fetchData = async () => {
+      if (!isVisible || !data?.ProductID || !data?.color?.Html_Code) return;
+      const requests = fetchRequest(data);
+      await Promise.allSettled(
+        requests.map(async ({ url, params, key }) => {
+          try {
+            const response: any = await Fetch(url, params, 5000, true, false);
+            if (key === "savedLogos" && response?.status)
+              return setLocalState(key, response?.artworkList ?? []);
+            else if (key === "modalData") return setLocalState(key, response);
+            else if (response?.status)
+              setLocalState(key, response[key] || response);
+          } catch (error) {
+            console.error(`Error fetching ${key}:`, error);
+          } finally {
+            setLoading(false);
+          }
+        })
+      );
     };
-    if (isVisible) getDesignPosition({});
-  }, [isVisible, data?.ProductID]);
-
-  useEffect(() => {
-    const getColors = async () => {
-      try {
-        const url = "api/ProductTextColours";
-        const params = {
-          product: data.ProductID,
-          colour: data?.color?.Html_Code,
-        };
-        const response: any = await Fetch(url, params, 5000, true);
-        if (response.status) setColors(response.textColours);
-      } catch (error) {
-        console.log("Error fetching artwork: " + error);
-      }
-    };
-    if (isVisible && data.ProductID) getColors();
-    // eslint-disable-next-line
-  }, [isVisible, data.ProductID]);
-
-  useEffect(() => {
-    const getFonts = async () => {
-      try {
-        const url = "api/ProductTextFontFamily";
-        const params = { product: data.ProductID };
-        const response: any = await Fetch(url, params, 5000, true);
-        if (response.status) setFonts(response.textFontFamily);
-      } catch (error) {
-        console.log("Error fetching artwork: " + error);
-      }
-    };
-    if (isVisible && data.ProductID) getFonts();
-  }, [isVisible, data.ProductID]);
+    fetchData();
+  }, [isVisible, data?.ProductID, data?.color?.Html_Code]);
 
   // to render screens as per customization steps
   const renderStepContent = useCallback(() => {
@@ -178,7 +142,7 @@ const CustomizeLogoModal = ({
       case 0:
         return (
           <ImageText
-            modalData={modalData}
+            modalData={localData?.modalData}
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
@@ -188,18 +152,18 @@ const CustomizeLogoModal = ({
           <>
             {customizeData?.imageText?.id !== 1 ? (
               <TextEditor
-                fonts={fonts}
-                colors={colors}
-                modalData={modalData}
-                savedTexts={savedTexts}
+                colors={localData.textColours}
+                fonts={localData.textFontFamily}
+                modalData={localData?.modalData}
+                savedTexts={localData.artworkList}
                 setCustomizeData={setCustomizeData}
                 getFilteredResults={getTextFilteredResults}
                 customizeData={{ ...data, ...customizeData }}
               />
             ) : (
               <SavedLogos
-                modalData={modalData}
-                savedLogos={savedLogos}
+                modalData={localData?.modalData}
+                savedLogos={localData.savedLogos}
                 setCustomizeData={setCustomizeData}
                 getFilteredResults={getFilteredResults}
                 customizeData={{ ...data, ...customizeData }}
@@ -210,7 +174,7 @@ const CustomizeLogoModal = ({
       case 2:
         return (
           <PrintEmbroidery
-            modalData={modalData}
+            modalData={localData?.modalData}
             customizeData={customizeData}
             setCustomizeData={setCustomizeData}
           />
@@ -219,8 +183,8 @@ const CustomizeLogoModal = ({
         return (
           <LogoPosition
             customizeData={customizeData}
-            artWorkPositions={artWorkPositions}
             setCustomizeData={setCustomizeData}
+            artWorkPositions={localData.artworkTemplate}
           />
         );
       case 4:
@@ -234,31 +198,14 @@ const CustomizeLogoModal = ({
         return null;
     }
     // eslint-disable-next-line
-  }, [currentCustomizeStep, customizeData, data, savedLogos, savedTexts]);
-
-  // func is called to check the current screen data is available or not
-  const getScreenActiveStatus = () => {
-    const isNextButtonActive =
-      (currentCustomizeStep === 0 && customizeData?.imageText?.id) ||
-      (currentCustomizeStep === 1 &&
-        (customizeData?.designImage || customizeData?.addtext?.textLine1)) ||
-      (currentCustomizeStep === 2 && customizeData?.printEmbroidery?.id) ||
-      (currentCustomizeStep === 3 && customizeData?.logoPosition.length > 0);
-    return isNextButtonActive;
-  };
+  }, [currentCustomizeStep, customizeData, data, localData]);
 
   // render step navigation buttons
   const renderStepButtons = () => {
-    const isNextButtonActive = getScreenActiveStatus();
-
-    if (currentCustomizeStep === 0)
-      return (
-        <NextButton
-          isDisabled={!isNextButtonActive}
-          handleCustomizeNext={handleCustomizeNext}
-        />
-      );
-
+    const isNextButtonActive = getScreenActiveStatus(
+      customizeData,
+      currentCustomizeStep
+    );
     if (currentCustomizeStep === customize.length - 1)
       return (
         <InterationButton
@@ -268,7 +215,9 @@ const CustomizeLogoModal = ({
       );
     return (
       <>
-        <PrevButton handleCustomizePrevious={handleCustomizePrevious} />
+        {currentCustomizeStep !== 0 && (
+          <PrevButton handleCustomizePrevious={handleCustomizePrevious} />
+        )}
         <NextButton
           isDisabled={!isNextButtonActive}
           handleCustomizeNext={handleCustomizeNext}
@@ -277,7 +226,7 @@ const CustomizeLogoModal = ({
     );
   };
 
-  if (!data) return null;
+  if (!data || loading) return null;
 
   return (
     <Modal
@@ -292,7 +241,7 @@ const CustomizeLogoModal = ({
         <Header
           onClose={onclose}
           customize={customize}
-          logo={modalData?.HeaderLogo}
+          logo={localData?.modalData?.HeaderLogo}
           handleCustomizeNext={handleCustomizeNext}
           currentCustomizeStep={currentCustomizeStep}
           handleCustomizePrevious={handleCustomizePrevious}
