@@ -19,11 +19,11 @@ const ItalicButton = ({
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <button
         title="Italic"
         onClick={handleToggleItalic}
-        className={`px-3 py-[0.8px] italic border rounded ${
+        className={`px-3 py-1 italic border rounded ${
           isItalic
             ? "text-white bg-black font-bold"
             : "text-gray-400 bg-white hover:bg-black hover:text-white"

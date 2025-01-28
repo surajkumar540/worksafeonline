@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { IoMdSearch } from "react-icons/io";
 import { BsFilterLeft } from "react-icons/bs";
-// import { Post } from "@/utils/axios";
 
-const GalleryFilters = ({
+const TextGalleryFilters = ({
   productID,
   getFilteredResults,
 }: {
@@ -252,4 +251,4 @@ const GalleryFilters = ({
   );
 };
 
-export default GalleryFilters;
+export default TextGalleryFilters;

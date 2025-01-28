@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Modal from "../common/Modal";
+import { Fetch, Post } from "@/utils/axios";
 import { useState, useCallback, useEffect } from "react";
 import ImageText from "../customisation/screens/ImageText";
 import SavedLogos from "../customisation/screens/SavedLogos";
@@ -8,7 +9,6 @@ import TextEditor from "../customisation/uploadDesign/TextEditor";
 import { InterationButton, NextButton, PrevButton } from "./Button";
 import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
-import { Fetch } from "@/utils/axios";
 
 const CustomizeLogoModal = ({
   data,
@@ -19,7 +19,12 @@ const CustomizeLogoModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
+  const [fonts, setFonts] = useState([]);
+  const [colors, setColors] = useState([]);
   const [modalData, setModalData] = useState<any>({});
+  const [savedLogos, setSavedLogos] = useState<any>([]);
+  const [savedTexts, setSavedTexts] = useState<any>([]);
+  const [artWorkPositions, setArtWorkPosition] = useState([]);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
     addtext: {},
@@ -44,8 +49,6 @@ const CustomizeLogoModal = ({
     const response: any = await Fetch(url, {}, 5000, true, false);
     if (response) setModalData(response);
   }, [data?.ProductID]);
-
-  console.log(modalData);
 
   useEffect(() => {
     fetchCustomization();
@@ -84,6 +87,91 @@ const CustomizeLogoModal = ({
     if (isVisible) resetModal();
   }, [isVisible, resetModal]);
 
+  useEffect(() => {
+    const fetchTexts = async (url: string, state: any) => {
+      try {
+        const param = { style: data?.ProductID, search: "" };
+        const response: any = await Fetch(url, param, 5000, true, false);
+        if (response?.status) state(response.artworkList);
+      } catch (error) {
+        console.log("Error fetching artwork: " + error);
+      }
+    };
+    if (isVisible && data?.ProductID) {
+      const url = "api/ArtworkList";
+      const url2 = "api/TextArtworkList";
+      fetchTexts(url, setSavedLogos);
+      fetchTexts(url2, setSavedTexts);
+    }
+  }, [isVisible, data?.ProductID]);
+
+  const getFilteredResults = async (params: Record<string, any>) => {
+    try {
+      const url = "api/FilterArtworkList";
+      const response: any = await Post(url, params, 5000, true);
+      if (response.status) setSavedLogos(response?.artworkList || []);
+    } catch (error) {
+      console.log("Error calling API:", error);
+    }
+  };
+
+  const getTextFilteredResults = async (params: Record<string, any>) => {
+    try {
+      const url = "api/FilterTextArtworkList";
+      const response: any = await Post(url, params, 5000, true);
+      if (response.status) setSavedTexts(response?.artworkList || []);
+    } catch (error) {
+      console.log("Error calling API:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getDesignPosition = async (param: any) => {
+      try {
+        console.log(param);
+        const url =
+          "api/DesignProductPositionTemplate?artwork=AW10808&product=BS955";
+        const response: any = await Fetch(url, {}, 5000, true);
+        if (response.status) setArtWorkPosition(response.artworkTemplate);
+      } catch (error) {
+        console.log("Error fetching artwork: " + error);
+      }
+    };
+    if (isVisible) getDesignPosition({});
+  }, [isVisible, data?.ProductID]);
+
+  useEffect(() => {
+    const getColors = async () => {
+      try {
+        const url = "api/ProductTextColours";
+        const params = {
+          product: data.ProductID,
+          colour: data?.color?.Html_Code,
+        };
+        const response: any = await Fetch(url, params, 5000, true);
+        if (response.status) setColors(response.textColours);
+      } catch (error) {
+        console.log("Error fetching artwork: " + error);
+      }
+    };
+    if (isVisible && data.ProductID) getColors();
+    // eslint-disable-next-line
+  }, [isVisible, data.ProductID]);
+
+  useEffect(() => {
+    const getFonts = async () => {
+      try {
+        const url = "api/ProductTextFontFamily";
+        const params = { product: data.ProductID };
+        const response: any = await Fetch(url, params, 5000, true);
+        if (response.status) setFonts(response.textFontFamily);
+      } catch (error) {
+        console.log("Error fetching artwork: " + error);
+      }
+    };
+    if (isVisible && data.ProductID) getFonts();
+  }, [isVisible, data.ProductID]);
+
   // to render screens as per customization steps
   const renderStepContent = useCallback(() => {
     switch (currentCustomizeStep) {
@@ -100,15 +188,21 @@ const CustomizeLogoModal = ({
           <>
             {customizeData?.imageText?.id !== 1 ? (
               <TextEditor
+                fonts={fonts}
+                colors={colors}
                 modalData={modalData}
-                customizeData={customizeData}
+                savedTexts={savedTexts}
                 setCustomizeData={setCustomizeData}
+                getFilteredResults={getTextFilteredResults}
+                customizeData={{ ...data, ...customizeData }}
               />
             ) : (
               <SavedLogos
                 modalData={modalData}
-                customizeData={customizeData}
+                savedLogos={savedLogos}
                 setCustomizeData={setCustomizeData}
+                getFilteredResults={getFilteredResults}
+                customizeData={{ ...data, ...customizeData }}
               />
             )}
           </>
@@ -125,6 +219,7 @@ const CustomizeLogoModal = ({
         return (
           <LogoPosition
             customizeData={customizeData}
+            artWorkPositions={artWorkPositions}
             setCustomizeData={setCustomizeData}
           />
         );
@@ -139,7 +234,7 @@ const CustomizeLogoModal = ({
         return null;
     }
     // eslint-disable-next-line
-  }, [currentCustomizeStep, customizeData, data]);
+  }, [currentCustomizeStep, customizeData, data, savedLogos, savedTexts]);
 
   // func is called to check the current screen data is available or not
   const getScreenActiveStatus = () => {
@@ -191,7 +286,7 @@ const CustomizeLogoModal = ({
       isVisible={isVisible}
       showCloseButton={false}
       minHeight="min-h-[90vh]"
-      width="w-[95vw] md:w-[80%]"
+      width="w-[95vw] md:w-[90%]"
     >
       <div className="flex flex-col relative">
         <Header

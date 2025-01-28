@@ -18,13 +18,13 @@ const SizeSelector = ({ logoPosition }: SizeSelectorProps) => {
   }, [logoPosition]);
 
   return (
-    <div className={`w-1/2 text-left mt-5 ${bigShoulders.className}`}>
+    <div className={`text-left mt-5 ${bigShoulders.className}`}>
       <h2 className="text-xl font-semibold mb-2">Select Size</h2>
-      <div className="flex gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {availableSizes.map((size) => (
           <label
             key={size}
-            className={`flex flex-col border-2 rounded-lg space-y-3 w-1/3 p-2 text-center ${
+            className={`flex flex-col border-2 rounded-lg space-y-3 p-2 text-center ${
               selectedSize === size ? "border-green-500" : ""
             }`}
           >

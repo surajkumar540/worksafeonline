@@ -32,7 +32,7 @@ const PrintEmbroidery = ({
       price: "Print Size Disclaimer - 30 cm",
       Disclaimer: modalData?.EmbroideryDisclaimer,
       terms: modalData?.PrintSetupText,
-      icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_printed.png",
+      icon: modalData?.PrintImg,
     },
     {
       id: 2,
@@ -40,7 +40,7 @@ const PrintEmbroidery = ({
       Disclaimer: modalData?.PrintDisclaimer,
       price: "Embriodery Size Disclaimer - 30 cm",
       terms: modalData?.EmbroiderySetupText,
-      icon: "https://customiseitnow.co.uk/wp-content/plugins/wooart/public/img/type_embroidered.png",
+      icon: modalData?.EmbImg,
     },
   ];
 
@@ -79,7 +79,7 @@ const PrintEmbroidery = ({
           alt="Immage"
           height={100}
           className="w-full object-contain rounded-2xl mx-auto"
-          src={"/assets/logoOptimize/printing.jpg"}
+          src={modalData.ThirdTabLeftImg}
         />
       </div>
       <div className="grid w-full lg:w-1/2 grid-cols-1 gap-3">
@@ -110,7 +110,7 @@ const PrintEmbroidery = ({
                   height={75}
                   unoptimized
                   src={option.icon}
-                  className="w-full object-contain"
+                  className="w-2/3 mx-auto object-contain"
                 />
               </div>
               <p

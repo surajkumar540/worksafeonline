@@ -1,14 +1,23 @@
 import AddText from "./AddText";
 import { useEffect, useState } from "react";
+import TextGalleryFilters from "../screens/TextGalleryFilters";
 
 const TextEditor = ({
+  fonts,
+  colors,
   modalData,
+  savedTexts,
   customizeData,
   setCustomizeData,
+  getFilteredResults,
 }: {
+  fonts: any;
+  colors: any;
   modalData: any;
+  savedTexts: any;
   customizeData: any;
   setCustomizeData: any;
+  getFilteredResults: any;
 }) => {
   const [selectedFields, setSelectedFilters] = useState({
     spacing1: "",
@@ -38,16 +47,23 @@ const TextEditor = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFields]);
 
-  console.log(customizeData);
-
   return (
-    <div className="flex justify-center items-start w-full mx-auto mb-5 gap-10 px-20">
-      <AddText
-        modalData={modalData}
-        selectedFields={selectedFields}
-        setSelectedFilters={setSelectedFilters}
+    <>
+      <TextGalleryFilters
+        productID={customizeData.ProductID}
+        getFilteredResults={getFilteredResults}
       />
-    </div>
+      <div className="flex justify-center items-start w-full mx-auto mb-5 gap-10">
+        <AddText
+          fonts={fonts}
+          colors={colors}
+          modalData={modalData}
+          savedTexts={savedTexts}
+          selectedFields={selectedFields}
+          setSelectedFilters={setSelectedFilters}
+        />
+      </div>
+    </>
   );
 };
 

@@ -27,7 +27,7 @@ const CharacterSpacingSelector = ({
   };
 
   return (
-    <div className="w-40">
+    <>
       <p className="text-xs font-semibold text-left">Spacing</p>
       <input
         min="0"
@@ -37,7 +37,7 @@ const CharacterSpacingSelector = ({
         onChange={(e) => handleSliderChange(Number(e.target.value))}
         className="w-full appearance-none rounded-lg bg-gray-200 outline-none range-input"
       />
-    </div>
+    </>
   );
 };
 

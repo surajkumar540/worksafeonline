@@ -30,7 +30,7 @@ const TextSizeSelector = ({
         id="text-size"
         value={textSize}
         onChange={(e) => handleTextSizeChange(e.target.value)}
-        className="border appearance-none  border-gray-300 text-sm px-3 py-3 rounded-full w-full outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
+        className="border appearance-none  border-gray-300 text-sm py-2 px-3 rounded-full w-full outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
       >
         <option value="">Select Size</option>
         <option value="text-[12px]">S</option>

@@ -2,28 +2,27 @@ import { useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { IoAddOutline } from "react-icons/io5";
 
-const colorsData = [
-  { name: "Red", value: "#FF0000" },
-  { name: "Blue", value: "#0000FF" },
-  { name: "Cyan", value: "#00FFFF" },
-  { name: "Lime", value: "#00FF00" },
-  { name: "Navy", value: "#000080" },
-  { name: "Black", value: "#000000" },
-  { name: "Green", value: "#008000" },
-  { name: "Yellow", value: "#FFFF00" },
-  { name: "Orange", value: "#FFA500" },
-  { name: "Purple", value: "#800080" },
-  { name: "Magenta", value: "#FF00FF" },
-];
-
 const SelectColor = ({
+  colors,
   modalData,
   handleColorChange,
 }: {
+  colors: any;
   modalData: any;
   handleColorChange: any;
 }) => {
-  const [colors, setColors] = useState(colorsData);
+  function removeDuplicateHtmlCodes(colourArray: any) {
+    const uniqueHtmlCodes = new Map();
+
+    colourArray.forEach((colour: any) => {
+      if (!uniqueHtmlCodes.has(colour.Html_Code)) {
+        uniqueHtmlCodes.set(colour.Html_Code, colour);
+      }
+    });
+    return Array.from(uniqueHtmlCodes.values());
+  }
+
+  const [colorsData, setColors] = useState(removeDuplicateHtmlCodes(colors));
   const [newColor, setNewColor] = useState("#000000");
   const [selectedColor, setSelectedColor] = useState("");
 
@@ -35,14 +34,14 @@ const SelectColor = ({
         Choose Colour:
       </h4>
       <div className="flex flex-wrap gap-2">
-        {colors.map((color: any) => {
-          const isSelected = selectedColor === color.value;
+        {colorsData.map((color: any) => {
+          const isSelected = selectedColor === color.Html_Code;
           return (
             <div
-              key={color.value}
+              key={color.Html_Code}
               onClick={() => {
-                setSelectedColor(color.value);
-                handleColorChange(color.value);
+                setSelectedColor(color.Html_Code);
+                handleColorChange(color.Html_Code);
               }}
               style={{
                 boxShadow: !isSelected
@@ -52,7 +51,7 @@ const SelectColor = ({
               className="relative group cursor-pointer rounded-full"
             >
               <div
-                className={`w-9 h-9 transition-all duration-200 ease-linear rounded-full ${
+                className={`w-8 h-8 transition-all duration-200 ease-linear rounded-full ${
                   isSelected
                     ? "p-[2px] border-2 border-black/80"
                     : "p-0 border-none"
@@ -60,11 +59,11 @@ const SelectColor = ({
               >
                 <div
                   className={`w-full h-full rounded-full overflow-hidden`}
-                  style={{ backgroundColor: color?.value }}
+                  style={{ backgroundColor: color?.Html_Code }}
                 ></div>
               </div>
               <span className="hidden group-hover:block absolute -top-5 left-5 bg-white font-normal px-4 py-1 rounded z-20 border text-sm">
-                {color?.name}
+                {color?.Colour_Description}
               </span>
             </div>
           );
@@ -72,13 +71,13 @@ const SelectColor = ({
 
         {/* Add new color section */}
         <div className="relative group cursor-pointer">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300 transition-colors">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300 transition-colors">
             {/* Color Picker Input */}
             <input
               type="color"
               value={newColor}
               onChange={(e) => setNewColor(e.target.value)}
-              className="absolute top-0 left-0 w-9 h-9 opacity-0 cursor-pointer"
+              className="absolute top-0 left-0 w-8 h-8 opacity-0 cursor-pointer"
             />
             <span title="Add Color" className="text-xl text-black font-bold">
               <IoAddOutline />
@@ -90,20 +89,24 @@ const SelectColor = ({
           </div>
 
           {/* Color Picker with Add Button */}
-          {newColor && !colors.some((color) => color.value === newColor) && (
-            <div className="absolute top-12 left-0 z-30">
-              <button
-                onClick={() => {
-                  setColors([...colors, { name: newColor, value: newColor }]);
-                  setSelectedColor(newColor);
-                  handleColorChange(newColor);
-                }}
-                className="w-full whitespace-nowrap text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-              >
-                + Add
-              </button>
-            </div>
-          )}
+          {newColor &&
+            !colors.some((color: any) => color.Html_Code === newColor) && (
+              <div className="absolute top-12 left-0 z-30">
+                <button
+                  onClick={() => {
+                    setColors([
+                      ...colors,
+                      { Colour_Description: newColor, Html_Code: newColor },
+                    ]);
+                    setSelectedColor(newColor);
+                    handleColorChange(newColor);
+                  }}
+                  className="w-full whitespace-nowrap text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                >
+                  + Add
+                </button>
+              </div>
+            )}
         </div>
       </div>
     </div>

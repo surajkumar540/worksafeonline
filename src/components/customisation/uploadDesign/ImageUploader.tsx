@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import { Post } from "@/utils/axios";
 import React, { useRef } from "react";
 import { toast } from "react-toastify";
-import { BiCloudUpload } from "react-icons/bi";
-import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
+import { BiCloudUpload } from "react-icons/bi";
 
 const ImageUploader = ({
   selectedImage,
@@ -15,7 +16,9 @@ const ImageUploader = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
 
     if (file) {
@@ -33,8 +36,15 @@ const ImageUploader = ({
           "Invalid file type. Please select a PNG, JPG, or JPEG image."
         );
       }
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
+      const formData = new FormData();
+      formData.append("image", file);
+      try {
+        const response: any = await Post("api/UploadArtworkImage", formData);
+        if (response && response[0] && response.length > 0)
+          setSelectedImage(response[0]);
+      } catch (error) {
+        console.log("Failed to set selected image: " + error);
+      }
     }
   };
 
@@ -64,14 +74,14 @@ const ImageUploader = ({
             alt="Selected"
             src={selectedImage}
             onClick={() => fileInputRef.current?.click()}
-            className="w-full h-full object-contain border-2 cursor-pointer rounded-xl"
+            className="w-full h-full object-contain border-2 p-1 border-green-500 cursor-pointer rounded-xl"
           />
           <button
             onClick={(e) => {
               e.stopPropagation();
               handleRemoveImage();
             }}
-            className="absolute -top-3 -right-3 bg-red-500 text-white w-7 h-7 flex justify-center items-center aspect-square rounded-full p-1 hover:bg-gray-500 transition-all duration-200 ease-linear"
+            className="absolute -top-3 -right-3 bg-red-400 text-white w-7 h-7 flex justify-center items-center aspect-square rounded-full p-1 hover:bg-red-600 transition-all duration-200 ease-linear"
           >
             ✕
           </button>

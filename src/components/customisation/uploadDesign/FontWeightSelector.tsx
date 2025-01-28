@@ -30,8 +30,8 @@ const FontWeightSelector = ({
   };
 
   return (
-    <div className="w-40">
-      <p className="text-xs font-semibold text-left">Bold (B)</p>
+    <>
+      <p className="text-xs font-semibold mt-2 text-left">Bold (B)</p>
       <input
         min="0"
         type="range"
@@ -40,7 +40,7 @@ const FontWeightSelector = ({
         onChange={(e) => handleSliderChange(Number(e.target.value))}
         className="w-full appearance-none rounded-lg bg-gray-200 outline-none range-input"
       />
-    </div>
+    </>
   );
 };
 

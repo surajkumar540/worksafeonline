@@ -19,10 +19,10 @@ const TextAlignButtons = ({
   };
 
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-2 mt-4">
       <button
         onClick={() => handleAlignmentChange("text-left")}
-        className={`p-1.5 rounded border-[0.5px] text-sm ${
+        className={`p-2 rounded border-[0.5px] text-sm ${
           selectedAlignment === "text-left"
             ? "text-white bg-black border-black font-bold"
             : "text-gray-500 bg-white hover:bg-black hover:border-black hover:text-white"
@@ -32,7 +32,7 @@ const TextAlignButtons = ({
       </button>
       <button
         onClick={() => handleAlignmentChange("text-center")}
-        className={`p-1.5 rounded border-[0.5px] text-sm ${
+        className={`p-2 rounded border-[0.5px] text-sm ${
           selectedAlignment === "text-center"
             ? "text-white bg-black border-black font-bold"
             : "text-gray-500 bg-white hover:bg-black hover:border-black hover:text-white"
@@ -42,7 +42,7 @@ const TextAlignButtons = ({
       </button>
       <button
         onClick={() => handleAlignmentChange("text-right")}
-        className={`p-1.5 rounded border-[0.5px] text-sm ${
+        className={`p-2 rounded border-[0.5px] text-sm ${
           selectedAlignment === "text-right"
             ? "text-white bg-black border-black font-bold"
             : "text-gray-500 bg-white border hover:bg-black hover:border-black hover:text-white"
