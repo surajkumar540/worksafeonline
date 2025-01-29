@@ -3,12 +3,10 @@ import { bigShoulders } from "@/app/layout";
 import { IoAddOutline } from "react-icons/io5";
 
 const SelectColor = ({
-  colors,
-  modalData,
+  localData,
   handleColorChange,
 }: {
-  colors: any;
-  modalData: any;
+  localData: any;
   handleColorChange: any;
 }) => {
   function removeDuplicateHtmlCodes(colourArray: any) {
@@ -22,7 +20,9 @@ const SelectColor = ({
     return Array.from(uniqueHtmlCodes.values());
   }
 
-  const [colorsData, setColors] = useState(removeDuplicateHtmlCodes(colors));
+  const [colorsData, setColors] = useState(
+    removeDuplicateHtmlCodes(localData.textColours)
+  );
   const [newColor, setNewColor] = useState("#000000");
   const [selectedColor, setSelectedColor] = useState("");
 
@@ -84,18 +84,20 @@ const SelectColor = ({
             </span>
 
             <p className="text-xs group-hover:block hidden absolute top-10 left-0 w-40 bg-white border rounded-lg p-2 shadow-md text-left text-gray-600">
-              Disclaimer: {modalData?.TextColourDisclaimer}
+              Disclaimer: {localData.modalData?.TextColourDisclaimer}
             </p>
           </div>
 
           {/* Color Picker with Add Button */}
           {newColor &&
-            !colors.some((color: any) => color.Html_Code === newColor) && (
+            !localData.textColours.some(
+              (color: any) => color.Html_Code === newColor
+            ) && (
               <div className="absolute top-12 left-0 z-30">
                 <button
                   onClick={() => {
                     setColors([
-                      ...colors,
+                      ...localData.textColours,
                       { Colour_Description: newColor, Html_Code: newColor },
                     ]);
                     setSelectedColor(newColor);

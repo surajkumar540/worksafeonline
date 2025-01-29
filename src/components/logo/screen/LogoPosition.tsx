@@ -1,18 +1,23 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import SizeSelector from "./SizeSelector";
-import { useState } from "react";
+import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { includes } from "@/utils/polyfills";
-import { toast } from "react-toastify";
+import SizeSelector from "../../customisation/screens/SizeSelector";
 
-// interface Option {
-//   id: number;
-//   icon: string;
-//   title?: string;
-//   LogoPosition?: string;
-//   position?: { top: number; bottom: number; left: number; right: number };
-// }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, duration: 0.5 },
+  },
+};
+
+const optionVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.5 } },
+};
 
 const LogoPosition = ({
   customizeData,
@@ -23,13 +28,18 @@ const LogoPosition = ({
   artWorkPositions: any;
   setCustomizeData: any;
 }) => {
-  console.log(setCustomizeData);
-  // Change selectedOption to an array to store multiple selected options
   const [selectedOptions, setSelectedOptions] = useState<number[]>(
     (Array.isArray(customizeData?.logoPosition) &&
-      customizeData?.logoPosition?.map((option: any) => option.id)) ??
+      customizeData?.logoPosition?.map((option: any) => option)) ??
       []
   );
+
+  useEffect(() => {
+    setCustomizeData((prev: any) => ({
+      ...prev,
+      logoPosition: selectedOptions,
+    }));
+  }, [selectedOptions.length]);
 
   const handleSelect = (option: any) => {
     if (
@@ -62,55 +72,6 @@ const LogoPosition = ({
     return acc;
   }, []);
 
-  // // This function will handle the selection of an option along with its size
-  // const handleSelectSelected = (option: string | number, size: string) => {
-  //   // Check if the option already exists in selectedOptions
-  //   setSelectedOptions((prevSelected: any) => {
-  //     const existingOptionIndex = prevSelected.findIndex(
-  //       (item: any) => item.id === option
-  //     );
-
-  //     if (existingOptionIndex > -1) {
-  //       // Option already exists, update size
-  //       const updatedOptions = [...prevSelected];
-  //       updatedOptions[existingOptionIndex].size = size;
-  //       return updatedOptions;
-  //     }
-
-  //     // Option doesn't exist, add a new one
-  //     return [...prevSelected, { id: option, size }];
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   if (selectedOptions.length > 0) {
-  //     const updatedLogoPositions = options
-  //       .concat(optionsBack, optionsSide)
-  //       .filter((item) => includes(selectedOptions, item?.id));
-
-  //     // Only update if the selected options have changed
-  //     setCustomizeData((prev: any) => ({
-  //       ...prev,
-  //       logoPosition: updatedLogoPositions,
-  //     }));
-  //   }
-  // }, [selectedOptions, setCustomizeData]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, duration: 0.5 },
-    },
-  };
-
-  console.log(artWorkPositions);
-
-  const optionVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5 } },
-  };
-
   const renderOption = (option: any) => (
     <motion.div
       key={option.LogoPosition}
@@ -133,9 +94,6 @@ const LogoPosition = ({
           alt={`Icon for option ${option.LogoPosition}`}
           className="min-w-28 max-w-28 object-contain"
         />
-        {/* <p className="text-xs">
-          {option.Description} ({option.LogoPosition})
-        </p> */}
       </div>
     </motion.div>
   );
@@ -163,7 +121,10 @@ const LogoPosition = ({
             </span>
           </span>
         </p>
-        <SizeSelector logoPosition={selectedOptions} />
+        <SizeSelector
+          customizeData={customizeData}
+          setCustomizeData={setCustomizeData}
+        />
         {artWorkPositions &&
           artWorkPositions.length > 0 &&
           artWorkPositions.map((pos: any) => {
@@ -195,14 +156,14 @@ const LogoPosition = ({
             variants={optionVariants}
           >
             <div className="w-full h-full gap-3 py-3 flex flex-wrap justify-center items-center">
-              {selectedOptions.map((id) => {
+              {selectedOptions.map((id, index) => {
                 const option = result.find(
                   (option: any) => option.LogoPosition === id
                 );
                 return option?.TempImage ? (
                   <Image
-                    key={id}
                     priority
+                    key={index}
                     unoptimized
                     width={524}
                     height={350}
@@ -211,7 +172,7 @@ const LogoPosition = ({
                     className="min-w-28 max-w-28 object-contain border-2 p-2 rounded-xl cursor-pointer"
                   />
                 ) : (
-                  <div key={id}>No icon available</div>
+                  <div key={index}>No icon available</div>
                 );
               })}
             </div>

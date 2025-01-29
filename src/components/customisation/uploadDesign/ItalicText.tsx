@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ItalicButton = ({
-  font,
-  setSelectedFilters,
+  italic,
+  updateForm,
+  selectedFields,
 }: {
-  font: string;
-  setSelectedFilters: any;
+  italic: string;
+  updateForm: any;
+  selectedFields: any;
 }) => {
-  const [isItalic, setIsItalic] = useState(false);
+  const [isItalic, setIsItalic] = useState(0);
+
+  useEffect(() => {
+    setIsItalic(selectedFields[italic]["TextItalic"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [italic]);
 
   const handleToggleItalic = () => {
-    const newItalicState = !isItalic;
+    const newItalicState = isItalic === 1 ? 0 : 1;
     setIsItalic(newItalicState);
-    setSelectedFilters((prev: any) => ({
-      ...prev,
-      [font]: newItalicState ? "italic" : "", // Apply italic when true, or reset when false
-    }));
+    updateForm(italic, "TextItalic", newItalicState);
   };
 
   return (

@@ -39,8 +39,8 @@ const Header: React.FC<HeaderProps> = ({
           width={100}
           unoptimized
           height={60}
-          src={logo}
-          className="w-32 bg-black p-1"
+          src={logo ?? null}
+          className="w-32 p-1"
         />
       </Link>
 

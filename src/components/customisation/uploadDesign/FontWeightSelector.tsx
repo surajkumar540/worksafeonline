@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const FontWeightSelector = ({
   font,
-  setSelectedFilters,
+  updateForm,
+  selectedFields,
 }: {
   font: string;
-  setSelectedFilters: any;
+  updateForm: any;
+  selectedFields: any;
 }) => {
   const fontWeightOptions = [
     "font-thin",
@@ -21,12 +23,16 @@ const FontWeightSelector = ({
 
   const [fontWeightIndex, setFontWeightIndex] = useState(3); // Default to "Normal"
 
+  useEffect(() => {
+    setFontWeightIndex(
+      fontWeightOptions.indexOf(selectedFields[font]["FontWeight"])
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [font]);
+
   const handleSliderChange = (index: number) => {
     setFontWeightIndex(index);
-    setSelectedFilters((prev: any) => ({
-      ...prev,
-      [font]: fontWeightOptions[index],
-    }));
+    updateForm(font, "FontWeight", fontWeightOptions[index]);
   };
 
   return (

@@ -1,16 +1,15 @@
 import Header from "./Header";
 import Modal from "../common/Modal";
+import ImageText from "./screen/ImageText";
 import { Fetch, Post } from "@/utils/axios";
+import SavedLogos from "./screen/SavedLogos";
+import LogoPosition from "./screen/LogoPosition";
+import PrintEmbroidery from "./screen/PrintEmbroidery";
 import { useState, useCallback, useEffect } from "react";
-import ImageText from "../customisation/screens/ImageText";
-import SavedLogos from "../customisation/screens/SavedLogos";
-import LogoPosition from "../customisation/screens/LogoPosition";
-import TextEditor from "../customisation/uploadDesign/TextEditor";
-import { InterationButton, NextButton, PrevButton } from "./Button";
-import PrintEmbroidery from "../customisation/screens/PrintEmbroidery";
-import CustomisationDetails from "../customisation/screens/CustomisationDetails";
-
 import { fetchRequest, getScreenActiveStatus } from "./general";
+import TextEditor from "./screen/TextEditor";
+import { InterationButton, NextButton, PrevButton } from "./Button";
+import CustomisationDetails from "../customisation/screens/CustomisationDetails";
 
 // describe the steps
 const customize = [
@@ -50,9 +49,11 @@ const CustomizeLogoModal = ({
   });
 
   const setLocalState = (key: string, data: any) => {
-    setLocalData((prevState: any) => ({ ...prevState, [key]: data }));
+    setLocalData((prevState: Record<string, any>) => ({
+      ...prevState,
+      [key]: data,
+    }));
   };
-  console.log(localData);
 
   // func is called when go to next step
   const handleCustomizeNext = (id?: number) => {
@@ -89,23 +90,27 @@ const CustomizeLogoModal = ({
   // func is called when user click on add to cart button
   const handleAddToCart = async () => {};
 
+  // filter images / logo images artworks
   const getFilteredResults = async (params: Record<string, any>) => {
     try {
       const url = "api/FilterArtworkList";
       const response: any = await Post(url, params, 5000, true);
       if (response.status)
         setLocalState("savedLogos", response?.artworkList || []);
+      else setLocalState("savedLogos", []);
     } catch (error) {
       console.log("Error calling API:", error);
     }
   };
 
+  // filter text artwork
   const getTextFilteredResults = async (params: Record<string, any>) => {
     try {
       const url = "api/FilterTextArtworkList";
       const response: any = await Post(url, params, 5000, true);
       if (response.status)
         setLocalState("artworkList", response?.artworkList || []);
+      else setLocalState("artworkList", []);
     } catch (error) {
       console.log("Error calling API:", error);
     }
@@ -128,7 +133,9 @@ const CustomizeLogoModal = ({
           } catch (error) {
             console.error(`Error fetching ${key}:`, error);
           } finally {
-            setLoading(false);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
           }
         })
       );
@@ -138,12 +145,13 @@ const CustomizeLogoModal = ({
 
   // to render screens as per customization steps
   const renderStepContent = useCallback(() => {
+    if (!isVisible) return;
     switch (currentCustomizeStep) {
       case 0:
         return (
           <ImageText
-            modalData={localData?.modalData}
             customizeData={customizeData}
+            modalData={localData?.modalData}
             setCustomizeData={setCustomizeData}
           />
         );
@@ -152,21 +160,17 @@ const CustomizeLogoModal = ({
           <>
             {customizeData?.imageText?.id !== 1 ? (
               <TextEditor
-                colors={localData.textColours}
-                fonts={localData.textFontFamily}
-                modalData={localData?.modalData}
-                savedTexts={localData.artworkList}
+                localData={localData}
+                customizeData={customizeData}
                 setCustomizeData={setCustomizeData}
                 getFilteredResults={getTextFilteredResults}
-                customizeData={{ ...data, ...customizeData }}
               />
             ) : (
               <SavedLogos
-                modalData={localData?.modalData}
-                savedLogos={localData.savedLogos}
+                localData={localData}
+                customizeData={customizeData}
                 setCustomizeData={setCustomizeData}
                 getFilteredResults={getFilteredResults}
-                customizeData={{ ...data, ...customizeData }}
               />
             )}
           </>
@@ -174,8 +178,8 @@ const CustomizeLogoModal = ({
       case 2:
         return (
           <PrintEmbroidery
-            modalData={localData?.modalData}
             customizeData={customizeData}
+            modalData={localData?.modalData}
             setCustomizeData={setCustomizeData}
           />
         );
@@ -190,7 +194,7 @@ const CustomizeLogoModal = ({
       case 4:
         return (
           <CustomisationDetails
-            data={{ ...data, ...customizeData }}
+            data={{ ...localData, ...customizeData, ...data }}
             setCurrentCustomizeStep={setCurrentCustomizeStep}
           />
         );

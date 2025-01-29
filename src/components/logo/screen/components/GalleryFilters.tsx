@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { IoMdSearch } from "react-icons/io";
 import { BsFilterLeft } from "react-icons/bs";
-// import { Post } from "@/utils/axios";
 
 const GalleryFilters = ({
   productID,
@@ -11,7 +10,7 @@ const GalleryFilters = ({
   productID: any;
   getFilteredResults: any;
 }) => {
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [selectedFilters, setSelectedFilters] = useState({
     printEmb: -1,
@@ -37,40 +36,45 @@ const GalleryFilters = ({
       RFavMyLogo: selectedFilters.preference ?? "",
     };
 
-    const getData = async () => {
-      getFilteredResults(params);
-    };
-    if (params.EmbPrint !== -1) getData();
+    if (params.EmbPrint !== -1) getFilteredResults(params);
     // eslint-disable-next-line
   }, [selectedFilters]);
-
-  // const handleFilterChange = (
-  //   key: keyof typeof selectedFilters,
-  //   value: string | number
-  // ) => {
-  //   setLoading(true);
-  //   setSelectedFilters((prev) => {
-  //     const updatedFilters = { ...prev, [key]: value };
-  //     const params = {
-  //       Style: productID ?? "",
-  //       EmbPrint: updatedFilters.printEmb ?? "",
-  //       RFavMyLogo: updatedFilters.preference ?? "",
-  //     };
-  //     getFilteredResults(params);
-  //     return updatedFilters;
-  //   });
-  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
-  const clearAllFilters = () => {
-    setSelectedFilters({
-      printEmb: -1,
-      preference: 0,
-    });
-    setSearchText("");
+  const clearAllFilters = async () => {
+    try {
+      setLoading(true);
+      setSelectedFilters({
+        printEmb: -1,
+        preference: 0,
+      });
+      setSearchText("");
+      await getFilteredResults({ Style: productID ?? "", search: "" });
+    } catch (error) {
+      console.log("Error: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      setLoading(true);
+      const params = {
+        Style: productID ?? "",
+        search: searchText ?? "",
+        EmbPrint: selectedFilters.printEmb ?? "",
+        RFavMyLogo: selectedFilters.preference ?? "",
+      };
+      await getFilteredResults(params);
+    } catch (error) {
+      console.log("Error: " + error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,6 +89,8 @@ const GalleryFilters = ({
             {isAccordionOpen ? "Hide" : "Show"} Filters
           </button>
           <button
+            type="button"
+            disabled={loading}
             onClick={clearAllFilters}
             className="px-3 py-1 bg-gray-200 hover:bg-gray-300 text-black text-sm font-medium rounded-md transition"
           >
@@ -96,19 +102,26 @@ const GalleryFilters = ({
           <div className="mt-4 bg-gray-50 transition rounded-xl p-3 space-y-4">
             <div className="grid grid-cols-5 justify-center items-center gap-5 lg:gap-10">
               <div className="flex col-span-2 justify-between items-center gap-10">
-                <div className="relative w-full">
+                <div className="relative flex gap-2 items-center w-full">
                   <input
                     type="text"
                     value={searchText}
-                    // autoFocus={searchBar}
                     onChange={handleInputChange}
                     placeholder={"Search by name or description..."}
                     className="w-full pl-4 pr-10 text-sm py-3 border text-gray-500 rounded-full outline-none"
                   />
-                  <IoMdSearch
-                    size={20}
-                    className="absolute right-2 top-3 text-gray-400 cursor-pointer"
-                  />
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={handleSearch}
+                    className="flex items-center gap-2 bg-gray-200 py-1.5 px-4 rounded-lg text-lg"
+                  >
+                    Search{" "}
+                    <IoMdSearch
+                      size={20}
+                      className="text-gray-400 cursor-pointer"
+                    />
+                  </button>
                 </div>
               </div>
 

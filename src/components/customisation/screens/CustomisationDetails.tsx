@@ -26,7 +26,7 @@ const CustomisationDetails = ({
         Summary
       </h3>
 
-      <div className="grid grid-cols-6 gap-2 px-28">
+      <div className="grid grid-cols-6 gap-2 px-36">
         {/* Column Titles */}
         {[
           "Product",
@@ -45,7 +45,7 @@ const CustomisationDetails = ({
         ))}
       </div>
 
-      <div className="grid grid-cols-6 gap-2 px-28 mt-2">
+      <div className="grid grid-cols-6 gap-2 px-36 mt-2">
         {/* Product */}
         <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
           <Image
@@ -83,7 +83,7 @@ const CustomisationDetails = ({
             )}
           </div>
           <p
-            className={`text-sm font-semibold pt-2 text-center ${bigShoulders.className}`}
+            className={`text-lg font-semibold pt-2 text-center ${bigShoulders.className}`}
           >
             {data?.color?.Colour_Description?.trim()}
           </p>
@@ -97,19 +97,27 @@ const CustomisationDetails = ({
             width={200}
             height={200}
             alt="Logo"
-            src={logo1}
-            className="object-contain w-3/4"
+            src={
+              data?.designImage !== ""
+                ? data?.designImage
+                : data?.design?.LogoImage
+            }
+            className="object-contain w-full shadow"
           />
           <p
-            className={`text-sm font-bold text-center ${bigShoulders.className}`}
+            className={`text-lg mt-2 font-bold text-center ${bigShoulders.className}`}
           >
-            Medium
+            {data?.logosize === "S"
+              ? "Small"
+              : data?.logosize === "M"
+              ? "Medium"
+              : "Large"}
           </p>
         </div>
 
         {/* Logo Position */}
         <div className="h-48 bg-gray-100 rounded-b-xl flex flex-col items-center justify-center p-2">
-          <Image
+          {/* <Image
             priority
             unoptimized
             width={200}
@@ -117,11 +125,11 @@ const CustomisationDetails = ({
             alt="Logo Position"
             src={data?.logoPosition?.icon ?? logo1}
             className="object-contain w-3/4"
-          />
+          /> */}
           <p
-            className={`text-xs font-bold pt-2 text-center ${bigShoulders.className}`}
+            className={`text-2xl font-bold pt-2 text-center ${bigShoulders.className}`}
           >
-            {data?.logoPosition?.map((id: any) => id?.title).join(", ")}
+            {data?.logoPosition?.map((id: any) => id).join(", ")}
           </p>
         </div>
 
@@ -134,7 +142,7 @@ const CustomisationDetails = ({
             height={200}
             alt="Application"
             src={data?.printEmbroidery?.icon ?? logo1}
-            className="object-contain w-3/4"
+            className="object-contain w-full"
           />
         </div>
 

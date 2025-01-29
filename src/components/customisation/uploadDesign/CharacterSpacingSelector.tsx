@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const CharacterSpacingSelector = ({
   space,
-  setSelectedFilters,
+  updateForm,
+  selectedFields,
 }: {
   space: string;
-  setSelectedFilters: any;
+  updateForm: any;
+  selectedFields: any;
 }) => {
   const spacingOptions = [
     "tracking-tighter",
@@ -18,12 +20,16 @@ const CharacterSpacingSelector = ({
 
   const [characterSpacingIndex, setCharacterSpacingIndex] = useState(2); // Default to "Normal"
 
+  useEffect(() => {
+    setCharacterSpacingIndex(
+      spacingOptions.indexOf(selectedFields[space]["TextSpacing"])
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [space]);
+
   const handleSliderChange = (index: number) => {
     setCharacterSpacingIndex(index);
-    setSelectedFilters((prev: any) => ({
-      ...prev,
-      [space]: spacingOptions[index],
-    }));
+    updateForm(space, "TextSpacing", spacingOptions[index]);
   };
 
   return (

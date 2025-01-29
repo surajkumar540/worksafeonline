@@ -5,9 +5,9 @@ import { bigShoulders } from "@/app/layout";
 
 interface Option {
   id: number;
+  icon: string;
   title: string;
   terms: string;
-  icon: JSX.Element;
   description: string;
   description2: string;
 }
@@ -47,37 +47,19 @@ const ImageText = ({
   const options: Option[] = [
     {
       id: 1,
+      icon: modalData.RightTopImg,
       title: modalData.RightTopText1,
       terms: modalData.RightTopTerms,
       description: modalData.RightTopText2,
       description2: modalData.RightTopText3,
-      icon: (
-        <Image
-          width={56}
-          height={56}
-          priority
-          unoptimized
-          src={modalData.RightTopImg}
-          alt="modalData.RightTopText1"
-        />
-      ),
     },
     {
       id: 2,
+      icon: modalData.RightBottomImg,
       title: modalData.RightBottomText1,
       terms: modalData.RightBottomTerms,
       description: modalData.RightBottomText2,
       description2: modalData.RightBottomText3,
-      icon: (
-        <Image
-          width={56}
-          height={56}
-          priority
-          unoptimized
-          src={modalData.RightBottomImg}
-          alt="modalData.RightBottomText1"
-        />
-      ),
     },
   ];
 
@@ -96,8 +78,8 @@ const ImageText = ({
           width={100}
           alt="Image"
           height={100}
+          src={modalData?.LeftImg ?? null}
           className="w-full object-contain rounded-2xl mx-auto"
-          src={modalData?.LeftImg}
         />
       </div>
       <div className="grid w-full lg:w-1/2 grid-cols-1 gap-5">
@@ -115,7 +97,16 @@ const ImageText = ({
             <div
               className={`flex flex-col items-center space-y-2 ${bigShoulders.className}`}
             >
-              <div>{option.icon}</div>
+              <div>
+                <Image
+                  width={56}
+                  height={56}
+                  priority
+                  unoptimized
+                  alt={option.title}
+                  src={option.icon ?? null}
+                />
+              </div>
               <h3 className="text-2xl font-extrabold text-center">
                 {option.title}
               </h3>

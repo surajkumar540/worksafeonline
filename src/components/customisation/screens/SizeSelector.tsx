@@ -1,21 +1,25 @@
+import { useState } from "react";
 import { bigShoulders } from "@/app/layout";
-import { useState, useEffect } from "react";
 
 interface SizeSelectorProps {
-  logoPosition: any;
+  customizeData: any;
+  setCustomizeData: any;
 }
 
-const SizeSelector = ({ logoPosition }: SizeSelectorProps) => {
-  const availableSizes = ["small", "medium", "large"];
-  const [selectedSize, setSelectedSize] = useState("medium");
+const SizeSelector = ({
+  customizeData,
+  setCustomizeData,
+}: SizeSelectorProps) => {
+  const availableSizes = ["S", "M", "L"];
+  const [selectedSize, setSelectedSize] = useState(customizeData?.logosize);
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSize(event.target.value);
+    setCustomizeData((prev: any) => ({
+      ...prev,
+      logosize: event.target.value,
+    }));
   };
-
-  useEffect(() => {
-    setSelectedSize("medium");
-  }, [logoPosition]);
 
   return (
     <div className={`text-left mt-5 ${bigShoulders.className}`}>
@@ -37,13 +41,12 @@ const SizeSelector = ({ logoPosition }: SizeSelectorProps) => {
               className="min-w-6 min-h-6 text-blue-600 border-gray-300 focus:ring-blue-500"
             />
             <span className="text-xs font-normal flex flex-col">
-              <strong className="text-xl font-extrabold">
+              <strong className="text-2xl font-extrabold">
                 {size.charAt(0).toUpperCase() + size.slice(1)}
               </strong>
-              {/* {size === "small" && "Ideal for most embroidered logos."}
-              {size === "medium" &&
-                "Perfect balance for size, clarity and impact."}
-              {size === "large" && "Great value for large printed designs."} */}
+              {size === "S" && "Ideal for most embroidered logos."}
+              {size === "M" && "Perfect balance for size, clarity and impact."}
+              {size === "L" && "Great value for large printed designs."}
             </span>
           </label>
         ))}

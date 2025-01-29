@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAlignLeft, FaAlignCenter, FaAlignRight } from "react-icons/fa";
 
 const TextAlignButtons = ({
-  setSelectedFilters,
-  font,
+  align,
+  updateForm,
+  selectedFields,
 }: {
-  setSelectedFilters: any;
-  font: string;
+  align: string;
+  updateForm: any;
+  selectedFields: any;
 }) => {
   const [selectedAlignment, setSelectedAlignment] = useState("text-center");
 
+  useEffect(() => {
+    setSelectedAlignment(selectedFields[align]["TextAlign"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [align]);
+
   const handleAlignmentChange = (alignment: string) => {
     setSelectedAlignment(alignment);
-    setSelectedFilters((prev: any) => ({
-      ...prev,
-      [font]: alignment,
-    }));
+    updateForm(align, "TextAlign", alignment);
   };
 
   return (

@@ -2,19 +2,19 @@ import { bigShoulders } from "@/app/layout";
 import React, { useState } from "react";
 
 const TextSizeSelector = ({
+  sizeKey,
   hideText,
-  size: sizeKey,
-  setSelectedFilters,
+  updateForm,
 }: {
-  size: string;
+  sizeKey: string;
+  updateForm: any;
   hideText?: boolean;
-  setSelectedFilters: any;
 }) => {
   const [textSize, setTextSize] = useState("text-[12px]");
 
   const handleTextSizeChange = (size: string) => {
     setTextSize(size);
-    setSelectedFilters((prev: any) => ({ ...prev, [sizeKey]: size }));
+    updateForm(sizeKey, "TextSize", size);
   };
 
   return (
@@ -37,6 +37,7 @@ const TextSizeSelector = ({
         <option value="text-[14px]">M</option>
         <option value="text-[16px]">L</option>
         <option value="text-[18px]">XL</option>
+        <option value="text-[20px]">XXL</option>
       </select>
       <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-sm text-black">
         ▼

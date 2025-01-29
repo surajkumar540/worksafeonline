@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ImageUploader from "../uploadDesign/ImageUploader";
+import ImageUploader from "./ImageUploader";
 
 const UploadDesign = ({
   customizeData,
@@ -11,6 +11,7 @@ const UploadDesign = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(
     customizeData?.designImage ?? null
   );
+
   useEffect(() => {
     setCustomizeData((prev: any) => ({
       ...prev,
@@ -18,6 +19,7 @@ const UploadDesign = ({
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedImage]);
+
   return (
     <div className="pb-5 flex w-full flex-col justify-center items-center">
       <ImageUploader

@@ -3,17 +3,24 @@ export const getScreenActiveStatus = (
   customizeData: any,
   currentCustomizeStep: any
 ) => {
-  const { imageText, designImage, addtext, printEmbroidery, logoPosition } =
-    customizeData || {};
+  const {
+    design,
+    addtext,
+    logosize,
+    imageText,
+    designImage,
+    logoPosition,
+    printEmbroidery,
+  } = customizeData || {};
   switch (currentCustomizeStep) {
     case 0:
       return !!imageText?.id;
     case 1:
-      return !!(designImage || addtext?.textLine1);
+      return !!(designImage || design?.Item_Code || addtext?.textLine1);
     case 2:
       return !!printEmbroidery?.id;
     case 3:
-      return !!logoPosition?.length;
+      return !!logoPosition?.length && !!logosize;
     default:
       return false;
   }
