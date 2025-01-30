@@ -37,16 +37,19 @@ const AddText: React.FC<AddTextProps> = ({
   const textLines = ["textLine1", "textLine2", "textLine3"] as const;
 
   useEffect(() => {
-    if (customizeData?.textDesign?.Item_Code && !customizeData?.designImage)
+    if (customizeData?.textDesign?.Item_Code)
       setIsLogoSelected(customizeData?.textDesign);
     if (!isLogoSelected)
       setCustomizeData((prev: any) => ({ ...prev, textDesign: null }));
     // eslint-disable-next-line
-  }, [
-    customizeData?.textDesign?.Item_Code,
-    isLogoSelected,
-    customizeData?.designImage,
-  ]);
+  }, [customizeData?.textDesign?.Item_Code, isLogoSelected]);
+
+  useEffect(() => {
+    if (customizeData?.textDesign?.Item_Code) {
+      setSelectedOption(1);
+      setIsLogoSelected(customizeData?.textDesign);
+    }
+  }, [customizeData?.textDesign?.Item_Code]);
 
   const handleKeyPress = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -105,7 +108,7 @@ const AddText: React.FC<AddTextProps> = ({
 
   const handleCurrentIndex = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    setSelectedOption(0);
+    setSelectedOption(2);
     setIsLogoSelected({});
     setCustomizeData((prev: any) => ({ ...prev, textDesign: null }));
     if (name === "textLine1") setCurrentIndex(0);
@@ -142,7 +145,7 @@ const AddText: React.FC<AddTextProps> = ({
 
   return (
     <>
-      <div className="w-2/5">
+      <div className={`w-2/5`}>
         <Gallery
           field="artworkList"
           localData={localData}
@@ -151,7 +154,21 @@ const AddText: React.FC<AddTextProps> = ({
           setCustomizeData={setCustomizeData}
         />
       </div>
-      <div className="w-3/5">
+      <div
+        className={`w-3/5 border-4 p-5 rounded-2xl ${
+          selectedOption === 2 ? "border-green-500" : "border-gray-100"
+        }`}
+      >
+        <div className="flex text-2xl uppercase font-semibold items-center justify-center mb-6">
+          <span
+            className={`border border-green-500 text-xl text-green-500 px-2 p-0.5 rounded-md ${bigShoulders.className}`}
+          >
+            Option 2
+          </span>
+          <span className={`px-2 text-black ${bigShoulders.className}`}>
+            - UPLOAD NEW TEXT
+          </span>
+        </div>
         <div className="flex justify-between gap-5">
           <div className="w-3/5 flex flex-col space-y-2">
             <SelectColor
