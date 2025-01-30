@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { Post } from "@/utils/axios";
+import { Fetch, Post } from "@/utils/axios";
 import { MdDelete } from "react-icons/md";
 import { bigShoulders } from "@/app/layout";
 import React, { useEffect, useState } from "react";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
+import Loader from "@/components/common/Loader";
 
 const CustomisationDetails = ({
   data,
@@ -86,37 +87,63 @@ const CustomisationDetails = ({
   }, []);
 
   const handleDeleteLogo = async (id: number) => {
-    console.log(id);
+    const url = "api/DeleteAddedArtwork";
+    const data = {
+      DeviceID: getDeviceCheck(),
+      Product: product?.ProductID,
+      Colour: product?.color?.Colour?.trim() || "NA",
+      Fit: product?.fitting?.Fitting?.trim() || "NA",
+    };
+    try {
+      const response: any = await Post(url, { ...data, Seq: id });
+      if (response.status) {
+        const url = "api/AddedArtworkList";
+        const data = {
+          device_id: getDeviceCheck(),
+          product: product?.ProductID,
+          colour: product?.color?.Colour?.trim() || "NA",
+          fit: product?.fitting?.Fitting?.trim() || "NA",
+        };
+        const resp: any = await Fetch(url, data, 5000, true, false);
+        if (resp?.status) setArtWorklist(resp.addedArtworkList);
+        else setArtWorklist([]);
+      }
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   };
 
-  if (loading) return null;
+  if (loading) return <Loader />;
 
   return (
     <>
-      <h3
-        className={`text-3xl pb-5 font-extrabold text-center ${bigShoulders.className}`}
-      >
-        Summary
-      </h3>
-
-      <div className="grid grid-cols-6 gap-2 px-36">
-        {/* Column Titles */}
-        {[
-          "Product",
-          "Colour",
-          "Logo / Text",
-          "Logo Position",
-          "Application",
-          "Delete",
-        ].map((title) => (
-          <p
-            key={title}
-            className="font-semibold text-sm bg-gray-100 py-2 rounded-t-xl text-center"
+      {artWorklist && artWorklist.length > 0 && (
+        <>
+          <h3
+            className={`text-3xl pb-5 font-extrabold text-center ${bigShoulders.className}`}
           >
-            {title}
-          </p>
-        ))}
-      </div>
+            Summary
+          </h3>
+          <div className="grid grid-cols-6 gap-2 px-36">
+            {/* Column Titles */}
+            {[
+              "Product",
+              "Colour",
+              "Logo / Text",
+              "Logo Position",
+              "Application",
+              "Delete",
+            ].map((title) => (
+              <p
+                key={title}
+                className="font-semibold text-sm bg-gray-100 py-2 rounded-t-xl text-center"
+              >
+                {title}
+              </p>
+            ))}
+          </div>
+        </>
+      )}
 
       <div className="grid grid-cols-6 gap-2 px-36 mt-2">
         {artWorklist &&
@@ -231,6 +258,9 @@ const CustomisationDetails = ({
             );
           })}
       </div>
+      {artWorklist && artWorklist.length === 0 && (
+        <p className="text-2xl text-secondary">No ArtWork Found</p>
+      )}
     </>
   );
 };
