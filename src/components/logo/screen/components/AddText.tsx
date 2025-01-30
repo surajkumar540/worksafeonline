@@ -49,6 +49,7 @@ const AddText: React.FC<AddTextProps> = ({
       setSelectedOption(1);
       setIsLogoSelected(customizeData?.textDesign);
     }
+    // eslint-disable-next-line
   }, [customizeData?.textDesign?.Item_Code]);
 
   const handleKeyPress = (
