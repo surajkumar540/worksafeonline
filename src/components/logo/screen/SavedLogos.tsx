@@ -35,6 +35,7 @@ const SavedLogos = ({
       setIsLogoSelected(customizeData?.logoDesign);
     if (!isLogoSelected)
       setCustomizeData((prev: any) => ({ ...prev, logoDesign: null }));
+    // eslint-disable-next-line
   }, [
     customizeData?.logoDesign?.Item_Code,
     isLogoSelected,

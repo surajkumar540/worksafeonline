@@ -10,7 +10,6 @@ interface StepperProps {
   currentStep: number;
   reduceSize?: boolean;
   handleCustomizeNextId?: any;
-  handleCustomizePrevious: any;
 }
 
 const Stepper: React.FC<StepperProps> = ({
@@ -18,7 +17,6 @@ const Stepper: React.FC<StepperProps> = ({
   reduceSize,
   currentStep,
   handleCustomizeNextId,
-  handleCustomizePrevious,
 }) => {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 w-full">

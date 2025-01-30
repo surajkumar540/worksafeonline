@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Post } from "@/utils/axios";
 import { MdDelete } from "react-icons/md";
 import { bigShoulders } from "@/app/layout";
+import React, { useEffect, useState } from "react";
 import { getDeviceCheck } from "@/api/generateDeviceId";
-import React, { useEffect, useRef, useState } from "react";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
 
 const CustomisationDetails = ({
@@ -45,7 +45,7 @@ const CustomisationDetails = ({
       try {
         setLoading(true);
         const url = "api/AddArtworkToProduct";
-        let updatedData = {
+        const updatedData = {
           Style: product?.ProductID,
           DeviceID: getDeviceCheck(),
           Colour: product?.color?.Colour?.trim() || "NA",
@@ -82,9 +82,12 @@ const CustomisationDetails = ({
       }
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
-  const handleDeleteLogo = async (id: number) => {};
+  const handleDeleteLogo = async (id: number) => {
+    console.log(id);
+  };
 
   if (loading) return null;
 

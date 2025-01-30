@@ -9,7 +9,6 @@ interface HeaderProps {
   customize: any; // Adjust type to match `customize` object structure
   onClose: () => void;
   currentCustomizeStep: number;
-  handleCustomizePrevious: () => void;
   handleCustomizeNext: (id?: number) => void;
 }
 
@@ -19,7 +18,6 @@ const Header: React.FC<HeaderProps> = ({
   customize,
   currentCustomizeStep,
   handleCustomizeNext,
-  handleCustomizePrevious,
 }) => {
   const handleStepChange = (id?: number) => {
     try {
@@ -51,7 +49,6 @@ const Header: React.FC<HeaderProps> = ({
           steps={customize}
           currentStep={currentCustomizeStep}
           handleCustomizeNextId={handleStepChange}
-          handleCustomizePrevious={handleCustomizePrevious}
         />
       ) : (
         <div className="text-gray-500">No steps available</div>

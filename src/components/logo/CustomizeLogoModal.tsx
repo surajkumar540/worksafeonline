@@ -162,6 +162,7 @@ const CustomizeLogoModal = ({
       );
     };
     fetchData();
+    // eslint-disable-next-line
   }, [isVisible, data?.ProductID, data?.color?.Html_Code]);
 
   // to render screens as per customization steps
@@ -270,7 +271,6 @@ const CustomizeLogoModal = ({
           logo={localData?.modalData?.HeaderLogo}
           handleCustomizeNext={handleCustomizeNext}
           currentCustomizeStep={currentCustomizeStep}
-          handleCustomizePrevious={handleCustomizePrevious}
         />
         <div className="w-full mx-auto text-center mt-4">
           <div className="px-4 mb-24">{renderStepContent()}</div>

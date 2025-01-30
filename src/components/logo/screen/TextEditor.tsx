@@ -1,5 +1,5 @@
+import { useState } from "react";
 import AddText from "./components/AddText";
-import { useEffect, useState } from "react";
 import TextGalleryFilters from "../../customisation/screens/TextGalleryFilters";
 
 const TextEditor = ({
@@ -58,11 +58,6 @@ const TextEditor = ({
       },
     }));
   };
-
-  // useEffect(() => {
-  //   setCustomizeData((prev: any) => ({ ...prev, addtext: selectedFields }));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedFields]);
 
   return (
     <>

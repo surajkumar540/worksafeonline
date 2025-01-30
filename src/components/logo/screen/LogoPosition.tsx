@@ -39,6 +39,7 @@ const LogoPosition = ({
       ...prev,
       logoPosition: selectedOptions,
     }));
+    // eslint-disable-next-line
   }, [selectedOptions.length]);
 
   const handleSelect = (option: any) => {

@@ -41,6 +41,7 @@ const AddText: React.FC<AddTextProps> = ({
       setIsLogoSelected(customizeData?.textDesign);
     if (!isLogoSelected)
       setCustomizeData((prev: any) => ({ ...prev, textDesign: null }));
+    // eslint-disable-next-line
   }, [
     customizeData?.textDesign?.Item_Code,
     isLogoSelected,
