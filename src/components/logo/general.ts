@@ -4,23 +4,34 @@ export const getScreenActiveStatus = (
   currentCustomizeStep: any
 ) => {
   const {
-    design,
     addtext,
-    logosize,
+    logoSize,
     imageText,
+    logoDesign,
+    textDesign,
     designImage,
     logoPosition,
     printEmbroidery,
   } = customizeData || {};
+
+  const isValid = !!(
+    (
+      textDesign?.Item_Code ||
+      addtext?.textLine1?.TextLine || // If textDesign or addtext is present
+      designImage ||
+      logoDesign?.Item_Code
+    ) // If designImage or logoDesign is present
+  );
+
   switch (currentCustomizeStep) {
     case 0:
       return !!imageText?.id;
     case 1:
-      return !!(designImage || design?.Item_Code || addtext?.textLine1);
+      return isValid;
     case 2:
       return !!printEmbroidery?.id;
     case 3:
-      return !!logoPosition?.length && !!logosize;
+      return !!logoPosition?.length && !!logoSize;
     default:
       return false;
   }

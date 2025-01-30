@@ -25,7 +25,7 @@ const Stepper: React.FC<StepperProps> = ({
       {steps.map((step, index) => (
         <div
           onClick={() => {
-            if (index < currentStep) handleCustomizePrevious();
+            if (index < currentStep) handleCustomizeNextId(index);
             else handleCustomizeNextId(index);
           }}
           key={index}

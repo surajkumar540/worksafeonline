@@ -31,12 +31,12 @@ const SavedLogos = ({
   };
 
   useEffect(() => {
-    if (customizeData?.design?.Item_Code && !customizeData?.designImage)
-      setIsLogoSelected(customizeData?.design);
+    if (customizeData?.logoDesign?.Item_Code && !customizeData?.designImage)
+      setIsLogoSelected(customizeData?.logoDesign);
     if (!isLogoSelected)
-      setCustomizeData((prev: any) => ({ ...prev, design: {} }));
+      setCustomizeData((prev: any) => ({ ...prev, logoDesign: null }));
   }, [
-    customizeData?.design?.Item_Code,
+    customizeData?.logoDesign?.Item_Code,
     isLogoSelected,
     customizeData?.designImage,
   ]);
@@ -53,22 +53,22 @@ const SavedLogos = ({
 
   // Handles the selection of Option 1
   const handleSelectedOption1 = () => {
-    if (customizeData.designImage) {
-      showDeselectWarning();
-      return;
-    }
+    if (customizeData.designImage) return showDeselectWarning();
     setSelectedOption(1);
   };
 
   // Handles the selection of Option 2
-  const handleSelectedOption2 = () => setSelectedOption(2);
+  const handleSelectedOption2 = () => {
+    if (selectedOption === 1 && customizeData?.designImage)
+      setSelectedOption(2);
+  };
 
   return (
     <>
       {/* Gallery Filters */}
       <GalleryFilters
         getFilteredResults={getFilteredResults}
-        productID={customizeData.data.ProductID}
+        productID={customizeData.ProductID}
       />
       <div className="flex items-start my-5 justify-between gap-8">
         <div onClick={handleSelectedOption1} className="w-3/5">
@@ -110,6 +110,13 @@ const SavedLogos = ({
           <div className="pt-5">
             <textarea
               rows={4}
+              onChange={(e) =>
+                setCustomizeData((prev: any) => ({
+                  ...prev,
+                  logoDescription: e.target.value,
+                }))
+              }
+              value={customizeData.logoDescription ?? ""}
               className={`w-full border border-gray-300 text-sm rounded-lg p-3 text-gray-800 placeholder-gray-400 outline-none focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary/50 resize-none ${bigShoulders.className}`}
               placeholder="Add Notes (optional)..."
             />

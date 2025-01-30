@@ -31,37 +31,21 @@ const Logo = ({
   const {
     size,
     color,
-    price,
-    Detail,
     fitting,
     quantity,
     ProductID,
-    Composition,
     ProductName,
-    availability,
     ProductImage,
-    productBrand,
-    reviewsCount,
-    ProductActualPrice,
-    ProductSellingPrice,
   } = product;
 
   const updatedProduct = {
     size,
     color,
-    price,
-    Detail,
     fitting,
     quantity,
     ProductID,
-    Composition,
     ProductName,
-    availability,
     ProductImage,
-    productBrand,
-    reviewsCount,
-    ProductActualPrice,
-    ProductSellingPrice,
   };
 
   const handleCustomizeLogo = () => {
@@ -78,11 +62,13 @@ const Logo = ({
 
   return (
     <>
-      <CustomizeLogoModal
-        data={updatedProduct}
-        isVisible={isVisible}
-        onclose={handleToggle}
-      />
+      {isVisible && (
+        <CustomizeLogoModal
+          data={updatedProduct}
+          isVisible={isVisible}
+          onclose={handleToggle}
+        />
+      )}
       <Button
         type="button"
         text="Customize Logo"

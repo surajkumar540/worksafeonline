@@ -1,5 +1,5 @@
 import AddText from "./components/AddText";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import TextGalleryFilters from "../../customisation/screens/TextGalleryFilters";
 
 const TextEditor = ({
@@ -59,16 +59,16 @@ const TextEditor = ({
     }));
   };
 
-  useEffect(() => {
-    setCustomizeData((prev: any) => ({ ...prev, addtext: selectedFields }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFields]);
+  // useEffect(() => {
+  //   setCustomizeData((prev: any) => ({ ...prev, addtext: selectedFields }));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedFields]);
 
   return (
     <>
       <TextGalleryFilters
+        productID={customizeData.ProductID}
         getFilteredResults={getFilteredResults}
-        productID={customizeData.data.ProductID}
       />
       <div className="flex justify-center items-start w-full mx-auto mb-5 gap-10">
         <AddText

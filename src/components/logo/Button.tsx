@@ -14,10 +14,6 @@ export const PrevButton: React.FC<PrevButtonProps> = ({
       onClick={handleCustomizePrevious}
       className={`bg-green-500 text-white uppercase relative text-xl group hover:text-white hover:bg-green-700 flex transition cursor-pointer items-center gap-1 px-6 py-1.5 rounded-full ${bigShoulders.className}`}
     >
-      {/* <IoArrowBackCircle
-        title="Back"
-        className="text-2xl group-hover:text-white"
-      /> */}
       Back
     </button>
   );
@@ -43,10 +39,6 @@ export const NextButton: React.FC<NextButtonProps> = ({
       }`}
     >
       Next
-      {/* <IoArrowForwardCircle
-        title="Forward"
-        className="text-2xl group-hover:text-white"
-      /> */}
     </button>
   );
 };
@@ -65,14 +57,14 @@ export const InterationButton: React.FC<InterationButtonProps> = ({
       <button
         type="button"
         onClick={resetModal}
-        className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-lg font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+        className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-secondary/20 hover:bg-secondary rounded-full text-lg font-bold bg-secondary/80 text-white ${bigShoulders.className}`}
       >
         Add Another Logo
       </button>
       <button
         type="button"
         onClick={handleAddToCart}
-        className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-lg font-bold bg-primary/80 text-black ${bigShoulders.className}`}
+        className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-green-500/20 hover:bg-green-500 rounded-full text-lg font-bold bg-green-500/80 text-white ${bigShoulders.className}`}
       >
         Add to cart
       </button>

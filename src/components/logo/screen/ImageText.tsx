@@ -27,7 +27,11 @@ const ImageText = ({
 
   const handleSelect = (option: any) => {
     setSelectedOption(option.id);
-    setCustomizeData((prev: any) => ({ ...prev, imageText: option }));
+    let data;
+    if (option.id === 1) {
+      data = { textDesign: null };
+    } else data = { logoDesign: null, designImage: null };
+    setCustomizeData((prev: any) => ({ ...prev, imageText: option, ...data }));
   };
 
   // Variants for stagger effect
@@ -105,6 +109,7 @@ const ImageText = ({
                   unoptimized
                   alt={option.title}
                   src={option.icon ?? null}
+                  className="object-contain w-fit"
                 />
               </div>
               <h3 className="text-2xl font-extrabold text-center">

@@ -135,7 +135,7 @@ const LogoPosition = ({
                 >
                   {pos?.MainPosition}
                 </p>
-                <div className="flex overflow-auto no-scrollbar pt-3 gap-2">
+                <div className="flex overflow-auto no-scrollbar p-2 gap-2">
                   {pos.ArtworkPosition.map(renderOption)}
                 </div>
               </div>

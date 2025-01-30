@@ -11,13 +11,13 @@ const SizeSelector = ({
   setCustomizeData,
 }: SizeSelectorProps) => {
   const availableSizes = ["S", "M", "L"];
-  const [selectedSize, setSelectedSize] = useState(customizeData?.logosize);
+  const [selectedSize, setSelectedSize] = useState(customizeData?.logoSize);
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSize(event.target.value);
     setCustomizeData((prev: any) => ({
       ...prev,
-      logosize: event.target.value,
+      logoSize: event.target.value,
     }));
   };
 

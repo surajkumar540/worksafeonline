@@ -31,18 +31,18 @@ const AddText: React.FC<AddTextProps> = ({
   const [loading, setLoading] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(1);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [isLogoSelected, setIsLogoSelected] = useState<any>({});
-  const [selectedOption, setSelectedOption] = useState<number>(1);
   const textLines = ["textLine1", "textLine2", "textLine3"] as const;
 
   useEffect(() => {
-    if (customizeData?.design?.Item_Code && !customizeData?.designImage)
-      setIsLogoSelected(customizeData?.design);
+    if (customizeData?.textDesign?.Item_Code && !customizeData?.designImage)
+      setIsLogoSelected(customizeData?.textDesign);
     if (!isLogoSelected)
-      setCustomizeData((prev: any) => ({ ...prev, design: {} }));
+      setCustomizeData((prev: any) => ({ ...prev, textDesign: null }));
   }, [
-    customizeData?.design?.Item_Code,
+    customizeData?.textDesign?.Item_Code,
     isLogoSelected,
     customizeData?.designImage,
   ]);
@@ -104,6 +104,9 @@ const AddText: React.FC<AddTextProps> = ({
 
   const handleCurrentIndex = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
+    setSelectedOption(0);
+    setIsLogoSelected({});
+    setCustomizeData((prev: any) => ({ ...prev, textDesign: null }));
     if (name === "textLine1") setCurrentIndex(0);
     else if (name === "textLine2") setCurrentIndex(1);
     else if (name === "textLine3") setCurrentIndex(2);
@@ -129,7 +132,10 @@ const AddText: React.FC<AddTextProps> = ({
         (field: any) => ({ ...field, UploadImage: resp ?? "" })
       );
       const response: any = await Post(url, selectedFieldsArray, 5000, true);
-      if (response.status) toast.success(response.message);
+      if (response.status) {
+        setCustomizeData((prev: any) => ({ ...prev, addtext: selectedFields }));
+        toast.success(response.message);
+      }
     }
   };
 

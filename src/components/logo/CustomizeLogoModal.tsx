@@ -3,11 +3,11 @@ import Modal from "../common/Modal";
 import ImageText from "./screen/ImageText";
 import { Fetch, Post } from "@/utils/axios";
 import SavedLogos from "./screen/SavedLogos";
+import TextEditor from "./screen/TextEditor";
 import LogoPosition from "./screen/LogoPosition";
 import PrintEmbroidery from "./screen/PrintEmbroidery";
 import { useState, useCallback, useEffect } from "react";
 import { fetchRequest, getScreenActiveStatus } from "./general";
-import TextEditor from "./screen/TextEditor";
 import { InterationButton, NextButton, PrevButton } from "./Button";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
 
@@ -30,23 +30,57 @@ const CustomizeLogoModal = ({
   onclose: () => void;
 }) => {
   const [loading, setLoading] = useState(true);
+  const [existingLogo, setExistingLogo] = useState([]);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
-    data,
-    addtext: {},
-    imageText: {},
-    designImage: "",
-    logoPosition: [],
-    printEmbroidery: {},
+    addtext: null,
+    logoSize: null,
+    imageText: null,
+    logoDesign: null,
+    textDesign: null,
+    designImage: null,
+    logoPosition: null,
+    logoDescription: null,
+    textDescription: null,
+    printEmbroidery: null,
+    ...(data?.data || data),
   });
   const [localData, setLocalData] = useState<any>({
-    textColours: [],
     modalData: {},
     savedLogos: [],
+    textColours: [],
     artworkList: [],
     textFontFamily: [],
     artworkTemplate: [],
   });
+
+  useEffect(() => {
+    if (isVisible) setExistingLogo([]);
+  }, [isVisible]);
+
+  // func is called when modal is opened
+  const resetModal = useCallback(() => {
+    setCustomizeData({
+      addtext: null,
+      logoSize: null,
+      imageText: null,
+      logoDesign: null,
+      textDesign: null,
+      designImage: null,
+      logoPosition: null,
+      logoDescription: null,
+      textDescription: null,
+      printEmbroidery: null,
+      ...(data?.data || data),
+    });
+    setCurrentCustomizeStep(0);
+    // eslint-disable-next-line
+  }, []);
+
+  // render when user re-opens the logo modal
+  useEffect(() => {
+    if (isVisible) resetModal();
+  }, [isVisible, resetModal]);
 
   const setLocalState = (key: string, data: any) => {
     setLocalData((prevState: Record<string, any>) => ({
@@ -57,7 +91,13 @@ const CustomizeLogoModal = ({
 
   // func is called when go to next step
   const handleCustomizeNext = (id?: number) => {
-    if (!getScreenActiveStatus(customizeData, currentCustomizeStep)) return;
+    if (
+      !getScreenActiveStatus(
+        customizeData,
+        typeof id === "number" ? id : currentCustomizeStep
+      )
+    )
+      return;
 
     if (typeof id === "number") return setCurrentCustomizeStep(id);
     setCurrentCustomizeStep(currentCustomizeStep + 1);
@@ -67,25 +107,6 @@ const CustomizeLogoModal = ({
   const handleCustomizePrevious = () => {
     setCurrentCustomizeStep(currentCustomizeStep - 1);
   };
-
-  // func is called when modal is opened
-  const resetModal = useCallback(() => {
-    setCustomizeData({
-      data,
-      addtext: {},
-      imageText: {},
-      designImage: "",
-      logoPosition: {},
-      printEmbroidery: {},
-    });
-    setCurrentCustomizeStep(0);
-    // eslint-disable-next-line
-  }, []);
-
-  // render when user re-opens the logo modal
-  useEffect(() => {
-    if (isVisible) resetModal();
-  }, [isVisible, resetModal]);
 
   // func is called when user click on add to cart button
   const handleAddToCart = async () => {};
@@ -135,7 +156,7 @@ const CustomizeLogoModal = ({
           } finally {
             setTimeout(() => {
               setLoading(false);
-            }, 1000);
+            }, 250);
           }
         })
       );
@@ -194,15 +215,16 @@ const CustomizeLogoModal = ({
       case 4:
         return (
           <CustomisationDetails
-            data={{ ...localData, ...customizeData, ...data }}
-            setCurrentCustomizeStep={setCurrentCustomizeStep}
+            data={customizeData}
+            existingLogo={existingLogo}
+            setExistingLogo={setExistingLogo}
           />
         );
       default:
         return null;
     }
     // eslint-disable-next-line
-  }, [currentCustomizeStep, customizeData, data, localData]);
+  }, [currentCustomizeStep, customizeData, data, localData, existingLogo]);
 
   // render step navigation buttons
   const renderStepButtons = () => {

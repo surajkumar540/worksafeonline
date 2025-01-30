@@ -3,6 +3,7 @@ import { Fetch } from "@/utils/axios";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { bigShoulders } from "@/app/layout";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface LogoData {
@@ -53,9 +54,11 @@ const SelectedLogo: React.FC<SelectedLogoProps> = ({
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center">
+    <div
+      className={`h-full w-full flex flex-col items-center justify-center ${bigShoulders.className}`}
+    >
       <div className="flex pb-5 gap-5 w-full items-center justify-between">
-        <p className="text-xl font-semibold">Selected Logo</p>
+        <p className="text-2xl font-semibold">Selected Logo</p>
         {/* Action Buttons */}
         {isLogoSelected?.Item_Code && (
           <div className="flex items-center space-x-2">
@@ -96,7 +99,7 @@ const SelectedLogo: React.FC<SelectedLogoProps> = ({
           width={100}
           height={100}
           unoptimized
-          src={isLogoSelected.LogoImage}
+          src={isLogoSelected.LogoImage ?? null}
           className="object-contain w-2/3 h-32"
         />
       )}
@@ -106,7 +109,7 @@ const SelectedLogo: React.FC<SelectedLogoProps> = ({
         <div className="text-center mt-4">
           <p className="font-semibold text-center leading-3">
             {isLogoSelected.name}{" "}
-            <span className="font-semibold text-gray-800">
+            <span className="font-extrabold text-lg text-gray-800">
               {isLogoSelected.Description} ({isLogoSelected.Item_Code})
             </span>
           </p>

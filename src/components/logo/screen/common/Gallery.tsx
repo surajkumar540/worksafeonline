@@ -33,7 +33,8 @@ const Gallery: React.FC<GalleryProps> = ({
   }
 
   const selectLogo = (option: any) => {
-    setCustomizeData((prev: any) => ({ ...prev, design: option }));
+    const key = field === "artworkList" ? "textDesign" : "logoDesign";
+    setCustomizeData((prev: any) => ({ ...prev, [key]: option }));
   };
 
   return (
