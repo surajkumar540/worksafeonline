@@ -74,6 +74,7 @@ const CustomisationDetails = ({
         };
         // const logos = handleLogoUpdate(updatedData);
         // updatedData.addLogo = logos;
+        console.log(existingLogo, setExistingLogo);
         const response: any = await Post(url, updatedData);
         if (response.status) setArtWorklist(response.addedArtworkList);
       } catch (error) {
