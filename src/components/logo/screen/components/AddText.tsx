@@ -1,4 +1,6 @@
+import { Post } from "@/utils/axios";
 import html2canvas from "html2canvas";
+import { toast } from "react-toastify";
 import Gallery from "../common/Gallery";
 import FontSelector from "./FontSelector";
 import { bigShoulders } from "@/app/layout";
@@ -9,8 +11,6 @@ import TextAlignButtons from "../../../customisation/uploadDesign/TextAlignButto
 import TextSizeSelector from "../../../customisation/uploadDesign/TextSizeSelector";
 import FontWeightSelector from "../../../customisation/uploadDesign/FontWeightSelector";
 import CharacterSpacingSelector from "../../../customisation/uploadDesign/CharacterSpacingSelector";
-import { Post } from "@/utils/axios";
-import { toast } from "react-toastify";
 
 interface AddTextProps {
   localData: any;
@@ -123,10 +123,8 @@ const AddText: React.FC<AddTextProps> = ({
     updateForm([name], "TextLine", value);
   };
 
-  const handleColorChange = (hexCode: string) => {
-    updateForm("textLine1", "TextColour", hexCode);
-    updateForm("textLine2", "TextColour", hexCode);
-    updateForm("textLine3", "TextColour", hexCode);
+  const handleColorChange = (field: string, hexCode: string) => {
+    updateForm(field, "TextColour", hexCode);
   };
 
   const uploadNext = async () => {
@@ -174,12 +172,15 @@ const AddText: React.FC<AddTextProps> = ({
           <div className="w-3/5 flex flex-col space-y-2">
             <SelectColor
               localData={localData}
+              selectedFields={selectedFields}
+              field={`textLine${currentIndex + 1}`}
               handleColorChange={handleColorChange}
             />
             <FontSelector
               localData={localData}
               updateForm={updateForm}
               selectedFields={selectedFields}
+              field={`textLine${currentIndex + 1}`}
             />
             {/* Text Inputs */}
             <h4
@@ -244,10 +245,6 @@ const AddText: React.FC<AddTextProps> = ({
               </div>
             </div>
             <div
-              style={{
-                color: selectedFields.textLine1.TextColour || "inherit",
-                fontFamily: selectedFields.textLine1.FontFamily || "inherit",
-              }}
               ref={divRef}
               className="col-span-2 rounded-lg py-10 min-h-full bg-gray-100"
             >
@@ -257,8 +254,12 @@ const AddText: React.FC<AddTextProps> = ({
 
                   return (
                     textData.TextLine && (
-                      <span
+                      <p
                         key={line}
+                        style={{
+                          color: textData.TextColour || "inherit",
+                          fontFamily: textData.FontFamily || "inherit",
+                        }}
                         className={`${textData.TextSize || ""} ${
                           textData.TextItalic ? "italic" : ""
                         } 
@@ -267,7 +268,7 @@ const AddText: React.FC<AddTextProps> = ({
                         }`}
                       >
                         {textData.TextLine}
-                      </span>
+                      </p>
                     )
                   );
                 })}

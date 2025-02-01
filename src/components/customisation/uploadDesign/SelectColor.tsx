@@ -1,30 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { bigShoulders } from "@/app/layout";
 import { IoAddOutline } from "react-icons/io5";
 
+function removeDuplicateHtmlCodes(colourArray: any) {
+  const uniqueHtmlCodes = new Map();
+
+  colourArray.forEach((colour: any) => {
+    if (!uniqueHtmlCodes.has(colour.Html_Code)) {
+      uniqueHtmlCodes.set(colour.Html_Code, colour);
+    }
+  });
+  return Array.from(uniqueHtmlCodes.values());
+}
+
 const SelectColor = ({
+  field,
   localData,
+  selectedFields,
   handleColorChange,
 }: {
+  field: any;
   localData: any;
+  selectedFields: any;
   handleColorChange: any;
 }) => {
-  function removeDuplicateHtmlCodes(colourArray: any) {
-    const uniqueHtmlCodes = new Map();
-
-    colourArray.forEach((colour: any) => {
-      if (!uniqueHtmlCodes.has(colour.Html_Code)) {
-        uniqueHtmlCodes.set(colour.Html_Code, colour);
-      }
-    });
-    return Array.from(uniqueHtmlCodes.values());
-  }
-
   const [colorsData, setColors] = useState(
     removeDuplicateHtmlCodes(localData.textColours)
   );
   const [newColor, setNewColor] = useState("#000000");
   const [selectedColor, setSelectedColor] = useState("");
+
+  useEffect(() => {
+    if (selectedFields && field)
+      setSelectedColor(selectedFields[field]["TextColour"]);
+    else setSelectedColor("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field]);
 
   return (
     <div>
@@ -41,7 +52,7 @@ const SelectColor = ({
               key={color.Html_Code}
               onClick={() => {
                 setSelectedColor(color.Html_Code);
-                handleColorChange(color.Html_Code);
+                handleColorChange(field, color.Html_Code);
               }}
               style={{
                 boxShadow: !isSelected

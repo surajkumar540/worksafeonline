@@ -6,10 +6,14 @@ import SavedLogos from "./screen/SavedLogos";
 import TextEditor from "./screen/TextEditor";
 import LogoPosition from "./screen/LogoPosition";
 import PrintEmbroidery from "./screen/PrintEmbroidery";
+import { getDeviceCheck } from "@/api/generateDeviceId";
 import { useState, useCallback, useEffect } from "react";
 import { fetchRequest, getScreenActiveStatus } from "./general";
 import { InterationButton, NextButton, PrevButton } from "./Button";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
+import eventEmitter from "@/hooks/useEventEmitter";
+import { addToCart } from "@/api/cartApi";
+import { toast } from "react-toastify";
 
 // describe the steps
 const customize = [
@@ -31,6 +35,7 @@ const CustomizeLogoModal = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const [existingLogo, setExistingLogo] = useState([]);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
     addtext: null,
@@ -109,7 +114,36 @@ const CustomizeLogoModal = ({
   };
 
   // func is called when user click on add to cart button
-  const handleAddToCart = async () => {};
+  const handleAddToCart = async () => {
+    try {
+      setAddToCartLoading(true);
+      const product = customizeData;
+      const deviceId = getDeviceCheck();
+      const handleAddToCartRequest = {
+        BOM: [],
+        DeviceID: deviceId,
+        ProductID: product?.ProductID,
+        Colour: product?.color?.Colour?.trim() || "NA",
+        Fitting: product?.fitting?.Fitting?.trim() || "NA",
+        Size:
+          product?.size.length > 0
+            ? product?.size.map((item: any) => ({
+                Size: item?.Size,
+                Quantity: item?.quantity,
+              }))
+            : [{ size: "NA", Quantity: 1 }],
+      };
+      const response = await addToCart(handleAddToCartRequest);
+      if (response?.status) {
+        eventEmitter?.emit("addToCart", product?.ProductID);
+        return onclose();
+      } else toast.info(response?.message);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    } finally {
+      setAddToCartLoading(false);
+    }
+  };
 
   // filter images / logo images artworks
   const getFilteredResults = async (params: Record<string, any>) => {
@@ -238,6 +272,7 @@ const CustomizeLogoModal = ({
         <InterationButton
           resetModal={resetModal}
           handleAddToCart={handleAddToCart}
+          addToCartLoading={addToCartLoading}
         />
       );
     return (

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Fetch, Post } from "@/utils/axios";
 import { MdDelete } from "react-icons/md";
+import { Fetch, Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
+import Loader from "@/components/common/Loader";
 import React, { useEffect, useState } from "react";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
-import Loader from "@/components/common/Loader";
 
 const CustomisationDetails = ({
   data,
@@ -23,23 +23,23 @@ const CustomisationDetails = ({
     (data?.color.Html_Code && data?.color.Html_Code?.split("/")) ||
     extractColorFromDescription(data?.color.Colour_Description);
 
-  const handleLogoUpdate = (updatedData: any) => {
-    const addLogo = updatedData.addLogo[0];
-    const isExisting = existingLogo.some(
-      (logo: any) =>
-        logo.ArtCode === addLogo.ArtCode &&
-        logo.ArtSize === addLogo.ArtSize &&
-        logo.Position === addLogo.Position &&
-        logo.ArtType === addLogo.ArtType
-    );
-    if (isExisting) {
-      setExistingLogo(existingLogo);
-      return existingLogo;
-    }
-    const updatedValue = [...existingLogo, addLogo];
-    setExistingLogo(updatedValue);
-    return updatedValue;
-  };
+  // const handleLogoUpdate = (updatedData: any) => {
+  //   const addLogo = updatedData.addLogo[0];
+  //   const isExisting = existingLogo.some(
+  //     (logo: any) =>
+  //       logo.ArtCode === addLogo.ArtCode &&
+  //       logo.ArtSize === addLogo.ArtSize &&
+  //       logo.Position === addLogo.Position &&
+  //       logo.ArtType === addLogo.ArtType
+  //   );
+  //   if (isExisting) {
+  //     setExistingLogo(existingLogo);
+  //     return existingLogo;
+  //   }
+  //   const updatedValue = [...existingLogo, addLogo];
+  //   setExistingLogo(updatedValue);
+  //   return updatedValue;
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,8 +72,8 @@ const CustomisationDetails = ({
             },
           ],
         };
-        const logos = handleLogoUpdate(updatedData);
-        updatedData.addLogo = logos;
+        // const logos = handleLogoUpdate(updatedData);
+        // updatedData.addLogo = logos;
         const response: any = await Post(url, updatedData);
         if (response.status) setArtWorklist(response.addedArtworkList);
       } catch (error) {
@@ -235,15 +235,19 @@ const CustomisationDetails = ({
                 </div>
                 {/* Application */}
                 <div className="h-48 bg-gray-100 rounded-b-xl flex items-center justify-center p-2">
-                  <Image
-                    priority
-                    unoptimized
-                    width={200}
-                    height={200}
-                    alt="Application"
-                    className="object-contain w-full"
-                    src={worklist?.ArtTypeImg ?? null}
-                  />
+                  {worklist?.ArtTypeImg ? (
+                    <Image
+                      priority
+                      unoptimized
+                      width={200}
+                      height={200}
+                      alt="Application"
+                      className="object-contain w-full"
+                      src={worklist?.ArtTypeImg ?? null}
+                    />
+                  ) : (
+                    <p>-</p>
+                  )}
                 </div>
                 {/* Delete */}
                 <div

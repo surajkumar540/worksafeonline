@@ -1,8 +1,9 @@
 import { bigShoulders } from "@/app/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Define types for the props
 interface FontSelectorProps {
+  field: string;
   localData: {
     textFontFamily: { FontFamily: string }[]; // assuming textFontFamily is an array of objects with FontFamily as string
   };
@@ -11,18 +12,25 @@ interface FontSelectorProps {
 }
 
 const FontSelector = ({
+  field,
   localData,
   updateForm,
   selectedFields,
 }: FontSelectorProps) => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false); // Ensure dropdownOpen is typed as boolean
+  const [selectedFont, setSelectedFont] = useState("");
 
-  const handleFontChange = (font: string): void => {
-    updateForm("textLine1", "FontFamily", font);
-    updateForm("textLine2", "FontFamily", font);
-    updateForm("textLine3", "FontFamily", font);
+  const handleFontChange = (field: string, font: string): void => {
+    updateForm(field, "FontFamily", font);
     setDropdownOpen(false);
   };
+
+  useEffect(() => {
+    if (selectedFields && field)
+      setSelectedFont(selectedFields[field]["FontFamily"]);
+    else setSelectedFont("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field]);
 
   return (
     <div className="grid grid-cols-4 items-center gap-2">
@@ -41,7 +49,7 @@ const FontSelector = ({
             aria-expanded={dropdownOpen}
             className="border border-gray-300 text-left px-3 py-2 text-sm line-clamp-1 cursor-pointer outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full"
           >
-            {selectedFields?.textLine1?.FontFamily || "Select Font"}
+            {selectedFont || "Select Font"}
           </div>
 
           {/* Dropdown List */}
@@ -55,7 +63,10 @@ const FontSelector = ({
                   tabIndex={0}
                   key={font.FontFamily}
                   onMouseDown={(e) => e.preventDefault()} // Prevent blur on click
-                  onClick={() => handleFontChange(font.FontFamily)}
+                  onClick={() => {
+                    setSelectedFont(font.FontFamily);
+                    handleFontChange(field, font.FontFamily);
+                  }}
                   style={{ fontFamily: font.FontFamily }}
                   className="py-2 px-4 cursor-pointer hover:bg-gray-100"
                 >

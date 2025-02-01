@@ -62,7 +62,8 @@ const SelectedLogo: React.FC<SelectedLogoProps> = ({
         {/* Action Buttons */}
         {isLogoSelected?.Item_Code && (
           <div className="flex items-center space-x-2">
-            {selectedFav === isLogoSelected.Item_Code ? (
+            {selectedFav === isLogoSelected.Item_Code ||
+            isLogoSelected.Wishlist ? (
               <FaHeart
                 size={25}
                 className="cursor-pointer text-red-500"

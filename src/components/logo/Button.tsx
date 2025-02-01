@@ -45,12 +45,14 @@ export const NextButton: React.FC<NextButtonProps> = ({
 
 interface InterationButtonProps {
   resetModal: ButtonHandler;
+  addToCartLoading: boolean;
   handleAddToCart: ButtonHandler;
 }
 
 export const InterationButton: React.FC<InterationButtonProps> = ({
   resetModal,
   handleAddToCart,
+  addToCartLoading,
 }) => {
   return (
     <div className="flex gap-2 justify-end w-full">
@@ -64,7 +66,8 @@ export const InterationButton: React.FC<InterationButtonProps> = ({
       <button
         type="button"
         onClick={handleAddToCart}
-        className={`w-fit flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-green-500/20 hover:bg-green-500 rounded-full text-lg font-bold bg-green-500/80 text-white ${bigShoulders.className}`}
+        disabled={addToCartLoading}
+        className={`w-fit disabled:cursor-not-allowed flex items-center justify-center px-10 py-2 border transition-all duration-200 ease-linear border-green-500/20 hover:bg-green-500 rounded-full text-lg font-bold bg-green-500/80 text-white ${bigShoulders.className}`}
       >
         Add to cart
       </button>
