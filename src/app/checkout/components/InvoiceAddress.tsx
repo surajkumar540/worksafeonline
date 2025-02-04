@@ -57,7 +57,6 @@ const InvoiceAddress = ({
           Add: address.line_1,
           PCode: address.postcode,
           PTown: address.post_town,
-          CountryCode: address.country,
         }));
       },
     });
