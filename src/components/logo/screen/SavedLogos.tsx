@@ -71,8 +71,8 @@ const SavedLogos = ({
         getFilteredResults={getFilteredResults}
         productID={customizeData.ProductID}
       />
-      <div className="flex items-start my-5 justify-between gap-8">
-        <div onClick={handleSelectedOption1} className="w-3/5">
+      <div className="flex flex-col lg:flex-row items-start my-5 justify-between gap-4 lg:gap-8">
+        <div onClick={handleSelectedOption1} className="w-full lg:w-3/5">
           {/* Gallery (SAVED LOGOS) */}
           <Gallery
             field="logo"
@@ -84,7 +84,7 @@ const SavedLogos = ({
         </div>
         <div
           onClick={handleSelectedOption2}
-          className={`w-2/5 border-4 p-5 rounded-2xl ${
+          className={`w-full lg:w-2/5 border-4 p-5 rounded-2xl ${
             selectedOption === 2 ? "border-green-500" : "border-gray-100"
           }`}
         >

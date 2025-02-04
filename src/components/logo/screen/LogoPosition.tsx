@@ -101,13 +101,13 @@ const LogoPosition = ({
 
   return (
     <motion.div
-      className="flex gap-5 py-5 lg:px-10 items-start justify-between"
+      className="flex flex-col lg:flex-row gap-5 py-5 lg:px-10 items-start justify-between"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <div className="flex w-2/3 flex-col border-r pr-10">
+      <div className="flex w-full lg:w-2/3 flex-col lg:border-r lg:pr-10">
         <p
           className={`${bigShoulders.className} relative text-2xl w-fit uppercase text-center font-black`}
         >
@@ -143,8 +143,7 @@ const LogoPosition = ({
             );
           })}
       </div>
-
-      <div className="w-1/3 pl-10 h-full mx-auto flex flex-col items-center justify-between">
+      <div className="w-full lg:w-1/3 pl-10 h-full mx-auto flex flex-col items-center justify-between">
         <p
           className={`${bigShoulders.className} relative pb-4 text-2xl uppercase text-center font-black`}
         >

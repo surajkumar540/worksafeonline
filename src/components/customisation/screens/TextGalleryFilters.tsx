@@ -80,7 +80,7 @@ const TextGalleryFilters = ({
   return (
     <div className={`mb-5 mt-1 ${bigShoulders.className}`}>
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center">
           <button
             onClick={() => setAccordionOpen(!isAccordionOpen)}
             className={`flex items-center gap-2 p-2 bg-gray-200 rounded-md text-sm font-bold uppercase text-gray-700 hover:bg-gray-300 transition ${bigShoulders.className}`}
@@ -100,7 +100,7 @@ const TextGalleryFilters = ({
 
         {isAccordionOpen && (
           <div className="mt-4 bg-gray-50 transition rounded-xl p-3 space-y-4">
-            <div className="grid grid-cols-5 justify-center items-center gap-5 lg:gap-10">
+            <div className="flex flex-col lg:grid lg:grid-cols-5 justify-center items-center gap-5 lg:gap-10 w-full">
               <div className="flex col-span-2 justify-between items-center gap-10">
                 <div className="relative flex gap-2 items-center w-full">
                   <input

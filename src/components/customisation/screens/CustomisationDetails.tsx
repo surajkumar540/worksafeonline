@@ -5,6 +5,7 @@ import { bigShoulders } from "@/app/layout";
 import Loader from "@/components/common/Loader";
 import React, { useEffect, useState } from "react";
 import { getDeviceCheck } from "@/api/generateDeviceId";
+import DeleteModal from "@/components/modals/DeleteModal";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
 
 const CustomisationDetails = ({
@@ -18,7 +19,9 @@ const CustomisationDetails = ({
 }) => {
   const product = data;
   const [loading, setLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [artWorklist, setArtWorklist] = useState([]);
+  const [deleteModalID, setDeleteModalID] = useState<any>("");
   const [primaryColor, secondaryColor] =
     (data?.color.Html_Code && data?.color.Html_Code?.split("/")) ||
     extractColorFromDescription(data?.color.Colour_Description);
@@ -111,13 +114,31 @@ const CustomisationDetails = ({
       }
     } catch (error) {
       console.log("Error: " + error);
+    } finally {
+      reseModal();
     }
+  };
+
+  const handleDelete = (id: string | number) => {
+    setDeleteModalID(id);
+    setIsVisible(true);
+  };
+
+  const reseModal = () => {
+    setDeleteModalID("");
+    setIsVisible(false);
   };
 
   if (loading) return <Loader />;
 
   return (
     <>
+      <DeleteModal
+        onClose={reseModal}
+        isVisible={isVisible}
+        onDelete={handleDeleteLogo}
+        deleteModalID={deleteModalID}
+      />
       {artWorklist && artWorklist.length > 0 && (
         <>
           <h3
@@ -125,7 +146,7 @@ const CustomisationDetails = ({
           >
             Summary
           </h3>
-          <div className="grid grid-cols-6 gap-2 px-36">
+          <div className="grid grid-cols-6 min-w-full gap-2 lg:px-36 overflow-auto no-scrollbar">
             {/* Column Titles */}
             {[
               "Product",
@@ -137,7 +158,7 @@ const CustomisationDetails = ({
             ].map((title) => (
               <p
                 key={title}
-                className="font-semibold text-sm bg-gray-100 py-2 rounded-t-xl text-center"
+                className="font-semibold px-4 text-sm bg-gray-100 py-2 rounded-t-xl text-center"
               >
                 {title}
               </p>
@@ -146,7 +167,7 @@ const CustomisationDetails = ({
         </>
       )}
 
-      <div className="grid grid-cols-6 gap-2 px-36 mt-2">
+      <div className="grid grid-cols-6 overflow-auto no-scrollbar gap-2 lg:px-36 mt-2">
         {artWorklist &&
           artWorklist.length > 0 &&
           artWorklist.map((worklist: any, index: number) => {
@@ -252,7 +273,7 @@ const CustomisationDetails = ({
                 </div>
                 {/* Delete */}
                 <div
-                  onClick={() => handleDeleteLogo(worklist.Seq)}
+                  onClick={() => handleDelete(worklist.Seq)}
                   className="h-48 bg-gray-100 rounded-b-xl flex items-center justify-center p-2"
                 >
                   <p className="text-4xl cursor-pointer text-red-500 hover:scale-150 transition">

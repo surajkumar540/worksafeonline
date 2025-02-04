@@ -65,7 +65,7 @@ const TextEditor = ({
         productID={customizeData.ProductID}
         getFilteredResults={getFilteredResults}
       />
-      <div className="flex justify-center items-start w-full mx-auto mb-5 gap-10">
+      <div className="flex flex-col lg:flex-row justify-center items-start w-full mx-auto mb-5 gap-5 lg:gap-10">
         <AddText
           localData={localData}
           updateForm={updateForm}

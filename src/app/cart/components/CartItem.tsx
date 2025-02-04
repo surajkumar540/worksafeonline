@@ -1,7 +1,8 @@
-import React from "react";
 import Image from "next/image";
+import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
+import LogoModal from "@/components/modals/LogoModal";
 
 interface CartItemProps {
   fetchCart: any;
@@ -14,8 +15,14 @@ const CartItem: React.FC<CartItemProps> = ({
   handleRemove,
   handleUpdateQuantity,
 }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const openArtWorkModal = async (id: number | string) => {
+    console.log(id);
+    setOpenModal(true);
+  };
   return (
     <>
+      <LogoModal isVisible={openModal} onclose={() => setOpenModal(false)} />
       <div className="md:hidden">
         {fetchCart.map((item: any) => {
           return (
@@ -47,7 +54,6 @@ const CartItem: React.FC<CartItemProps> = ({
                   )}
                 </>
                 <div className="flex justify-between items-center mt-1">
-                  <p className="text-lg">£{item?.LineTotal.toFixed(2)}</p>
                   <div className="flex items-center">
                     <button
                       className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -70,6 +76,12 @@ const CartItem: React.FC<CartItemProps> = ({
                       +
                     </button>
                   </div>
+                  <p
+                    onClick={() => openArtWorkModal(item?.Line)}
+                    className="bg-secondary/80 cursor-pointer text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
+                  >
+                    View Detail
+                  </p>
                 </div>
               </div>
             </div>
@@ -78,10 +90,11 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       <div className="hidden md:block">
         <div
-          className={`grid grid-cols-6 border-y py-4 gap-5 justify-center items-center ${bigShoulders.className}`}
+          className={`grid grid-cols-7 border-y py-4 gap-5 justify-center items-center ${bigShoulders.className}`}
         >
           <p></p>
           <p className="text-2xl col-span-2 font-black uppercase">Product</p>
+          <p className="text-2xl font-black uppercase">ArtWork</p>
           <p className="text-2xl font-black uppercase">Price</p>
           <p className="text-2xl font-black uppercase">Quantity</p>
           <p className="text-2xl font-black uppercase">Subtotal</p>
@@ -90,7 +103,7 @@ const CartItem: React.FC<CartItemProps> = ({
           return (
             <div
               key={item?.Line}
-              className="border-b grid grid-cols-6 gap-5 justify-center items-center"
+              className="border-b grid grid-cols-7 gap-5 justify-center items-center"
             >
               <div className="p-2 flex justify-center items-center">
                 <span
@@ -123,6 +136,12 @@ const CartItem: React.FC<CartItemProps> = ({
                   <span className="text-sm">Size: {item?.Size}</span>
                 )}
               </div>
+              <p
+                onClick={() => openArtWorkModal(item?.Line)}
+                className="bg-secondary/80 cursor-pointer text-white px-2 text-sm whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
+              >
+                View Detail
+              </p>
               <p className="text-lg">£ {item?.SalesPrice}</p>
               <div className="flex items-center">
                 <button

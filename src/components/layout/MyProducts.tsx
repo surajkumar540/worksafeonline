@@ -8,13 +8,21 @@ const MyProducts = () => {
   const [loggedIn, setUserLoggedIn] = useState<boolean>(false);
 
   const handleToggle = useCallback(() => {
-    setUserLoggedIn(true);
+    setUserLoggedIn(!loggedIn);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     eventEmitter?.on("loggedIn", handleToggle);
     return () => {
       eventEmitter?.off("loggedIn", handleToggle);
+    };
+  }, [handleToggle]);
+
+  useEffect(() => {
+    eventEmitter?.on("loggedOut", handleToggle);
+    return () => {
+      eventEmitter?.off("loggedOut", handleToggle);
     };
   }, [handleToggle]);
 

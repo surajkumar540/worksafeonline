@@ -69,7 +69,7 @@ const ImageText = ({
 
   return (
     <motion.div
-      className="flex items-center mt-6 justify-between gap-10 w-full pb-3 px-6 lg:px-28"
+      className="flex flex-col lg:flex-row items-center mt-2 lg:mt-6 justify-between gap-5 lg:gap-10 w-full pb-3 lg:px-28"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

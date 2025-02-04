@@ -144,7 +144,7 @@ const AddText: React.FC<AddTextProps> = ({
 
   return (
     <>
-      <div className={`w-2/5`}>
+      <div className={`w-full lg:w-2/5`}>
         <Gallery
           field="artworkList"
           localData={localData}
@@ -154,7 +154,7 @@ const AddText: React.FC<AddTextProps> = ({
         />
       </div>
       <div
-        className={`w-3/5 border-4 p-5 rounded-2xl ${
+        className={`w-full lg:w-3/5 border-4 p-5 rounded-2xl ${
           selectedOption === 2 ? "border-green-500" : "border-gray-100"
         }`}
       >
@@ -168,8 +168,8 @@ const AddText: React.FC<AddTextProps> = ({
             - UPLOAD NEW TEXT
           </span>
         </div>
-        <div className="flex justify-between gap-5">
-          <div className="w-3/5 flex flex-col space-y-2">
+        <div className="flex flex-col lg:flex-row justify-between gap-5">
+          <div className="w-full lg:w-3/5 flex flex-col space-y-2">
             <SelectColor
               localData={localData}
               selectedFields={selectedFields}
@@ -217,7 +217,7 @@ const AddText: React.FC<AddTextProps> = ({
               ))}
             </div>
           </div>
-          <div className="w-2/5 my-auto min-h-full">
+          <div className="w-full lg:w-2/5 my-auto min-h-full">
             <div className="space-y-2">
               <div className="flex w-full flex-wrap gap-3 mb-5 justify-center items-center">
                 <CharacterSpacingSelector

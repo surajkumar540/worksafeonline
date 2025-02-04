@@ -100,8 +100,8 @@ const GalleryFilters = ({
 
         {isAccordionOpen && (
           <div className="mt-4 bg-gray-50 transition rounded-xl p-3 space-y-4">
-            <div className="grid grid-cols-5 justify-center items-center gap-5 lg:gap-10">
-              <div className="flex col-span-2 justify-between items-center gap-10">
+            <div className="flex flex-col lg:grid lg:grid-cols-5 justify-center items-center gap-5 lg:gap-10">
+              <div className="flex col-span-2 justify-between items-center w-full gap-10">
                 <div className="relative flex gap-2 items-center w-full">
                   <input
                     type="text"
