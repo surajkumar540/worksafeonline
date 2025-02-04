@@ -216,7 +216,6 @@ export default function ClientPage() {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors); // Set errors to state if validation fails
-      return;
     }
     try {
       const data = {
