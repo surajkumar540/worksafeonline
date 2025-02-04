@@ -27,7 +27,7 @@ const MyProducts = () => {
 
   const link = {
     id: 1,
-    href: "/shop-all",
+    href: "/my-products",
     label: "MY PRODUCTS",
   };
   return (

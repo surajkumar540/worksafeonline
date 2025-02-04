@@ -80,3 +80,11 @@ export const getDeviceCheck = () => {
 
   return deviceId;
 };
+
+export const isTokenExist = () => {
+  const token =
+    typeof window !== "undefined" &&
+    localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+  if (token) return true;
+  else return null;
+};

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
 import Pagination from "@/components/common/Pagination";
 import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
+import { usePathname } from "next/navigation";
 
 interface Filter {
   response: any;
@@ -22,6 +23,7 @@ const FilterSection = ({
   subcategory,
   categoryResponse,
 }: Filter) => {
+  const pathname = usePathname();
   const [state, setState] = useState({
     sizes: [],
     brands: [],
@@ -57,7 +59,11 @@ const FilterSection = ({
             : [category],
       });
 
-      const url = BASE_URL + "api/FilterSortProductsByPageN";
+      const url =
+        BASE_URL + pathname === "/my-products"
+          ? "api/FilterSortMyUniformProductsWCategories"
+          : "api/FilterSortProductsByPageN";
+
       const response: any = await Post(url, updatedData, 10000, true);
 
       if (response?.status) {
@@ -85,8 +91,8 @@ const FilterSection = ({
         colors: response?.Colours ?? [],
         products: response?.product ?? [],
         fittings: response?.Fittings ?? [],
-        pageCount: response?.PageCount ?? 0,
-        currentPage: response?.CurrentPage ?? 0,
+        pageCount: response?.PageCount ?? 1,
+        currentPage: response?.CurrentPage ?? 1,
         categories: categoryResponse?.SubCategories ?? [],
       });
     }
@@ -175,24 +181,28 @@ const FilterSection = ({
         )}
       </div>
       <div className="col-span-2 lg:col-span-3">
-        <CustomFilter
-          filters={filters}
-          setFilters={setFilters}
-          pageCount={state.pageCount}
-          currentPage={state.currentPage}
-          handleProducts={handleProducts}
-        />
+        {(state.pageCount !== 0 || state.currentPage !== 0) && (
+          <CustomFilter
+            filters={filters}
+            setFilters={setFilters}
+            pageCount={state.pageCount}
+            currentPage={state.currentPage}
+            handleProducts={handleProducts}
+          />
+        )}
         <ProductSection
           isLoading={loader}
           category={category}
           products={filteredProducts}
         />
-        <Pagination
-          filters={filters}
-          totalPages={state.pageCount}
-          onPageChange={handleProducts}
-          currentPage={state.currentPage}
-        />
+        {(state.pageCount !== 0 || state.currentPage !== 0) && (
+          <Pagination
+            filters={filters}
+            totalPages={state.pageCount}
+            onPageChange={handleProducts}
+            currentPage={state.currentPage}
+          />
+        )}
       </div>
     </div>
   );
