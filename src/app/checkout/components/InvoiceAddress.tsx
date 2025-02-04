@@ -7,9 +7,10 @@ import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
 import Select from "@/components/input/Select";
 import { FaAddressBook } from "react-icons/fa";
-import React, { useEffect, useState } from "react";
 import { getDeviceCheck } from "@/api/generateDeviceId";
+import React, { useEffect, useRef, useState } from "react";
 import { InvoiceFormFields as formFields } from "./formType";
+import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
 
 const InvoiceAddress = ({
@@ -41,6 +42,28 @@ const InvoiceAddress = ({
   setSelectedAddress: any;
   handleForm1Validation: any;
 }) => {
+  const shouldRender = useRef(true);
+
+  useEffect(() => {
+    if (!shouldRender.current) return;
+    shouldRender.current = false;
+
+    AddressFinder.watch({
+      inputField: "#PCode",
+      apiKey: "ak_m5xjqe9dDb9a32eo5fgmZkbbzf9a2",
+      onAddressRetrieved: (address: any) => {
+        setFormData((prev: any) => ({
+          ...prev,
+          Add: address.line_1,
+          PCode: address.postcode,
+          PTown: address.post_town,
+          CountryCode: address.country,
+        }));
+      },
+    });
+    // eslint-disable-next-line
+  }, []);
+
   const [options, setOptions] = useState([]);
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -192,6 +215,7 @@ const InvoiceAddress = ({
                     ? formData[formFields[7].name].toUpperCase()
                     : "",
                 }}
+                // ref={postcodeRef}
                 handleInputChange={handleInputChange}
                 error={errors[formFields[7].name]}
               />
