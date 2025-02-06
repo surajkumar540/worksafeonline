@@ -52,15 +52,10 @@ export default function RootLayout({
         <div className="min-h-screen w-full mx-auto">{children}</div>
         <Footer />
         <ToastContainer
-          position="bottom-right"
+          position="top-center"
           autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          pauseOnHover
-          theme="dark"
+          newestOnTop={true}
+          hideProgressBar={true}
         />
       </body>
     </html>

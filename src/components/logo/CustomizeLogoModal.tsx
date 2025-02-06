@@ -34,7 +34,6 @@ const CustomizeLogoModal = ({
   onclose: () => void;
 }) => {
   const [loading, setLoading] = useState(true);
-  const [existingLogo, setExistingLogo] = useState([]);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [currentCustomizeStep, setCurrentCustomizeStep] = useState<number>(0); // used to determine the current step
   const [customizeData, setCustomizeData] = useState<any>({
@@ -58,10 +57,6 @@ const CustomizeLogoModal = ({
     textFontFamily: [],
     artworkTemplate: [],
   });
-
-  useEffect(() => {
-    if (isVisible) setExistingLogo([]);
-  }, [isVisible]);
 
   // func is called when modal is opened
   const resetModal = useCallback(() => {
@@ -248,18 +243,12 @@ const CustomizeLogoModal = ({
           />
         );
       case 4:
-        return (
-          <CustomisationDetails
-            data={customizeData}
-            existingLogo={existingLogo}
-            setExistingLogo={setExistingLogo}
-          />
-        );
+        return <CustomisationDetails data={customizeData} />;
       default:
         return null;
     }
     // eslint-disable-next-line
-  }, [currentCustomizeStep, customizeData, data, localData, existingLogo]);
+  }, [currentCustomizeStep, customizeData, data, localData]);
 
   // render step navigation buttons
   const renderStepButtons = () => {
@@ -303,6 +292,7 @@ const CustomizeLogoModal = ({
         <Header
           onClose={onclose}
           customize={customize}
+          product={customizeData}
           logo={localData?.modalData?.HeaderLogo}
           handleCustomizeNext={handleCustomizeNext}
           currentCustomizeStep={currentCustomizeStep}

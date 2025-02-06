@@ -1,15 +1,13 @@
 import Modal from "../common/Modal";
 
-const DeleteModal = ({
+const DeleteAllArtworkModal = ({
   onClose,
   onDelete,
   isVisible,
-  deleteModalID,
 }: {
   onClose: any;
   onDelete: any;
   isVisible: boolean;
-  deleteModalID: any;
 }) => {
   return (
     <Modal
@@ -22,8 +20,7 @@ const DeleteModal = ({
       <div className="relative flex flex-col justify-center items-center p-6 min-h-40">
         {/* Modal Content */}
         <h2 className="text-3xl mt-2 font-semibold text-center">
-          Are you sure you want to delete this artwork?
-          <br />
+          Are you sure you want to delete all artwork? <br />
           <span className="text-sm font-light text-gray-400">
             Disclaimer: This action cannot be undone.
           </span>
@@ -32,7 +29,7 @@ const DeleteModal = ({
         {/* Buttons */}
         <div className="flex gap-4 mt-2">
           <button
-            onClick={() => onDelete(deleteModalID)}
+            onClick={onDelete}
             className="px-4 py-2 bg-primary/80 text-black font-semibold rounded-lg hover:bg-primary transition"
           >
             Delete
@@ -49,4 +46,4 @@ const DeleteModal = ({
   );
 };
 
-export default DeleteModal;
+export default DeleteAllArtworkModal;

@@ -225,11 +225,19 @@ export default function ClientPage() {
       };
       const url = "api/CofirmCheckoutWorksafe";
       const response: any = await Post(url, data, 5000, true);
-      if (response?.status) {
-        if (response?.message) toast.success(response?.message);
+      if (response?.status && response?.OrderID) {
         setErrors({});
         localStorage.setItem("OrderID", response?.OrderID);
-        router.replace("/thank-you");
+        if (response?.message) {
+          toast.success(response?.message);
+          return router.replace("/thank-you");
+        } else if (response?.paymenturl1)
+          window.location.href = response?.paymenturl1;
+      } else {
+        toast.info(response?.message ?? "Please contact the administrator!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
     } catch (error) {
       console.log("An error occurred:", error);
@@ -237,6 +245,10 @@ export default function ClientPage() {
       setFormLoading(false);
     }
   };
+
+  useEffect(() => {
+    router.prefetch("/thank-you");
+  }, [router]);
 
   const handleButtonClick = (activeScreen: any) => {
     setAccordionStates((prevState: any) => {

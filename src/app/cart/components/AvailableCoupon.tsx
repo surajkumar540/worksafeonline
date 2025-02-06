@@ -16,7 +16,7 @@ const AvailableCoupon = ({
       <h2 className="text-lg font-semibold uppercase lg:rounded-t-xl bg-black text-white py-2 px-4">
         Available <span className="text-secondary">Coupons</span>
       </h2>
-      <div className="grid md:grid-cols-2 p-4 gap-2">
+      <div className="grid md:grid-cols-2 py-4 lg:p-4 gap-2">
         {couponList.map((couponListItem: any) => {
           const isSelected = selectedCoupon?.Coupon === couponListItem.Code;
           return (

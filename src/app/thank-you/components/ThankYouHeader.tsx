@@ -15,14 +15,14 @@ const ThankYouHeader = ({ order, email }: { order: any; email: string }) => {
           <p className="mt-2 text-xl font-semibold text-gray-600">
             Your order has been successfully placed.
           </p>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 text-xs mt-1">
             A confirmation email with the order details has been sent to{" "}
             <span className="text-gray-500 font-semibold underline">
               {email}
             </span>
             .
           </p>
-          <p className="text-gray-600 mt-1 md:mt-3 text-sm md:text-lg space-x-1">
+          <p className="text-gray-600 mt-1 text-xs space-x-1">
             <span>
               For any issues or inquiries, feel free to reach out to us at:
             </span>

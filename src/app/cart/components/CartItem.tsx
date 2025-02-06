@@ -76,12 +76,14 @@ const CartItem: React.FC<CartItemProps> = ({
                       +
                     </button>
                   </div>
-                  <p
-                    onClick={() => openArtWorkModal(item?.Line)}
-                    className="bg-secondary/80 cursor-pointer text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
-                  >
-                    View Detail
-                  </p>
+                  {item?.ArtworkExist === 1 && (
+                    <p
+                      onClick={() => openArtWorkModal(item?.Line)}
+                      className="bg-secondary/80 cursor-pointer text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
+                    >
+                      View Detail
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -93,11 +95,13 @@ const CartItem: React.FC<CartItemProps> = ({
           className={`grid grid-cols-7 border-y py-4 gap-5 justify-center items-center ${bigShoulders.className}`}
         >
           <p></p>
-          <p className="text-2xl col-span-2 font-black uppercase">Product</p>
-          <p className="text-2xl font-black uppercase">ArtWork</p>
-          <p className="text-2xl font-black uppercase">Price</p>
-          <p className="text-2xl font-black uppercase">Quantity</p>
-          <p className="text-2xl font-black uppercase">Subtotal</p>
+          <p className="text-xl lg:text-2xl col-span-2 font-black uppercase">
+            Product
+          </p>
+          <p className="text-xl lg:text-2xl font-black uppercase">ArtWork</p>
+          <p className="text-xl lg:text-2xl font-black uppercase">Price</p>
+          <p className="text-xl lg:text-2xl font-black uppercase">Quantity</p>
+          <p className="text-xl lg:text-2xl font-black uppercase">Subtotal</p>
         </div>
         {fetchCart.map((item: any) => {
           return (
@@ -121,7 +125,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 />
               </div>
               <div className="col-span-2">
-                <p className="line-clamp-3 font-semibold">
+                <p className="line-clamp-3 text-sm lg:text-base font-semibold">
                   {item?.ProductDescription}
                 </p>
                 {item?.Colour && (
@@ -136,13 +140,17 @@ const CartItem: React.FC<CartItemProps> = ({
                   <span className="text-sm">Size: {item?.Size}</span>
                 )}
               </div>
-              <p
-                onClick={() => openArtWorkModal(item?.Line)}
-                className="bg-secondary/80 cursor-pointer text-white px-2 text-sm whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
-              >
-                View Detail
-              </p>
-              <p className="text-lg">£ {item?.SalesPrice}</p>
+              {item?.ArtworkExist === 1 ? (
+                <p
+                  onClick={() => openArtWorkModal(item?.Line)}
+                  className="bg-secondary/80 cursor-pointer text-white px-2 text-sm whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
+                >
+                  View Detail
+                </p>
+              ) : (
+                "-"
+              )}
+              <p className="text-sm lg:text-lg">£ {item?.SalesPrice}</p>
               <div className="flex items-center">
                 <button
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -155,7 +163,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 >
                   -
                 </button>
-                <span className="px-4">{item.Quantity}</span>
+                <span className="px-2 lg:px-4">{item.Quantity}</span>
                 <button
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                   onClick={() =>
@@ -165,7 +173,9 @@ const CartItem: React.FC<CartItemProps> = ({
                   +
                 </button>
               </div>
-              <p className="text-lg">£ {item.LineTotal.toFixed(2)}</p>
+              <p className="text-sm lg:text-lg">
+                £ {item.LineTotal.toFixed(2)}
+              </p>
             </div>
           );
         })}

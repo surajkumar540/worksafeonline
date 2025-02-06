@@ -43,7 +43,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
       </div>
       <div className="bg-gray-300 h-[1px] mt-5" />
-      <p className="mt-4 text-gray-500 font-thin">{product.Detail}</p>
+      <p className="mt-4 text-gray-500">{product.Detail}</p>
     </div>
   );
 };

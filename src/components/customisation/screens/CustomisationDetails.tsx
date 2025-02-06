@@ -8,15 +8,7 @@ import { getDeviceCheck } from "@/api/generateDeviceId";
 import DeleteModal from "@/components/modals/DeleteModal";
 import { extractColorFromDescription } from "@/app/product/components/ProductColor";
 
-const CustomisationDetails = ({
-  data,
-  existingLogo,
-  setExistingLogo,
-}: {
-  data: any;
-  existingLogo: any;
-  setExistingLogo: any;
-}) => {
+const CustomisationDetails = ({ data }: { data: any }) => {
   const product = data;
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
@@ -77,9 +69,8 @@ const CustomisationDetails = ({
         };
         // const logos = handleLogoUpdate(updatedData);
         // updatedData.addLogo = logos;
-        console.log(existingLogo, setExistingLogo);
         const response: any = await Post(url, updatedData);
-        if (response.status) setArtWorklist(response.addedArtworkList);
+        if (response.status) setArtWorklist(response.addedArtworkList ?? []);
       } catch (error) {
         console.log("Error fetching data: " + error);
       } finally {
