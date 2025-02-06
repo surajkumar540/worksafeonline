@@ -15,14 +15,19 @@ const CartItem: React.FC<CartItemProps> = ({
   handleRemove,
   handleUpdateQuantity,
 }) => {
+  const [data, setData] = useState<any>({});
   const [openModal, setOpenModal] = useState(false);
-  const openArtWorkModal = async (id: number | string) => {
-    console.log(id);
+  const openArtWorkModal = async (artworkDetails: any) => {
+    setData(artworkDetails);
     setOpenModal(true);
   };
   return (
     <>
-      <LogoModal isVisible={openModal} onclose={() => setOpenModal(false)} />
+      <LogoModal
+        data={data}
+        isVisible={openModal}
+        onclose={() => setOpenModal(false)}
+      />
       <div className="md:hidden">
         {fetchCart.map((item: any) => {
           return (
@@ -76,9 +81,9 @@ const CartItem: React.FC<CartItemProps> = ({
                       +
                     </button>
                   </div>
-                  {item?.ArtworkExist === 1 && (
+                  {item?.ArtworkExist > 0 && (
                     <p
-                      onClick={() => openArtWorkModal(item?.Line)}
+                      onClick={() => openArtWorkModal(item?.ArtworkDetails)}
                       className="bg-secondary/80 cursor-pointer text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
                     >
                       View Detail
@@ -140,9 +145,9 @@ const CartItem: React.FC<CartItemProps> = ({
                   <span className="text-sm">Size: {item?.Size}</span>
                 )}
               </div>
-              {item?.ArtworkExist === 1 ? (
+              {item?.ArtworkExist > 0 ? (
                 <p
-                  onClick={() => openArtWorkModal(item?.Line)}
+                  onClick={() => openArtWorkModal(item?.ArtworkDetails)}
                   className="bg-secondary/80 cursor-pointer text-white px-2 text-sm whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
                 >
                   View Detail
