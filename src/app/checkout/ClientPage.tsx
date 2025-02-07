@@ -248,6 +248,8 @@ export default function ClientPage() {
 
   useEffect(() => {
     router.prefetch("/thank-you");
+    router.prefetch("/retry");
+    router.prefetch("/shop-all");
   }, [router]);
 
   const handleButtonClick = (activeScreen: any) => {
