@@ -12,7 +12,7 @@ import AddToCartButton from "./AddToCartButton";
 
 interface QuantitySelectorProps {
   product: Product;
-  showLogoCustomisation?: number;
+  showLogoCustomisation?: any;
 }
 
 const QuantitySelector = ({
