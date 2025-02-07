@@ -24,6 +24,7 @@ import AvailableCoupon from "../cart/components/AvailableCoupon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { checkFormFields, getSelectFormattedData } from "@/api/generalApi";
 import { BillingFormField, InvoiceFormFields } from "./components/formType";
+import SelectPaymentMethodModal from "@/components/modals/SelectPaymentMethodModal";
 
 export default function ClientPage() {
   // navigation and form fields
@@ -35,6 +36,8 @@ export default function ClientPage() {
   const [cart, setCart] = useState<any>({});
   const [couponList, setCouponList] = useState([]);
   const [updatedCart, setUpdatedCart] = useState<any>({});
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
+  const [openPaymentModalData, setOpenPaymentModalData] = useState({});
 
   // loading state changes here
   const [loading, setLoading] = useState<boolean>(true);
@@ -241,8 +244,10 @@ export default function ClientPage() {
         if (response?.message) {
           toast.success(response?.message);
           return router.replace("/thank-you");
-        } else if (response?.paymenturl1)
-          window.location.href = response?.paymenturl1;
+        } else if (response?.paymenturl1 || response?.paymenturl2) {
+          setOpenPaymentModal(true);
+          setOpenPaymentModalData(response);
+        }
       } else {
         toast.info(response?.message ?? "Please contact the administrator!");
         setTimeout(() => {
@@ -316,6 +321,10 @@ export default function ClientPage() {
         >
           checkout
         </h1>
+        <SelectPaymentMethodModal
+          data={openPaymentModalData}
+          isVisible={openPaymentModal}
+        />
         <div className="flex flex-col mt-5">
           <AccountManage
             isOpen={accordionStates.askLogin}
