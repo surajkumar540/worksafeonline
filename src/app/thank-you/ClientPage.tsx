@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Fetch } from "@/utils/axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -14,9 +13,15 @@ import DeliveryAddress from "./components/DeliveryAddress";
 
 const ClientPage = () => {
   const router = useRouter();
+
   const [loading, setLoading] = useState(true);
   const [orderData, setOrderData] = useState({});
   const [orderSummary, setOrderSummary] = useState<any>({});
+
+  const handleNavigation = () => {
+    router.push("/shop-all"); // Navigate to the page
+    router.refresh(); // Revalidate and refresh the page
+  };
 
   useEffect(() => {
     const fetchOrderSummary = async () => {
@@ -71,12 +76,12 @@ const ClientPage = () => {
         </div>
         <div className="">
           <OrderTotals total={orderSummary?.Ordertotal} />
-          <Link
-            href={"/shop-all"}
+          <button
+            onClick={handleNavigation}
             className="flex justify-between items-center mt-5 w-fit mx-auto bg-secondary/80 hover:bg-secondary text-white transition px-6 py-3 rounded-lg text-xl"
           >
             Shop More
-          </Link>
+          </button>
         </div>
       </div>
     </div>

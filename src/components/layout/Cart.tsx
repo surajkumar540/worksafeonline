@@ -44,8 +44,10 @@ const CartModal = () => {
     if (
       (cart && cart?.Products && cart?.Products.length === 0) ||
       pathname === "/thank-you"
-    )
-      await fetchCart();
+    ) {
+      const data = await fetchCart();
+      if (!data?.status) setCart(null);
+    }
     if (!["/thank-you"].includes(pathname)) {
       setOpenCartModal(true);
     }
