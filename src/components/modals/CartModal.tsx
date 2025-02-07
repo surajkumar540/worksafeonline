@@ -6,6 +6,7 @@ import React, { useCallback, useState } from "react";
 import { getCartDetails, removeProduct } from "@/api/cartApi";
 import SubTotal from "@/app/wishlist/components/cart/SubTotal";
 import CartItem from "@/app/wishlist/components/cart/cartItems";
+import eventEmitter from "@/hooks/useEventEmitter";
 
 const CartListModal = ({
   cart,
@@ -38,6 +39,7 @@ const CartListModal = ({
     const response = await removeProduct(removeProductData);
     if (response?.status) {
       setFetchingResponse(false);
+      eventEmitter?.emit("removeProductFromCartModal");
       return fetchCart();
     }
   };

@@ -130,8 +130,10 @@ export default function ClientPage() {
   const fetchCart = useCallback(async () => {
     try {
       const response = await getCartDetails();
-      if (response?.status) setCart(response);
-      else {
+      if (response?.status) {
+        setCart(response);
+        setUpdatedCart(response?.CartTot);
+      } else {
         setCart({});
         router.replace("/shop-all");
       }
@@ -142,6 +144,14 @@ export default function ClientPage() {
       setLoading(false);
     }
   }, [router]);
+
+  useEffect(() => {
+    eventEmitter?.on("removeProductFromCartModal", fetchCart);
+    return () => {
+      eventEmitter?.off("removeProductFromCartModal", fetchCart);
+    };
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     fetchCart();

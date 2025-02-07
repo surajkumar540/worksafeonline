@@ -22,16 +22,12 @@ const CartModal = () => {
       const response: any = await fetchCart();
       if (response?.status) setOpenCartModal(true);
     };
-    if (typeof window !== "undefined" && eventEmitter) {
-      eventEmitter.on("addToCart", cartListener);
-      eventEmitter.on("removeFromCart", fetchCart);
-    }
+    eventEmitter?.on("addToCart", cartListener);
+    eventEmitter?.on("removeFromCart", fetchCart);
 
     return () => {
-      if (typeof window !== "undefined" && eventEmitter) {
-        eventEmitter.off("addToCart", cartListener);
-        eventEmitter.off("removeFromCart", fetchCart);
-      }
+      eventEmitter?.off("addToCart", cartListener);
+      eventEmitter?.off("removeFromCart", fetchCart);
     };
     // eslint-disable-next-line
   }, []);
@@ -50,7 +46,7 @@ const CartModal = () => {
       pathname === "/thank-you"
     )
       await fetchCart();
-    if (!["/cart", "/checkout", "/thank-you"].includes(pathname)) {
+    if (!["/thank-you"].includes(pathname)) {
       setOpenCartModal(true);
     }
     // eslint-disable-next-line

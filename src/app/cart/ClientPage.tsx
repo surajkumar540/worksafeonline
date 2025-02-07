@@ -30,6 +30,14 @@ export default function ClientPage() {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    eventEmitter?.on("removeProductFromCartModal", fetchCart);
+    return () => {
+      eventEmitter?.off("removeProductFromCartModal", fetchCart);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   const handleRemove = async (id: string) => {
     if (fetchingResponse) return;
     setFetchingResponse(true);
