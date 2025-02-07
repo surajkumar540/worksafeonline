@@ -159,9 +159,9 @@ const StandardLogin = ({
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-lg shadow-md text-lg font-bold hover:bg-primary/80 outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 disabled:cursor-not-allowed px-4 bg-primary text-black uppercase rounded-lg shadow-md text-lg font-bold hover:bg-primary/80 outline-none ${bigShoulders.className}`}
           >
-            LOGIN
+            {loading ? "Please wait..." : "LOGIN"}
           </button>
         </form>
         {/* Additional Links */}

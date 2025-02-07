@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { getDeviceData, storeDeviceData } from "@/api/generateDeviceId";
 
 const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
   const handleGuestLogin = async () => {
+    if (!isChecked) {
+      toast.error("You must agree to the Terms & Conditions first.");
+      return;
+    }
+
     const toastId = toast.loading("Please wait...");
     try {
       const data = getDeviceData();
@@ -26,6 +34,14 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
         autoClose: 3000,
       });
     }
+  };
+
+  const handleButtonClick = (screen: string) => {
+    if (!isChecked) {
+      toast.error("You must agree to the Terms & Conditions first.");
+      return;
+    }
+    setScreen(screen);
   };
 
   return (
@@ -60,14 +76,14 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
         <div className="space-y-4">
           <button
             type="submit"
-            onClick={() => setScreen("register")}
+            onClick={() => handleButtonClick("register")}
             className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             Register
           </button>
           <button
             type="submit"
-            onClick={() => setScreen("standardlogin")}
+            onClick={() => handleButtonClick("standardlogin")}
             className={`w-full py-2 px-4 bg-[#1C1C1C] text-primary border border-primary hover:text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary transition outline-none ${bigShoulders.className}`}
           >
             Login
@@ -80,12 +96,21 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
             >
               Continue as guest
             </button>
-            <p className="text-xs mt-2 text-center text-white/60">
-              I have read & agree to the{" "}
-              <Link href={"/terms-and-conditions"} className="underline">
-                terms & condition{" "}
-              </Link>
-            </p>
+            <div className="flex items-start mt-2 text-white/60 text-xs">
+              <input
+                type="checkbox"
+                id="terms"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+                className="mr-2"
+              />
+              <label htmlFor="terms">
+                I have read & agree to the{" "}
+                <Link href="/terms-and-conditions" className="underline">
+                  terms & conditions
+                </Link>
+              </label>
+            </div>
           </div>
         </div>
       </div>

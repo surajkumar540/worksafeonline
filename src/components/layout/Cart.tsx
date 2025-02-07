@@ -7,17 +7,9 @@ import CartListModal from "../modals/CartModal";
 import eventEmitter from "@/hooks/useEventEmitter";
 import React, { useState, useEffect, useCallback } from "react";
 
-// type Product = {
-//   ID: number;
-//   Style: string;
-//   Description: string;
-//   [key: string]: any;
-// };
-
 const CartModal = () => {
   const pathname = usePathname();
   const [cart, setCart] = useState<any>({});
-  // const [loading, setLoading] = useState(true);
   const [openCartModal, setOpenCartModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,15 +40,17 @@ const CartModal = () => {
     const response = await getCartDetails();
     if (response?.status) {
       setCart(response);
-      // setLoading(false);
       return response;
     } else return { status: false };
   }, []);
 
   const openCart = useCallback(async () => {
-    if (cart && cart?.Products && cart?.Products.length === 0)
+    if (
+      (cart && cart?.Products && cart?.Products.length === 0) ||
+      pathname === "/thank-you"
+    )
       await fetchCart();
-    if (!["/cart", "/checkout"].includes(pathname)) {
+    if (!["/cart", "/checkout", "/thank-you"].includes(pathname)) {
       setOpenCartModal(true);
     }
     // eslint-disable-next-line

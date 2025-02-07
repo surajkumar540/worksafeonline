@@ -40,15 +40,18 @@ const Wishlist = () => {
       setWishlist((prev) => prev.filter((item: any) => item !== id));
     };
 
-    if (typeof window !== "undefined" && eventEmitter) {
-      eventEmitter.on("addToWishlist", wishlistListener);
-      eventEmitter.on("removeFromWishlist", removeFromwishlistListener);
-    }
+    const emptyWishlistListener = () => {
+      setWishlist([]);
+      localStorage.removeItem("wishlist");
+    };
+
+    eventEmitter?.on("addToWishlist", wishlistListener);
+    eventEmitter?.on("emptyWishlist", emptyWishlistListener);
+    eventEmitter?.on("removeFromWishlist", removeFromwishlistListener);
     return () => {
-      if (typeof window !== "undefined" && eventEmitter) {
-        eventEmitter.off("addToWishlist", wishlistListener);
-        eventEmitter.off("removeFromWishlist", removeFromwishlistListener);
-      }
+      eventEmitter?.off("addToWishlist", wishlistListener);
+      eventEmitter?.off("emptyWishlist", emptyWishlistListener);
+      eventEmitter?.off("removeFromWishlist", removeFromwishlistListener);
     };
   }, []);
 

@@ -24,13 +24,12 @@ const CartListModal = ({
     const response = await getCartDetails();
     if (response?.status) {
       setCart(response);
+    } else {
+      setCart(null);
+      handleToggle();
     }
     // eslint-disable-next-line
   }, []);
-
-  // useEffect(() => {
-  //   if (isOpen) fetchCart();
-  // }, [fetchCart, isOpen]);
 
   const handleRemove = async (id: string) => {
     if (fetchingResponse) return;

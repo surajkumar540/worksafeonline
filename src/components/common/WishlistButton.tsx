@@ -10,6 +10,7 @@ import { RxEnterFullScreen } from "react-icons/rx";
 import { useEffect, useState, useRef } from "react";
 import QuickViewModal from "../modals/QuickViewModal";
 import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
+import { removeFromWishlist } from "@/api/wishlistApis";
 
 const WishlistButton = ({
   imgSrc,
@@ -100,6 +101,37 @@ const WishlistButton = ({
     }
   };
 
+  const handleRemove = async () => {
+    const id = product.Style;
+    const removedResponse = await removeFromWishlist(id);
+    if (removedResponse?.status) {
+      let ids: any[] = [];
+      const storedWishlist = localStorage.getItem("wishlist");
+      if (storedWishlist) {
+        try {
+          const parsedWishlist = JSON.parse(storedWishlist);
+          if (Array.isArray(parsedWishlist))
+            ids = parsedWishlist.filter((wishlist: any) => wishlist !== id);
+        } catch (error) {
+          console.error("Error parsing wishlist:", error);
+        }
+      }
+      localStorage.setItem("wishlist", JSON.stringify(ids));
+      eventEmitter?.emit("removeFromWishlist", id);
+      setIsSelected(false);
+    }
+  };
+
+  const debouncedRemoveToWishlist = () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      handleRemove();
+    }, 1000);
+  };
+
   const debouncedSelectProductToWishlist = () => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -122,6 +154,7 @@ const WishlistButton = ({
           <FaHeart
             size={25}
             className="text-red-500"
+            onClick={debouncedRemoveToWishlist}
             title="Already added to wishlist"
           />
         ) : (

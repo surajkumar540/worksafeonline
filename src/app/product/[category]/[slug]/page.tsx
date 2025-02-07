@@ -5,8 +5,8 @@ import Features from "@/components/common/Features";
 import ProductImage from "../../components/ProductImage";
 import ProductContent from "../../components/ProductContent";
 import ProductFeatures from "../../components/ProductFeatures";
-import RecommendedProducts from "@/components/common/RecommendedProducts";
 import BreadcrumbsHeader from "../../components/BradcrumbsHeader";
+import RecommendedProducts from "@/components/common/RecommendedProducts";
 
 type ProductPageProps = {
   params: Promise<{
@@ -15,11 +15,8 @@ type ProductPageProps = {
   }>;
 };
 
-
 export async function generateMetadata() {
-  // Replace with the correct endpoint
   const pageData = await Get("");
-
   return {
     title: pageData?.title ?? "Worksafeonline | Product Details",
     keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
@@ -35,8 +32,6 @@ export async function generateMetadata() {
     },
   };
 }
-
-
 
 export default async function Page(ctx: ProductPageProps) {
   const { category, slug } = (await ctx.params) || {};

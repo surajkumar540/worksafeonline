@@ -6,6 +6,7 @@ import Loader from "@/components/common/Loader";
 import React, { useEffect, useState } from "react";
 import { isTokenExist } from "@/api/generateDeviceId";
 import FilterSection from "../shop/components/FilterSection";
+import eventEmitter from "@/hooks/useEventEmitter";
 
 export default function ClientPage() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function ClientPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!isTokenExist()) return router.replace("/");
+        if (!isTokenExist()) return eventEmitter?.emit("openLoginModal");
         const url = "api/MyUniformListingWCategories";
         const resp: any = await Fetch(url, {}, 5000, true, false);
         if (resp.status) setProducts(resp ?? []);

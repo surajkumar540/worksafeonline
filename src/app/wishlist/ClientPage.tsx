@@ -3,16 +3,19 @@
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
-import { addToCart } from "@/api/cartApi";
+import { useRouter } from "next/navigation";
+// import { addToCart } from "@/api/cartApi";
 import { filterData } from "@/api/generalApi";
 import eventEmitter from "@/hooks/useEventEmitter";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
+// import { getDeviceCheck } from "@/api/generateDeviceId";
 import React, { useCallback, useEffect, useState } from "react";
 import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 export default function ClientPage() {
+  const router = useRouter();
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
   const [isFetching, setIsFetching] = useState(false); // To prevent multiple calls
   const token =
@@ -37,8 +40,10 @@ export default function ClientPage() {
       } else if (response?.message) {
         toast.info(response?.message);
         setWishlistUpdated([]);
+        eventEmitter?.emit("emptyWishlist");
       } else {
         setWishlistUpdated([]);
+        eventEmitter?.emit("emptyWishlist");
       }
     } finally {
       setIsFetching(false);
@@ -62,16 +67,20 @@ export default function ClientPage() {
 
   const onAddToCart = async (data: any) => {
     if (await handleRemove(data?.ID)) {
-      const updatedData = {
-        BOM: [],
-        Size: [],
-        Colour: "",
-        Fitting: "",
-        DeviceID: "",
-        ProductID: data?.ID,
-      };
-      const resp = await addToCart(updatedData);
-      if (resp?.status) eventEmitter?.emit("addToCart");
+      router.replace(
+        `/product/${data?.CategoryData?.categoryId ?? 1}/${data?.ID}`
+      );
+      // eventEmitter?.emit("addToCart");
+      // const updatedData = {
+      //   BOM: [],
+      //   Colour: "NA",
+      //   Fitting: "NA",
+      //   ProductID: data?.ID,
+      //   DeviceID: getDeviceCheck(),
+      //   Size: [{ Quantity: data.Quantity }],
+      // };
+      // const resp = await addToCart(updatedData);
+      // if (resp?.status)
     }
   };
 

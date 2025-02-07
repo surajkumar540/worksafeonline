@@ -187,9 +187,9 @@ const Login = ({
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 disabled:cursor-not-allowed bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
-            Login
+            {loading ? "Please wait..." : "Login"}
           </button>
           <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}
