@@ -4,10 +4,12 @@ import ArtworkGallery from "../common/ArtworkGallery";
 
 const LogoModal = ({
   data,
+  cart,
   onclose,
   isVisible,
 }: {
   data: any;
+  cart: any;
   onclose: any;
   isVisible: boolean;
 }) => {
@@ -16,7 +18,7 @@ const LogoModal = ({
       onClose={onclose}
       removePadding={true}
       isVisible={isVisible}
-      width="w-[90%] lg:w-3/5"
+      width="w-[90%] lg:w-2/3"
       showCloseButton={false}
     >
       <div className="relative text-white">
@@ -27,7 +29,12 @@ const LogoModal = ({
           className="cursor-pointer hover:scale-110 absolute top-2 z-20 right-3 text-white"
         />
         <div>
-          <ArtworkGallery artworks={data} showDeleteButton={true} />
+          <ArtworkGallery
+            cart={cart}
+            artworks={data}
+            onclose={onclose}
+            showDeleteButton={true}
+          />
         </div>
       </div>
     </Modal>

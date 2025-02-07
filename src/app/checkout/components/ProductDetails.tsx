@@ -1,5 +1,6 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import LogoModal from "@/components/modals/LogoModal";
 
 interface ProductDetailsProps {
   cart: {
@@ -25,8 +26,20 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
+  const [data, setData] = useState<any>({});
+  const [openModal, setOpenModal] = useState(false);
+  const openArtWorkModal = async (artworkDetails: any) => {
+    setData(artworkDetails);
+    setOpenModal(true);
+  };
   return (
     <div className="overflow-x-scroll no-scrollbar">
+      <LogoModal
+        cart={data}
+        isVisible={openModal}
+        data={data?.ArtworkDetails}
+        onclose={() => setOpenModal(false)}
+      />
       <table className="w-full border-collapse whitespace-nowrap">
         <thead>
           <tr className="bg-[#F06022] font-semibold md:uppercase text-xs md:text-sm text-white">
@@ -40,6 +53,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
             <th className="p-3 border text-center">Quantity</th>
             <th className="p-3 border text-center">Price</th>
             <th className="p-3 border text-center">Total Amount</th>
+            <th className="p-3 border text-center">ArtWork Details</th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +83,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
               </td>
               <td className="px-2 text-base font-semibold text-center">
                 £{product.LineTotal && product.LineTotal.toFixed(2)}
+              </td>
+              <td>
+                {product?.ArtworkExist > 0 ? (
+                  <p
+                    onClick={() => openArtWorkModal(product)}
+                    className="bg-secondary/80 cursor-pointer mx-auto text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
+                  >
+                    View Detail
+                  </p>
+                ) : (
+                  <p className="text-center">-</p>
+                )}
               </td>
             </tr>
           ))}

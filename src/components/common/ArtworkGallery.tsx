@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import { Fetch, Post } from "@/utils/axios";
+// import { RxCross1 } from "react-icons/rx";
+import { Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
 import DeleteModal from "../modals/DeleteModal";
 import { getDeviceCheck } from "@/api/generateDeviceId";
@@ -23,9 +23,13 @@ interface Artwork {
 }
 
 export default function ArtworkGallery({
+  cart,
+  onclose,
   artworks,
   showDeleteButton,
 }: {
+  cart: any;
+  onclose: any;
   artworks: Artwork[];
   showDeleteButton: boolean;
 }) {
@@ -33,39 +37,41 @@ export default function ArtworkGallery({
   const [deleteModalID, setDeleteModalID] = useState<any>("");
   const [artWorklist, setArtWorklist] = useState(artworks ?? []);
 
-  const handleDeleteLogo = async (id: number, product: any) => {
+  const handleDeleteLogo = async (id: number) => {
+    console.log(setArtWorklist, showDeleteButton);
     const url = "api/DeleteAddedArtwork";
     const data = {
       DeviceID: getDeviceCheck(),
-      Product: product?.ProductID,
-      Colour: product?.color?.Colour?.trim() || "NA",
-      Fit: product?.fitting?.Fitting?.trim() || "NA",
+      Product: cart?.ProductCode,
+      Fit: cart?.Fitting?.trim() || "NA",
+      Colour: cart?.Colour?.trim() || "NA",
     };
     try {
       const response: any = await Post(url, { ...data, Seq: id });
       if (response.status) {
-        const url = "api/AddedArtworkList";
-        const data = {
-          device_id: getDeviceCheck(),
-          product: product?.ProductID,
-          colour: product?.color?.Colour?.trim() || "NA",
-          fit: product?.fitting?.Fitting?.trim() || "NA",
-        };
-        const resp: any = await Fetch(url, data, 5000, true, false);
-        if (resp?.status) setArtWorklist(resp.addedArtworkList);
-        else setArtWorklist([]);
+        // const url = "api/AddedArtworkList";
+        // const data = {
+        //   device_id: getDeviceCheck(),
+        //   Product: cart?.ProductCode,
+        //   Fit: cart?.Fitting?.trim() || "NA",
+        //   Colour: cart?.Colour?.trim() || "NA",
+        // };
+        // const resp: any = await Fetch(url, data, 5000, true, false);
+        // if (resp?.status) setArtWorklist(resp.addedArtworkList);
+        // else setArtWorklist([]);
       }
     } catch (error) {
       console.log("Error: " + error);
     } finally {
       reseModal();
+      onclose();
     }
   };
 
-  const handleDelete = (id: string | number) => {
-    setDeleteModalID(id);
-    setIsVisible(true);
-  };
+  // const handleDelete = (id: string | number) => {
+  //   setDeleteModalID(id);
+  //   setIsVisible(true);
+  // };
 
   const reseModal = () => {
     setDeleteModalID("");
@@ -113,7 +119,7 @@ export default function ArtworkGallery({
                   className="object-contain bg-white rounded-t-2xl w-fit"
                 />
               </div>
-              {showDeleteButton && (
+              {/* {showDeleteButton && (
                 <span className="">
                   <RxCross1
                     size={32}
@@ -122,7 +128,7 @@ export default function ArtworkGallery({
                     className="cursor-pointer bg-secondary rounded-full p-1.5 font-bold transition absolute -top-3 z-20 -right-3 text-white"
                   />
                 </span>
-              )}
+              )} */}
 
               <div className="p-5">
                 <h2 className="text-2xl font-semibold text-white">

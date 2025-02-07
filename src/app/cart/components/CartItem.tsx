@@ -24,8 +24,9 @@ const CartItem: React.FC<CartItemProps> = ({
   return (
     <>
       <LogoModal
-        data={data}
+        cart={data}
         isVisible={openModal}
+        data={data?.ArtworkDetails}
         onclose={() => setOpenModal(false)}
       />
       <div className="md:hidden">
@@ -83,7 +84,7 @@ const CartItem: React.FC<CartItemProps> = ({
                   </div>
                   {item?.ArtworkExist > 0 && (
                     <p
-                      onClick={() => openArtWorkModal(item?.ArtworkDetails)}
+                      onClick={() => openArtWorkModal(item)}
                       className="bg-secondary/80 cursor-pointer text-white px-2 text-xs whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
                     >
                       View Detail
@@ -147,7 +148,7 @@ const CartItem: React.FC<CartItemProps> = ({
               </div>
               {item?.ArtworkExist > 0 ? (
                 <p
-                  onClick={() => openArtWorkModal(item?.ArtworkDetails)}
+                  onClick={() => openArtWorkModal(item)}
                   className="bg-secondary/80 cursor-pointer text-white px-2 text-sm whitespace-nowrap py-1 rounded hover:bg-secondary w-fit transition"
                 >
                   View Detail
