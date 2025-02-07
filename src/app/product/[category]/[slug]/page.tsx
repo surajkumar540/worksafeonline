@@ -66,3 +66,5 @@ export default async function Page(ctx: ProductPageProps) {
     </>
   );
 }
+
+export const revalidate = 1800;

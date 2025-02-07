@@ -9,7 +9,10 @@ const ProductContent = ({ product }: { product: any }) => {
   return (
     <div className="w-full lg:w-[45%] mt-4 lg:mt-0">
       <ProductDetails product={product} />
-      <QuantitySelector product={product} />
+      <QuantitySelector
+        product={product}
+        showLogoCustomisation={product.ShowDesignLogo}
+      />
       <ProductActions />
       <Guarantee />
       <ShippingInfo />

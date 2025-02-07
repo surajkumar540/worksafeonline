@@ -12,12 +12,12 @@ import AddToCartButton from "./AddToCartButton";
 
 interface QuantitySelectorProps {
   product: Product;
-  showLogoCustomisation?: boolean;
+  showLogoCustomisation?: number;
 }
 
 const QuantitySelector = ({
   product,
-  showLogoCustomisation = true,
+  showLogoCustomisation,
 }: QuantitySelectorProps) => {
   const [price, setPrice] = useState({
     ProductSellingPrice: product?.ProductSellingPrice,
@@ -209,7 +209,7 @@ const QuantitySelector = ({
           }}
         />
       </div>
-      {showLogoCustomisation && (
+      {showLogoCustomisation === 1 && (
         <Logo
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
