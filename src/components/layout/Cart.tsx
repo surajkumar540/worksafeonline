@@ -58,8 +58,6 @@ const CartModal = () => {
     setOpenCartModal((prev) => !prev);
   };
 
-  console.log(cart);
-
   const totalQuantity =
     cart?.Products?.reduce(
       (sum: number, product: any) => sum + (product.Quantity || 0),
