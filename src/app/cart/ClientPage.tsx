@@ -68,6 +68,7 @@ export default function ClientPage() {
     const response = await updateQuantity(updateProductData);
     if (response?.status) {
       setFetchingResponse(false);
+      eventEmitter?.emit("updateQuantity");
       return fetchCart();
     }
   };

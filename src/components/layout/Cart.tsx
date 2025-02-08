@@ -24,10 +24,12 @@ const CartModal = () => {
     };
     eventEmitter?.on("addToCart", cartListener);
     eventEmitter?.on("removeFromCart", fetchCart);
+    eventEmitter?.on("updateQuantity", fetchCart);
 
     return () => {
       eventEmitter?.off("addToCart", cartListener);
       eventEmitter?.off("removeFromCart", fetchCart);
+      eventEmitter?.off("updateQuantity", fetchCart);
     };
     // eslint-disable-next-line
   }, []);
