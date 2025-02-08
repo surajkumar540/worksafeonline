@@ -32,13 +32,14 @@ const PriceFilter = ({
     const clampedValue = Math.min(Math.max(numericValue, min), max);
     previousValue.current = value;
     setValue(clampedValue);
-
-    const updatedFilters = { ...filters, price: clampedValue };
+    const valueToBeSent = `£${min} to £${clampedValue}`;
+    const updatedFilters = { ...filters, price: valueToBeSent };
     setFilters(updatedFilters);
   };
 
   const applyFilter = async () => {
-    const updatedFilters = { ...filters, price: value };
+    const valueToBeSent = `£${min} to £${value}`;
+    const updatedFilters = { ...filters, price: valueToBeSent };
     setFilters(updatedFilters);
     handleProducts(updatedFilters);
   };
