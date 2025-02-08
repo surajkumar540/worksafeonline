@@ -256,6 +256,10 @@ export default function ClientPage() {
       }
     } catch (error) {
       console.log("An error occurred:", error);
+      toast.error("An error occurred while submitting the form!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } finally {
       setFormLoading(false);
     }

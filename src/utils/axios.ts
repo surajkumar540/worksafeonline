@@ -50,16 +50,20 @@ const request = async <T>(
 
     clearTimeout(timeoutId);
     return response;
-  } catch (error) {
+  } catch (error: any) {
     clearTimeout(timeoutId);
-    if (axios.isAxiosError(error) && error.message === "canceled") {
-      throw new Error("Request aborted");
-    } else {
-      const status = (error as AxiosResponse)?.status;
-      const message =
-        (error as AxiosResponse)?.data?.message || (error as Error).message;
-      throw new Error(`Error ${status}: ${message}`);
-    }
+    const response = error?.response?.data;
+    const message = response?.message || "An unexpected error occurred.";
+    throw new Error(message);
+
+    // if (axios.isAxiosError(error) && error.message === "canceled") {
+    //   throw new Error("Request aborted");
+    // } else {
+    //   const status = (error as AxiosResponse)?.status;
+    //   const message =
+    //     (error as AxiosResponse)?.data?.message || (error as Error).message;
+    //   throw new Error(`Error ${status}: ${message}`);
+    // }
   }
 };
 
