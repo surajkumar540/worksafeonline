@@ -13,11 +13,13 @@ const CartListModal = ({
   isOpen,
   setCart,
   handleToggle,
+  formattedQuantity,
 }: {
   cart: any;
   setCart: any;
   isOpen: boolean;
   handleToggle: any;
+  formattedQuantity: any;
 }) => {
   const [fetchingResponse, setFetchingResponse] = useState<boolean>(false);
 
@@ -54,7 +56,7 @@ const CartListModal = ({
           <p
             className={`text-xl font-black uppercase ${bigShoulders.className}`}
           >
-            Shopping Cart ({cart?.Products?.length ?? 0})
+            Shopping Cart ({formattedQuantity})
           </p>
           <RxCross1
             size={20}

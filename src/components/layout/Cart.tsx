@@ -58,6 +58,19 @@ const CartModal = () => {
     setOpenCartModal((prev) => !prev);
   };
 
+  console.log(cart);
+
+  const totalQuantity =
+    cart?.Products?.reduce(
+      (sum: number, product: any) => sum + (product.Quantity || 0),
+      0
+    ) || 0;
+
+  const formattedQuantity =
+    totalQuantity > 0 && totalQuantity < 9
+      ? `0${totalQuantity}`
+      : totalQuantity;
+
   return (
     <span className="hover:text-yellow-500 cursor-pointer relative transition-all duration-100 ease-linear">
       <TiShoppingCart onClick={openCart} size={23} />
@@ -66,16 +79,13 @@ const CartModal = () => {
         setCart={setCart}
         isOpen={openCartModal}
         handleToggle={handleToggle}
+        formattedQuantity={formattedQuantity}
       />
       <span
         onClick={openCart}
         className="absolute -top-3 -right-3 w-5 md:w-6 h-5 md:h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
       >
-        {cart?.Products &&
-        cart?.Products.length > 0 &&
-        cart?.Products.length < 9
-          ? `0${cart?.Products.length}`
-          : (cart?.Products && cart?.Products.length) ?? 0}
+        {formattedQuantity}
       </span>
     </span>
   );
