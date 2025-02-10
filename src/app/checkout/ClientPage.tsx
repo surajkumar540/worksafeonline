@@ -243,7 +243,7 @@ export default function ClientPage() {
         localStorage.setItem("OrderID", response?.OrderID);
         if (response?.message) {
           toast.success(response?.message);
-          return router.replace("/thank-you");
+          return (window.location.href = "/thank-you");
         } else if (response?.paymenturl1 || response?.paymenturl2) {
           setOpenPaymentModal(true);
           setOpenPaymentModalData(response);
