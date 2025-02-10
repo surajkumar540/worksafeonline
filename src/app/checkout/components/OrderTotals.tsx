@@ -13,6 +13,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
   updatedCart,
   formloading,
 }) => {
+  const [isChecked, setIsChecked] = useState(false);
   const [cartValues, setCartValues] = useState({
     Coupon: 0,
     Carriage: 0,
@@ -145,6 +146,22 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
           </Link>
           .
         </p>
+        <div className="flex items-start mt-2 text-xs">
+          <input
+            type="checkbox"
+            id="terms"
+            required
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+            className="mr-2"
+          />
+          <label htmlFor="terms">
+            I have read & agree to the{" "}
+            <Link href="/terms-and-conditions" className="underline">
+              terms & conditions
+            </Link>
+          </label>
+        </div>
         <button
           type="submit"
           disabled={formloading}

@@ -5,9 +5,9 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { LuUser } from "react-icons/lu";
 import { bigShoulders } from "@/app/layout";
+import { usePathname } from "next/navigation";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { getDeviceData } from "@/api/generateDeviceId";
-import { usePathname, useRouter } from "next/navigation";
 
 const AccountLayout = ({
   children,
@@ -16,7 +16,7 @@ const AccountLayout = ({
   children: any;
   accountDetail: any;
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname();
 
   const activeClass =
@@ -31,7 +31,7 @@ const AccountLayout = ({
       localStorage.setItem("deviceData", JSON.stringify(deviceData));
     toast.success("User logged out!");
     eventEmitter?.emit("loggedOut");
-    return router.replace("/");
+    window.location.href = "/";
   };
 
   return (

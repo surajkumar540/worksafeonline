@@ -1,15 +1,19 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import ActivateLink from "./ActivateLink";
 import { bigShoulders } from "@/app/layout";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const Categories = ({ categories }: { categories: any }) => {
-  const navigate = useRouter();
+  // const navigate = useRouter();
   const handleNavigation = (menu_id: string | number) => {
     const href = `/shop?category=${menu_id}`;
-    if (href && menu_id) return navigate.push(href);
+    if (href && menu_id) return (window.location.href = href);
+  };
+
+  const handlelink = (href: string) => {
+    window.location.href = href;
   };
 
   return (
@@ -34,15 +38,18 @@ const Categories = ({ categories }: { categories: any }) => {
                     console.warn("Invalid category data:", category);
                     return null;
                   }
-
                   return (
-                    <Link
+                    <span
                       key={category.menu_id}
-                      href={`/shop?category=${category.parent_id}&subcategory=${category?.menu_id}`}
+                      onClick={() =>
+                        handlelink(
+                          `/shop?category=${category.parent_id}&subcategory=${category?.menu_id}`
+                        )
+                      }
                       className={`px-4 text-lg font-semibold hover:text-primary ${bigShoulders.className}`}
                     >
                       {category.menu_name}
-                    </Link>
+                    </span>
                   );
                 })
               ) : (

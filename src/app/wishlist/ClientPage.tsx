@@ -4,12 +4,11 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
 import { useRouter } from "next/navigation";
-// import { addToCart } from "@/api/cartApi";
 import { filterData } from "@/api/generalApi";
+import Loader from "@/components/common/Loader";
 import eventEmitter from "@/hooks/useEventEmitter";
 import Features from "@/components/common/Features";
 import WishlistCard from "./components/WishlistCard";
-// import { getDeviceCheck } from "@/api/generateDeviceId";
 import React, { useCallback, useEffect, useState } from "react";
 import { getWishlist, removeFromWishlist } from "@/api/wishlistApis";
 import AnimatedActionButton from "@/components/common/AnimatedActionButton";
@@ -17,15 +16,16 @@ import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 export default function ClientPage() {
   const router = useRouter();
   const [wishlistUpdated, setWishlistUpdated] = useState<any>([]);
-  const [isFetching, setIsFetching] = useState(false); // To prevent multiple calls
-  const token =
-    typeof window !== "undefined" &&
-    localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+  const [isFetching, setIsFetching] = useState(true); // Default to true until API call finishes
 
   const fetchWishlist = useCallback(async () => {
-    if (isFetching) return; // Prevent duplicate calls
     setIsFetching(true);
     try {
+      const token =
+        typeof window !== "undefined" &&
+        localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return;
+
       const response = await getWishlist();
       if (response?.wishlist) {
         const updatedWishlist = response.wishlist.map((product: any) =>
@@ -45,15 +45,17 @@ export default function ClientPage() {
         setWishlistUpdated([]);
         eventEmitter?.emit("emptyWishlist");
       }
+    } catch (error) {
+      console.error("❌ Error fetching wishlist:", error);
     } finally {
-      setIsFetching(false);
+      setIsFetching(false); // Ensure state updates even if an error occurs
     }
-  }, [isFetching]);
+  }, []);
 
   useEffect(() => {
-    if (token) fetchWishlist();
+    fetchWishlist();
     // eslint-disable-next-line
-  }, [token]);
+  }, [fetchWishlist]);
 
   const handleRemove = async (id: string) => {
     const removedResponse = await removeFromWishlist(id);
@@ -70,19 +72,10 @@ export default function ClientPage() {
       router.replace(
         `/product/${data?.CategoryData?.categoryId ?? 1}/${data?.ID}`
       );
-      // eventEmitter?.emit("addToCart");
-      // const updatedData = {
-      //   BOM: [],
-      //   Colour: "NA",
-      //   Fitting: "NA",
-      //   ProductID: data?.ID,
-      //   DeviceID: getDeviceCheck(),
-      //   Size: [{ Quantity: data.Quantity }],
-      // };
-      // const resp = await addToCart(updatedData);
-      // if (resp?.status)
     }
   };
+
+  if (isFetching) return <Loader />; // Show loader until API call is completed
 
   return (
     <>

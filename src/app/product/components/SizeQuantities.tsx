@@ -34,13 +34,13 @@ const SizeQuantities = ({
     // eslint-disable-next-line
   }, [selectedFields]);
 
-  const handleIncrement = (size: any) => {
+  const handleIncrement = (size: any, isBlur?: boolean) => {
     if (fieldsCheck()) return;
 
     setQuantities((prev) => {
       const currentQuantity = prev[size.Size] || 0;
       if (currentQuantity < size.qty) {
-        const newQuantity = currentQuantity + 1;
+        const newQuantity = currentQuantity + (isBlur ? 0 : 1);
         return { ...prev, [size.Size]: newQuantity };
       }
       return prev;
@@ -54,7 +54,7 @@ const SizeQuantities = ({
       );
       const updatedSize = {
         ...size,
-        quantity: (quantities[size.Size] || 0) + 1,
+        quantity: (quantities[size.Size] || 0) + (isBlur ? 0 : 1),
       };
 
       if (existingSizeIndex === -1) updatedFields.size.push(updatedSize);
@@ -64,11 +64,14 @@ const SizeQuantities = ({
     });
   };
 
-  const handleDecrement = (size: any) => {
+  const handleDecrement = (size: any, isBlur?: boolean) => {
     if (fieldsCheck()) return;
 
     setQuantities((prev) => {
-      const newQuantity = Math.max((prev[size.Size] || 0) - 1, 0);
+      const newQuantity = Math.max(
+        (prev[size.Size] || 0) - (isBlur ? 0 : 1),
+        0
+      );
       return { ...prev, [size.Size]: newQuantity };
     });
 
@@ -81,14 +84,14 @@ const SizeQuantities = ({
       );
 
       if (existingSizeIndex !== -1) {
-        if ((quantities[size.Size] || 0) - 1 <= 0) {
+        if ((quantities[size.Size] || 0) - (isBlur ? 0 : 1) <= 0) {
           updatedFields.size = updatedFields.size.filter(
             (item: any) => item.Size !== size.Size
           );
         } else {
           updatedFields.size[existingSizeIndex] = {
             ...updatedFields.size[existingSizeIndex],
-            quantity: (quantities[size.Size] || 0) - 1,
+            quantity: (quantities[size.Size] || 0) - (isBlur ? 0 : 1),
           };
         }
       }
@@ -135,7 +138,19 @@ const SizeQuantities = ({
                   >
                     -
                   </button>
-                  <span className="text-sm">{quantities[size.Size] || 0}</span>
+                  <input
+                    type="text"
+                    value={quantities[size.Size] || 0}
+                    onChange={(e) => {
+                      const newValue = Math.max(
+                        0,
+                        Math.min(size.qty, Number(e.target.value))
+                      );
+                      setQuantities({ ...quantities, [size.Size]: newValue });
+                    }}
+                    onBlur={() => handleIncrement(size, true)}
+                    className="text-xs py-0.5 w-7 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
                   <button
                     className={`w-5 h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition rounded ${
                       isActive

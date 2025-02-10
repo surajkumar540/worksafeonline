@@ -1,18 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
 import { getDeviceData, storeDeviceData } from "@/api/generateDeviceId";
 
 const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const handleGuestLogin = async () => {
-    if (!isChecked) {
-      toast.error("You must agree to the Terms & Conditions first.");
-      return;
-    }
+    // if (!isChecked) {
+    //   toast.error("You must agree to the Terms & Conditions first.");
+    //   return;
+    // }
 
     const toastId = toast.loading("Please wait...");
     try {
@@ -37,10 +37,10 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
   };
 
   const handleButtonClick = (screen: string) => {
-    if (!isChecked) {
-      toast.error("You must agree to the Terms & Conditions first.");
-      return;
-    }
+    // if (!isChecked) {
+    //   toast.error("You must agree to the Terms & Conditions first.");
+    //   return;
+    // }
     setScreen(screen);
   };
 
@@ -96,7 +96,7 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
             >
               Continue as guest
             </button>
-            <div className="flex items-start mt-2 text-white/60 text-xs">
+            {/* <div className="flex items-start mt-2 text-white/60 text-xs">
               <input
                 type="checkbox"
                 id="terms"
@@ -110,7 +110,7 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
                   terms & conditions
                 </Link>
               </label>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

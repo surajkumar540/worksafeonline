@@ -13,7 +13,7 @@ const SelectPaymentMethodModal = ({
   const [selectedMethod, setSelectedMethod] = useState<any>(null);
 
   const handleSubmit = () => {
-    if (data?.paymenturl1 && selectedMethod === "StagPay")
+    if (data?.paymenturl1 && selectedMethod === "SagePay")
       window.location.href = data?.paymenturl1;
     else if (data?.paymenturl2 && selectedMethod === "PayPal")
       window.location.href = data?.paymenturl2;
@@ -37,14 +37,14 @@ const SelectPaymentMethodModal = ({
         <div className="flex gap-4 mt-6 w-full justify-center">
           <button
             className={`flex flex-col items-center px-6 py-3 border-[3px] rounded-lg transition-all text-lg font-semibold w-40 ${
-              selectedMethod === "StagPay"
+              selectedMethod === "SagePay"
                 ? "border-primary bg-primary/10"
                 : "border-gray-200 hover:border-primary"
             }`}
-            onClick={() => setSelectedMethod("StagPay")}
+            onClick={() => setSelectedMethod("SagePay")}
           >
             <FaMoneyCheckAlt size={30} className="mb-2 text-primary" />
-            StagPay
+            SagePay
           </button>
 
           <button

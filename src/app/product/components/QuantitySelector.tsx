@@ -27,7 +27,7 @@ const QuantitySelector = ({
   const [filterProductSizes, setFilterProductSizes] = useState<any>(
     product?.ProductSizes
   );
-  const [selectedFields, setSelectedFields] = useState({
+  const [selectedFields, setSelectedFields] = useState<any>({
     size: [],
     color: { Colour_Sequence_No: "" },
     fitting: { Fitting_Sequence_No: "" },
@@ -166,13 +166,39 @@ const QuantitySelector = ({
     return false;
   };
 
+  useEffect(() => {
+    if (
+      !product ||
+      !Array.isArray(product.ProductColour) ||
+      !Array.isArray(filterProductFittings)
+    )
+      return;
+
+    const hasSingleColor = product.ProductColour.length === 1;
+    const hasSingleFitting = filterProductFittings.length === 1;
+
+    if (hasSingleColor || hasSingleFitting) {
+      setSelectedFields((prev: any) => {
+        const newSelectedFields = {
+          size: [],
+          color: hasSingleColor ? product.ProductColour[0] : prev.color,
+          fitting: hasSingleFitting ? filterProductFittings[0] : prev.fitting,
+        };
+        return JSON.stringify(prev) === JSON.stringify(newSelectedFields)
+          ? prev
+          : newSelectedFields;
+      });
+    }
+    // eslint-disable-next-line
+  }, [product?.ProductColour.length, filterProductFittings.length]);
+
   return (
     <>
       {price?.ProductActualPrice && price?.ProductSellingPrice && (
         <p className={`mt-4 text-4xl space-x-2 ${bigShoulders.className}`}>
-          <span>£{price.ProductSellingPrice}</span>
+          <span>£{price.ProductSellingPrice.toFixed(2)}</span>
           <span className="text-3xl text-gray-500 line-through">
-            £{price.ProductActualPrice}
+            £{price.ProductActualPrice.toFixed(2)}
           </span>
         </p>
       )}

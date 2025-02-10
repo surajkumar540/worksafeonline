@@ -1,10 +1,12 @@
 "use client";
 
 import ItemHover from "./ItemHover";
+import { useRouter } from "next/navigation";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { useCallback, useEffect, useState } from "react";
 
 const MyProducts = () => {
+  const navigate = useRouter();
   const [loggedIn, setUserLoggedIn] = useState<boolean>(false);
 
   const handleToggle = useCallback(() => {
@@ -29,6 +31,12 @@ const MyProducts = () => {
     };
   }, []);
 
+  const handleClick = useCallback(() => {
+    const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+    if (loggedIn || token) return navigate.push("/my-products");
+    else eventEmitter?.emit("openLoginModal");
+  }, [loggedIn, navigate]);
+
   useEffect(() => {
     const token =
       typeof window !== "undefined" &&
@@ -43,9 +51,18 @@ const MyProducts = () => {
   };
   return (
     <>
-      {loggedIn && (
+      {loggedIn ? (
         <span className="relative group w-fit">
           <ItemHover link={link} />
+        </span>
+      ) : (
+        <span
+          onClick={handleClick}
+          className="relative cursor-pointer group w-fit"
+        >
+          <p className="font-semibold 2xl:text-xl text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear">
+            {link?.label}
+          </p>
         </span>
       )}
     </>

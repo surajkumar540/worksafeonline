@@ -2,8 +2,8 @@ import Link from "next/link";
 import StarRating from "./StarRating";
 import { bigShoulders } from "@/app/layout";
 import ImageComponent from "./ImageComponent";
-import AddtoCartButton from "./AddtoCartButton";
 import { Product } from "@/hooks/useEventEmitter";
+// import AddtoCartButton from "./AddtoCartButton";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const slug = `/product/${product?.MenuId}/${product?.Style}`;
@@ -15,7 +15,9 @@ const ProductCard = ({ product }: { product: Product }) => {
       >
         <StarRating rating={4} />
         <h3 className="font-extrabold text-lg mt-2 line-clamp-1 hover:text-primary transition-all duration-200 ease-linear">
-          <Link href={slug}>{product?.Description}</Link>
+          <Link href={slug}>
+            {product?.Style} - {product?.Description}
+          </Link>
         </h3>
         <button className="flex mt-2 justify-between items-center">
           <span className="space-x-1 flex items-center">
@@ -27,7 +29,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 </span>
               )}
           </span>
-          <AddtoCartButton product={product} />
+          {/* <AddtoCartButton product={product} /> */}
         </button>
       </div>
     </div>
