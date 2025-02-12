@@ -187,7 +187,7 @@ const Footer = async () => {
           </div>
           <div className="bg-white pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
             <p className="text-gray-500">
-              Copyright © {new Date().getFullYear()} Axetor. All rights reserved
+              Copyright © {new Date().getFullYear()} WorkSafeOnline. All rights reserved
             </p>
             <Image
               src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
