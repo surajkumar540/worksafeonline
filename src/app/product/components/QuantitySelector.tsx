@@ -197,6 +197,7 @@ const QuantitySelector = ({
   // fetch customization logo check for loggedIn users
   useEffect(() => {
     const fetchProduct = async () => {
+      console.log(showLogoCustomisation);
       if (!isTokenExist() || showLogoModal) return;
       const url = `api/ProductDetails12`;
       const params = {
