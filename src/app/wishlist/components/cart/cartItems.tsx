@@ -2,19 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { RxCross1 } from "react-icons/rx";
 
-// type Product = {
-//   ID: string;
-//   Quantity: number;
-//   EndPrice: string;
-//   Description: string;
-//   ListingImage: string;
-// };
-
-// type WishlistCardProps = {
-//   product: Product;
-//   handleRemove: any;
-// };
-
 const CartItem = ({
   product,
   handleRemove,
@@ -22,6 +9,7 @@ const CartItem = ({
   product: any;
   handleRemove: any;
 }) => {
+  const slug = `/product/1/${product?.ProductCode}`;
   return (
     <div className="flex relative hover:bg-gray-100 gap-3 md:p-3 lg:p-4 pr-10 border-b border-b-gray-200">
       <span
@@ -36,11 +24,15 @@ const CartItem = ({
           height={200}
           src={product?.ProductImage}
           alt={product?.ProductDescription}
+          onClick={() => (window.location.href = slug)}
           className="w-full aspect-square object-contain rounded-md border"
         />
       </div>
       <div>
-        <h2 className="text-black font-semibold">
+        <h2
+          className="text-black font-semibold"
+          onClick={() => (window.location.href = slug)}
+        >
           {product.ProductDescription} ({product.ProductCode})
         </h2>
         <p>
