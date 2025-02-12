@@ -41,7 +41,7 @@ const CartItem = ({
       </div>
       <div>
         <h2 className="text-black font-semibold">
-          {product.ProductDescription}
+          {product.ProductDescription} ({product.ProductCode})
         </h2>
         <p>
           {product?.Colour && (

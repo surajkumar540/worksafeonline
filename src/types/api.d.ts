@@ -25,10 +25,12 @@ export interface Product {
   reviewsCount: number;
   ProductImage: string;
   availability: string;
+  slug?: string | number;
   addToWatchlist: string;
   productCategory: string;
   ProductSizes: unknown[];
   ProductColour: unknown[];
+  category?: string | number;
   ProductFeatures: unknown[];
   ProductFittings: unknown[];
   ProductID: number | string;

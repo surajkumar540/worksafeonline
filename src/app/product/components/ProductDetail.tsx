@@ -1,8 +1,8 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { Product } from "@/types/api";
-import { BiCheck } from "react-icons/bi";
+// import { BiCheck } from "react-icons/bi";
 import { bigShoulders } from "@/app/layout";
-import StarRating from "@/components/common/StarRating";
+// import StarRating from "@/components/common/StarRating";
 
 type ProductDetailsProps = {
   product: Product;
@@ -22,9 +22,12 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       <h1
         className={`text-3xl md:text-5xl py-5 font-black uppercase ${bigShoulders.className}`}
       >
-        {product.ProductName}
+        {product.ProductName}{" "}
+        <span className="text-2xl md:text-4xl text-primary">
+          ({product.ProductID})
+        </span>
       </h1>
-      <div className="flex flex-wrap text-gray-600 items-center gap-3 md:gap-5">
+      {/* <div className="flex flex-wrap text-gray-600 items-center gap-3 md:gap-5">
         <span className="pt-px">
           <span>Brands: </span>
           <span className="text-primary font-semibold">
@@ -41,8 +44,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <BiCheck size={20} />
           <span className="rounded-full">{product.availability}</span>
         </div>
-      </div>
-      <div className="bg-gray-300 h-[1px] mt-5" />
+      </div> */}
+      <div className="bg-gray-300 h-[1px]" />
       <p className="mt-4 text-gray-500">{product.Detail}</p>
     </div>
   );

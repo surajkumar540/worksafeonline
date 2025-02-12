@@ -28,13 +28,13 @@ const ProductFeatures = ({ product }: { product: Product }) => {
           }  hover:bg-[#000000]`}
           onClick={() => handleChangeContent("additional")}
         />
-        <Button
+        {/* <Button
           text={`REVIEWS (5)`}
           classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${
             content === "reviews" ? "bg-black text-white" : "text-[#000000]"
           }  hover:bg-[#000000]`}
           onClick={() => handleChangeContent("reviews")}
-        />
+        /> */}
       </div>
       {content === "reviews" && (
         <Reviews handleChangeContent={handleChangeContent} />

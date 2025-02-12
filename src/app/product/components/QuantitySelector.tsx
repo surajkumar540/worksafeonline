@@ -1,6 +1,7 @@
 "use client";
 
 import { Product } from "@/types/api";
+import { Fetch } from "@/utils/axios";
 import { toast } from "react-toastify";
 import Logo from "@/components/logo/Logo";
 import ProductColors from "./ProductColor";
@@ -9,6 +10,7 @@ import { bigShoulders } from "@/app/layout";
 import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
+import { isTokenExist } from "@/api/generateDeviceId";
 
 interface QuantitySelectorProps {
   product: Product;
@@ -23,7 +25,7 @@ const QuantitySelector = ({
     ProductSellingPrice: product?.ProductSellingPrice,
     ProductActualPrice: product?.ProductActualPrice,
   });
-  // const [countItem, setCountItem] = useState(1);
+  const [showLogoModal, setShowLogoModal] = useState(false);
   const [filterProductSizes, setFilterProductSizes] = useState<any>(
     product?.ProductSizes
   );
@@ -192,6 +194,24 @@ const QuantitySelector = ({
     // eslint-disable-next-line
   }, [product?.ProductColour.length, filterProductFittings.length]);
 
+  // fetch customization logo check for loggedIn users
+  useEffect(() => {
+    const fetchProduct = async () => {
+      console.log(showLogoCustomisation);
+      if (!isTokenExist() || showLogoModal) return;
+      const url = `api/ProductDetails12`;
+      const params = {
+        product_id: product?.slug,
+        category_id: product?.category,
+      };
+      const productResponse: any = await Fetch(url, params, 5000, true, false);
+      if (productResponse?.ShowDesignLogo === 1) setShowLogoModal(true);
+      else setShowLogoModal(false);
+    };
+    if (product?.category && product?.slug) fetchProduct();
+    // eslint-disable-next-line
+  }, [product]);
+
   return (
     <>
       {price?.ProductActualPrice && price?.ProductSellingPrice && (
@@ -235,7 +255,7 @@ const QuantitySelector = ({
           }}
         />
       </div>
-      {showLogoCustomisation === 1 && (
+      {showLogoModal && (
         <Logo
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}

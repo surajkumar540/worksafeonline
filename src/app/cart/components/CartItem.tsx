@@ -64,7 +64,7 @@ const CartItem: React.FC<CartItemProps> = ({
             </div>
             <div className="w-3/4 py-2">
               <p className="line-clamp-1 font-bold">
-                {item.ProductDescription}
+                {item.ProductDescription} ({item.ProductCode})
               </p>
               {item.Colour && (
                 <span className="text-sm">Color: {item.Colour}</span>
@@ -167,7 +167,7 @@ const CartItem: React.FC<CartItemProps> = ({
             </div>
             <div className="col-span-2">
               <p className="line-clamp-3 text-sm lg:text-base font-semibold">
-                {item.ProductDescription}
+                {item.ProductDescription} ({item.ProductCode})
               </p>
               {item.Colour && (
                 <span className="text-sm">Color: {item.Colour}</span>
