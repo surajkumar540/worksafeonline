@@ -7,6 +7,7 @@ import { getCartDetails, removeProduct } from "@/api/cartApi";
 import SubTotal from "@/app/wishlist/components/cart/SubTotal";
 import CartItem from "@/app/wishlist/components/cart/cartItems";
 import eventEmitter from "@/hooks/useEventEmitter";
+import { getDeviceCheck } from "@/api/generateDeviceId";
 
 const CartListModal = ({
   cart,
@@ -37,7 +38,12 @@ const CartListModal = ({
   const handleRemove = async (id: string) => {
     if (fetchingResponse) return;
     setFetchingResponse(true);
-    const removeProductData = { Seq: 0, Qty: 0, Line: id, DeviceID: "" };
+    const removeProductData = {
+      Seq: 0,
+      Qty: 0,
+      Line: id,
+      DeviceID: getDeviceCheck(),
+    };
     const response = await removeProduct(removeProductData);
     if (response?.status) {
       setFetchingResponse(false);
